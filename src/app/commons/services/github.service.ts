@@ -3,7 +3,7 @@ import { map } from 'rxjs/operators';
 import { Observable } from 'rxjs';
 import { Province } from 'src/app/commons/models/province';
 import { ProvinceData } from '../models/province-data';
-import { DistrictDetailedData } from '../models/district-detailed-data';
+import { GroupData } from '../models/group-data';
 import { DistrictData } from '../models/district-data';
 import { RemoteDataService } from './remote-data.service';
 
@@ -45,7 +45,7 @@ export class GithubService {
       );
   }
 
-  getAllDataInDistrict(district: string): Observable<DistrictDetailedData> {
+  getAllDataInDistrict(district: string): Observable<GroupData<ProvinceData>> {
     return this.remote.getAllData<ProvinceData>(this.BASE_PATH + this.ALL_PROVINCES_DATA)
       .pipe(
         map(data => {
@@ -56,7 +56,22 @@ export class GithubService {
                       group.push(i);
                       acc[i.sigla_provincia] = group;
                       return acc;
-                    }, {}) as DistrictDetailedData;
+                    }, {}) as GroupData<ProvinceData>;
+        })
+      );
+  }
+
+  getAllDistrictsData(): Observable<GroupData<DistrictData>> {
+    return this.remote.getAllData<DistrictData>(this.BASE_PATH + this.ALL_DISTRICTS_DATA)
+      .pipe(
+        map(data => {
+          return data
+                    .reduce((acc, i) => {
+                      const group = acc[i.denominazione_regione] || [];
+                      group.push(i);
+                      acc[i.denominazione_regione] = group;
+                      return acc;
+                    }, {}) as GroupData<DistrictData>;
         })
       );
   }

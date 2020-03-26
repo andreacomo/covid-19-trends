@@ -1,8 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, EventEmitter, Output } from '@angular/core';
 import { GithubService } from 'src/app/commons/services/github.service';
 import { DistrictData } from 'src/app/commons/models/district-data';
 import { Observable } from 'rxjs';
 import { MatButtonToggleChange } from '@angular/material/button-toggle';
+
 
 @Component({
   selector: 'app-districts',
@@ -15,6 +16,9 @@ export class DistrictsComponent implements OnInit {
 
   checkGroup: 'all' | 'none';
 
+  @Output()
+  clickItems: EventEmitter<DistrictData[]> = new EventEmitter<DistrictData[]>();
+
   constructor(private github: GithubService) { }
 
   ngOnInit() {
@@ -23,15 +27,15 @@ export class DistrictsComponent implements OnInit {
       .subscribe(d => this.districts = d as (DistrictData & {disabled: boolean})[]);
   }
 
-  toggle(province: DistrictData & {disabled: boolean}) {
-    province.disabled = !province.disabled;
+  toggle(district: DistrictData & {disabled: boolean}) {
+    district.disabled = !district.disabled;
     this.calculateCheckGroup();
-    // this.clickItems.next([province]);
+    this.clickItems.next([district]);
   }
 
   onCheckGroupChange(event: MatButtonToggleChange) {
     this.checkGroup = event.value;
-    // this.clickItems.next([...this.provinces]); // cloning will trigger changes in child components...
+    this.clickItems.next([...this.districts]); // cloning will trigger changes in child components...
   }
 
   private calculateCheckGroup() {

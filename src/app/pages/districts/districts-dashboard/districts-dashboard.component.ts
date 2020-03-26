@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { DistrictData } from 'src/app/commons/models/district-data';
 
 @Component({
   selector: 'app-districts-dashboard',
@@ -7,9 +8,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class DistrictsDashboardComponent implements OnInit {
 
+  selectedDistricts: DistrictData[];
+
   constructor() { }
 
   ngOnInit() {
   }
 
+  districtClicked(event: DistrictData[]) {
+    this.selectedDistricts = event;
+  }
 }

@@ -6,6 +6,7 @@ import { LinearChartProvider } from '../../../../commons/services/linear-chart-p
 import { LocalDataService } from 'src/app/commons/services/local-data.service';
 import { Province } from 'src/app/commons/models/province';
 import { LineChartComponent } from 'src/app/commons/components/line-chart/line-chart.component';
+import { ProvinceData } from 'src/app/commons/models/province-data';
 
 @Component({
   selector: 'app-provinces-chart',
@@ -36,7 +37,7 @@ export class ProvincesChartComponent implements OnInit, OnChanges {
     if (changes.district != null && changes.district.currentValue) {
       this.github.getAllDataInDistrict(changes.district.currentValue)
         .subscribe(data => {
-          this.chartData = LinearChartProvider.createChartData(data);
+          this.chartData = LinearChartProvider.createChartData<ProvinceData>(data, (values) => values.map(v => v.totale_casi));
 
           this.labels = LinearChartProvider.createLabels(data);
         });

@@ -1,9 +1,11 @@
 import { ChartDataSets, ChartOptions, ChartSize } from 'chart.js';
-import { DistrictDetailedData } from 'src/app/commons/models/district-detailed-data';
 import { Colors } from 'src/app/commons/models/colors';
 import { Label } from 'ng2-charts';
 import * as pluginAnnotations from 'chartjs-plugin-annotation';
 import { Milestone } from 'src/app/commons/models/milestone';
+import { GroupData } from '../models/group-data';
+import { ProvinceData } from '../models/province-data';
+import { DistrictData } from '../models/district-data';
 
 export class LinearChartProvider {
 
@@ -70,7 +72,7 @@ export class LinearChartProvider {
           };
     }
 
-    static createChartData(data: DistrictDetailedData): ChartDataSets[] {
+    static createChartData<T>(data: GroupData<T>, transformer: (values: T[]) => any): ChartDataSets[] {
         let index = 0;
         return Object.entries(data)
             .filter(([code]) => code)
@@ -78,7 +80,7 @@ export class LinearChartProvider {
               const color = Colors.SUPPORTED[index++];
               return {
                 label: code,
-                data: values.map(v => v.totale_casi),
+                data: transformer(values),
                 fill: false,
                 pointRadius: 5,
                 backgroundColor: color,
@@ -88,7 +90,7 @@ export class LinearChartProvider {
             });
     }
 
-    static createLabels(data: DistrictDetailedData): Label[] {
+    static createLabels<T>(data: GroupData<T>): Label[] {
         return (Object.entries(data)[1][1])
                             .map(v => this.dateStringAsLabel(v.data));
     }
