@@ -9,10 +9,10 @@ import { LineChartComponent } from 'src/app/commons/components/line-chart/line-c
 
 @Component({
   selector: 'app-charts',
-  templateUrl: './charts.component.html',
-  styleUrls: ['./charts.component.scss']
+  templateUrl: './provinces-chart.component.html',
+  styleUrls: ['./provinces-chart.component.scss']
 })
-export class ChartsComponent implements OnInit, OnChanges {
+export class ProvincesChartComponent implements OnInit, OnChanges {
 
   @Input()
   district: string;
