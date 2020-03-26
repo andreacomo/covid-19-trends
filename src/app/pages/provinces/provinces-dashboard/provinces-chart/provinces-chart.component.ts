@@ -8,7 +8,7 @@ import { Province } from 'src/app/commons/models/province';
 import { LineChartComponent } from 'src/app/commons/components/line-chart/line-chart.component';
 
 @Component({
-  selector: 'app-charts',
+  selector: 'app-provinces-chart',
   templateUrl: './provinces-chart.component.html',
   styleUrls: ['./provinces-chart.component.scss']
 })

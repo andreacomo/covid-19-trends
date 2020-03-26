@@ -4,14 +4,15 @@ import { MaterialModule } from 'src/app/commons/material/material.module';
 import { ChartsModule } from 'ng2-charts';
 import { FormsModule } from '@angular/forms';
 import { DistrictsDashboardComponent } from './districts-dashboard/districts-dashboard.component';
-import { DistrictsComponent } from './districts/districts-dashboard/districts/districts.component';
+import { DistrictsComponent } from './districts-dashboard/districts/districts.component';
 import { CommonComponentsModule } from 'src/app/commons/common-components.module';
 import { AsColorPipe } from 'src/app/commons/pipes/as-color.pipe';
+import { DistrictChartComponent } from './districts-dashboard/district-chart/district-chart.component';
 
 
 
 @NgModule({
-  declarations: [DistrictsDashboardComponent, DistrictsComponent],
+  declarations: [DistrictsDashboardComponent, DistrictsComponent, DistrictChartComponent],
   imports: [
     CommonModule,
     MaterialModule,
