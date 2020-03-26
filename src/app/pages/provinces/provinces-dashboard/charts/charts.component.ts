@@ -2,9 +2,10 @@ import { Component, OnInit, Input, OnChanges, SimpleChanges, ViewChild } from '@
 import { GithubService } from 'src/app/commons/services/github.service';
 import { ChartDataSets, ChartOptions } from 'chart.js';
 import { Label, BaseChartDirective } from 'ng2-charts';
-import { LinearChartProvider } from './linear-chart-provider';
+import { LinearChartProvider } from '../../../../commons/services/linear-chart-provider';
 import { LocalDataService } from 'src/app/commons/services/local-data.service';
 import { Province } from 'src/app/commons/models/province';
+import { LineChartComponent } from 'src/app/commons/components/line-chart/line-chart.component';
 
 @Component({
   selector: 'app-charts',
@@ -23,21 +24,12 @@ export class ChartsComponent implements OnInit, OnChanges {
 
   labels: Label[];
 
-  options: ChartOptions;
+  @ViewChild('chart', { static: false })
+  chart: LineChartComponent;
 
-  plugins: any[];
-
-  @ViewChild(BaseChartDirective, { static: false })
-  chart: BaseChartDirective;
-
-  constructor(private github: GithubService,
-              private dataService: LocalDataService) { }
+  constructor(private github: GithubService) { }
 
   ngOnInit() {
-    this.dataService.getMilestones()
-      .subscribe(m => {
-        this.options = LinearChartProvider.getOptions(m);
-      });
   }
 
   ngOnChanges(changes: SimpleChanges): void {
@@ -47,8 +39,6 @@ export class ChartsComponent implements OnInit, OnChanges {
           this.chartData = LinearChartProvider.createChartData(data);
 
           this.labels = LinearChartProvider.createLabels(data);
-
-          this.plugins = LinearChartProvider.getPlugins();
         });
     }
 
