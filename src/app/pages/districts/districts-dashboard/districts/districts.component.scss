@@ -1,5 +1,10 @@
 @import 'src/styles/palette.scss';
 
+.list-container {
+    overflow-y: scroll;
+    max-height: 90vh;
+}
+
 .cases {
     color: $text-light;
 }

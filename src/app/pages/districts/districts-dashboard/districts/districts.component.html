@@ -2,11 +2,13 @@
     <div fxLayout="column" fxLayoutAlign="space-around center">
         <app-toggle-buttons [list]="districts" [value]="checkGroup" (valueChange)="onCheckGroupChange($event)"></app-toggle-buttons>
     </div>
-    <mat-list>
-            <mat-list-item (click)="toggle(district)" *ngFor="let district of districts; let i = index" class="district-btn" [class.disabled]="district.disabled"> 
-                <p mat-list-icon [ngStyle]="{'background-color':  i | asColor}"></p>
-                <p mat-line>{{district.denominazione_regione}}</p>
-                <small mat-line class="cases">casi totali: <strong>{{district.totale_casi}}</strong></small>
-            </mat-list-item>
-    </mat-list>
+    <div class="list-container">
+        <mat-list>
+                <mat-list-item (click)="toggle(district)" *ngFor="let district of districts; let i = index" class="district-btn" [class.disabled]="district.disabled"> 
+                    <p mat-list-icon [ngStyle]="{'background-color':  i | asColor}"></p>
+                    <p mat-line>{{district.denominazione_regione}}</p>
+                    <small mat-line class="cases">casi totali: <strong>{{district.totale_casi}}</strong></small>
+                </mat-list-item>
+        </mat-list>
+    </div>
 </div>
