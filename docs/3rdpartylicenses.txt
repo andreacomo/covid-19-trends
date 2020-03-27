@@ -114,6 +114,8 @@ THE SOFTWARE.
 
 @angular/material/button-toggle
 
+@angular/material/chips
+
 @angular/material/core
 
 @angular/material/form-field
@@ -127,6 +129,8 @@ THE SOFTWARE.
 @angular/material/select
 
 @angular/material/sidenav
+
+@angular/material/tabs
 
 @angular/material/toolbar
 
