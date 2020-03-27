@@ -32,8 +32,8 @@
               "src/styles.scss"
             ],
             "scripts": [],
-            "baseHref": "/covid-19-per-provincia/",
-            "deployUrl": "/covid-19-per-provincia/"
+            "baseHref": "/covid-19-trends/",
+            "deployUrl": "/covid-19-trends/"
           },
           "configurations": {
             "production": {

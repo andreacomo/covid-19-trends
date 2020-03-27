@@ -1,11 +1,11 @@
-# Covid-19: distribuzione casi per provincia
+# Covid-19 Trends: andamento casi per regione e provincia
 
-Una applicazione per monitorare l'andamento dei contagi nella propria provincia, potendolo confrontare con le altre della propria regione.
+Una applicazione per monitorare l'andamento dei contagi nella propria provincia e/o regione
 
 ## Online
 E' disponibile online servito come "GitHub Pages" su:
 
-[https://andreacomo.github.io/covid-19-per-provincia/](https://andreacomo.github.io/covid-19-per-provincia/)
+[https://andreacomo.github.io/covid-19-trends/](https://andreacomo.github.io/covid-19-trends/)
 
 ## Build prod
 Se si hanno problemi **causati da Babel** nella build di prod:

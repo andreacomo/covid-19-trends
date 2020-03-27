@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  context: '/covid-19-per-provincia/'
+  context: '/covid-19-trends/'
 };
 
 /*
