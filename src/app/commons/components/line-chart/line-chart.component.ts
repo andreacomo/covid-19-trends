@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, ViewChild } from '@angular/core';
+import { Component, OnInit, Input, ViewChild, OnChanges, SimpleChanges } from '@angular/core';
 import { ChartDataSets, ChartOptions } from 'chart.js';
 import { Label, BaseChartDirective } from 'ng2-charts';
 import { LinearChartProvider } from 'src/app/commons/services/linear-chart-provider';
@@ -16,6 +16,9 @@ export class LineChartComponent implements OnInit {
 
   @Input()
   labels: Label[];
+
+  @Input()
+  updatedOn: Date;
 
   options: ChartOptions;
 

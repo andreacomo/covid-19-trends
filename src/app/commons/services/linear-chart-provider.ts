@@ -15,7 +15,7 @@ export class LinearChartProvider {
             responsive: true,
             aspectRatio: 2,
             legend: {
-              display: true,
+              display: false,
               position: 'top',
               align: 'center',
               labels: {
@@ -43,7 +43,7 @@ export class LinearChartProvider {
             layout: {
               padding: {
                   left: 0,
-                  right: 20,
+                  right: 0,
                   top: 0,
                   bottom: 0
               }
@@ -91,8 +91,13 @@ export class LinearChartProvider {
     }
 
     static createLabels<T>(data: GroupData<T>): Label[] {
-        return (Object.entries(data)[1][1])
+        return (Object.entries(data)[0][1])
                             .map(v => this.dateStringAsLabel(v.data));
+    }
+
+    static createUpdatedOn<T>(data: GroupData<T>): Date {
+      const firstData = Object.entries(data)[0][1];
+      return new Date(firstData[firstData.length - 1].data);
     }
 
     static getPlugins(): any[] {

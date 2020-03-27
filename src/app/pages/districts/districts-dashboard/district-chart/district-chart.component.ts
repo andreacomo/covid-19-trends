@@ -20,6 +20,8 @@ export class DistrictChartComponent implements OnInit, OnChanges {
 
   labels: Label[];
 
+  updatedOn: Date;
+
   @ViewChild('chart', { static: false })
   chart: LineChartComponent;
 
@@ -28,9 +30,11 @@ export class DistrictChartComponent implements OnInit, OnChanges {
   ngOnInit() {
     this.github.getAllDistrictsData()
       .subscribe(data => {
-        this.chartData = LinearChartProvider.createChartData(data, (values) => values.map(v => v.totale_casi));
+        this.chartData = LinearChartProvider.createChartData<DistrictData>(data, (values) => values.map(v => v.totale_casi));
 
-        this.labels = LinearChartProvider.createLabels(data);
+        this.labels = LinearChartProvider.createLabels<DistrictData>(data);
+
+        this.updatedOn = LinearChartProvider.createUpdatedOn<DistrictData>(data);
       });
   }
 

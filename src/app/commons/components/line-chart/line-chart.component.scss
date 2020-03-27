@@ -1,5 +1,9 @@
 @import 'src/styles/palette.scss';
 
+.chart-container {
+    padding-right: 1em;
+}
+
 .change-rotation {
     color: $text-light;
     margin-top: 1em;

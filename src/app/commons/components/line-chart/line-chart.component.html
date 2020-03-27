@@ -1,4 +1,5 @@
-<div *ngIf="chartData" fxHide.xs>
+<div *ngIf="chartData" fxHide.xs class="chart-container">
+    <app-line-chart-legend [updatedOn]="updatedOn"></app-line-chart-legend>
     <canvas baseChart
             [datasets]="chartData"
             [labels]="labels"

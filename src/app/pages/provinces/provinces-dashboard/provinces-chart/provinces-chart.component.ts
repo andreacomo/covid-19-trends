@@ -25,6 +25,8 @@ export class ProvincesChartComponent implements OnInit, OnChanges {
 
   labels: Label[];
 
+  updatedOn: Date;
+
   @ViewChild('chart', { static: false })
   chart: LineChartComponent;
 
@@ -39,7 +41,9 @@ export class ProvincesChartComponent implements OnInit, OnChanges {
         .subscribe(data => {
           this.chartData = LinearChartProvider.createChartData<ProvinceData>(data, (values) => values.map(v => v.totale_casi));
 
-          this.labels = LinearChartProvider.createLabels(data);
+          this.labels = LinearChartProvider.createLabels<ProvinceData>(data);
+
+          this.updatedOn = LinearChartProvider.createUpdatedOn<ProvinceData>(data);
         });
     }
 

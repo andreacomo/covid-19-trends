@@ -11,6 +11,7 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatButtonToggleModule } from '@angular/material/button-toggle';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatTabsModule } from '@angular/material/tabs';
+import { MatChipsModule } from '@angular/material/chips';
 import { FlexLayoutModule } from '@angular/flex-layout';
 
 
@@ -31,6 +32,7 @@ import { FlexLayoutModule } from '@angular/flex-layout';
     MatButtonToggleModule,
     MatSidenavModule,
     MatTabsModule,
+    MatChipsModule,
     FlexLayoutModule
   ]
 })

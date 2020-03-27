@@ -1,0 +1,10 @@
+.chip-container {
+    margin-left: 5px;
+
+    .mat-standard-chip:hover::after {
+        opacity: 0;
+    }
+    .mat-standard-chip:focus::after {
+        opacity: 0;
+    }
+}

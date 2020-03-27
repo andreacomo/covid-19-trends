@@ -1,0 +1,11 @@
+<div fxLayout="row" fxLayoutAlign="space-between">
+    <div fxFlexAlign="center" class="chip-container">
+        <mat-chip-list aria-label="Dati mostrati">
+            <mat-chip color="accent" selected>Casi totali</mat-chip>
+        </mat-chip-list>
+    </div>
+    <div>
+        <p class="mat-small">dati aggiornati al<br>
+        {{updatedOn | date: 'dd-MM-yyyy HH:mm'}}</p>
+    </div>
+</div>

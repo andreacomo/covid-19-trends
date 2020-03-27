@@ -6,11 +6,12 @@ import { FormsModule } from '@angular/forms';
 import { AsColorPipe } from './pipes/as-color.pipe';
 import { LineChartComponent } from './components/line-chart/line-chart.component';
 import { ChartsModule } from 'ng2-charts';
+import { LineChartLegendComponent } from './components/line-chart-legend/line-chart-legend.component';
 
 
 
 @NgModule({
-  declarations: [ToggleButtonsComponent, AsColorPipe, LineChartComponent],
+  declarations: [ToggleButtonsComponent, AsColorPipe, LineChartComponent, LineChartLegendComponent],
   imports: [
     CommonModule,
     FormsModule,
