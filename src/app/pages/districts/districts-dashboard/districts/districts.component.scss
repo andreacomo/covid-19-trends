@@ -1,5 +1,9 @@
 @import 'src/styles/palette.scss';
 
+.container-small {
+    margin-top: 1em;
+}
+
 .list-container {
     overflow-y: scroll;
     max-height: 90vh;

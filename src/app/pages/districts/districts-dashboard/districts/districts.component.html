@@ -1,8 +1,8 @@
-<div *ngIf="districts">
+<div *ngIf="districts" ngClass.lt-sm="container-small" ngClass.sm="container-small">
     <div fxLayout="column" fxLayoutAlign="space-around center">
         <app-toggle-buttons [list]="districts" [value]="checkGroup" (valueChange)="onCheckGroupChange($event)"></app-toggle-buttons>
     </div>
-    <div class="list-container">
+    <div ngClass.gt-sm="list-container">
         <mat-list>
                 <mat-list-item (click)="toggle(district)" *ngFor="let district of districts; let i = index" class="district-btn" [class.disabled]="district.disabled"> 
                     <p mat-list-icon [ngStyle]="{'background-color':  i | asColor}"></p>

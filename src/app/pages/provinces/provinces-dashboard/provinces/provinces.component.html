@@ -1,4 +1,4 @@
-<div *ngIf="provinces">
+<div *ngIf="provinces" ngClass.lt-sm="container-small" ngClass.sm="container-small">
     <div fxLayout="column" fxLayoutAlign="space-around center">
         <app-toggle-buttons [list]="provinces" [value]="checkGroup" (valueChange)="onCheckGroupChange($event)"></app-toggle-buttons>
     </div>
