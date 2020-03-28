@@ -105,13 +105,15 @@ export class LinearChartProvider {
         return Object.entries(data)
             .filter(([code]) => code)
             .map(([code, values]) => {
+              const color = values[0].color;
               return {
                 label: `${code} - ${dataType.label}`,
                 data: dataType.transformer(values),
                 fill: false,
-                backgroundColor: values[0].color,
-                borderColor: values[0].color,
-                pointBackgroundColor: values[0].color,
+                backgroundColor: color,
+                borderColor: color,
+                pointBackgroundColor: color,
+                pointHoverBorderColor: color,
                 borderDash: dataType.lineDash,
                 borderWidth: lineWidth,
                 pointRadius: dotRadius,

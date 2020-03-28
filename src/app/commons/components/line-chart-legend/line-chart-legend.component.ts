@@ -1,5 +1,6 @@
 import { Component, OnInit, Input, EventEmitter, Output } from '@angular/core';
 import { ChartDataType } from '../line-chart/line-chart.component';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-line-chart-legend',
@@ -17,12 +18,19 @@ export class LineChartLegendComponent implements OnInit {
   @Output()
   toggleDataType: EventEmitter<ChartDataType> = new EventEmitter<ChartDataType>();
 
-  constructor() { }
+  constructor(private snackBar: MatSnackBar) { }
 
   ngOnInit() {
   }
 
   toggle(chartDataType: ChartDataType) {
-    this.toggleDataType.next({...chartDataType, active: !chartDataType.active});
+    const countActive = this.chartDataTypes
+                  .filter(c => c.active)
+                  .length;
+    if (countActive < 4 || chartDataType.active) {
+      this.toggleDataType.next({...chartDataType, active: !chartDataType.active});
+    } else {
+      this.snackBar.open('Spiacente, al massimo 4 grafici');
+    }
   }
 }
