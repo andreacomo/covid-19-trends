@@ -5,8 +5,6 @@ import { Label } from 'ng2-charts';
 import { LineChartComponent, ChartDataType } from 'src/app/commons/components/line-chart/line-chart.component';
 import { GithubService } from 'src/app/commons/services/github.service';
 import { LinearChartProvider } from 'src/app/commons/services/linear-chart-provider';
-import { GroupData } from 'src/app/commons/models/group-data';
-import { ThrowStmt } from '@angular/compiler';
 
 @Component({
   selector: 'app-district-chart',
@@ -67,14 +65,15 @@ export class DistrictChartComponent implements OnInit, OnChanges {
 
   private currentData: {[name: string]: DistrictData[]};
 
-  constructor(private github: GithubService) { }
+  constructor(private github: GithubService,
+              private chartProvider: LinearChartProvider) { }
 
   ngOnInit() {
     this.github.getAllDistrictsData()
       .subscribe(data => {
         this.currentData = data;
         this.initDataSet(data);
-        this.updatedOn = LinearChartProvider.createUpdatedOn<DistrictData>(data);
+        this.updatedOn = this.chartProvider.createUpdatedOn<DistrictData>(data);
       });
   }
 
@@ -104,10 +103,10 @@ export class DistrictChartComponent implements OnInit, OnChanges {
   private initDataSet(data: {[name: string]: DistrictData[]}) {
     this.chartData = this.availableChartTypes
                       .filter(c => c.active)
-                      .flatMap(c => LinearChartProvider.createChartData<DistrictData>(data, c));
+                      .flatMap(c => this.chartProvider.createChartData<DistrictData>(data, c));
 
     if (Object.keys(data).length) {
-      this.labels = LinearChartProvider.createLabels<DistrictData>(data);
+      this.labels = this.chartProvider.createLabels<DistrictData>(data);
     }
   }
 }

@@ -1,15 +1,17 @@
-import { Component, OnInit, Input, ViewChild, OnChanges, SimpleChanges, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Input, ViewChild, OnChanges, SimpleChanges, Output, EventEmitter, OnDestroy } from '@angular/core';
 import { ChartDataSets, ChartOptions } from 'chart.js';
 import { Label, BaseChartDirective } from 'ng2-charts';
 import { LinearChartProvider } from 'src/app/commons/services/linear-chart-provider';
 import { LocalDataService } from '../../services/local-data.service';
+import { MediaObserver, MediaChange } from '@angular/flex-layout';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-line-chart',
   templateUrl: './line-chart.component.html',
   styleUrls: ['./line-chart.component.scss']
 })
-export class LineChartComponent implements OnInit {
+export class LineChartComponent implements OnInit, OnDestroy {
 
   @Input()
   chartData: ChartDataSets[];
@@ -30,17 +32,37 @@ export class LineChartComponent implements OnInit {
 
   plugins: any[];
 
+  private previousMediaQuery: string;
+
+  private watcher: Subscription;
+
   @ViewChild(BaseChartDirective, { static: false })
   chart: BaseChartDirective;
 
-  constructor(private dataService: LocalDataService) { }
+  constructor(private dataService: LocalDataService,
+              private chartProvider: LinearChartProvider,
+              private mediaObserver: MediaObserver) { }
 
   ngOnInit() {
-    this.plugins = LinearChartProvider.getPlugins();
+    this.plugins = this.chartProvider.getPlugins();
+
     this.dataService.getMilestones()
       .subscribe(m => {
-        this.options = LinearChartProvider.getOptions(m);
+        this.options = this.chartProvider.getOptions(m);
       });
+
+    this.watcher = this.mediaObserver.media$.subscribe((change: MediaChange) => {
+      if (change.mqAlias === 'sm' && this.previousMediaQuery === 'md' && this.chartData) {
+        this.chartProvider.switchToThinLines(this.chartData);
+      } else if (change.mqAlias === 'md' && this.previousMediaQuery === 'sm' && this.chartData) {
+        this.chartProvider.switchToDefaultLines(this.chartData);
+      }
+      this.previousMediaQuery = change.mqAlias;
+    });
+  }
+
+  ngOnDestroy() {
+    this.watcher.unsubscribe();
   }
 
   hideDataset(chartIndex: number, value: boolean) {

@@ -1,17 +1,28 @@
 import { ChartDataSets, ChartOptions, ChartSize, ChartTooltipItem, ChartData } from 'chart.js';
-import { Colors } from 'src/app/commons/models/colors';
 import { Label } from 'ng2-charts';
 import * as pluginAnnotations from 'chartjs-plugin-annotation';
 import { Milestone } from 'src/app/commons/models/milestone';
-import { GroupData } from '../models/group-data';
-import { ProvinceData } from '../models/province-data';
-import { DistrictData } from '../models/district-data';
 import { ChartDataType } from '../components/line-chart/line-chart.component';
 import { HasColor } from '../models/has-color';
+import { Injectable } from '@angular/core';
+import { MediaObserver } from '@angular/flex-layout';
 
+@Injectable({
+  providedIn: 'root'
+})
 export class LinearChartProvider {
 
-    static getOptions(milestones: Milestone[]): (ChartOptions & { annotation: any }) {
+    private static readonly DEFAULT_LINE_WIDTH: number = 3;
+
+    private static readonly DEFAULT_POINT_RADIUS: number = 5;
+
+    private static readonly THIN_LINE_WIDTH: number = 2;
+
+    private static readonly THIN_POINT_RADIUS: number = 3;
+
+    constructor(private mediaObserver: MediaObserver) { }
+
+    public getOptions(milestones: Milestone[]): (ChartOptions & { annotation: any }) {
         let labelGaps = 1;
         return {
             responsive: true,
@@ -81,8 +92,16 @@ export class LinearChartProvider {
           };
     }
 
-    static createChartData<T extends HasColor>(data: {[code: string]: T[]},
+    public createChartData<T extends HasColor>(data: {[code: string]: T[]},
                                                dataType: ChartDataType): ChartDataSets[] {
+
+        let lineWidth = LinearChartProvider.DEFAULT_LINE_WIDTH;
+        let dotRadius = LinearChartProvider.DEFAULT_POINT_RADIUS;
+        if (this.mediaObserver.isActive('sm')) {
+          lineWidth = LinearChartProvider.THIN_LINE_WIDTH;
+          dotRadius = LinearChartProvider.THIN_POINT_RADIUS;
+        }
+
         return Object.entries(data)
             .filter(([code]) => code)
             .map(([code, values]) => {
@@ -90,32 +109,46 @@ export class LinearChartProvider {
                 label: `${code} - ${dataType.label}`,
                 data: dataType.transformer(values),
                 fill: false,
-                pointRadius: 5,
                 backgroundColor: values[0].color,
                 borderColor: values[0].color,
                 pointBackgroundColor: values[0].color,
                 borderDash: dataType.lineDash,
-                borderWidth: 3,
+                borderWidth: lineWidth,
+                pointRadius: dotRadius,
                 pointBorderWidth: 1
               };
             });
     }
 
-    static createLabels<T extends { data: string }>(data: {[code: string]: T[]}): Label[] {
+    public createLabels<T extends { data: string }>(data: {[code: string]: T[]}): Label[] {
         return (Object.entries(data)[0][1])
                             .map(v => this.dateStringAsLabel(v.data));
     }
 
-    static createUpdatedOn<T extends { data: string }>(data: {[code: string]: T[]}): Date {
+    public createUpdatedOn<T extends { data: string }>(data: {[code: string]: T[]}): Date {
       const firstData = Object.entries(data)[0][1];
       return new Date(firstData[firstData.length - 1].data);
     }
 
-    static getPlugins(): any[] {
+    public getPlugins(): any[] {
         return [pluginAnnotations];
     }
 
-    private static dateStringAsLabel(date: string): string {
+    public switchToThinLines(dataSet: ChartDataSets[]) {
+      dataSet.forEach(d => {
+        d.borderWidth = LinearChartProvider.THIN_LINE_WIDTH;
+        d.pointRadius = LinearChartProvider.THIN_POINT_RADIUS;
+      });
+    }
+
+    public switchToDefaultLines(dataSet: ChartDataSets[]) {
+      dataSet.forEach(d => {
+        d.borderWidth = LinearChartProvider.DEFAULT_LINE_WIDTH;
+        d.pointRadius = LinearChartProvider.DEFAULT_POINT_RADIUS;
+      });
+    }
+
+    private dateStringAsLabel(date: string): string {
         const datePart = date.split('T')[0];
         const split = datePart.split('-');
         return `${split[2]}/${split[1]}`;

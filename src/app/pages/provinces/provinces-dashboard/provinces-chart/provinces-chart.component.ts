@@ -38,7 +38,8 @@ export class ProvincesChartComponent implements OnInit, OnChanges {
     lineDash: []
   };
 
-  constructor(private github: GithubService) { }
+  constructor(private github: GithubService,
+              private chartProvider: LinearChartProvider) { }
 
   ngOnInit() {
   }
@@ -47,11 +48,11 @@ export class ProvincesChartComponent implements OnInit, OnChanges {
     if (changes.district != null && changes.district.currentValue) {
       this.github.getAllDataInDistrict(changes.district.currentValue)
         .subscribe(data => {
-          this.chartData = LinearChartProvider.createChartData<ProvinceData>(data, this.chartDataType);
+          this.chartData = this.chartProvider.createChartData<ProvinceData>(data, this.chartDataType);
 
-          this.labels = LinearChartProvider.createLabels<ProvinceData>(data);
+          this.labels = this.chartProvider.createLabels<ProvinceData>(data);
 
-          this.updatedOn = LinearChartProvider.createUpdatedOn<ProvinceData>(data);
+          this.updatedOn = this.chartProvider.createUpdatedOn<ProvinceData>(data);
         });
     }
 
