@@ -49,13 +49,21 @@ export class LineChartComponent implements OnInit, OnDestroy {
       });
 
     this.watcher = this.mediaObserver.media$.subscribe((change: MediaChange) => {
-      if (change.mqAlias === 'sm' && this.previousMediaQuery === 'md' && this.chartData) {
+      if (change.mqAlias === 'sm' && this.isBig(this.previousMediaQuery) && this.chartData) {
         this.chartProvider.switchToThinLines(this.chartData);
-      } else if (change.mqAlias === 'md' && this.previousMediaQuery === 'sm' && this.chartData) {
+      } else if (this.isBig(change.mqAlias) && this.was('sm') && this.chartData) {
         this.chartProvider.switchToDefaultLines(this.chartData);
       }
       this.previousMediaQuery = change.mqAlias;
     });
+  }
+
+  private isBig(alias: string) {
+    return ['md', 'lg', 'xl'].indexOf(alias) !== -1;
+  }
+
+  private was(alias: string) {
+    return this.previousMediaQuery === alias;
   }
 
   ngOnDestroy() {
