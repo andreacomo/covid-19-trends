@@ -1,7 +1,7 @@
 <div fxLayout="row" fxLayoutAlign="space-between">
     <div fxFlexAlign="center" class="chip-container">
         <mat-chip-list aria-label="Dati mostrati">
-            <mat-chip color="accent" selected>Casi totali</mat-chip>
+            <mat-chip color="accent" selected *ngFor="let type of chartDataTypes" (click)="toggle(type)" [class.chart-disabled]="!type.active">{{type.label}}</mat-chip>
         </mat-chip-list>
     </div>
     <div>

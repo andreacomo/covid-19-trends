@@ -1,4 +1,5 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, EventEmitter, Output } from '@angular/core';
+import { ChartDataType } from '../line-chart/line-chart.component';
 
 @Component({
   selector: 'app-line-chart-legend',
@@ -10,9 +11,18 @@ export class LineChartLegendComponent implements OnInit {
   @Input()
   updatedOn: Date;
 
+  @Input()
+  chartDataTypes: ChartDataType[];
+
+  @Output()
+  toggleDataType: EventEmitter<ChartDataType> = new EventEmitter<ChartDataType>();
+
   constructor() { }
 
   ngOnInit() {
   }
 
+  toggle(chartDataType: ChartDataType) {
+    this.toggleDataType.next({...chartDataType, active: !chartDataType.active});
+  }
 }

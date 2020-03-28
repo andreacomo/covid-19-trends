@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, ViewChild, OnChanges, SimpleChanges } from '@angular/core';
+import { Component, OnInit, Input, ViewChild, OnChanges, SimpleChanges, Output, EventEmitter } from '@angular/core';
 import { ChartDataSets, ChartOptions } from 'chart.js';
 import { Label, BaseChartDirective } from 'ng2-charts';
 import { LinearChartProvider } from 'src/app/commons/services/linear-chart-provider';
@@ -20,6 +20,12 @@ export class LineChartComponent implements OnInit {
   @Input()
   updatedOn: Date;
 
+  @Input()
+  chartTypes: ChartDataType[];
+
+  @Output()
+  toggleDataType: EventEmitter<ChartDataType> = new EventEmitter<ChartDataType>();
+
   options: ChartOptions;
 
   plugins: any[];
@@ -40,4 +46,16 @@ export class LineChartComponent implements OnInit {
   hideDataset(chartIndex: number, value: boolean) {
     this.chart.hideDataset(chartIndex, value);
   }
+
+  toggle(dataType: ChartDataType) {
+    this.toggleDataType.next(dataType);
+  }
+}
+
+export class ChartDataType {
+  label: string;
+  value: string;
+  active: boolean;
+  transformer: (values: any[]) => any;
+  lineDash: number[];
 }

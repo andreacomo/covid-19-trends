@@ -5,7 +5,7 @@ import { Label, BaseChartDirective } from 'ng2-charts';
 import { LinearChartProvider } from '../../../../commons/services/linear-chart-provider';
 import { LocalDataService } from 'src/app/commons/services/local-data.service';
 import { Province } from 'src/app/commons/models/province';
-import { LineChartComponent } from 'src/app/commons/components/line-chart/line-chart.component';
+import { LineChartComponent, ChartDataType } from 'src/app/commons/components/line-chart/line-chart.component';
 import { ProvinceData } from 'src/app/commons/models/province-data';
 
 @Component({
@@ -30,6 +30,14 @@ export class ProvincesChartComponent implements OnInit, OnChanges {
   @ViewChild('chart', { static: false })
   chart: LineChartComponent;
 
+  private chartDataType: ChartDataType = {
+    label: 'Totale Casi',
+    value: 'totale_casi',
+    active: true,
+    transformer: (values) => values.map(v => v.totale_casi),
+    lineDash: []
+  };
+
   constructor(private github: GithubService) { }
 
   ngOnInit() {
@@ -39,7 +47,7 @@ export class ProvincesChartComponent implements OnInit, OnChanges {
     if (changes.district != null && changes.district.currentValue) {
       this.github.getAllDataInDistrict(changes.district.currentValue)
         .subscribe(data => {
-          this.chartData = LinearChartProvider.createChartData<ProvinceData>(data, (values) => values.map(v => v.totale_casi));
+          this.chartData = LinearChartProvider.createChartData<ProvinceData>(data, this.chartDataType);
 
           this.labels = LinearChartProvider.createLabels<ProvinceData>(data);
 
@@ -51,7 +59,7 @@ export class ProvincesChartComponent implements OnInit, OnChanges {
       changes.toggleProvinces.currentValue.forEach(p => {
         const dataSetIndex = this.chartData
           .map(d => d.label)
-          .indexOf(p.code);
+          .indexOf(p.sigla_provincia);
         this.chart.hideDataset(dataSetIndex, p.disabled);
       });
     }

@@ -30,9 +30,10 @@ export class DistrictsComponent implements OnInit {
   toggle(district: DistrictData & {disabled: boolean}) {
     district.disabled = !district.disabled;
     this.calculateCheckGroup();
-    this.clickItems.next([district]);
+    this.clickItems.next([...this.districts]);
   }
 
+  // called after app-toggle-buttons changed disabled values
   onCheckGroupChange(event: MatButtonToggleChange) {
     this.checkGroup = event.value;
     this.clickItems.next([...this.districts]); // cloning will trigger changes in child components...

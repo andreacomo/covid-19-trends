@@ -1,4 +1,6 @@
 <app-line-chart #chart
                 [chartData]="chartData" 
                 [labels]="labels"
-                [updatedOn]="updatedOn"></app-line-chart>
+                [updatedOn]="updatedOn"
+                [chartTypes]="availableChartTypes"
+                (toggleDataType)="toggle($event)"></app-line-chart>

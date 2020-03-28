@@ -1,10 +1,11 @@
 .chip-container {
     margin-left: 5px;
 
-    .mat-standard-chip:hover::after {
-        opacity: 0;
+    .chart-disabled {
+        opacity: .2;
     }
-    .mat-standard-chip:focus::after {
-        opacity: 0;
+
+    mat-chip {
+        cursor: pointer;
     }
 }

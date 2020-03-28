@@ -6,6 +6,8 @@ import { Milestone } from 'src/app/commons/models/milestone';
 import { GroupData } from '../models/group-data';
 import { ProvinceData } from '../models/province-data';
 import { DistrictData } from '../models/district-data';
+import { ChartDataType } from '../components/line-chart/line-chart.component';
+import { HasColor } from '../models/has-color';
 
 export class LinearChartProvider {
 
@@ -72,30 +74,30 @@ export class LinearChartProvider {
           };
     }
 
-    static createChartData<T>(data: GroupData<T>, transformer: (values: T[]) => any): ChartDataSets[] {
-        let index = 0;
+    static createChartData<T extends HasColor>(data: {[code: string]: T[]},
+                                               dataType: ChartDataType): ChartDataSets[] {
         return Object.entries(data)
             .filter(([code]) => code)
             .map(([code, values]) => {
-              const color = Colors.SUPPORTED[index++];
               return {
                 label: code,
-                data: transformer(values),
+                data: dataType.transformer(values),
                 fill: false,
                 pointRadius: 5,
-                backgroundColor: color,
-                borderColor: color,
-                pointBackgroundColor: color
+                backgroundColor: values[0].color,
+                borderColor: values[0].color,
+                pointBackgroundColor: values[0].color,
+                borderDash: dataType.lineDash
               };
             });
     }
 
-    static createLabels<T>(data: GroupData<T>): Label[] {
+    static createLabels<T extends { data: string }>(data: {[code: string]: T[]}): Label[] {
         return (Object.entries(data)[0][1])
                             .map(v => this.dateStringAsLabel(v.data));
     }
 
-    static createUpdatedOn<T>(data: GroupData<T>): Date {
+    static createUpdatedOn<T extends { data: string }>(data: {[code: string]: T[]}): Date {
       const firstData = Object.entries(data)[0][1];
       return new Date(firstData[firstData.length - 1].data);
     }

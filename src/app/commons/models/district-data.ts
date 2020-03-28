@@ -1,4 +1,6 @@
-export class DistrictData {
+import { HasColor } from './has-color';
+
+export class DistrictData extends HasColor {
     data: string;
     stato: string;
     'codice_regione': number;
