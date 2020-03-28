@@ -1,4 +1,4 @@
-import { ChartDataSets, ChartOptions, ChartSize } from 'chart.js';
+import { ChartDataSets, ChartOptions, ChartSize, ChartTooltipItem, ChartData } from 'chart.js';
 import { Colors } from 'src/app/commons/models/colors';
 import { Label } from 'ng2-charts';
 import * as pluginAnnotations from 'chartjs-plugin-annotation';
@@ -28,8 +28,15 @@ export class LinearChartProvider {
             tooltips: {
               enabled: true,
               callbacks: {
-                footer: (item, data) => {
-                  const i = item[0];
+                beforeTitle: (items: ChartTooltipItem[], data: ChartData) => {
+                    const first = items[0];
+                    return data.datasets[first.datasetIndex].label.split('::')[0];
+                },
+                label: (item: ChartTooltipItem, data: ChartData) => {
+                  return item.value;
+                },
+                footer: (items: ChartTooltipItem[], data: ChartData) => {
+                  const i = items[0];
                   const previous = data.datasets[i.datasetIndex].data[i.index - 1] as number;
                   const current = parseInt(i.value, 10);
                   const incrementPercent = (((current - previous) / previous) * 100);
@@ -80,14 +87,16 @@ export class LinearChartProvider {
             .filter(([code]) => code)
             .map(([code, values]) => {
               return {
-                label: code,
+                label: `${code} - ${dataType.label}`,
                 data: dataType.transformer(values),
                 fill: false,
                 pointRadius: 5,
                 backgroundColor: values[0].color,
                 borderColor: values[0].color,
                 pointBackgroundColor: values[0].color,
-                borderDash: dataType.lineDash
+                borderDash: dataType.lineDash,
+                borderWidth: 3,
+                pointBorderWidth: 1
               };
             });
     }

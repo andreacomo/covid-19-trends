@@ -42,6 +42,24 @@ export class DistrictChartComponent implements OnInit, OnChanges {
       active: false,
       transformer: (values) => values.map(v => v.deceduti),
       lineDash: [3, 3]
+    }, {
+      label: 'Dimessi guariti',
+      value: 'dimessi',
+      active: false,
+      transformer: (values) => values.map(v => v.dimessi_guariti),
+      lineDash: [10, 2, 2, 2]
+    }, {
+      label: 'Ricoverati',
+      value: 'ricoverati',
+      active: false,
+      transformer: (values) => values.map(v => v.ricoverati_con_sintomi),
+      lineDash: [3, 6, 3, 6]
+    }, {
+      label: 'Terapia intensiva',
+      value: 'terapia_intensiva',
+      active: false,
+      transformer: (values) => values.map(v => v.terapia_intensiva),
+      lineDash: [4, 4, 2, 4]
     }];
 
   @ViewChild('chart', { static: false })
