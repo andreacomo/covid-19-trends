@@ -25,13 +25,11 @@ export class ProvincesChartComponent implements OnInit, OnChanges {
 
   labels: Label[];
 
-  updatedOn: Date;
-
   @ViewChild('chart', { static: false })
   chart: LineChartComponent;
 
   private chartDataType: ChartDataType = {
-    label: 'Totale Casi',
+    label: 'Casi totali',
     value: 'totale_casi',
     active: true,
     transformer: (values) => values.map(v => v.totale_casi),
@@ -51,8 +49,6 @@ export class ProvincesChartComponent implements OnInit, OnChanges {
           this.chartData = this.chartProvider.createChartData<ProvinceData>(data, this.chartDataType);
 
           this.labels = this.chartProvider.createLabels<ProvinceData>(data);
-
-          this.updatedOn = this.chartProvider.createUpdatedOn<ProvinceData>(data);
         });
     }
 

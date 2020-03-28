@@ -20,9 +20,6 @@ export class LineChartComponent implements OnInit, OnDestroy {
   labels: Label[];
 
   @Input()
-  updatedOn: Date;
-
-  @Input()
   chartTypes: ChartDataType[];
 
   @Output()

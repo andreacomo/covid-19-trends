@@ -20,10 +20,8 @@ export class DistrictChartComponent implements OnInit, OnChanges {
 
   labels: Label[];
 
-  updatedOn: Date;
-
   availableChartTypes: ChartDataType[] = [{
-      label: 'Totale Casi',
+      label: 'Casi totali',
       value: 'totale_casi',
       active: true,
       transformer: (values) => values.map(v => v.totale_casi),
@@ -73,7 +71,6 @@ export class DistrictChartComponent implements OnInit, OnChanges {
       .subscribe(data => {
         this.currentData = data;
         this.initDataSet(data);
-        this.updatedOn = this.chartProvider.createUpdatedOn<DistrictData>(data);
       });
   }
 

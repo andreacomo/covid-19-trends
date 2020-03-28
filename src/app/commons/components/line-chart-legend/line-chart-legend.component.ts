@@ -10,9 +10,6 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 export class LineChartLegendComponent implements OnInit {
 
   @Input()
-  updatedOn: Date;
-
-  @Input()
   chartDataTypes: ChartDataType[];
 
   @Output()
