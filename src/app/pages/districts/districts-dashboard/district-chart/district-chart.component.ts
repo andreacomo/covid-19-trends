@@ -47,39 +47,30 @@ export class DistrictChartComponent implements OnInit, OnChanges {
   @ViewChild('chart', { static: false })
   chart: LineChartComponent;
 
-  private cachedDistrictsData: {[name: string]: DistrictData[]};
+  private currentData: {[name: string]: DistrictData[]};
 
   constructor(private github: GithubService) { }
 
   ngOnInit() {
     this.github.getAllDistrictsData()
       .subscribe(data => {
-        this.cachedDistrictsData = data;
+        this.currentData = data;
         this.initDataSet(data);
         this.updatedOn = LinearChartProvider.createUpdatedOn<DistrictData>(data);
       });
   }
 
   ngOnChanges(changes: SimpleChanges): void {
-    /*if (changes.toggleDistricts != null && changes.toggleDistricts.currentValue) {
-      changes.toggleDistricts.currentValue.forEach(p => {
-        const dataSetIndex = this.chartData
-          .map(d => d.label)
-          .indexOf(p.denominazione_regione);
-        this.chart.hideDataset(dataSetIndex, p.disabled);
-      });
-    }
-    */
     if (!changes.toggleDistricts.isFirstChange()) {
       this.github.getAllDistrictsData()
         .subscribe(data => {
-          this.cachedDistrictsData = data;
+          this.currentData = data;
           changes.toggleDistricts.currentValue
                                 .filter(d => d.disabled)
                                 .forEach(d => {
-                                  delete this.cachedDistrictsData[d.denominazione_regione];
+                                  delete this.currentData[d.denominazione_regione];
                                 });
-          this.initDataSet(this.cachedDistrictsData);
+          this.initDataSet(this.currentData);
         });
     }
   }
@@ -89,7 +80,7 @@ export class DistrictChartComponent implements OnInit, OnChanges {
       .filter(c => c.value === event.value)
       .forEach(c => c.active = event.active);
 
-    this.initDataSet(this.cachedDistrictsData);
+    this.initDataSet(this.currentData);
   }
 
   private initDataSet(data: {[name: string]: DistrictData[]}) {

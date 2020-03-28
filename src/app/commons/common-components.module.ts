@@ -7,11 +7,12 @@ import { AsColorPipe } from './pipes/as-color.pipe';
 import { LineChartComponent } from './components/line-chart/line-chart.component';
 import { ChartsModule } from 'ng2-charts';
 import { LineChartLegendComponent } from './components/line-chart-legend/line-chart-legend.component';
+import { LineChartStrokeComponent } from './components/line-chart-stroke/line-chart-stroke.component';
 
 
 
 @NgModule({
-  declarations: [ToggleButtonsComponent, AsColorPipe, LineChartComponent, LineChartLegendComponent],
+  declarations: [ToggleButtonsComponent, AsColorPipe, LineChartComponent, LineChartLegendComponent, LineChartStrokeComponent],
   imports: [
     CommonModule,
     FormsModule,

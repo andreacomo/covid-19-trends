@@ -1,7 +1,10 @@
 <div fxLayout="row" fxLayoutAlign="space-between">
     <div fxFlexAlign="center" class="chip-container">
         <mat-chip-list aria-label="Dati mostrati">
-            <mat-chip color="accent" selected *ngFor="let type of chartDataTypes" (click)="toggle(type)" [class.chart-disabled]="!type.active">{{type.label}}</mat-chip>
+            <div *ngFor="let type of chartDataTypes" fxLayout="column" fxLayoutAlign="center">
+                <mat-chip #chip color="accent" selected (click)="toggle(type)" [class.chart-disabled]="!type.active">{{type.label}}</mat-chip>
+                <app-line-chart-stroke [lineDash]="type.lineDash" [sizeOf]="chip"></app-line-chart-stroke>
+            </div>
         </mat-chip-list>
     </div>
     <div>
