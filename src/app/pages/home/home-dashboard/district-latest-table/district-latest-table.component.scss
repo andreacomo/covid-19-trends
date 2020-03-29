@@ -1,3 +1,7 @@
-table {
-    width: 100%;
+.table-container {
+    height: 70vh;
+    overflow: auto;
+    table {
+        width: 100%;
+    }
 }
