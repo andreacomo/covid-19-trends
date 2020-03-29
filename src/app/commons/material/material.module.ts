@@ -13,6 +13,7 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatChipsModule } from '@angular/material/chips';
 import { MatSnackBarModule, MAT_SNACK_BAR_DEFAULT_OPTIONS } from '@angular/material/snack-bar';
+import { MatTableModule } from '@angular/material/table';
 import { FlexLayoutModule } from '@angular/flex-layout';
 
 
@@ -35,6 +36,7 @@ import { FlexLayoutModule } from '@angular/flex-layout';
     MatTabsModule,
     MatChipsModule,
     MatSnackBarModule,
+    MatTableModule,
     FlexLayoutModule
   ],
   providers: [

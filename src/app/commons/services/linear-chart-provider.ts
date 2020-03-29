@@ -6,6 +6,7 @@ import { ChartDataType } from '../components/line-chart/line-chart.component';
 import { HasColor } from '../models/has-color';
 import { Injectable } from '@angular/core';
 import { MediaObserver } from '@angular/flex-layout';
+import { DateStringPipe } from '../pipes/date-string.pipe';
 
 @Injectable({
   providedIn: 'root'
@@ -20,7 +21,8 @@ export class LinearChartProvider {
 
     private static readonly THIN_POINT_RADIUS: number = 3;
 
-    constructor(private mediaObserver: MediaObserver) { }
+    constructor(private mediaObserver: MediaObserver,
+                private dateString: DateStringPipe) { }
 
     public getOptions(milestones: Milestone[]): (ChartOptions & { annotation: any }) {
         let labelGaps = 1;
@@ -151,8 +153,6 @@ export class LinearChartProvider {
     }
 
     private dateStringAsLabel(date: string): string {
-        const datePart = date.split('T')[0];
-        const split = datePart.split('-');
-        return `${split[2]}/${split[1]}`;
+        return this.dateString.transform(date);
     }
 }

@@ -9,6 +9,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MaterialModule } from './commons/material/material.module';
 import { FooterComponent } from './layout/footer/footer.component';
 import { DistrictsModule } from './pages/districts/districts.module';
+import { HomeModule } from './pages/home/home.module';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import { DistrictsModule } from './pages/districts/districts.module';
     BrowserAnimationsModule,
     MaterialModule,
     ProvincesModule,
-    DistrictsModule
+    DistrictsModule,
+    HomeModule
   ],
   providers: [],
   bootstrap: [AppComponent]

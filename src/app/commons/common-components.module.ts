@@ -8,17 +8,22 @@ import { LineChartComponent } from './components/line-chart/line-chart.component
 import { ChartsModule } from 'ng2-charts';
 import { LineChartLegendComponent } from './components/line-chart-legend/line-chart-legend.component';
 import { LineChartStrokeComponent } from './components/line-chart-stroke/line-chart-stroke.component';
+import { DateStringPipe } from './pipes/date-string.pipe';
 
 
 
 @NgModule({
-  declarations: [ToggleButtonsComponent, AsColorPipe, LineChartComponent, LineChartLegendComponent, LineChartStrokeComponent],
+  declarations: [ToggleButtonsComponent, AsColorPipe, LineChartComponent, LineChartLegendComponent,
+    LineChartStrokeComponent, DateStringPipe],
   imports: [
     CommonModule,
     FormsModule,
     ChartsModule,
     MaterialModule
   ],
-  exports: [ToggleButtonsComponent, AsColorPipe, LineChartComponent]
+  providers: [
+    DateStringPipe
+  ],
+  exports: [ToggleButtonsComponent, AsColorPipe, LineChartComponent, DateStringPipe]
 })
 export class CommonComponentsModule { }
