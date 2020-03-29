@@ -56,7 +56,7 @@ export class ProvincesChartComponent implements OnInit, OnChanges {
       changes.toggleProvinces.currentValue.forEach(p => {
         const dataSetIndex = this.chartData
           .map(d => d.label)
-          .indexOf(p.sigla_provincia);
+          .indexOf(`${p.sigla_provincia} - ${this.chartDataType.label}`);
         this.chart.hideDataset(dataSetIndex, p.disabled);
       });
     }
