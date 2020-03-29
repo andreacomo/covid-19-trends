@@ -1,6 +1,7 @@
 import { Component, OnInit, Input, OnChanges, SimpleChanges } from '@angular/core';
 import { DistrictData } from 'src/app/commons/models/district-data';
 import { DateStringPipe } from 'src/app/commons/pipes/date-string.pipe';
+import { DistrictLatestProviderService } from '../../services/district-latest-provider.service';
 
 @Component({
   selector: 'app-district-latest-table',
@@ -18,17 +19,15 @@ export class DistrictLatestTableComponent implements OnInit, OnChanges {
 
   displayedColumns: string[];
 
-  constructor(private dateString: DateStringPipe) { }
+  constructor(private dataProvider: DistrictLatestProviderService,
+              private dateString: DateStringPipe) { }
 
   ngOnInit() {
   }
 
   ngOnChanges(changes: SimpleChanges): void {
     if (changes.data.currentValue) {
-      const chartData = Object.keys(this.data).reduce((ret, key) => {
-        ret[key] = this.createDiffWithPreviousDay(this.data[key]);
-        return ret;
-      }, {});
+      const chartData = this.dataProvider.createData(this.data);
 
       this.tableData = Object.entries(chartData)
           .filter(([code]) => code)
@@ -60,28 +59,4 @@ export class DistrictLatestTableComponent implements OnInit, OnChanges {
       console.log(this.tableData);
     }
   }
-
-  private createDiffWithPreviousDay(values: DistrictData[]): (DistrictData & {diff_casi: number, diff_casi_percent: number})[] {
-    const latestValues = values.slice(values.length - 4);
-    let index = 0;
-    return latestValues
-      .map(v => {
-        if (index > 0) {
-          const current = latestValues[index].totale_casi;
-          const previous = latestValues[index - 1].totale_casi;
-          const newValue = {
-            ...v,
-            diff_casi: current - previous,
-            diff_casi_percent: ((current - previous) / previous) * 100
-          };
-          index++;
-          return newValue;
-        } else {
-          index++;
-          return null;
-        }
-      })
-      .filter(v => v != null);
-  }
-
 }

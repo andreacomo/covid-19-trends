@@ -7,6 +7,7 @@ import { MaterialModule } from 'src/app/commons/material/material.module';
 import { DistrictLatestTableComponent } from './home-dashboard/district-latest-table/district-latest-table.component';
 import { CommonComponentsModule } from 'src/app/commons/common-components.module';
 import { NationalLatestComponent } from './home-dashboard/national-latest/national-latest.component';
+import { DistrictLatestProviderService } from './services/district-latest-provider.service';
 
 
 
@@ -17,6 +18,9 @@ import { NationalLatestComponent } from './home-dashboard/national-latest/nation
     MaterialModule,
     CommonComponentsModule,
     ChartsModule
+  ],
+  providers: [
+    DistrictLatestProviderService
   ]
 })
 export class HomeModule { }
