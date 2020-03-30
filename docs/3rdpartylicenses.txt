@@ -114,6 +114,8 @@ THE SOFTWARE.
 
 @angular/material/button-toggle
 
+@angular/material/card
+
 @angular/material/chips
 
 @angular/material/core
@@ -131,6 +133,8 @@ THE SOFTWARE.
 @angular/material/sidenav
 
 @angular/material/snack-bar
+
+@angular/material/table
 
 @angular/material/tabs
 
@@ -293,6 +297,8 @@ WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
 FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
 OTHER DEALINGS IN THE SOFTWARE.
 
+
+undefined
 
 ng2-charts
 ISC
