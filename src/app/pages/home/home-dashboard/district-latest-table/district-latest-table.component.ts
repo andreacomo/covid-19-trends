@@ -1,16 +1,18 @@
-import { Component, OnInit, Input, OnChanges, SimpleChanges } from '@angular/core';
+import { Component, OnInit, Input, OnChanges, SimpleChanges, OnDestroy } from '@angular/core';
 import { DistrictData } from 'src/app/commons/models/district-data';
 import { DateStringPipe } from 'src/app/commons/pipes/date-string.pipe';
 import { DistrictLatestProviderService } from '../../services/district-latest-provider.service';
 import { EnrichedDistrict } from '../../models/enriched-district';
 import { MeanData } from '../../models/mean-data';
+import { MediaObserver, MediaChange } from '@angular/flex-layout';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-district-latest-table',
   templateUrl: './district-latest-table.component.html',
   styleUrls: ['./district-latest-table.component.scss']
 })
-export class DistrictLatestTableComponent implements OnInit, OnChanges {
+export class DistrictLatestTableComponent implements OnInit, OnChanges, OnDestroy {
 
   @Input()
   data: {[district: string]: DistrictData[]};
@@ -23,8 +25,11 @@ export class DistrictLatestTableComponent implements OnInit, OnChanges {
 
   private meanData: {[district: string]: MeanData};
 
+  private watcher: Subscription;
+
   constructor(private dataProvider: DistrictLatestProviderService,
-              private dateString: DateStringPipe) { }
+              private dateString: DateStringPipe,
+              private mediaObserver: MediaObserver) { }
 
   ngOnInit() {
   }
@@ -57,8 +62,18 @@ export class DistrictLatestTableComponent implements OnInit, OnChanges {
         latest: this.dateString.transform(firstValues[2].data)
       };
 
-      this.displayedColumns = Object.keys(this.tableDef);
+      this.watcher = this.mediaObserver.media$.subscribe((change: MediaChange) => {
+        if (change.mqAlias !== 'xs') {
+          this.displayedColumns = Object.keys(this.tableDef);
+        } else {
+          this.displayedColumns = ['district', 'latest'];
+        }
+      });
     }
+  }
+
+  ngOnDestroy() {
+    this.watcher.unsubscribe();
   }
 
   getColor(district: string, value: number): string {
