@@ -1,3 +1,5 @@
+@import 'src/styles/palette.scss';
+
 .table-container {
     height: 70vh;
     overflow: auto;
@@ -11,5 +13,33 @@
         border-radius: 8px;
         display: inline-block;
         margin-right: 2em;
+    }
+
+    .mat-column-district {
+        width: 40%;
+    }
+
+    .mat-column-beforeBeforeLatest {
+        width: 15%;
+    }
+
+    .mat-column-beforeLatest {
+        width: 15%;
+    }
+
+    .mat-column-latest {
+        width: 15%;
+    }
+
+    .mat-column-icon {
+        width: 5%;
+    }
+
+    .trend-up {
+        color: map-get($md-accent, 500);
+    }
+
+    .trend-down {
+        color: map-get($md-primary, 100);
     }
 }

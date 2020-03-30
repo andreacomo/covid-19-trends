@@ -12,18 +12,33 @@
     
             <ng-container matColumnDef="beforeBeforeLatest">
                 <th mat-header-cell *matHeaderCellDef>{{tableDef.beforeBeforeLatest}}</th>
-                <td mat-cell *matCellDef="let element"> {{element.beforeBeforeLatest | signedNumber}} ({{element.beforeBeforeLatestPercent | signedPercentage}}) </td>
+                <td mat-cell *matCellDef="let element">
+                    {{element.beforeBeforeLatest | signedNumber}} ({{element.beforeBeforeLatestPercent | signedPercentage}})
+                </td>
             </ng-container>
     
             <ng-container matColumnDef="beforeLatest">
                 <th mat-header-cell *matHeaderCellDef>{{tableDef.beforeLatest}}</th>
-                <td mat-cell *matCellDef="let element"> {{element.beforeLatest | signedNumber}} ({{element.beforeLatestPercent | signedPercentage}})</td>
+                <td mat-cell *matCellDef="let element">
+                    {{element.beforeLatest | signedNumber}} ({{element.beforeLatestPercent | signedPercentage}})
+                </td>
             </ng-container>
     
             <ng-container matColumnDef="latest">
                 <th mat-header-cell *matHeaderCellDef>{{tableDef.latest}}</th>
                 <td mat-cell *matCellDef="let element"> 
-                    <app-chip [style]="getColor(element.district, element.latest)">{{element.latest | signedNumber}} ({{element.latestPercent | signedPercentage}})</app-chip>
+                    <app-chip [style]="getColor(element.district, element.latest)">
+                        {{element.latest | signedNumber}} ({{element.latestPercent | signedPercentage}})
+                    </app-chip>
+                </td>
+            </ng-container>
+
+            <ng-container matColumnDef="icon">
+                <th mat-header-cell *matHeaderCellDef></th>
+                <td mat-cell *matCellDef="let element">
+                    <mat-icon *ngIf="element.latest < element.beforeLatest" class="trend-down">trending_down</mat-icon>
+                    <mat-icon *ngIf="element.latest > element.beforeLatest" class="trend-up">trending_up</mat-icon>
+                    <mat-icon *ngIf="element.latest == element.beforeLatest">trending_flat</mat-icon>
                 </td>
             </ng-container>
     
