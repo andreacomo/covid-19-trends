@@ -1,11 +1,32 @@
-<div *ngIf="tableData && displayedColumns" class="table-container mat-elevation-z8">
-    <table mat-table [dataSource]="tableData">
-        <ng-container *ngFor="let colDef of tableDef" [matColumnDef]="colDef.dataKey">
-            <th mat-header-cell *matHeaderCellDef>{{colDef.label}}</th>
-            <td mat-cell *matCellDef="let element"> {{element[colDef.dataKey]}} </td>
-        </ng-container>
-
-        <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
-        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-    </table>
+<div *ngIf="tableData && displayedColumns" >
+    <h2 class="mat-title">Incremento casi totali</h2>
+    <div class="table-container mat-elevation-z8">
+        <table mat-table [dataSource]="tableData">
+            <ng-container matColumnDef="district">
+                <th mat-header-cell *matHeaderCellDef>{{tableDef.district}}</th>
+                <td mat-cell *matCellDef="let element">
+                    <span [ngStyle]="{backgroundColor: element.districtColor}" class="district-color">&nbsp;</span> 
+                    <span>{{element.district}}</span>
+                </td>
+            </ng-container>
+    
+            <ng-container matColumnDef="beforeBeforeLatest">
+                <th mat-header-cell *matHeaderCellDef>{{tableDef.beforeBeforeLatest}}</th>
+                <td mat-cell *matCellDef="let element"> {{element.beforeBeforeLatest | signedNumber}} ({{element.beforeBeforeLatestPercent | signedPercentage}}) </td>
+            </ng-container>
+    
+            <ng-container matColumnDef="beforeLatest">
+                <th mat-header-cell *matHeaderCellDef>{{tableDef.beforeLatest}}</th>
+                <td mat-cell *matCellDef="let element"> {{element.beforeLatest | signedNumber}} ({{element.beforeLatestPercent | signedPercentage}})</td>
+            </ng-container>
+    
+            <ng-container matColumnDef="latest">
+                <th mat-header-cell *matHeaderCellDef>{{tableDef.latest}}</th>
+                <td mat-cell *matCellDef="let element"> {{element.latest | signedNumber}} ({{element.latestPercent | signedPercentage}})</td>
+            </ng-container>
+    
+            <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+        </table>
+    </div>
 </div>

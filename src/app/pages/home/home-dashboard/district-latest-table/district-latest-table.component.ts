@@ -15,7 +15,7 @@ export class DistrictLatestTableComponent implements OnInit, OnChanges {
 
   tableData: any[];
 
-  tableDef: any[];
+  tableDef: any;
 
   displayedColumns: string[];
 
@@ -34,28 +34,25 @@ export class DistrictLatestTableComponent implements OnInit, OnChanges {
           .map(([code, values]) => {
             return {
               district: code,
+              districtColor: values[0].color,
               beforeBeforeLatest: values[0].diff_casi,
+              beforeBeforeLatestPercent: values[0].diff_casi_percent,
               beforeLatest: values[1].diff_casi,
-              latest: values[2].diff_casi
+              beforeLatestPercent: values[1].diff_casi_percent,
+              latest: values[2].diff_casi,
+              latestPercent: values[2].diff_casi_percent
             };
           });
 
       const firstValues = Object.entries(chartData)[0][1];
-      this.tableDef = [{
-        dataKey: 'district',
-        label: 'Regioni'
-      }, {
-        dataKey: 'beforeBeforeLatest',
-        label: this.dateString.transform(firstValues[0].data)
-      }, {
-        dataKey: 'beforeLatest',
-        label: this.dateString.transform(firstValues[1].data)
-      }, {
-        dataKey: 'latest',
-        label: this.dateString.transform(firstValues[2].data)
-      }];
+      this.tableDef = {
+        district: 'Regioni',
+        beforeBeforeLatest: this.dateString.transform(firstValues[0].data),
+        beforeLatest: this.dateString.transform(firstValues[1].data),
+        latest: this.dateString.transform(firstValues[2].data)
+      };
 
-      this.displayedColumns = this.tableDef.map(d => d.dataKey);
+      this.displayedColumns = Object.keys(this.tableDef);
       console.log(this.tableData);
     }
   }

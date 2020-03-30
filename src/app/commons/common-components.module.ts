@@ -9,12 +9,14 @@ import { ChartsModule } from 'ng2-charts';
 import { LineChartLegendComponent } from './components/line-chart-legend/line-chart-legend.component';
 import { LineChartStrokeComponent } from './components/line-chart-stroke/line-chart-stroke.component';
 import { DateStringPipe } from './pipes/date-string.pipe';
+import { SignedNumberPipe } from './pipes/signed-number.pipe';
+import { SignedPercentagePipe } from './pipes/signed-percentage.pipe';
 
 
 
 @NgModule({
   declarations: [ToggleButtonsComponent, AsColorPipe, LineChartComponent, LineChartLegendComponent,
-    LineChartStrokeComponent, DateStringPipe],
+    LineChartStrokeComponent, DateStringPipe, SignedNumberPipe, SignedPercentagePipe],
   imports: [
     CommonModule,
     FormsModule,
@@ -24,6 +26,6 @@ import { DateStringPipe } from './pipes/date-string.pipe';
   providers: [
     DateStringPipe
   ],
-  exports: [ToggleButtonsComponent, AsColorPipe, LineChartComponent, DateStringPipe]
+  exports: [ToggleButtonsComponent, AsColorPipe, LineChartComponent, DateStringPipe, SignedNumberPipe, SignedPercentagePipe]
 })
 export class CommonComponentsModule { }
