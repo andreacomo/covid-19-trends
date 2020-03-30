@@ -1,21 +1,24 @@
 <div fxLayout="column" class="container">
   <mat-toolbar color="primary" class="mat-elevation-z6">
+   <div class="md-toolbar-tools">
     <span>COVID-19 Trends</span>
+  </div>
+  <nav>
+      <button
+        mat-button
+        *ngFor="let link of navLinks"
+        [routerLink]="link.path"
+        routerLinkActive #rla="routerLinkActive"
+        [class.active]="rla.isActive">
+        {{link.label}}
+      </button>
+    </nav>
     <span fxFlex="1 1 auto"></span>
     <a mat-button href="https://github.com/andreacomo/covid-19-trends" target="_blank" matTooltip="Fork me!" aria-label="Click me to contribute">
       <mat-icon svgIcon="github" [ngStyle]="{'color':'white'}"></mat-icon>
     </a>
   </mat-toolbar>
   <div class="content">
-    <nav mat-tab-nav-bar>
-      <a mat-tab-link
-         *ngFor="let link of navLinks"
-         [routerLink]="link.path"
-         routerLinkActive #rla="routerLinkActive"
-         [active]="rla.isActive">
-        {{link.label}}
-      </a>
-    </nav>
     <router-outlet></router-outlet>
   </div>
   <app-footer></app-footer>
