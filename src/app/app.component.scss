@@ -1,14 +1,23 @@
 .container {
-    min-height: 100vh;
+  min-height: 100vh;
 
-    a[mat-button] {
-
-        &:hover {
-            opacity: .8;
-        }
+  .md-toolbar-tools {
+    margin-right: 2rem;
+  }
+  .mat-button {
+    font-size: 1rem;
+    &.active {
+      background-color: rgba(0, 0, 0, 0.1);
     }
+  }
 
-    .content {
-        flex: 1;
+  a[mat-button] {
+    &:hover {
+      opacity: 0.8;
     }
+  }
+
+  .content {
+    flex: 1;
+  }
 }
