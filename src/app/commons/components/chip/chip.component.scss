@@ -1,0 +1,26 @@
+@import 'src/styles/palette.scss';
+
+.chip {
+    padding: 5px;
+    border-radius: 20px;
+
+    &.good {
+        background-color: $good;
+        color: $bright;
+    }
+
+    &.good-ish {
+        background-color: $good-ish;
+        color: $dark;
+    }
+
+    &.bad-ish {
+        background-color: $bad-ish;
+        color: $dark;
+    }
+
+    &.bad {
+        background-color: $bad;
+        color: $bright;
+    }
+}

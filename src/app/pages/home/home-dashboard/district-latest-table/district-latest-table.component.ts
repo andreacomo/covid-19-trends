@@ -2,6 +2,8 @@ import { Component, OnInit, Input, OnChanges, SimpleChanges } from '@angular/cor
 import { DistrictData } from 'src/app/commons/models/district-data';
 import { DateStringPipe } from 'src/app/commons/pipes/date-string.pipe';
 import { DistrictLatestProviderService } from '../../services/district-latest-provider.service';
+import { EnrichedDistrict } from '../../models/enriched-district';
+import { MeanData } from '../../models/mean-data';
 
 @Component({
   selector: 'app-district-latest-table',
@@ -11,13 +13,15 @@ import { DistrictLatestProviderService } from '../../services/district-latest-pr
 export class DistrictLatestTableComponent implements OnInit, OnChanges {
 
   @Input()
-  data: {[name: string]: DistrictData[]};
+  data: {[district: string]: DistrictData[]};
 
   tableData: any[];
 
   tableDef: any;
 
   displayedColumns: string[];
+
+  private meanData: {[district: string]: MeanData};
 
   constructor(private dataProvider: DistrictLatestProviderService,
               private dateString: DateStringPipe) { }
@@ -28,6 +32,7 @@ export class DistrictLatestTableComponent implements OnInit, OnChanges {
   ngOnChanges(changes: SimpleChanges): void {
     if (changes.data.currentValue) {
       const chartData = this.dataProvider.createData(this.data);
+      this.meanData = this.dataProvider.createMeanData(chartData);
 
       this.tableData = Object.entries(chartData)
           .filter(([code]) => code)
@@ -53,7 +58,18 @@ export class DistrictLatestTableComponent implements OnInit, OnChanges {
       };
 
       this.displayedColumns = Object.keys(this.tableDef);
-      console.log(this.tableData);
+    }
+  }
+
+  getColor(district: string, value: number): string {
+    if (value <= this.meanData[district].subMean) {
+      return 'good';
+    } else if (value > this.meanData[district].subMean && value <= this.meanData[district].mean) {
+      return 'good-ish';
+    } else if (value > this.meanData[district].mean && value <= this.meanData[district].superMean) {
+      return 'bad-ish';
+    } else { // value > this.meanData[district].superMean
+      return 'bad';
     }
   }
 }

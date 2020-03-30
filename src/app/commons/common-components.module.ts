@@ -11,12 +11,13 @@ import { LineChartStrokeComponent } from './components/line-chart-stroke/line-ch
 import { DateStringPipe } from './pipes/date-string.pipe';
 import { SignedNumberPipe } from './pipes/signed-number.pipe';
 import { SignedPercentagePipe } from './pipes/signed-percentage.pipe';
+import { ChipComponent } from './components/chip/chip.component';
 
 
 
 @NgModule({
   declarations: [ToggleButtonsComponent, AsColorPipe, LineChartComponent, LineChartLegendComponent,
-    LineChartStrokeComponent, DateStringPipe, SignedNumberPipe, SignedPercentagePipe],
+    LineChartStrokeComponent, DateStringPipe, SignedNumberPipe, SignedPercentagePipe, ChipComponent],
   imports: [
     CommonModule,
     FormsModule,
@@ -26,6 +27,6 @@ import { SignedPercentagePipe } from './pipes/signed-percentage.pipe';
   providers: [
     DateStringPipe
   ],
-  exports: [ToggleButtonsComponent, AsColorPipe, LineChartComponent, DateStringPipe, SignedNumberPipe, SignedPercentagePipe]
+  exports: [ToggleButtonsComponent, AsColorPipe, LineChartComponent, DateStringPipe, SignedNumberPipe, SignedPercentagePipe, ChipComponent]
 })
 export class CommonComponentsModule { }

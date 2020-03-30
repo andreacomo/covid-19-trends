@@ -22,7 +22,9 @@
     
             <ng-container matColumnDef="latest">
                 <th mat-header-cell *matHeaderCellDef>{{tableDef.latest}}</th>
-                <td mat-cell *matCellDef="let element"> {{element.latest | signedNumber}} ({{element.latestPercent | signedPercentage}})</td>
+                <td mat-cell *matCellDef="let element"> 
+                    <app-chip [style]="getColor(element.district, element.latest)">{{element.latest | signedNumber}} ({{element.latestPercent | signedPercentage}})</app-chip>
+                </td>
             </ng-container>
     
             <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
