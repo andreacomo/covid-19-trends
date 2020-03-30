@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { GithubService } from 'src/app/commons/services/github.service';
 import { DistrictData } from 'src/app/commons/models/district-data';
+import { NationalData } from 'src/app/commons/models/national-data';
 
 @Component({
   selector: 'app-home-dashboard',
@@ -9,14 +10,21 @@ import { DistrictData } from 'src/app/commons/models/district-data';
 })
 export class HomeDashboardComponent implements OnInit {
 
-  data: {[name: string]: DistrictData[]};
+  allDistrictsData: {[name: string]: DistrictData[]};
+
+  latestNational: NationalData;
 
   constructor(private github: GithubService) { }
 
   ngOnInit() {
     this.github.getAllDistrictsData()
       .subscribe(data => {
-        this.data = data;
+        this.allDistrictsData = data;
+      });
+
+    this.github.getLatestNational()
+      .subscribe(data => {
+        this.latestNational = data;
       });
   }
 

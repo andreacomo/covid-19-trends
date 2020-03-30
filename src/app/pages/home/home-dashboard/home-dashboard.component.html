@@ -1,6 +1,6 @@
 <div fxLayout="row" fxLayout.xs="column" fxLayout.sm="column" fxLayoutAlign="center" class="home-container" fxLayoutGap="2em">
-    <app-national-latest fxFlex="20"></app-national-latest>
-    <app-district-latest-table [data]="data" fxFlex="80"></app-district-latest-table>
+    <app-national-latest fxFlex="20" [data]="latestNational"></app-national-latest>
+    <app-district-latest-table [data]="allDistrictsData" fxFlex="80"></app-district-latest-table>
 </div>
 <!--
 <app-district-latest-trend [data]="data"></app-district-latest-trend>

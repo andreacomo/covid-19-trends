@@ -1,7 +1,7 @@
 @import 'src/styles/palette.scss';
 
 .table-container {
-    height: 70vh;
+    height: 80vh;
     overflow: auto;
     border-radius: 4px;
 
@@ -19,6 +19,9 @@
 
     .mat-column-district {
         width: 40%;
+        &.default-width {
+            width: 60%;
+        }
     }
 
     .mat-column-beforeBeforeLatest {
@@ -31,6 +34,9 @@
 
     .mat-column-latest {
         width: 15%;
+        &.default-width {
+            width: 40%;
+        }
     }
 
     .mat-column-icon {

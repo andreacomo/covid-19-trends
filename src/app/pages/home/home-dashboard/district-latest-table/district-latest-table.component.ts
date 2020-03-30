@@ -63,9 +63,11 @@ export class DistrictLatestTableComponent implements OnInit, OnChanges, OnDestro
       };
 
       this.watcher = this.mediaObserver.media$.subscribe((change: MediaChange) => {
-        if (change.mqAlias !== 'xs') {
+        if (['lg', 'xl', 'md'].indexOf(change.mqAlias) !== -1) {
           this.displayedColumns = ['district', 'beforeBeforeLatest', 'beforeLatest', 'latest', 'icon'];
-        } else {
+        } else if (change.mqAlias === 'xs') {
+          this.displayedColumns = ['district', 'latest'];
+        } else if (change.mqAlias === 'sm') {
           this.displayedColumns = ['district', 'latest', 'icon'];
         }
       });

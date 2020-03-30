@@ -14,17 +14,17 @@ const routes: Routes = [
     }
   },
   {
-    path: 'provinces',
-    component: ProvincesDashboardComponent,
-    data: {
-      label: 'Province'
-    }
-  },
-  {
     path: 'districts',
     component: DistrictsDashboardComponent,
     data: {
       label: 'Regioni'
+    }
+  },
+  {
+    path: 'provinces',
+    component: ProvincesDashboardComponent,
+    data: {
+      label: 'Province'
     }
   },
   {

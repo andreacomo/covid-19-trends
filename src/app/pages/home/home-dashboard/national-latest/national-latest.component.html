@@ -1,14 +1,10 @@
-<div>
-    <h2 class="mat-title">Situazione nazionale</h2>
-    <mat-card>
-        <mat-card-content fxLayout="row" fxLayoutAlign="space-between center">
-            <strong>Totale Casi</strong> <span>534254234</span>
-        </mat-card-content>
-    </mat-card>
-    <mat-card> 
-        <mat-card-title>Tamponi</mat-card-title>
-        <mat-card-content>
-            534254234
-        </mat-card-content>
-    </mat-card>
+<div *ngIf="items" fxLayout="column">
+    <h2 class="mat-title">Situazione al {{data.data | date : 'dd/MM/yyyy'}}</h2>
+    <div fxLayout.gt-sm="column" fxLayout.sm="row wrap" fxLayoutAlign.sm="space-between">
+        <mat-card *ngFor="let item of items" fxFlex.gt-sm="100" fxFlex.sm="49">
+            <mat-card-content fxLayout="row" fxLayoutAlign="space-between center">
+                <strong>{{item.label}}</strong> <span>{{item.value | number : '1.0-0' : 'it'}}</span>
+            </mat-card-content>
+        </mat-card>
+    </div>
 </div>

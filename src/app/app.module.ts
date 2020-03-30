@@ -10,6 +10,8 @@ import { MaterialModule } from './commons/material/material.module';
 import { FooterComponent } from './layout/footer/footer.component';
 import { DistrictsModule } from './pages/districts/districts.module';
 import { HomeModule } from './pages/home/home.module';
+import { registerLocaleData } from '@angular/common';
+import localeIt from '@angular/common/locales/it';
 
 @NgModule({
   declarations: [
@@ -30,3 +32,5 @@ import { HomeModule } from './pages/home/home.module';
   bootstrap: [AppComponent]
 })
 export class AppModule { }
+
+registerLocaleData(localeIt, 'it');

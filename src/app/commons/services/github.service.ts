@@ -6,6 +6,7 @@ import { DistrictData } from '../models/district-data';
 import { RemoteDataService } from './remote-data.service';
 import { Colors } from '../models/colors';
 import { HasColor } from '../models/has-color';
+import { NationalData } from '../models/national-data';
 
 @Injectable({
   providedIn: 'root'
@@ -21,6 +22,8 @@ export class GithubService {
   private readonly LATEST_PROVINCES_DATA = 'dpc-covid19-ita-province-latest.json';
 
   private readonly LATEST_DISTRICTS_DATA = 'dpc-covid19-ita-regioni-latest.json';
+
+  private readonly LATEST_NATIONAL_DATA = 'dpc-covid19-ita-andamento-nazionale-latest.json';
 
   constructor(private remote: RemoteDataService) { }
 
@@ -81,6 +84,13 @@ export class GithubService {
 
           return result;
         })
+      );
+  }
+
+  getLatestNational(): Observable<NationalData> {
+    return this.remote.getLatestData<NationalData>(this.BASE_PATH + this.LATEST_NATIONAL_DATA)
+      .pipe(
+        map(d => d[0])
       );
   }
 
