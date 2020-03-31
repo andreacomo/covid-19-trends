@@ -69,7 +69,7 @@ export class DistrictLatestTableComponent implements OnInit, OnChanges, OnDestro
         } else if (change.mqAlias === 'xs') {
           this.displayedColumns = ['district', 'latest'];
         } else if (change.mqAlias === 'sm') {
-          this.displayedColumns = ['district', 'latest', 'icon'];
+          this.displayedColumns = ['district', 'beforeLatest', 'latest', 'icon'];
         }
       });
     }
@@ -79,9 +79,12 @@ export class DistrictLatestTableComponent implements OnInit, OnChanges, OnDestro
     this.watcher.unsubscribe();
   }
 
-  getColor(district: string, value: number): string {
-    const trend = this.meanData[district].trendOf(value);
-    switch (trend) {
+  getTrendOf(district: string, value: number): Trend {
+    return this.meanData[district].trendOf(value);
+  }
+
+  getTrend(district: string, value: number): string {
+    switch (this.getTrendOf(district, value)) {
       case Trend.MARKED_IMPROVEMENT:
         return 'good';
       case Trend.IMPROVEMENT:
@@ -96,8 +99,7 @@ export class DistrictLatestTableComponent implements OnInit, OnChanges, OnDestro
   }
 
   getTooltip(district: string, value: number): string {
-    const trend = this.meanData[district].trendOf(value);
-    switch (trend) {
+    switch (this.getTrendOf(district, value)) {
       case Trend.MARKED_IMPROVEMENT:
         return 'Netto miglioramento';
       case Trend.IMPROVEMENT:
@@ -108,28 +110,6 @@ export class DistrictLatestTableComponent implements OnInit, OnChanges, OnDestro
         return 'Netto peggioramento';
       default:
         return 'bad';
-    }
-  }
-
-  getTrendUp(district: string, value: number): boolean {
-    const trend = this.meanData[district].trendOf(value);
-    switch (trend) {
-      case Trend.DETERIORATION:
-      case Trend.SHARP_DETERIORATION:
-        return true;
-      default:
-        return false;
-    }
-  }
-
-  getTrendDown(district: string, value: number): boolean {
-    const trend = this.meanData[district].trendOf(value);
-    switch (trend) {
-      case Trend.MARKED_IMPROVEMENT:
-      case Trend.IMPROVEMENT:
-        return true;
-      default:
-        return false;
     }
   }
 }

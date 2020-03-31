@@ -27,7 +27,7 @@
             <ng-container matColumnDef="latest">
                 <th mat-header-cell *matHeaderCellDef [ngClass.xs]="'default-width'">{{tableDef.latest}}</th>
                 <td mat-cell *matCellDef="let element" [ngClass.xs]="'default-width'"> 
-                    <app-chip [style]="getColor(element.district, element.latest)" [matTooltip]="getTooltip(element.district, element.latest)">
+                    <app-chip [style]="getTrend(element.district, element.latest)" [matTooltip]="getTooltip(element.district, element.latest)">
                         {{element.latest | signedNumber}} ({{element.latestPercent | signedPercentage}})
                     </app-chip>
                 </td>
@@ -36,8 +36,7 @@
             <ng-container matColumnDef="icon">
                 <th mat-header-cell *matHeaderCellDef>Trend</th>
                 <td mat-cell *matCellDef="let element">
-                    <mat-icon *ngIf="getTrendDown(element.district, element.latest)" class="trend-down">arrow_downward</mat-icon>
-                    <mat-icon *ngIf="getTrendUp(element.district, element.latest)" class="trend-up">arrow_upward</mat-icon>
+                    <mat-icon class="trend" [ngClass]="getTrend(element.district, element.latest)">play_arrow</mat-icon>
                 </td>
             </ng-container>
     

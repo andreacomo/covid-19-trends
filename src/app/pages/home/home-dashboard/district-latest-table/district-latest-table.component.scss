@@ -43,11 +43,25 @@
         width: 5%;
     }
 
-    .trend-up {
-        color: #585858;
+    .trend {
+        &.good {
+            color: $good;
+            transform: rotate(90deg);
+        }
+        &.good-ish {
+            color: $good-ish;
+            transform: rotate(90deg);
+        }
+    
+        &.bad-ish {
+            color: $bad-ish;
+            transform: rotate(-90deg);
+        }
+    
+        &.bad {
+            color: $bad;
+            transform: rotate(-90deg);
+        }
     }
 
-    .trend-down {
-        color: #585858;
-    }
 }
