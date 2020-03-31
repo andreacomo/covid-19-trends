@@ -34,10 +34,10 @@ export class NationalLatestComponent implements OnInit, OnChanges {
         value: this.data.dimessi_guariti
       }, {
         label: 'Nuovi positivi',
-        value: this.data.nuovi_attualmente_positivi
+        value: this.data.nuovi_positivi
       }, {
         label: 'Totale positivi',
-        value: this.data.totale_attualmente_positivi
+        value: this.data.totale_positivi
       }, {
         label: 'Totale ospedalizzazioni',
         value: this.data.totale_ospedalizzati

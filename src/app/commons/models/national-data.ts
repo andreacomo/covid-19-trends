@@ -5,8 +5,9 @@ export class NationalData {
     'terapia_intensiva': number;
     'totale_ospedalizzati': number;
     'isolamento_domiciliare': number;
-    'totale_attualmente_positivi': number;
-    'nuovi_attualmente_positivi': number;
+    'totale_positivi': number;
+    'variazione_totale_positivi': number;
+    'nuovi_positivi': number;
     'dimessi_guariti': number;
     deceduti: number;
     'totale_casi': number;
