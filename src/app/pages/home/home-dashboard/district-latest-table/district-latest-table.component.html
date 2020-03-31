@@ -36,8 +36,8 @@
             <ng-container matColumnDef="icon">
                 <th mat-header-cell *matHeaderCellDef>Trend</th>
                 <td mat-cell *matCellDef="let element">
-                    <mat-icon *ngIf="getTrendDown(element.district, element.latest)">arrow_downward</mat-icon>
-                    <mat-icon *ngIf="getTrendUp(element.district, element.latest)">arrow_upward</mat-icon>
+                    <mat-icon *ngIf="getTrendDown(element.district, element.latest)" class="trend-down">arrow_downward</mat-icon>
+                    <mat-icon *ngIf="getTrendUp(element.district, element.latest)" class="trend-up">arrow_upward</mat-icon>
                 </td>
             </ng-container>
     

@@ -114,8 +114,8 @@ export class DistrictLatestTableComponent implements OnInit, OnChanges, OnDestro
   getTrendUp(district: string, value: number): boolean {
     const trend = this.meanData[district].trendOf(value);
     switch (trend) {
-      case Trend.MARKED_IMPROVEMENT:
-      case Trend.IMPROVEMENT:
+      case Trend.DETERIORATION:
+      case Trend.SHARP_DETERIORATION:
         return true;
       default:
         return false;
@@ -125,8 +125,8 @@ export class DistrictLatestTableComponent implements OnInit, OnChanges, OnDestro
   getTrendDown(district: string, value: number): boolean {
     const trend = this.meanData[district].trendOf(value);
     switch (trend) {
-      case Trend.DETERIORATION:
-      case Trend.SHARP_DETERIORATION:
+      case Trend.MARKED_IMPROVEMENT:
+      case Trend.IMPROVEMENT:
         return true;
       default:
         return false;
