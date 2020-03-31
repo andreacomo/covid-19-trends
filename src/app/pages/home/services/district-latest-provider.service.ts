@@ -21,7 +21,8 @@ export class DistrictLatestProviderService {
       ret[district] = {
         mean,
         superMean: this.calculateMeanOffset(mean, .25),
-        subMean: this.calculateMeanOffset(mean, -.25)
+        subMean: this.calculateMeanOffset(mean, -.25),
+        trendOf: MeanData.prototype.trendOf
       };
       return ret;
     }, {} as {[district: string]: (MeanData)});

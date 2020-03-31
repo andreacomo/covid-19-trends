@@ -6,6 +6,7 @@ import { EnrichedDistrict } from '../../models/enriched-district';
 import { MeanData } from '../../models/mean-data';
 import { MediaObserver, MediaChange } from '@angular/flex-layout';
 import { Subscription } from 'rxjs';
+import { Trend } from '../../models/trend';
 
 @Component({
   selector: 'app-district-latest-table',
@@ -79,14 +80,56 @@ export class DistrictLatestTableComponent implements OnInit, OnChanges, OnDestro
   }
 
   getColor(district: string, value: number): string {
-    if (value <= this.meanData[district].subMean) {
-      return 'good';
-    } else if (value > this.meanData[district].subMean && value <= this.meanData[district].mean) {
-      return 'good-ish';
-    } else if (value > this.meanData[district].mean && value <= this.meanData[district].superMean) {
-      return 'bad-ish';
-    } else { // value > this.meanData[district].superMean
-      return 'bad';
+    const trend = this.meanData[district].trendOf(value);
+    switch (trend) {
+      case Trend.MARKED_IMPROVEMENT:
+        return 'good';
+      case Trend.IMPROVEMENT:
+        return 'good-ish';
+      case Trend.DETERIORATION:
+        return 'bad-ish';
+      case Trend.SHARP_DETERIORATION:
+        return 'bad';
+      default:
+        return 'bad';
+    }
+  }
+
+  getTooltip(district: string, value: number): string {
+    const trend = this.meanData[district].trendOf(value);
+    switch (trend) {
+      case Trend.MARKED_IMPROVEMENT:
+        return 'Netto miglioramento';
+      case Trend.IMPROVEMENT:
+        return 'Miglioramento lieve';
+      case Trend.DETERIORATION:
+        return 'Peggioramento lieve';
+      case Trend.SHARP_DETERIORATION:
+        return 'Netto peggioramento';
+      default:
+        return 'bad';
+    }
+  }
+
+  getTrendUp(district: string, value: number): boolean {
+    const trend = this.meanData[district].trendOf(value);
+    switch (trend) {
+      case Trend.MARKED_IMPROVEMENT:
+      case Trend.IMPROVEMENT:
+        return true;
+      default:
+        return false;
+    }
+  }
+
+  getTrendDown(district: string, value: number): boolean {
+    const trend = this.meanData[district].trendOf(value);
+    switch (trend) {
+      case Trend.DETERIORATION:
+      case Trend.SHARP_DETERIORATION:
+        return true;
+      default:
+        return false;
     }
   }
 }
