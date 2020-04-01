@@ -2,20 +2,21 @@ import { Injectable } from '@angular/core';
 import { DistrictData } from 'src/app/commons/models/district-data';
 import { EnrichedDistrict } from '../models/enriched-district';
 import { MeanData } from '../models/mean-data';
+import { EnrichedDistrictDataGroup } from '../models/enriched-district-data-group';
 
 @Injectable()
 export class DistrictLatestProviderService {
 
   constructor() { }
 
-  public createData(data: {[district: string]: DistrictData[]}): {[district: string]: (DistrictData & EnrichedDistrict)[]} {
+  public createData(data: {[district: string]: DistrictData[]}): EnrichedDistrictDataGroup {
     return Object.keys(data).reduce((ret, district) => {
       ret[district] = this.createDiffWithPreviousDay(data[district]);
       return ret;
-    }, {} as {[district: string]: (DistrictData & EnrichedDistrict)[]});
+    }, {} as EnrichedDistrictDataGroup);
   }
 
-  public createMeanData(data: {[district: string]: (DistrictData & EnrichedDistrict)[]}): {[district: string]: MeanData} {
+  public createMeanData(data: EnrichedDistrictDataGroup): {[district: string]: MeanData} {
     return Object.keys(data).reduce((ret, district) => {
       const mean = data[district].reduce((acc, i) => acc + (i.diff_casi / data[district].length), 0);
       ret[district] = {

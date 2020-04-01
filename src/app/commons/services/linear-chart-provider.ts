@@ -95,7 +95,8 @@ export class LinearChartProvider {
     }
 
     public createChartData<T extends HasColor>(data: {[code: string]: T[]},
-                                               dataType: ChartDataType): ChartDataSets[] {
+                                               dataType: ChartDataType,
+                                               override: ChartDataSets = {}): ChartDataSets[] {
 
         let lineWidth = LinearChartProvider.DEFAULT_LINE_WIDTH;
         let dotRadius = LinearChartProvider.DEFAULT_POINT_RADIUS;
@@ -119,7 +120,9 @@ export class LinearChartProvider {
                 borderDash: dataType.lineDash,
                 borderWidth: lineWidth,
                 pointRadius: dotRadius,
-                pointBorderWidth: 1
+                pointBorderWidth: 1,
+                lineTension: 0,
+                ...override
               };
             });
     }

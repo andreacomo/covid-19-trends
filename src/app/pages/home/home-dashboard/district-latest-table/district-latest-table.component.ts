@@ -2,16 +2,24 @@ import { Component, OnInit, Input, OnChanges, SimpleChanges, OnDestroy } from '@
 import { DistrictData } from 'src/app/commons/models/district-data';
 import { DateStringPipe } from 'src/app/commons/pipes/date-string.pipe';
 import { DistrictLatestProviderService } from '../../services/district-latest-provider.service';
-import { EnrichedDistrict } from '../../models/enriched-district';
 import { MeanData } from '../../models/mean-data';
 import { MediaObserver, MediaChange } from '@angular/flex-layout';
 import { Subscription } from 'rxjs';
 import { Trend } from '../../models/trend';
+import { EnrichedDistrictDataGroup } from '../../models/enriched-district-data-group';
+import { trigger, state, style, animate, transition } from '@angular/animations';
 
 @Component({
   selector: 'app-district-latest-table',
   templateUrl: './district-latest-table.component.html',
-  styleUrls: ['./district-latest-table.component.scss']
+  styleUrls: ['./district-latest-table.component.scss'],
+  animations: [
+    trigger('detailExpand', [
+      state('collapsed', style({height: '0px', minHeight: '0'})),
+      state('expanded', style({height: '*'})),
+      transition('expanded <=> collapsed', animate('225ms cubic-bezier(0.4, 0.0, 0.2, 1)')),
+    ]),
+  ],
 })
 export class DistrictLatestTableComponent implements OnInit, OnChanges, OnDestroy {
 
@@ -23,6 +31,8 @@ export class DistrictLatestTableComponent implements OnInit, OnChanges, OnDestro
   tableDef: any;
 
   displayedColumns: string[];
+
+  chartData: EnrichedDistrictDataGroup;
 
   private meanData: {[district: string]: MeanData};
 
@@ -37,10 +47,10 @@ export class DistrictLatestTableComponent implements OnInit, OnChanges, OnDestro
 
   ngOnChanges(changes: SimpleChanges): void {
     if (changes.data.currentValue) {
-      const chartData = this.dataProvider.createData(this.data);
-      this.meanData = this.dataProvider.createMeanData(chartData);
+      this.chartData = this.dataProvider.createData(this.data);
+      this.meanData = this.dataProvider.createMeanData(this.chartData);
 
-      this.tableData = Object.entries(chartData)
+      this.tableData = Object.entries(this.chartData)
           .filter(([code]) => code)
           .map(([code, values]) => {
             return {
@@ -55,7 +65,7 @@ export class DistrictLatestTableComponent implements OnInit, OnChanges, OnDestro
             };
           });
 
-      const firstValues = Object.entries(chartData)[0][1];
+      const firstValues = Object.entries(this.chartData)[0][1];
       this.tableDef = {
         district: 'Regioni',
         beforeBeforeLatest: this.dateString.transform(firstValues[0].data),

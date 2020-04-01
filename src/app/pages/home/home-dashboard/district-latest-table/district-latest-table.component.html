@@ -1,7 +1,7 @@
 <div *ngIf="tableData && displayedColumns" >
     <h2 class="mat-title">Incremento casi totali</h2>
     <div class="table-container mat-elevation-z2">
-        <table mat-table [dataSource]="tableData">
+        <table mat-table [dataSource]="tableData" multiTemplateDataRows>
             <ng-container matColumnDef="district">
                 <th mat-header-cell *matHeaderCellDef [ngClass.xs]="'default-width'">{{tableDef.district}}</th>
                 <td mat-cell *matCellDef="let element">
@@ -39,9 +39,24 @@
                     <mat-icon class="trend" [ngClass]="getTrend(element.district, element.latest)">play_arrow</mat-icon>
                 </td>
             </ng-container>
+
+            <ng-container matColumnDef="expandedDetail">
+                <td mat-cell *matCellDef="let element" [attr.colspan]="displayedColumns.length">
+                  <div class="element-detail"
+                       [@detailExpand]="element == expandedElement ? 'expanded' : 'collapsed'">
+                       
+                       <app-district-latest-trend [data]="chartData[element.district]"></app-district-latest-trend>
+                  </div>
+                </td>
+              </ng-container>
     
             <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
-            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+            <tr mat-row *matRowDef="let element; columns: displayedColumns;"
+                class="element-row"
+                [class.expanded-row]="expandedElement === element"
+                (click)="expandedElement = expandedElement === element ? null : element">
+            </tr>
+            <tr mat-row *matRowDef="let row; columns: ['expandedDetail'];" class="detail-row"></tr>
         </table>
     </div>
 </div>

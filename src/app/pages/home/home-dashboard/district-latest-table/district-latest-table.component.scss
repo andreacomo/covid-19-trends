@@ -7,6 +7,27 @@
 
     table {
         width: 100%;
+
+        tr.detail-row {
+            height: 0;
+        }
+
+        tr.element-row:not(.expanded-row):hover {
+            background: $hover-row;
+        }
+        
+        tr.element-row {
+            cursor: pointer;
+        }
+
+        .element-row td {
+            border-bottom-width: 0;
+        }
+
+        .element-detail {
+            overflow: hidden;
+            display: flex;
+        }          
     }
 
     .district-color {
