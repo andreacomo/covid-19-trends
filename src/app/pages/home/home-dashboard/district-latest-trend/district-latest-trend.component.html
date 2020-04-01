@@ -1,7 +1,15 @@
 <div *ngIf="chartData">
+    <!--
     <canvas baseChart
         [datasets]="chartData"
         [labels]="labels"
         [chartType]="'bar'">
     </canvas>
+-->
+    <canvas baseChart
+            [datasets]="chartData"
+            [labels]="labels"
+            [options]="options"
+            [legend]="true"
+            [chartType]="'line'"></canvas>
 </div>

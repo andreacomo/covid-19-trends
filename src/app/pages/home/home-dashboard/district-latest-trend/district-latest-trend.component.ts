@@ -1,8 +1,12 @@
 import { Component, OnInit, Input, OnChanges, SimpleChanges } from '@angular/core';
 import { GithubService } from 'src/app/commons/services/github.service';
 import { DistrictData } from 'src/app/commons/models/district-data';
-import { ChartDataSets } from 'chart.js';
+import { ChartDataSets, ChartOptions } from 'chart.js';
 import { Label } from 'ng2-charts';
+import { DistrictLatestProviderService } from '../../services/district-latest-provider.service';
+import { DateStringPipe } from 'src/app/commons/pipes/date-string.pipe';
+import { LinearChartProvider } from 'src/app/commons/services/linear-chart-provider';
+import { ChartDataType } from 'src/app/commons/components/line-chart/line-chart.component';
 
 @Component({
   selector: 'app-district-latest-trend',
@@ -18,20 +22,36 @@ export class DistrictLatestTrendComponent implements OnInit, OnChanges {
 
   labels: Label[];
 
-  constructor(private github: GithubService) { }
+  availableChartTypes: ChartDataType[] = [{
+    label: 'Casi totali',
+    value: 'totale_casi',
+    active: false,
+    transformer: (values) => values.map(v => v.totale_casi),
+    lineDash: []
+  }];
+
+  options: ChartOptions = {
+    responsive: true,
+    legend: {
+      display: false
+    }
+  };
+
+  constructor(private dataProvider: DistrictLatestProviderService,
+              private dateString: DateStringPipe,
+              private linearChart: LinearChartProvider) { }
 
   ngOnInit() {
   }
 
   ngOnChanges(changes: SimpleChanges): void {
     if (changes.data.currentValue) {
-      const chartData = Object.keys(this.data).reduce((ret, key) => {
-        ret[key] = this.createDiffWithPreviousDay(this.data[key]);
-        return ret;
-      }, {});
+      /*
+      const chartData = this.dataProvider.createData(this.data);
+      const meanData = this.dataProvider.createMeanData(chartData);
 
       const barData = Object.entries(chartData)
-          .filter(([code]) => code)
+          .filter(([code]) => code === 'Lombardia')
           .map(([code, values]) => {
             return {
               label: code,
@@ -39,41 +59,17 @@ export class DistrictLatestTrendComponent implements OnInit, OnChanges {
             };
           });
 
-      /*
-      const lineData = barData.map(d => {
-        return {
-          ...d,
-          fill: false,
-          type: 'line'
-        };
-      });
-      */
       this.chartData = barData;
 
-      this.labels = (Object.entries(chartData)[0][1] as any[]).map(v => v.data);
-    }
-  }
+      this.labels = (Object.entries(chartData)[0][1] as any[]).map(v => this.dateString.transform(v.data));
+      */
+      const data = this.dataProvider.createData({lomb: this.data.Abruzzo});
+      this.chartData = this.linearChart.createChartData<DistrictData>(
+          data,
+          this.availableChartTypes[0]
+      );
 
-  private createDiffWithPreviousDay(values: DistrictData[]): (DistrictData & {diff_casi: number, diff_casi_percent: number})[] {
-    const latestValues = values.slice(values.length - 4);
-    let index = 0;
-    return latestValues
-      .map(v => {
-        if (index > 0) {
-          const current = latestValues[index].totale_casi;
-          const previous = latestValues[index - 1].totale_casi;
-          const newValue = {
-            ...v,
-            diff_casi: current - previous,
-            diff_casi_percent: ((current - previous) / previous) * 100
-          };
-          index++;
-          return newValue;
-        } else {
-          index++;
-          return null;
-        }
-      })
-      .filter(v => v != null);
+      this.labels = this.linearChart.createLabels<DistrictData>(data);
+    }
   }
 }
