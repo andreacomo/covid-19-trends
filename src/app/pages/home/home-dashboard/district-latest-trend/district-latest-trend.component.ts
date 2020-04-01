@@ -32,7 +32,17 @@ export class DistrictLatestTrendComponent implements OnInit, OnChanges {
     responsive: true,
     legend: {
       display: false
-    }
+    },
+    scales: {
+      yAxes: [{
+        id: 'loose-labels',
+        type: 'linear',
+        position: 'left',
+        ticks: {
+          maxTicksLimit: 6
+        }
+      }]
+    },
   };
 
   constructor(private linearChart: LinearChartProvider) { }
@@ -42,10 +52,16 @@ export class DistrictLatestTrendComponent implements OnInit, OnChanges {
 
   ngOnChanges(changes: SimpleChanges): void {
     if (changes.data.currentValue) {
-      const adaptedData = {key: this.data};
+      const adaptedData = {};
+      adaptedData[this.data[0].denominazione_regione] = this.data;
+
       this.chartData = this.linearChart.createChartData<DistrictData & EnrichedDistrict>(
         adaptedData,
-        this.availableChartTypes[0]
+        this.availableChartTypes[0],
+        {
+          yAxisID: 'loose-labels',
+          lineTension: 0.1
+        }
       );
 
       this.labels = this.linearChart.createLabels<DistrictData & EnrichedDistrict>(adaptedData);
