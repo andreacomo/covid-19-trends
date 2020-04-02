@@ -34,6 +34,8 @@ export class DistrictLatestTableComponent implements OnInit, OnChanges, OnDestro
 
   chartData: EnrichedDistrictDataGroup;
 
+  expandedElement; any;
+
   private meanData: {[district: string]: MeanData};
 
   private watcher: Subscription;
