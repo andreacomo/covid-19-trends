@@ -45,7 +45,39 @@
                   <div class="element-detail"
                        [@detailExpand]="element == expandedElement ? 'expanded' : 'collapsed'">
                        
-                       <app-district-latest-trend [data]="chartData[element.district]"></app-district-latest-trend>
+                       <div fxLayout="row" fxFlex="100" fxLayoutAlign="space-between" *ngIf="chartData[element.district] as district">
+                            <app-district-latest-trend [data]="district" fxFlex.gt-xs="40" fxFlex.xs="100"></app-district-latest-trend>
+                            <div fxFlex.gt-xs="60" fxLayout="row" fxLayoutAlign="space-around center" fxHide.xs>
+                                <div fxFlex="40">
+                                    <p>
+                                        <strong>Totale casi</strong>
+                                        <span class="district-detail-value">{{district[2].totale_casi | number : '1.0-0' : 'it'}}</span>
+                                    </p>
+                                    <p>
+                                        <strong>Tamponi</strong>
+                                        <span class="district-detail-value">{{district[2].tamponi | number : '1.0-0' : 'it'}}</span>
+                                    </p>
+                                    <p>
+                                        <strong>Ricoverati</strong>
+                                        <span class="district-detail-value">{{district[2].ricoverati_con_sintomi | number : '1.0-0' : 'it'}}</span>
+                                    </p>
+                                </div>
+                                <div fxFlex="40">
+                                    <p>
+                                        <strong>Terapia intensiva</strong>
+                                        <span class="district-detail-value">{{district[2].terapia_intensiva | number : '1.0-0' : 'it'}}</span>
+                                    </p>
+                                    <p>
+                                        <strong>Dimessi guariti</strong>
+                                        <span class="district-detail-value">{{district[2].dimessi_guariti | number : '1.0-0' : 'it'}}</span>
+                                    </p>
+                                    <p>
+                                        <strong>Isolamento</strong>
+                                        <span class="district-detail-value">{{district[2].isolamento_domiciliare | number : '1.0-0' : 'it'}}</span>
+                                    </p>
+                                </div>
+                            </div>
+                       </div>
                   </div>
                 </td>
               </ng-container>
