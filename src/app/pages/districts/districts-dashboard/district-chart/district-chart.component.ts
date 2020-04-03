@@ -5,6 +5,7 @@ import { Label } from 'ng2-charts';
 import { LineChartComponent, ChartDataType } from 'src/app/commons/components/line-chart/line-chart.component';
 import { GithubService } from 'src/app/commons/services/github.service';
 import { LinearChartProvider } from 'src/app/commons/services/linear-chart-provider';
+import { LinearChartDataTypeProvider } from 'src/app/commons/services/linear-chart-data-type-provider';
 
 @Component({
   selector: 'app-district-chart',
@@ -20,43 +21,7 @@ export class DistrictChartComponent implements OnInit, OnChanges {
 
   labels: Label[];
 
-  availableChartTypes: ChartDataType[] = [{
-      label: 'Casi totali',
-      value: 'totale_casi',
-      active: true,
-      transformer: (values) => values.map(v => v.totale_casi),
-      lineDash: []
-    }, {
-      label: 'Tamponi',
-      value: 'tamponi',
-      active: false,
-      transformer: (values) => values.map(v => v.tamponi),
-      lineDash: [15, 5]
-    }, {
-      label: 'Decessi',
-      value: 'decessi',
-      active: false,
-      transformer: (values) => values.map(v => v.deceduti),
-      lineDash: [3, 3]
-    }, {
-      label: 'Dimessi guariti',
-      value: 'dimessi',
-      active: false,
-      transformer: (values) => values.map(v => v.dimessi_guariti),
-      lineDash: [10, 2, 2, 2]
-    }, {
-      label: 'Ricoverati',
-      value: 'ricoverati',
-      active: false,
-      transformer: (values) => values.map(v => v.ricoverati_con_sintomi),
-      lineDash: [3, 6, 3, 6]
-    }, {
-      label: 'Terapia intensiva',
-      value: 'terapia_intensiva',
-      active: false,
-      transformer: (values) => values.map(v => v.terapia_intensiva),
-      lineDash: [4, 4, 2, 4]
-    }];
+  availableChartTypes: ChartDataType[];
 
   @ViewChild('chart', { static: false })
   chart: LineChartComponent;
@@ -64,7 +29,8 @@ export class DistrictChartComponent implements OnInit, OnChanges {
   private currentData: {[name: string]: DistrictData[]};
 
   constructor(private github: GithubService,
-              private chartProvider: LinearChartProvider) { }
+              private chartProvider: LinearChartProvider,
+              private chartTypeProvider: LinearChartDataTypeProvider) { }
 
   ngOnInit() {
     this.github.getAllDistrictsData()
@@ -75,7 +41,9 @@ export class DistrictChartComponent implements OnInit, OnChanges {
   }
 
   ngOnChanges(changes: SimpleChanges): void {
-    if (!changes.toggleDistricts.isFirstChange()) {
+    if (changes.toggleDistricts.isFirstChange()) {
+      this.availableChartTypes = this.chartTypeProvider.getAll();
+    } else {
       this.github.getAllDistrictsData()
         .subscribe(data => {
           this.currentData = data;

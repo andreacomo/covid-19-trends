@@ -7,6 +7,7 @@ import { LocalDataService } from 'src/app/commons/services/local-data.service';
 import { Province } from 'src/app/commons/models/province';
 import { LineChartComponent, ChartDataType } from 'src/app/commons/components/line-chart/line-chart.component';
 import { ProvinceData } from 'src/app/commons/models/province-data';
+import { LinearChartDataTypeProvider } from 'src/app/commons/services/linear-chart-data-type-provider';
 
 @Component({
   selector: 'app-provinces-chart',
@@ -28,18 +29,14 @@ export class ProvincesChartComponent implements OnInit, OnChanges {
   @ViewChild('chart', { static: false })
   chart: LineChartComponent;
 
-  private chartDataType: ChartDataType = {
-    label: 'Casi totali',
-    value: 'totale_casi',
-    active: true,
-    transformer: (values) => values.map(v => v.totale_casi),
-    lineDash: []
-  };
+  private chartDataType: ChartDataType;
 
   constructor(private github: GithubService,
-              private chartProvider: LinearChartProvider) { }
+              private chartProvider: LinearChartProvider,
+              private chartTypeProvider: LinearChartDataTypeProvider) { }
 
   ngOnInit() {
+    this.chartDataType = this.chartTypeProvider.get('totale_casi');
   }
 
   ngOnChanges(changes: SimpleChanges): void {

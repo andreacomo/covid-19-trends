@@ -5,6 +5,7 @@ import { Label } from 'ng2-charts';
 import { LinearChartProvider } from 'src/app/commons/services/linear-chart-provider';
 import { ChartDataType } from 'src/app/commons/components/line-chart/line-chart.component';
 import { EnrichedDistrict } from '../../models/enriched-district';
+import { LinearChartDataTypeProvider } from 'src/app/commons/services/linear-chart-data-type-provider';
 
 @Component({
   selector: 'app-district-latest-trend',
@@ -20,13 +21,7 @@ export class DistrictLatestTrendComponent implements OnInit, OnChanges {
 
   labels: Label[];
 
-  availableChartTypes: ChartDataType[] = [{
-    label: 'Casi totali',
-    value: 'totale_casi',
-    active: false,
-    transformer: (values) => values.map(v => v.totale_casi),
-    lineDash: []
-  }];
+  availableChartTypes: ChartDataType[];
 
   options: ChartOptions = {
     responsive: true,
@@ -45,12 +40,16 @@ export class DistrictLatestTrendComponent implements OnInit, OnChanges {
     },
   };
 
-  constructor(private linearChart: LinearChartProvider) { }
+  constructor(private linearChart: LinearChartProvider,
+              private chartTypeProvider: LinearChartDataTypeProvider) { }
 
   ngOnInit() {
   }
 
   ngOnChanges(changes: SimpleChanges): void {
+    if (changes.data.isFirstChange()) {
+      this.availableChartTypes = [this.chartTypeProvider.get('totale_casi')];
+    }
     if (changes.data.currentValue) {
       const adaptedData = {};
       adaptedData[this.data[0].denominazione_regione] = this.data;
