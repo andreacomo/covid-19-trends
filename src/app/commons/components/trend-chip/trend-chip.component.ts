@@ -12,6 +12,10 @@ export class TrendChipComponent implements OnInit {
   @Input()
   trend: Trend;
 
+  // usually when values increase rapidly it's bad: invert logic if it's good
+  @Input()
+  inverseLogic: boolean;
+
   constructor() { }
 
   ngOnInit() {
@@ -20,13 +24,13 @@ export class TrendChipComponent implements OnInit {
   getTrend(trend: Trend): string {
     switch (trend) {
       case Trend.MARKED_IMPROVEMENT:
-        return 'good';
+        return this.inverseLogic ? 'bad' : 'good';
       case Trend.IMPROVEMENT:
-        return 'good-ish';
+        return this.inverseLogic ? 'bad-ish' : 'good-ish';
       case Trend.DETERIORATION:
-        return 'bad-ish';
+        return this.inverseLogic ? 'good-ish' : 'bad-ish';
       case Trend.SHARP_DETERIORATION:
-        return 'bad';
+        return this.inverseLogic ? 'good' : 'bad';
       default:
         return 'bad';
     }
@@ -35,13 +39,13 @@ export class TrendChipComponent implements OnInit {
   getTooltip(trend: Trend): string {
     switch (trend) {
       case Trend.MARKED_IMPROVEMENT:
-        return 'Netto miglioramento';
+        return 'Netto ' + (this.inverseLogic ? 'peggioramento' : 'miglioramento');
       case Trend.IMPROVEMENT:
-        return 'Miglioramento lieve';
+        return (this.inverseLogic ? 'Peggioramento' : 'Miglioramento') + ' lieve';
       case Trend.DETERIORATION:
-        return 'Peggioramento lieve';
+        return (this.inverseLogic ? 'Miglioramento' : 'Peggioramento') + ' lieve';
       case Trend.SHARP_DETERIORATION:
-        return 'Netto peggioramento';
+        return 'Netto ' + (this.inverseLogic ? 'miglioramento' : 'peggioramento');
       default:
         return 'bad';
     }

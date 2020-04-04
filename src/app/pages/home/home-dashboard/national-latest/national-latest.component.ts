@@ -55,7 +55,8 @@ export class NationalLatestComponent implements OnInit, OnChanges {
       value: latest.tamponi,
       valueDif: latest.diff_tamponi,
       valueDifPercent: latest.diff_percent_tamponi,
-      mean: this.dataProvider.createMeanDataOn(latest3Days, 'diff_tamponi')
+      mean: this.dataProvider.createMeanDataOn(latest3Days, 'diff_tamponi'),
+      inverseLogic: true // if increase it's good
     }, {
       label: 'Deceduti',
       value: latest.deceduti,
@@ -67,7 +68,8 @@ export class NationalLatestComponent implements OnInit, OnChanges {
       value: latest.dimessi_guariti,
       valueDif: latest.diff_dimessi_guariti,
       valueDifPercent: latest.diff_percent_dimessi_guariti,
-      mean: this.dataProvider.createMeanDataOn(latest3Days, 'diff_dimessi_guariti')
+      mean: this.dataProvider.createMeanDataOn(latest3Days, 'diff_dimessi_guariti'),
+      inverseLogic: true // if increase it's good
     }, {
       label: 'Nuovi positivi',
       value: latest.nuovi_positivi,

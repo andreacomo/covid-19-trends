@@ -6,7 +6,7 @@
                 <strong>{{item.label}}</strong> 
                 <div class="numbers">
                     <span class="absolute-number">{{item.value | number : '1.0-0' : 'it'}}</span>
-                    <app-trend-chip [trend]="item.mean.trendOf(item.valueDif)">
+                    <app-trend-chip [trend]="item.mean.trendOf(item.valueDif)" [inverseLogic]="item.inverseLogic">
                         {{item.valueDifPercent | signedPercentage}}
                     </app-trend-chip>
                 </div>
