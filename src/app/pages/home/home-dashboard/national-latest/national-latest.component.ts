@@ -47,47 +47,56 @@ export class NationalLatestComponent implements OnInit, OnChanges {
     return [{
       label: 'Totale casi',
       value: latest.totale_casi,
-      latestPercent: latest.diff_percent_totale_casi,
+      valueDif: latest.diff_totale_casi,
+      valueDifPercent: latest.diff_percent_totale_casi,
       mean: this.dataProvider.createMeanDataOn(latest3Days, 'diff_totale_casi')
     }, {
       label: 'Tamponi',
       value: latest.tamponi,
-      latestPercent: latest.diff_percent_tamponi,
+      valueDif: latest.diff_tamponi,
+      valueDifPercent: latest.diff_percent_tamponi,
       mean: this.dataProvider.createMeanDataOn(latest3Days, 'diff_tamponi')
     }, {
       label: 'Deceduti',
       value: latest.deceduti,
-      latestPercent: latest.diff_percent_deceduti,
+      valueDif: latest.diff_deceduti,
+      valueDifPercent: latest.diff_percent_deceduti,
       mean: this.dataProvider.createMeanDataOn(latest3Days, 'diff_deceduti')
     }, {
       label: 'Dimessi guariti',
       value: latest.dimessi_guariti,
-      latestPercent: latest.diff_percent_dimessi_guariti,
+      valueDif: latest.diff_dimessi_guariti,
+      valueDifPercent: latest.diff_percent_dimessi_guariti,
       mean: this.dataProvider.createMeanDataOn(latest3Days, 'diff_dimessi_guariti')
     }, {
       label: 'Nuovi positivi',
       value: latest.nuovi_positivi,
-      latestPercent: latest.diff_percent_nuovi_positivi,
+      valueDif: latest.diff_nuovi_positivi,
+      valueDifPercent: latest.diff_percent_nuovi_positivi,
       mean: this.dataProvider.createMeanDataOn(latest3Days, 'diff_nuovi_positivi')
     }, {
       label: 'Totale positivi',
       value: latest.totale_positivi,
-      latestPercent: latest.diff_percent_totale_positivi,
+      valueDif: latest.diff_totale_positivi,
+      valueDifPercent: latest.diff_percent_totale_positivi,
       mean: this.dataProvider.createMeanDataOn(latest3Days, 'diff_totale_positivi')
     }, {
       label: 'Ospedalizzazioni',
       value: latest.totale_ospedalizzati,
-      latestPercent: latest.diff_percent_totale_ospedalizzati,
+      valueDif: latest.diff_totale_ospedalizzati,
+      valueDifPercent: latest.diff_percent_totale_ospedalizzati,
       mean: this.dataProvider.createMeanDataOn(latest3Days, 'diff_totale_ospedalizzati')
     }, {
       label: 'Terapia intensiva',
       value: latest.terapia_intensiva,
-      latestPercent: latest.diff_percent_terapia_intensiva,
+      valueDif: latest.diff_terapia_intensiva,
+      valueDifPercent: latest.diff_percent_terapia_intensiva,
       mean: this.dataProvider.createMeanDataOn(latest3Days, 'diff_terapia_intensiva')
     }, {
       label: 'Ricoverati',
       value: latest.ricoverati_con_sintomi,
-      latestPercent: latest.diff_percent_ricoverati_con_sintomi,
+      valueDif: latest.diff_ricoverati_con_sintomi,
+      valueDifPercent: latest.diff_percent_ricoverati_con_sintomi,
       mean: this.dataProvider.createMeanDataOn(latest3Days, 'diff_ricoverati_con_sintomi')
     }];
   }

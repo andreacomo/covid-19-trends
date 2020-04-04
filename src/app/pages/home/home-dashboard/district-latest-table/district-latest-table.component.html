@@ -27,7 +27,7 @@
             <ng-container matColumnDef="latest">
                 <th mat-header-cell *matHeaderCellDef [ngClass.xs]="'default-width'">{{tableDef.latest}}</th>
                 <td mat-cell *matCellDef="let element" [ngClass.xs]="'default-width'"> 
-                    <app-chip [style]="getTrend(element.district, element.latest)" [matTooltip]="getTooltip(element.district, element.latest)">
+                    <app-chip #chip [style]="chip.getTrend(getTrendOf(element.district, element.latest))" [matTooltip]="getTooltip(element.district, element.latest)">
                         {{element.latest | signedNumber}} ({{element.latestPercent | signedPercentage}})
                     </app-chip>
                 </td>
