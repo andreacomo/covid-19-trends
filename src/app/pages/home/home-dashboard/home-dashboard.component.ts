@@ -12,7 +12,7 @@ export class HomeDashboardComponent implements OnInit {
 
   allDistrictsData: {[name: string]: DistrictData[]};
 
-  latestNational: NationalData;
+  allNationalData: NationalData[];
 
   constructor(private github: GithubService) { }
 
@@ -22,10 +22,10 @@ export class HomeDashboardComponent implements OnInit {
         this.allDistrictsData = data;
       });
 
-    this.github.getLatestNational()
-      .subscribe(data => {
-        this.latestNational = data;
-      });
+    this.github.getAllNationalData()
+    .subscribe(data => {
+      this.allNationalData = data;
+    });
   }
 
 }

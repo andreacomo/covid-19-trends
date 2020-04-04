@@ -4,7 +4,7 @@ import { ChartDataSets, ChartOptions } from 'chart.js';
 import { Label } from 'ng2-charts';
 import { LinearChartProvider } from 'src/app/commons/services/linear-chart-provider';
 import { ChartDataType } from 'src/app/commons/components/line-chart/line-chart.component';
-import { EnrichedDistrict } from '../../models/enriched-district';
+import { EnrichedData } from '../../models/enriched-data';
 import { LinearChartDataTypeProvider } from 'src/app/commons/services/linear-chart-data-type-provider';
 
 @Component({
@@ -15,7 +15,7 @@ import { LinearChartDataTypeProvider } from 'src/app/commons/services/linear-cha
 export class DistrictLatestTrendComponent implements OnInit, OnChanges {
 
   @Input()
-  data: (DistrictData & EnrichedDistrict)[];
+  data: (DistrictData & EnrichedData)[];
 
   chartData: ChartDataSets[];
 
@@ -54,7 +54,7 @@ export class DistrictLatestTrendComponent implements OnInit, OnChanges {
       const adaptedData = {};
       adaptedData[this.data[0].denominazione_regione] = this.data;
 
-      this.chartData = this.linearChart.createChartData<DistrictData & EnrichedDistrict>(
+      this.chartData = this.linearChart.createChartData<DistrictData & EnrichedData>(
         adaptedData,
         this.availableChartTypes[0],
         {
@@ -63,7 +63,7 @@ export class DistrictLatestTrendComponent implements OnInit, OnChanges {
         }
       );
 
-      this.labels = this.linearChart.createLabels<DistrictData & EnrichedDistrict>(adaptedData);
+      this.labels = this.linearChart.createLabels<DistrictData & EnrichedData>(adaptedData);
     }
   }
 }

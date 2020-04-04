@@ -2,11 +2,7 @@ import { Trend } from './trend';
 
 export class MeanData {
 
-    mean: number;
-
-    superMean: number;
-
-    subMean: number;
+    constructor(public mean: number, public superMean: number, public subMean: number) {}
 
     trendOf(value: number): Trend {
         if (value <= this.subMean) {

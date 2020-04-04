@@ -1,4 +1,7 @@
-export class NationalData {
+import { HasTotalCases } from './has-total-cases';
+import { EnrichedData } from 'src/app/pages/home/models/enriched-data';
+
+export class NationalData implements HasTotalCases {
     data: string;
     stato: string;
     'ricoverati_con_sintomi': number;

@@ -1,12 +1,12 @@
 import { Component, OnInit, Input, OnChanges, SimpleChanges, OnDestroy } from '@angular/core';
 import { DistrictData } from 'src/app/commons/models/district-data';
 import { DateStringPipe } from 'src/app/commons/pipes/date-string.pipe';
-import { DistrictLatestProviderService } from '../../services/district-latest-provider.service';
+import { LatestProviderService } from '../../services/latest-data-provider.service';
 import { MeanData } from '../../models/mean-data';
 import { MediaObserver, MediaChange } from '@angular/flex-layout';
 import { Subscription } from 'rxjs';
 import { Trend } from '../../models/trend';
-import { EnrichedDistrictDataGroup } from '../../models/enriched-district-data-group';
+import { EnrichedDataGroup } from '../../models/enriched-district-data-group';
 import { trigger, state, style, animate, transition } from '@angular/animations';
 
 @Component({
@@ -32,7 +32,7 @@ export class DistrictLatestTableComponent implements OnInit, OnChanges, OnDestro
 
   displayedColumns: string[];
 
-  chartData: EnrichedDistrictDataGroup;
+  chartData: EnrichedDataGroup<DistrictData>;
 
   expandedElement; any;
 
@@ -40,7 +40,7 @@ export class DistrictLatestTableComponent implements OnInit, OnChanges, OnDestro
 
   private watcher: Subscription;
 
-  constructor(private dataProvider: DistrictLatestProviderService,
+  constructor(private dataProvider: LatestProviderService,
               private dateString: DateStringPipe,
               private mediaObserver: MediaObserver) { }
 
@@ -49,8 +49,8 @@ export class DistrictLatestTableComponent implements OnInit, OnChanges, OnDestro
 
   ngOnChanges(changes: SimpleChanges): void {
     if (changes.data.currentValue) {
-      this.chartData = this.dataProvider.createData(this.data);
-      this.meanData = this.dataProvider.createMeanData(this.chartData);
+      this.chartData = this.dataProvider.createDataTotalCases<DistrictData>(this.data);
+      this.meanData = this.dataProvider.createMeanDataDiffTotalCases<DistrictData>(this.chartData);
 
       this.tableData = Object.entries(this.chartData)
           .filter(([code]) => code)
@@ -58,12 +58,12 @@ export class DistrictLatestTableComponent implements OnInit, OnChanges, OnDestro
             return {
               district: code,
               districtColor: values[0].color,
-              beforeBeforeLatest: values[0].diff_casi,
-              beforeBeforeLatestPercent: values[0].diff_casi_percent,
-              beforeLatest: values[1].diff_casi,
-              beforeLatestPercent: values[1].diff_casi_percent,
-              latest: values[2].diff_casi,
-              latestPercent: values[2].diff_casi_percent
+              beforeBeforeLatest: values[0].diff_totale_casi,
+              beforeBeforeLatestPercent: values[0].diff_percent_totale_casi,
+              beforeLatest: values[1].diff_totale_casi,
+              beforeLatestPercent: values[1].diff_percent_totale_casi,
+              latest: values[2].diff_totale_casi,
+              latestPercent: values[2].diff_percent_totale_casi
             };
           });
 

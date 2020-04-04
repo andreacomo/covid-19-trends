@@ -1,6 +1,5 @@
-import { DistrictData } from 'src/app/commons/models/district-data';
-import { EnrichedDistrict } from './enriched-district';
+import { EnrichedData } from './enriched-data';
 
-export interface EnrichedDistrictDataGroup {
-    [district: string]: (DistrictData & EnrichedDistrict)[];
+export interface EnrichedDataGroup<T> {
+    [district: string]: (T & EnrichedData)[];
 }

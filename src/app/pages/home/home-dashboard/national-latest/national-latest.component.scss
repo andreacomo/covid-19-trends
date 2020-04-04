@@ -1,3 +1,9 @@
 mat-card {
     margin-bottom: 1em;
+
+    .numbers {
+        .absolute-number {
+            padding-right: 1em;
+        }
+    }
 }

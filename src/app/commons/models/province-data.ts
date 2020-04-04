@@ -1,6 +1,7 @@
 import { HasColor } from './has-color';
+import { HasTotalCases } from './has-total-cases';
 
-export class ProvinceData extends HasColor {
+export class ProvinceData extends HasColor implements HasTotalCases {
     data: string;
     stato: string;
     'codice_regione': number;

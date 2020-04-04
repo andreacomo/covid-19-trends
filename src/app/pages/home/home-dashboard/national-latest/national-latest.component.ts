@@ -1,5 +1,8 @@
 import { Component, OnInit, Input, OnChanges, SimpleChanges } from '@angular/core';
 import { NationalData } from 'src/app/commons/models/national-data';
+import { LatestProviderService as LatestDataProviderService } from '../../services/latest-data-provider.service';
+import { MeanData } from '../../models/mean-data';
+import { EnrichedData } from '../../models/enriched-data';
 
 @Component({
   selector: 'app-national-latest',
@@ -9,46 +12,83 @@ import { NationalData } from 'src/app/commons/models/national-data';
 export class NationalLatestComponent implements OnInit, OnChanges {
 
   @Input()
-  data: NationalData;
+  data: NationalData[];
 
   items: any[];
 
-  constructor() { }
+  updatedAt: Date;
+
+  constructor(private dataProvider: LatestDataProviderService) { }
 
   ngOnInit() {
   }
 
   ngOnChanges(changes: SimpleChanges): void {
     if (changes.data.currentValue) {
-      this.items = [{
-        label: 'Totale casi',
-        value: this.data.totale_casi
-      }, {
-        label: 'Tamponi',
-        value: this.data.tamponi
-      }, {
-        label: 'Deceduti',
-        value: this.data.deceduti
-      }, {
-        label: 'Dimessi guariti',
-        value: this.data.dimessi_guariti
-      }, {
-        label: 'Nuovi positivi',
-        value: this.data.nuovi_positivi
-      }, {
-        label: 'Totale positivi',
-        value: this.data.totale_positivi
-      }, {
-        label: 'Totale ospedalizzazioni',
-        value: this.data.totale_ospedalizzati
-      }, {
-        label: 'Terapia intensiva',
-        value: this.data.terapia_intensiva
-      }, {
-        label: 'Ricoverati',
-        value: this.data.ricoverati_con_sintomi
-      }];
+      const latest3Days: (NationalData & EnrichedData)[] = this.dataProvider.createDiffWithPreviousDay<NationalData>(
+        this.data,
+        'totale_casi',
+        'tamponi',
+        'deceduti',
+        'dimessi_guariti',
+        'nuovi_positivi',
+        'totale_positivi',
+        'totale_ospedalizzati',
+        'terapia_intensiva',
+        'ricoverati_con_sintomi'
+      );
+      this.items = this.createItems(latest3Days);
+      this.updatedAt = new Date(latest3Days[latest3Days.length - 1].data);
     }
   }
 
+  private createItems(latest3Days: (NationalData & EnrichedData)[]): any[] {
+    const latest = latest3Days[latest3Days.length - 1];
+    return [{
+      label: 'Totale casi',
+      value: latest.totale_casi,
+      latestPercent: latest.diff_percent_totale_casi,
+      mean: this.dataProvider.createMeanDataOn(latest3Days, 'diff_totale_casi')
+    }, {
+      label: 'Tamponi',
+      value: latest.tamponi,
+      latestPercent: latest.diff_percent_tamponi,
+      mean: this.dataProvider.createMeanDataOn(latest3Days, 'diff_tamponi')
+    }, {
+      label: 'Deceduti',
+      value: latest.deceduti,
+      latestPercent: latest.diff_percent_deceduti,
+      mean: this.dataProvider.createMeanDataOn(latest3Days, 'diff_deceduti')
+    }, {
+      label: 'Dimessi guariti',
+      value: latest.dimessi_guariti,
+      latestPercent: latest.diff_percent_dimessi_guariti,
+      mean: this.dataProvider.createMeanDataOn(latest3Days, 'diff_dimessi_guariti')
+    }, {
+      label: 'Nuovi positivi',
+      value: latest.nuovi_positivi,
+      latestPercent: latest.diff_percent_nuovi_positivi,
+      mean: this.dataProvider.createMeanDataOn(latest3Days, 'diff_nuovi_positivi')
+    }, {
+      label: 'Totale positivi',
+      value: latest.totale_positivi,
+      latestPercent: latest.diff_percent_totale_positivi,
+      mean: this.dataProvider.createMeanDataOn(latest3Days, 'diff_totale_positivi')
+    }, {
+      label: 'Ospedalizzazioni',
+      value: latest.totale_ospedalizzati,
+      latestPercent: latest.diff_percent_totale_ospedalizzati,
+      mean: this.dataProvider.createMeanDataOn(latest3Days, 'diff_totale_ospedalizzati')
+    }, {
+      label: 'Terapia intensiva',
+      value: latest.terapia_intensiva,
+      latestPercent: latest.diff_percent_terapia_intensiva,
+      mean: this.dataProvider.createMeanDataOn(latest3Days, 'diff_terapia_intensiva')
+    }, {
+      label: 'Ricoverati',
+      value: latest.ricoverati_con_sintomi,
+      latestPercent: latest.diff_percent_ricoverati_con_sintomi,
+      mean: this.dataProvider.createMeanDataOn(latest3Days, 'diff_ricoverati_con_sintomi')
+    }];
+  }
 }

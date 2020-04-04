@@ -19,6 +19,8 @@ export class GithubService {
 
   private readonly ALL_DISTRICTS_DATA = 'dpc-covid19-ita-regioni.json';
 
+  private readonly ALL_NATIONAL_DATA = 'dpc-covid19-ita-andamento-nazionale.json';
+
   private readonly LATEST_PROVINCES_DATA = 'dpc-covid19-ita-province-latest.json';
 
   private readonly LATEST_DISTRICTS_DATA = 'dpc-covid19-ita-regioni-latest.json';
@@ -92,6 +94,10 @@ export class GithubService {
       .pipe(
         map(d => d[0])
       );
+  }
+
+  getAllNationalData(): Observable<NationalData[]> {
+    return this.remote.getAllData<NationalData>(this.BASE_PATH + this.ALL_NATIONAL_DATA);
   }
 
   private addColorToEntries<T extends HasColor>(result: {[code: string]: T[]}) {
