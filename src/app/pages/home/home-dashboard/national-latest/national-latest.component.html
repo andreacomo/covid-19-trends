@@ -6,9 +6,9 @@
                 <strong>{{item.label}}</strong> 
                 <div class="numbers">
                     <span class="absolute-number">{{item.value | number : '1.0-0' : 'it'}}</span>
-                    <app-chip #chip [style]="chip.getTrend(item.mean.trendOf(item.valueDif))">
+                    <app-trend-chip [trend]="item.mean.trendOf(item.valueDif)">
                         {{item.valueDifPercent | signedPercentage}}
-                    </app-chip>
+                    </app-trend-chip>
                 </div>
             </mat-card-content>
         </mat-card>

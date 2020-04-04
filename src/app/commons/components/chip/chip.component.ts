@@ -1,10 +1,10 @@
-import { Component, OnInit, Input } from '@angular/core';
-import { Trend } from 'src/app/pages/home/models/trend';
+import { Component, OnInit, Input, ViewEncapsulation } from '@angular/core';
 
 @Component({
   selector: 'app-chip',
   templateUrl: './chip.component.html',
-  styleUrls: ['./chip.component.scss']
+  styleUrls: ['./chip.component.scss'],
+  encapsulation: ViewEncapsulation.None
 })
 export class ChipComponent implements OnInit {
 
@@ -15,20 +15,4 @@ export class ChipComponent implements OnInit {
 
   ngOnInit() {
   }
-
-  getTrend(trend: Trend): string {
-    switch (trend) {
-      case Trend.MARKED_IMPROVEMENT:
-        return 'good';
-      case Trend.IMPROVEMENT:
-        return 'good-ish';
-      case Trend.DETERIORATION:
-        return 'bad-ish';
-      case Trend.SHARP_DETERIORATION:
-        return 'bad';
-      default:
-        return 'bad';
-    }
-  }
-
 }

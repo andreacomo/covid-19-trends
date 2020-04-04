@@ -1,0 +1,23 @@
+@import 'src/styles/palette.scss';
+
+app-chip.trend-chip {
+    span.chip.good {
+        background-color: $good;
+        color: $bright;
+    }
+
+    span.chip.good-ish {
+        background-color: $good-ish;
+        color: $dark;
+    }
+
+    span.chip.bad-ish {
+        background-color: $bad-ish;
+        color: $dark;
+    }
+
+    span.chip.bad {
+        background-color: $bad;
+        color: $bright;
+    }
+}

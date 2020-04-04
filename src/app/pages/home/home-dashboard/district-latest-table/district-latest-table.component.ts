@@ -109,19 +109,4 @@ export class DistrictLatestTableComponent implements OnInit, OnChanges, OnDestro
         return 'bad';
     }
   }
-
-  getTooltip(district: string, value: number): string {
-    switch (this.getTrendOf(district, value)) {
-      case Trend.MARKED_IMPROVEMENT:
-        return 'Netto miglioramento';
-      case Trend.IMPROVEMENT:
-        return 'Miglioramento lieve';
-      case Trend.DETERIORATION:
-        return 'Peggioramento lieve';
-      case Trend.SHARP_DETERIORATION:
-        return 'Netto peggioramento';
-      default:
-        return 'bad';
-    }
-  }
 }
