@@ -1,13 +1,14 @@
-import { Component, OnInit, Input, OnChanges, SimpleChanges, ViewChild } from '@angular/core';
+import { Component, OnInit, Input, OnChanges, SimpleChanges } from '@angular/core';
 import { GithubService } from 'src/app/commons/services/github.service';
-import { ChartDataSets, ChartOptions } from 'chart.js';
-import { Label, BaseChartDirective } from 'ng2-charts';
+import { ChartDataSets } from 'chart.js';
+import { Label } from 'ng2-charts';
 import { LinearChartProvider } from '../../../../commons/services/linear-chart-provider';
-import { LocalDataService } from 'src/app/commons/services/local-data.service';
 import { Province } from 'src/app/commons/models/province';
-import { LineChartComponent, ChartDataType } from 'src/app/commons/components/line-chart/line-chart.component';
+import { ChartDataType } from 'src/app/commons/components/line-chart/line-chart.component';
 import { ProvinceData } from 'src/app/commons/models/province-data';
 import { LinearChartDataTypeProvider } from 'src/app/commons/services/linear-chart-data-type-provider';
+import { TimeFilter } from 'src/app/commons/models/time-filter';
+import { DataFilterProviderService } from 'src/app/commons/services/data-filter-provider.service';
 
 @Component({
   selector: 'app-provinces-chart',
@@ -26,36 +27,54 @@ export class ProvincesChartComponent implements OnInit, OnChanges {
 
   labels: Label[];
 
-  @ViewChild('chart', { static: false })
-  chart: LineChartComponent;
+  private currentData: {[code: string]: ProvinceData[]};
 
   private chartDataType: ChartDataType;
 
+  private timeFilter: TimeFilter;
+
   constructor(private github: GithubService,
               private chartProvider: LinearChartProvider,
-              private chartTypeProvider: LinearChartDataTypeProvider) { }
+              private chartTypeProvider: LinearChartDataTypeProvider,
+              private filtersProvider: DataFilterProviderService) { }
 
   ngOnInit() {
     this.chartDataType = this.chartTypeProvider.get('totale_casi');
+    this.timeFilter = this.filtersProvider.getTimeFilterByScope('all');
   }
 
   ngOnChanges(changes: SimpleChanges): void {
     if (changes.district != null && changes.district.currentValue) {
       this.github.getAllDataInDistrict(changes.district.currentValue)
         .subscribe(data => {
-          this.chartData = this.chartProvider.createChartData<ProvinceData>(data, this.chartDataType);
-
-          this.labels = this.chartProvider.createLabels<ProvinceData>(data);
+          this.currentData = data;
+          this.initDataSet(data);
         });
     }
 
     if (changes.toggleProvinces != null && changes.toggleProvinces.currentValue) {
-      changes.toggleProvinces.currentValue.forEach(p => {
-        const dataSetIndex = this.chartData
-          .map(d => d.label)
-          .indexOf(`${p.sigla_provincia} - ${this.chartDataType.label}`);
-        this.chart.hideDataset(dataSetIndex, p.disabled);
-      });
+      this.github.getAllDataInDistrict(this.district)
+        .subscribe(data => {
+          this.currentData = data;
+          changes.toggleProvinces.currentValue
+                                .filter(d => d.disabled)
+                                .forEach(d => {
+                                  delete this.currentData[d.sigla_provincia];
+                                });
+          this.initDataSet(this.currentData);
+        });
     }
+  }
+
+  private initDataSet(data: {[code: string]: ProvinceData[]}) {
+    const filters = [this.timeFilter];
+    this.chartData = this.chartProvider.createChartData<ProvinceData>(data, this.chartDataType, {}, filters);
+
+    this.labels = this.chartProvider.createLabels<ProvinceData>(data, filters);
+  }
+
+  applyTimeFilter(filter: TimeFilter) {
+    this.timeFilter = filter;
+    this.initDataSet(this.currentData);
   }
 }

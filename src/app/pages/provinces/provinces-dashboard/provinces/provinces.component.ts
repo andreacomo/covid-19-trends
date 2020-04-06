@@ -39,7 +39,7 @@ export class ProvincesComponent implements OnInit, OnChanges {
   toggle(province: ProvinceData & {disabled: boolean}) {
     province.disabled = !province.disabled;
     this.calculateCheckGroup();
-    this.clickItems.next([province]);
+    this.clickItems.next([...this.provinces]);
   }
 
   onCheckGroupChange(event: MatButtonToggleChange) {
