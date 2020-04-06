@@ -5,6 +5,7 @@ import { LinearChartProvider } from 'src/app/commons/services/linear-chart-provi
 import { LocalDataService } from '../../services/local-data.service';
 import { MediaObserver, MediaChange } from '@angular/flex-layout';
 import { Subscription } from 'rxjs';
+import { TimeFilter } from '../../models/time-filter';
 
 @Component({
   selector: 'app-line-chart',
@@ -24,6 +25,9 @@ export class LineChartComponent implements OnInit, OnDestroy {
 
   @Output()
   toggleDataType: EventEmitter<ChartDataType> = new EventEmitter<ChartDataType>();
+
+  @Output()
+  timeFilterChange: EventEmitter<TimeFilter> = new EventEmitter<TimeFilter>();
 
   options: ChartOptions;
 
@@ -76,6 +80,10 @@ export class LineChartComponent implements OnInit, OnDestroy {
 
   toggle(dataType: ChartDataType) {
     this.toggleDataType.next(dataType);
+  }
+
+  applyTimeFilter(filter: TimeFilter) {
+    this.timeFilterChange.next(filter);
   }
 }
 

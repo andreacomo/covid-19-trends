@@ -16,6 +16,7 @@ import { MatSnackBarModule, MAT_SNACK_BAR_DEFAULT_OPTIONS } from '@angular/mater
 import { MatTableModule } from '@angular/material/table';
 import { MatCardModule } from '@angular/material/card';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatMenuModule } from '@angular/material/menu';
 import { FlexLayoutModule } from '@angular/flex-layout';
 
 
@@ -41,6 +42,7 @@ import { FlexLayoutModule } from '@angular/flex-layout';
     MatTableModule,
     MatCardModule,
     BrowserAnimationsModule,
+    MatMenuModule,
     FlexLayoutModule
   ],
   providers: [

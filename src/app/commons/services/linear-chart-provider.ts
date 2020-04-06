@@ -7,6 +7,7 @@ import { HasColor } from '../models/has-color';
 import { Injectable } from '@angular/core';
 import { MediaObserver } from '@angular/flex-layout';
 import { DateStringPipe } from '../pipes/date-string.pipe';
+import { DataFilter } from '../models/data-filter';
 
 @Injectable({
   providedIn: 'root'
@@ -96,7 +97,8 @@ export class LinearChartProvider {
 
     public createChartData<T extends HasColor>(data: {[code: string]: T[]},
                                                dataType: ChartDataType,
-                                               override: ChartDataSets = {}): ChartDataSets[] {
+                                               override: ChartDataSets = {},
+                                               filters: DataFilter[] = [{apply: values => values}]): ChartDataSets[] {
 
         let lineWidth = LinearChartProvider.DEFAULT_LINE_WIDTH;
         let dotRadius = LinearChartProvider.DEFAULT_POINT_RADIUS;
@@ -111,7 +113,7 @@ export class LinearChartProvider {
               const color = values[0].color;
               return {
                 label: `${code} - ${dataType.label}`,
-                data: dataType.transformer(values),
+                data: dataType.transformer(filters.reduce((acc, f) => f.apply(values), [])),
                 fill: false,
                 backgroundColor: color,
                 borderColor: color,
@@ -127,9 +129,11 @@ export class LinearChartProvider {
             });
     }
 
-    public createLabels<T extends { data: string }>(data: {[code: string]: T[]}): Label[] {
-        return (Object.entries(data)[0][1])
-                            .map(v => this.dateStringAsLabel(v.data));
+    public createLabels<T extends { data: string }>(data: {[code: string]: T[]},
+                                                    filters: DataFilter[] = [{apply: values => values}]): Label[] {
+      const firstData = (Object.entries(data)[0][1]);
+      return filters.reduce((acc, f) => f.apply(firstData), [])
+                    .map(v => this.dateStringAsLabel(v.data));
     }
 
     public createUpdatedOn<T extends { data: string }>(data: {[code: string]: T[]}): Date {

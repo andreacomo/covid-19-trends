@@ -1,5 +1,8 @@
-<div *ngIf="chartData" fxHide.xs class="chart-container">
-    <app-line-chart-legend [chartDataTypes]="chartTypes" (toggleDataType)="toggle($event)"></app-line-chart-legend>
+<div *ngIf="chartData" fxHide.xs class="chart-container" fxLayout="column">
+    <div fxLayout="row" fxLayoutAlign="space-between" fxLayout.sm="column">
+        <app-line-chart-legend [chartDataTypes]="chartTypes" (toggleDataType)="toggle($event)"></app-line-chart-legend>
+        <app-time-filter (selectFilter)="applyTimeFilter($event)" fxFlexAlign.sm="end"></app-time-filter>
+    </div>
     <canvas baseChart
             [datasets]="chartData"
             [labels]="labels"
