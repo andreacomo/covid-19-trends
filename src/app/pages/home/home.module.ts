@@ -9,10 +9,9 @@ import { CommonComponentsModule } from 'src/app/commons/common-components.module
 import { NationalLatestComponent } from './home-dashboard/national-latest/national-latest.component';
 import { LatestProviderService } from './services/latest-data-provider.service';
 
-
-
 @NgModule({
-  declarations: [HomeDashboardComponent, DistrictLatestTrendComponent, DistrictLatestTableComponent, NationalLatestComponent],
+  declarations: [HomeDashboardComponent, DistrictLatestTrendComponent,
+    DistrictLatestTableComponent, NationalLatestComponent],
   imports: [
     CommonModule,
     MaterialModule,

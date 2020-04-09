@@ -1,0 +1,9 @@
+<div *ngIf="chartData">
+    <h2 class="mat-title">Nuovi casi con media mobile settimanale</h2>
+    <canvas baseChart
+            [datasets]="chartData"
+            [labels]="labels"
+            [options]="options"
+            [legend]="false"
+            [chartType]="'bar'"></canvas>
+</div>
