@@ -1,5 +1,5 @@
 <div *ngIf="chartData">
-    <h2 class="mat-title">Nuovi casi con media mobile settimanale</h2>
+    <h2 class="mat-title">Nuovi casi con media mobile a {{window}} giorni</h2>
     <canvas baseChart
             [datasets]="chartData"
             [labels]="labels"
