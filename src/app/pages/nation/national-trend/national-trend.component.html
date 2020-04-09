@@ -1,3 +1,11 @@
-<div fxLayout="row" fxLayout.xs="column" fxLayout.sm="column" fxLayoutAlign="center" class="container" fxLayoutGap="2em">
-    <app-national-new-cases-chart [data]="allNationalData" fxFlex="50"></app-national-new-cases-chart>
+<div class="container" >
+    <h2 class="mat-title">Andamento degli ultimi {{dataLatestDays}} giorni con media mobile a {{smaWindow}} giorni</h2>
+    <div fxLayout="row" fxLayout.xs="column" fxLayout.sm="column" fxLayoutAlign="center" fxLayoutGap="2em">
+        <app-national-data-chart [data]="allNationalData" [config]="newCasesConfig" fxFlex="50"></app-national-data-chart>
+        <app-national-data-chart [data]="allNationalData" [config]="allCasesConfig" fxFlex="50"></app-national-data-chart>
+    </div>
+    <div fxLayout="row" fxLayout.xs="column" fxLayout.sm="column" fxLayoutAlign="center" fxLayoutGap="2em">
+        <app-national-data-chart [data]="allNationalData" [config]="newDeadCasesConfig" fxFlex="50"></app-national-data-chart>
+        <app-national-data-chart [data]="allNationalData" [config]="deadCasesConfig" fxFlex="50"></app-national-data-chart>
+    </div>
 </div>

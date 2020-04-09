@@ -3,16 +3,20 @@ import { NationalData } from 'src/app/commons/models/national-data';
 import { ChartOptions, ChartDataSets } from 'chart.js';
 import { Label } from 'ng2-charts';
 import { DateStringPipe } from 'src/app/commons/pipes/date-string.pipe';
+import { Colors } from 'src/app/commons/models/colors';
 
 @Component({
-  selector: 'app-national-new-cases-chart',
-  templateUrl: './national-new-cases-chart.component.html',
-  styleUrls: ['./national-new-cases-chart.component.scss']
+  selector: 'app-national-data-chart',
+  templateUrl: './national-data-chart.component.html',
+  styleUrls: ['./national-data-chart.component.scss']
 })
-export class NationalNewCasesChartComponent implements OnInit, OnChanges {
+export class NationalDataChartComponent implements OnInit, OnChanges {
 
   @Input()
   data: NationalData[];
+
+  @Input()
+  config: ChartConfig;
 
   options: ChartOptions = {
     responsive: true,
@@ -23,28 +27,29 @@ export class NationalNewCasesChartComponent implements OnInit, OnChanges {
 
   chartData: ChartDataSets[];
 
-  window: number;
-
   constructor(private dateString: DateStringPipe) { }
 
   ngOnInit() {
-    this.window = 5;
   }
 
   ngOnChanges(changes: SimpleChanges): void {
     if (changes.data.currentValue && !changes.data.previousValue) {
-      const latestData = this.data.slice(this.data.length - 40);
+      const latestData = this.data.slice(this.data.length - this.config.dataLatestDays);
       this.chartData = [{
-          label: 'Totale casi',
-          data: latestData.map(d => d.nuovi_positivi),
+          label: this.config.dataLabel,
+          data: latestData.map(d => d[this.config.metric]),
           barPercentage: .6,
-          backgroundColor: '#ff9800AA',
-          hoverBackgroundColor: '#ff7b00'
+          backgroundColor: `${this.config.dataBarColor}AA`,
+          hoverBackgroundColor: this.config.dataBarColor
         }, {
-          label: `Media Mobile a ${window} giorni`,
-          data: this.createSimpleMovingAverage(latestData, this.window, 'nuovi_positivi'),
+          label: this.config.smaLabel,
+          data: this.createSimpleMovingAverage(latestData, this.config.smaWindow, this.config.metric),
           type: 'line',
-          fill: false
+          fill: false,
+          borderWidth: 2,
+          pointRadius: 2,
+          backgroundColor: Colors.SUPPORTED[Colors.SUPPORTED.length - 2],
+          borderColor: Colors.SUPPORTED[Colors.SUPPORTED.length - 2]
         }];
       this.labels = latestData.map(d => this.dateString.transform(d.data));
     }
@@ -63,4 +68,21 @@ export class NationalNewCasesChartComponent implements OnInit, OnChanges {
 
     return result;
   }
+}
+
+export class ChartConfig {
+
+  title: string;
+
+  metric: string;
+
+  dataLatestDays: number;
+
+  dataLabel: string;
+
+  dataBarColor: string;
+
+  smaLabel: string;
+
+  smaWindow: number;
 }

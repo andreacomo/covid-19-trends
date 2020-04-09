@@ -4,11 +4,11 @@ import { MaterialModule } from 'src/app/commons/material/material.module';
 import { CommonComponentsModule } from 'src/app/commons/common-components.module';
 import { ChartsModule } from 'ng2-charts';
 import { NationalTrendComponent } from './national-trend/national-trend.component';
-import { NationalNewCasesChartComponent } from './national-trend/national-new-cases-chart/national-new-cases-chart.component';
+import { NationalDataChartComponent } from './national-trend/national-data-chart/national-data-chart.component';
 
 
 @NgModule({
-  declarations: [NationalTrendComponent, NationalNewCasesChartComponent],
+  declarations: [NationalTrendComponent, NationalDataChartComponent],
   imports: [
     MaterialModule,
     CommonComponentsModule,
