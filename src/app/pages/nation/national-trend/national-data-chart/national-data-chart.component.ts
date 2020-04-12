@@ -1,6 +1,6 @@
 import { Component, OnInit, Input, SimpleChanges, OnChanges } from '@angular/core';
 import { NationalData } from 'src/app/commons/models/national-data';
-import { ChartOptions, ChartDataSets } from 'chart.js';
+import { ChartOptions, ChartDataSets, ChartTooltipItem, ChartData } from 'chart.js';
 import { Label } from 'ng2-charts';
 import { DateStringPipe } from 'src/app/commons/pipes/date-string.pipe';
 import { Colors } from 'src/app/commons/models/colors';
@@ -20,7 +20,26 @@ export class NationalDataChartComponent implements OnInit, OnChanges {
 
   options: ChartOptions = {
     responsive: true,
-    aspectRatio: 2
+    aspectRatio: 2,
+    legend: {
+      display: true,
+      position: 'top',
+      align: 'center',
+      labels: {
+        boxWidth: 13,
+        fontFamily: 'Roboto, \'Helvetica Neue\', sans-serif'
+      }
+    },
+    tooltips: {
+      enabled: true,
+      callbacks: {
+        label: (item: ChartTooltipItem, data: ChartData) => {
+          const valueAsFloat = parseFloat(item.value);
+          const value: string = valueAsFloat % 1 === 0 ? item.value : valueAsFloat.toFixed(2);
+          return `${data.datasets[item.datasetIndex].label}: ${value}${this.config.isPercentage ? '%' : ''}`;
+        }
+      }
+    }
   };
 
   labels: Label[];
@@ -40,7 +59,8 @@ export class NationalDataChartComponent implements OnInit, OnChanges {
           data: latestData.map(d => d[this.config.metric]),
           barPercentage: .6,
           backgroundColor: `${this.config.dataBarColor}AA`,
-          hoverBackgroundColor: this.config.dataBarColor
+          hoverBackgroundColor: this.config.dataBarColor,
+          borderColor: this.config.dataBarColor
         }, {
           label: this.config.smaLabel,
           data: this.createSimpleMovingAverage(latestData, this.config.smaWindow, this.config.metric),
@@ -85,4 +105,6 @@ export class ChartConfig {
   smaLabel: string;
 
   smaWindow: number;
+
+  isPercentage?: boolean;
 }
