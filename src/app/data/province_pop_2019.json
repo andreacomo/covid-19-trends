@@ -1,0 +1,965 @@
+[
+  {
+    "codice_regione": 12,
+    "regione": "LAZ",
+    "sigla_provincia": "RM",
+    "popolazione": 4342212,
+    "superficie_kmq": 5363.28,
+    "densita_ab_kmq": 810,
+    "num_comini": 121
+  },
+  {
+    "codice_regione": 3,
+    "regione": "LOM",
+    "sigla_provincia": "MI",
+    "popolazione": 3250315,
+    "superficie_kmq": 1575.65,
+    "densita_ab_kmq": 2063,
+    "num_comini": 133
+  },
+  {
+    "codice_regione": 15,
+    "regione": "CAM",
+    "sigla_provincia": "NA",
+    "popolazione": 3084890,
+    "superficie_kmq": 1178.93,
+    "densita_ab_kmq": 2617,
+    "num_comini": 92
+  },
+  {
+    "codice_regione": 1,
+    "regione": "PIE",
+    "sigla_provincia": "TO",
+    "popolazione": 2259523,
+    "superficie_kmq": 6827,
+    "densita_ab_kmq": 331,
+    "num_comini": 312
+  },
+  {
+    "codice_regione": 3,
+    "regione": "LOM",
+    "sigla_provincia": "BS",
+    "popolazione": 1265954,
+    "superficie_kmq": 4785.62,
+    "densita_ab_kmq": 265,
+    "num_comini": 205
+  },
+  {
+    "codice_regione": 19,
+    "regione": "SIC",
+    "sigla_provincia": "PA",
+    "popolazione": 1252588,
+    "superficie_kmq": 5009.28,
+    "densita_ab_kmq": 250,
+    "num_comini": 82
+  },
+  {
+    "codice_regione": 16,
+    "regione": "PUG",
+    "sigla_provincia": "BA",
+    "popolazione": 1251994,
+    "superficie_kmq": 3862.88,
+    "densita_ab_kmq": 324,
+    "num_comini": 41
+  },
+  {
+    "codice_regione": 3,
+    "regione": "LOM",
+    "sigla_provincia": "BG",
+    "popolazione": 1114590,
+    "superficie_kmq": 2754.9,
+    "densita_ab_kmq": 405,
+    "num_comini": 243
+  },
+  {
+    "codice_regione": 19,
+    "regione": "SIC",
+    "sigla_provincia": "CT",
+    "popolazione": 1107702,
+    "superficie_kmq": 3573.68,
+    "densita_ab_kmq": 310,
+    "num_comini": 58
+  },
+  {
+    "codice_regione": 15,
+    "regione": "CAM",
+    "sigla_provincia": "SA",
+    "popolazione": 1098513,
+    "superficie_kmq": 4954.16,
+    "densita_ab_kmq": 222,
+    "num_comini": 158
+  },
+  {
+    "codice_regione": 8,
+    "regione": "EMR",
+    "sigla_provincia": "BO",
+    "popolazione": 1014619,
+    "superficie_kmq": 3702.32,
+    "densita_ab_kmq": 274,
+    "num_comini": 55
+  },
+  {
+    "codice_regione": 9,
+    "regione": "TOS",
+    "sigla_provincia": "FI",
+    "popolazione": 1011349,
+    "superficie_kmq": 3513.69,
+    "densita_ab_kmq": 288,
+    "num_comini": 41
+  },
+  {
+    "codice_regione": 5,
+    "regione": "VEN",
+    "sigla_provincia": "PD",
+    "popolazione": 937908,
+    "superficie_kmq": 2144.15,
+    "densita_ab_kmq": 437,
+    "num_comini": 102
+  },
+  {
+    "codice_regione": 5,
+    "regione": "VEN",
+    "sigla_provincia": "VR",
+    "popolazione": 926497,
+    "superficie_kmq": 3096.39,
+    "densita_ab_kmq": 299,
+    "num_comini": 98
+  },
+  {
+    "codice_regione": 15,
+    "regione": "CAM",
+    "sigla_provincia": "CE",
+    "popolazione": 922965,
+    "superficie_kmq": 2651.35,
+    "densita_ab_kmq": 348,
+    "num_comini": 104
+  },
+  {
+    "codice_regione": 3,
+    "regione": "LOM",
+    "sigla_provincia": "VA",
+    "popolazione": 890768,
+    "superficie_kmq": 1198.11,
+    "densita_ab_kmq": 743,
+    "num_comini": 138
+  },
+  {
+    "codice_regione": 5,
+    "regione": "VEN",
+    "sigla_provincia": "TV",
+    "popolazione": 887806,
+    "superficie_kmq": 2479.83,
+    "densita_ab_kmq": 358,
+    "num_comini": 94
+  },
+  {
+    "codice_regione": 3,
+    "regione": "LOM",
+    "sigla_provincia": "MB",
+    "popolazione": 873935,
+    "superficie_kmq": 405.41,
+    "densita_ab_kmq": 2156,
+    "num_comini": 55
+  },
+  {
+    "codice_regione": 5,
+    "regione": "VEN",
+    "sigla_provincia": "VI",
+    "popolazione": 862418,
+    "superficie_kmq": 2722.53,
+    "densita_ab_kmq": 317,
+    "num_comini": 114
+  },
+  {
+    "codice_regione": 5,
+    "regione": "VEN",
+    "sigla_provincia": "VE",
+    "popolazione": 853338,
+    "superficie_kmq": 2472.91,
+    "densita_ab_kmq": 345,
+    "num_comini": 44
+  },
+  {
+    "codice_regione": 7,
+    "regione": "LIG",
+    "sigla_provincia": "GE",
+    "popolazione": 841180,
+    "superficie_kmq": 1833.79,
+    "densita_ab_kmq": 459,
+    "num_comini": 67
+  },
+  {
+    "codice_regione": 16,
+    "regione": "PUG",
+    "sigla_provincia": "LE",
+    "popolazione": 795134,
+    "superficie_kmq": 2799.07,
+    "densita_ab_kmq": 284,
+    "num_comini": 96
+  },
+  {
+    "codice_regione": 18,
+    "regione": "CAL",
+    "sigla_provincia": "CS",
+    "popolazione": 705753,
+    "superficie_kmq": 6709.75,
+    "densita_ab_kmq": 105,
+    "num_comini": 150
+  },
+  {
+    "codice_regione": 8,
+    "regione": "EMR",
+    "sigla_provincia": "MO",
+    "popolazione": 705393,
+    "superficie_kmq": 2688.02,
+    "densita_ab_kmq": 262,
+    "num_comini": 47
+  },
+  {
+    "codice_regione": 10,
+    "regione": "UMB",
+    "sigla_provincia": "PG",
+    "popolazione": 656382,
+    "superficie_kmq": 6337.15,
+    "densita_ab_kmq": 104,
+    "num_comini": 59
+  },
+  {
+    "codice_regione": 19,
+    "regione": "SIC",
+    "sigla_provincia": "ME",
+    "popolazione": 626876,
+    "superficie_kmq": 3266.12,
+    "densita_ab_kmq": 192,
+    "num_comini": 108
+  },
+  {
+    "codice_regione": 16,
+    "regione": "PUG",
+    "sigla_provincia": "FG",
+    "popolazione": 622183,
+    "superficie_kmq": 7007.54,
+    "densita_ab_kmq": 89,
+    "num_comini": 61
+  },
+  {
+    "codice_regione": 3,
+    "regione": "LOM",
+    "sigla_provincia": "CO",
+    "popolazione": 599204,
+    "superficie_kmq": 1279.04,
+    "densita_ab_kmq": 468,
+    "num_comini": 148
+  },
+  {
+    "codice_regione": 1,
+    "regione": "PIE",
+    "sigla_provincia": "CN",
+    "popolazione": 587098,
+    "superficie_kmq": 6894.94,
+    "densita_ab_kmq": 85,
+    "num_comini": 247
+  },
+  {
+    "codice_regione": 16,
+    "regione": "PUG",
+    "sigla_provincia": "TA",
+    "popolazione": 576756,
+    "superficie_kmq": 2467.35,
+    "densita_ab_kmq": 234,
+    "num_comini": 29
+  },
+  {
+    "codice_regione": 12,
+    "regione": "LAZ",
+    "sigla_provincia": "LT",
+    "popolazione": 575254,
+    "superficie_kmq": 2256.16,
+    "densita_ab_kmq": 255,
+    "num_comini": 33
+  },
+  {
+    "codice_regione": 18,
+    "regione": "CAL",
+    "sigla_provincia": "RC",
+    "popolazione": 548009,
+    "superficie_kmq": 3210.37,
+    "densita_ab_kmq": 171,
+    "num_comini": 97
+  },
+  {
+    "codice_regione": 3,
+    "regione": "LOM",
+    "sigla_provincia": "PV",
+    "popolazione": 545888,
+    "superficie_kmq": 2968.64,
+    "densita_ab_kmq": 184,
+    "num_comini": 186
+  },
+  {
+    "codice_regione": 4,
+    "regione": "TAA",
+    "sigla_provincia": "TN",
+    "popolazione": 541098,
+    "superficie_kmq": 6207.12,
+    "densita_ab_kmq": 87,
+    "num_comini": 166
+  },
+  {
+    "codice_regione": 8,
+    "regione": "EMR",
+    "sigla_provincia": "RE",
+    "popolazione": 531891,
+    "superficie_kmq": 2291.26,
+    "densita_ab_kmq": 232,
+    "num_comini": 42
+  },
+  {
+    "codice_regione": 4,
+    "regione": "TAA",
+    "sigla_provincia": "BZ",
+    "popolazione": 531178,
+    "superficie_kmq": 7398.38,
+    "densita_ab_kmq": 72,
+    "num_comini": 116
+  },
+  {
+    "codice_regione": 6,
+    "regione": "FVG",
+    "sigla_provincia": "UD",
+    "popolazione": 528791,
+    "superficie_kmq": 4969.3,
+    "densita_ab_kmq": 106,
+    "num_comini": 134
+  },
+  {
+    "codice_regione": 20,
+    "regione": "SAR",
+    "sigla_provincia": "SS",
+    "popolazione": 491571,
+    "superficie_kmq": 7692.09,
+    "densita_ab_kmq": 64,
+    "num_comini": 92
+  },
+  {
+    "codice_regione": 12,
+    "regione": "LAZ",
+    "sigla_provincia": "FR",
+    "popolazione": 489083,
+    "superficie_kmq": 3247.08,
+    "densita_ab_kmq": 151,
+    "num_comini": 91
+  },
+  {
+    "codice_regione": 11,
+    "regione": "MAR",
+    "sigla_provincia": "AN",
+    "popolazione": 471228,
+    "superficie_kmq": 1963.22,
+    "densita_ab_kmq": 240,
+    "num_comini": 47
+  },
+  {
+    "codice_regione": 8,
+    "regione": "EMR",
+    "sigla_provincia": "PR",
+    "popolazione": 451631,
+    "superficie_kmq": 3447.48,
+    "densita_ab_kmq": 131,
+    "num_comini": 44
+  },
+  {
+    "codice_regione": 19,
+    "regione": "SIC",
+    "sigla_provincia": "AG",
+    "popolazione": 434870,
+    "superficie_kmq": 3052.59,
+    "densita_ab_kmq": 142,
+    "num_comini": 43
+  },
+  {
+    "codice_regione": 20,
+    "regione": "SAR",
+    "sigla_provincia": "CA",
+    "popolazione": 431038,
+    "superficie_kmq": 1248.68,
+    "densita_ab_kmq": 345,
+    "num_comini": 17
+  },
+  {
+    "codice_regione": 19,
+    "regione": "SIC",
+    "sigla_provincia": "TP",
+    "popolazione": 430492,
+    "superficie_kmq": 2469.62,
+    "densita_ab_kmq": 174,
+    "num_comini": 24
+  },
+  {
+    "codice_regione": 1,
+    "regione": "PIE",
+    "sigla_provincia": "AL",
+    "popolazione": 421284,
+    "superficie_kmq": 3558.83,
+    "densita_ab_kmq": 118,
+    "num_comini": 187
+  },
+  {
+    "codice_regione": 9,
+    "regione": "TOS",
+    "sigla_provincia": "PI",
+    "popolazione": 419037,
+    "superficie_kmq": 2444.72,
+    "densita_ab_kmq": 171,
+    "num_comini": 37
+  },
+  {
+    "codice_regione": 15,
+    "regione": "CAM",
+    "sigla_provincia": "AV",
+    "popolazione": 418306,
+    "superficie_kmq": 2806.07,
+    "densita_ab_kmq": 149,
+    "num_comini": 118
+  },
+  {
+    "codice_regione": 3,
+    "regione": "LOM",
+    "sigla_provincia": "MN",
+    "popolazione": 412292,
+    "superficie_kmq": 2341.44,
+    "densita_ab_kmq": 176,
+    "num_comini": 64
+  },
+  {
+    "codice_regione": 19,
+    "regione": "SIC",
+    "sigla_provincia": "SR",
+    "popolazione": 399224,
+    "superficie_kmq": 2124.13,
+    "densita_ab_kmq": 188,
+    "num_comini": 21
+  },
+  {
+    "codice_regione": 8,
+    "regione": "EMR",
+    "sigla_provincia": "FC",
+    "popolazione": 394627,
+    "superficie_kmq": 2378.4,
+    "densita_ab_kmq": 166,
+    "num_comini": 30
+  },
+  {
+    "codice_regione": 16,
+    "regione": "PUG",
+    "sigla_provincia": "BR",
+    "popolazione": 392975,
+    "superficie_kmq": 1861.12,
+    "densita_ab_kmq": 211,
+    "num_comini": 20
+  },
+  {
+    "codice_regione": 16,
+    "regione": "PUG",
+    "sigla_provincia": "BT",
+    "popolazione": 390011,
+    "superficie_kmq": 1542.95,
+    "densita_ab_kmq": 253,
+    "num_comini": 10
+  },
+  {
+    "codice_regione": 8,
+    "regione": "EMR",
+    "sigla_provincia": "RA",
+    "popolazione": 389456,
+    "superficie_kmq": 1859.44,
+    "densita_ab_kmq": 209,
+    "num_comini": 18
+  },
+  {
+    "codice_regione": 9,
+    "regione": "TOS",
+    "sigla_provincia": "LU",
+    "popolazione": 387876,
+    "superficie_kmq": 1773.22,
+    "densita_ab_kmq": 219,
+    "num_comini": 33
+  },
+  {
+    "codice_regione": 13,
+    "regione": "ABR",
+    "sigla_provincia": "CH",
+    "popolazione": 385588,
+    "superficie_kmq": 2599.58,
+    "densita_ab_kmq": 148,
+    "num_comini": 104
+  },
+  {
+    "codice_regione": 1,
+    "regione": "PIE",
+    "sigla_provincia": "NO",
+    "popolazione": 369018,
+    "superficie_kmq": 1340.28,
+    "densita_ab_kmq": 275,
+    "num_comini": 87
+  },
+  {
+    "codice_regione": 17,
+    "regione": "BAS",
+    "sigla_provincia": "PZ",
+    "popolazione": 364960,
+    "superficie_kmq": 6594.44,
+    "densita_ab_kmq": 55,
+    "num_comini": 100
+  },
+  {
+    "codice_regione": 3,
+    "regione": "LOM",
+    "sigla_provincia": "CR",
+    "popolazione": 358955,
+    "superficie_kmq": 1770.46,
+    "densita_ab_kmq": 203,
+    "num_comini": 113
+  },
+  {
+    "codice_regione": 11,
+    "regione": "MAR",
+    "sigla_provincia": "PU",
+    "popolazione": 358886,
+    "superficie_kmq": 2567.78,
+    "densita_ab_kmq": 140,
+    "num_comini": 53
+  },
+  {
+    "codice_regione": 18,
+    "regione": "CAL",
+    "sigla_provincia": "CZ",
+    "popolazione": 358316,
+    "superficie_kmq": 2415.45,
+    "densita_ab_kmq": 148,
+    "num_comini": 80
+  },
+  {
+    "codice_regione": 20,
+    "regione": "SAR",
+    "sigla_provincia": "SU",
+    "popolazione": 350725,
+    "superficie_kmq": 6530.78,
+    "densita_ab_kmq": 54,
+    "num_comini": 107
+  },
+  {
+    "codice_regione": 8,
+    "regione": "EMR",
+    "sigla_provincia": "FE",
+    "popolazione": 345691,
+    "superficie_kmq": 2635.12,
+    "densita_ab_kmq": 131,
+    "num_comini": 21
+  },
+  {
+    "codice_regione": 9,
+    "regione": "TOS",
+    "sigla_provincia": "AR",
+    "popolazione": 342654,
+    "superficie_kmq": 3233.08,
+    "densita_ab_kmq": 106,
+    "num_comini": 36
+  },
+  {
+    "codice_regione": 8,
+    "regione": "EMR",
+    "sigla_provincia": "RN",
+    "popolazione": 339017,
+    "superficie_kmq": 864.88,
+    "densita_ab_kmq": 392,
+    "num_comini": 25
+  },
+  {
+    "codice_regione": 3,
+    "regione": "LOM",
+    "sigla_provincia": "LC",
+    "popolazione": 337380,
+    "superficie_kmq": 805.61,
+    "densita_ab_kmq": 419,
+    "num_comini": 84
+  },
+  {
+    "codice_regione": 9,
+    "regione": "TOS",
+    "sigla_provincia": "LI",
+    "popolazione": 334832,
+    "superficie_kmq": 1213.71,
+    "densita_ab_kmq": 276,
+    "num_comini": 19
+  },
+  {
+    "codice_regione": 19,
+    "regione": "SIC",
+    "sigla_provincia": "RG",
+    "popolazione": 320893,
+    "superficie_kmq": 1623.89,
+    "densita_ab_kmq": 198,
+    "num_comini": 12
+  },
+  {
+    "codice_regione": 13,
+    "regione": "ABR",
+    "sigla_provincia": "PE",
+    "popolazione": 318909,
+    "superficie_kmq": 1230.33,
+    "densita_ab_kmq": 259,
+    "num_comini": 46
+  },
+  {
+    "codice_regione": 12,
+    "regione": "LAZ",
+    "sigla_provincia": "VT",
+    "popolazione": 317030,
+    "superficie_kmq": 3615.24,
+    "densita_ab_kmq": 88,
+    "num_comini": 60
+  },
+  {
+    "codice_regione": 11,
+    "regione": "MAR",
+    "sigla_provincia": "MC",
+    "popolazione": 314178,
+    "superficie_kmq": 2779.34,
+    "densita_ab_kmq": 113,
+    "num_comini": 55
+  },
+  {
+    "codice_regione": 6,
+    "regione": "FVG",
+    "sigla_provincia": "PN",
+    "popolazione": 312533,
+    "superficie_kmq": 2275.42,
+    "densita_ab_kmq": 137,
+    "num_comini": 50
+  },
+  {
+    "codice_regione": 13,
+    "regione": "ABR",
+    "sigla_provincia": "TE",
+    "popolazione": 308052,
+    "superficie_kmq": 1954.38,
+    "densita_ab_kmq": 158,
+    "num_comini": 47
+  },
+  {
+    "codice_regione": 13,
+    "regione": "ABR",
+    "sigla_provincia": "AQ",
+    "popolazione": 299031,
+    "superficie_kmq": 5047.55,
+    "densita_ab_kmq": 59,
+    "num_comini": 108
+  },
+  {
+    "codice_regione": 9,
+    "regione": "TOS",
+    "sigla_provincia": "PT",
+    "popolazione": 292473,
+    "superficie_kmq": 964.12,
+    "densita_ab_kmq": 303,
+    "num_comini": 20
+  },
+  {
+    "codice_regione": 8,
+    "regione": "EMR",
+    "sigla_provincia": "PC",
+    "popolazione": 287152,
+    "superficie_kmq": 2585.86,
+    "densita_ab_kmq": 111,
+    "num_comini": 46
+  },
+  {
+    "codice_regione": 15,
+    "regione": "CAM",
+    "sigla_provincia": "BN",
+    "popolazione": 277018,
+    "superficie_kmq": 2080.44,
+    "densita_ab_kmq": 133,
+    "num_comini": 78
+  },
+  {
+    "codice_regione": 7,
+    "regione": "LIG",
+    "sigla_provincia": "SV",
+    "popolazione": 276064,
+    "superficie_kmq": 1546.29,
+    "densita_ab_kmq": 179,
+    "num_comini": 69
+  },
+  {
+    "codice_regione": 9,
+    "regione": "TOS",
+    "sigla_provincia": "SI",
+    "popolazione": 267197,
+    "superficie_kmq": 3820.98,
+    "densita_ab_kmq": 70,
+    "num_comini": 35
+  },
+  {
+    "codice_regione": 19,
+    "regione": "SIC",
+    "sigla_provincia": "CL",
+    "popolazione": 262458,
+    "superficie_kmq": 2138.37,
+    "densita_ab_kmq": 123,
+    "num_comini": 22
+  },
+  {
+    "codice_regione": 9,
+    "regione": "TOS",
+    "sigla_provincia": "PO",
+    "popolazione": 257716,
+    "superficie_kmq": 365.72,
+    "densita_ab_kmq": 705,
+    "num_comini": 7
+  },
+  {
+    "codice_regione": 5,
+    "regione": "VEN",
+    "sigla_provincia": "RO",
+    "popolazione": 234937,
+    "superficie_kmq": 1819.35,
+    "densita_ab_kmq": 129,
+    "num_comini": 50
+  },
+  {
+    "codice_regione": 6,
+    "regione": "FVG",
+    "sigla_provincia": "TS",
+    "popolazione": 234493,
+    "superficie_kmq": 212.51,
+    "densita_ab_kmq": 1103,
+    "num_comini": 6
+  },
+  {
+    "codice_regione": 3,
+    "regione": "LOM",
+    "sigla_provincia": "LO",
+    "popolazione": 230198,
+    "superficie_kmq": 782.99,
+    "densita_ab_kmq": 294,
+    "num_comini": 60
+  },
+  {
+    "codice_regione": 10,
+    "regione": "UMB",
+    "sigla_provincia": "TR",
+    "popolazione": 225633,
+    "superficie_kmq": 2127.18,
+    "densita_ab_kmq": 106,
+    "num_comini": 33
+  },
+  {
+    "codice_regione": 9,
+    "regione": "TOS",
+    "sigla_provincia": "GR",
+    "popolazione": 221629,
+    "superficie_kmq": 4503.12,
+    "densita_ab_kmq": 49,
+    "num_comini": 28
+  },
+  {
+    "codice_regione": 14,
+    "regione": "MOL",
+    "sigla_provincia": "CB",
+    "popolazione": 221238,
+    "superficie_kmq": 2925.41,
+    "densita_ab_kmq": 76,
+    "num_comini": 84
+  },
+  {
+    "codice_regione": 7,
+    "regione": "LIG",
+    "sigla_provincia": "SP",
+    "popolazione": 219556,
+    "superficie_kmq": 881.35,
+    "densita_ab_kmq": 249,
+    "num_comini": 32
+  },
+  {
+    "codice_regione": 1,
+    "regione": "PIE",
+    "sigla_provincia": "AT",
+    "popolazione": 214638,
+    "superficie_kmq": 1510.19,
+    "densita_ab_kmq": 142,
+    "num_comini": 118
+  },
+  {
+    "codice_regione": 7,
+    "regione": "LIG",
+    "sigla_provincia": "IM",
+    "popolazione": 213840,
+    "superficie_kmq": 1154.78,
+    "densita_ab_kmq": 185,
+    "num_comini": 66
+  },
+  {
+    "codice_regione": 20,
+    "regione": "SAR",
+    "sigla_provincia": "NU",
+    "popolazione": 208550,
+    "superficie_kmq": 5638.02,
+    "densita_ab_kmq": 37,
+    "num_comini": 74
+  },
+  {
+    "codice_regione": 11,
+    "regione": "MAR",
+    "sigla_provincia": "AP",
+    "popolazione": 207179,
+    "superficie_kmq": 1228.27,
+    "densita_ab_kmq": 169,
+    "num_comini": 33
+  },
+  {
+    "codice_regione": 5,
+    "regione": "VEN",
+    "sigla_provincia": "BL",
+    "popolazione": 202950,
+    "superficie_kmq": 3610.2,
+    "densita_ab_kmq": 56,
+    "num_comini": 61
+  },
+  {
+    "codice_regione": 17,
+    "regione": "BAS",
+    "sigla_provincia": "MT",
+    "popolazione": 197909,
+    "superficie_kmq": 3478.89,
+    "densita_ab_kmq": 57,
+    "num_comini": 31
+  },
+  {
+    "codice_regione": 9,
+    "regione": "TOS",
+    "sigla_provincia": "MS",
+    "popolazione": 194878,
+    "superficie_kmq": 1154.68,
+    "densita_ab_kmq": 169,
+    "num_comini": 17
+  },
+  {
+    "codice_regione": 3,
+    "regione": "LOM",
+    "sigla_provincia": "SO",
+    "popolazione": 181095,
+    "superficie_kmq": 3195.76,
+    "densita_ab_kmq": 57,
+    "num_comini": 77
+  },
+  {
+    "codice_regione": 1,
+    "regione": "PIE",
+    "sigla_provincia": "BI",
+    "popolazione": 175585,
+    "superficie_kmq": 913.28,
+    "densita_ab_kmq": 192,
+    "num_comini": 74
+  },
+  {
+    "codice_regione": 18,
+    "regione": "CAL",
+    "sigla_provincia": "KR",
+    "popolazione": 174980,
+    "superficie_kmq": 1735.68,
+    "densita_ab_kmq": 101,
+    "num_comini": 27
+  },
+  {
+    "codice_regione": 11,
+    "regione": "MAR",
+    "sigla_provincia": "FM",
+    "popolazione": 173800,
+    "superficie_kmq": 862.77,
+    "densita_ab_kmq": 201,
+    "num_comini": 40
+  },
+  {
+    "codice_regione": 1,
+    "regione": "PIE",
+    "sigla_provincia": "VC",
+    "popolazione": 170911,
+    "superficie_kmq": 2081.64,
+    "densita_ab_kmq": 82,
+    "num_comini": 82
+  },
+  {
+    "codice_regione": 19,
+    "regione": "SIC",
+    "sigla_provincia": "EN",
+    "popolazione": 164788,
+    "superficie_kmq": 2574.7,
+    "densita_ab_kmq": 64,
+    "num_comini": 20
+  },
+  {
+    "codice_regione": 18,
+    "regione": "CAL",
+    "sigla_provincia": "VV",
+    "popolazione": 160073,
+    "superficie_kmq": 1150.64,
+    "densita_ab_kmq": 139,
+    "num_comini": 50
+  },
+  {
+    "codice_regione": 1,
+    "regione": "PIE",
+    "sigla_provincia": "VB",
+    "popolazione": 158349,
+    "superficie_kmq": 2260.91,
+    "densita_ab_kmq": 70,
+    "num_comini": 74
+  },
+  {
+    "codice_regione": 20,
+    "regione": "SAR",
+    "sigla_provincia": "OR",
+    "popolazione": 157707,
+    "superficie_kmq": 2990.45,
+    "densita_ab_kmq": 53,
+    "num_comini": 87
+  },
+  {
+    "codice_regione": 12,
+    "regione": "LAZ",
+    "sigla_provincia": "RI",
+    "popolazione": 155503,
+    "superficie_kmq": 2750.52,
+    "densita_ab_kmq": 57,
+    "num_comini": 73
+  },
+  {
+    "codice_regione": 6,
+    "regione": "FVG",
+    "sigla_provincia": "GO",
+    "popolazione": 139403,
+    "superficie_kmq": 467.14,
+    "densita_ab_kmq": 298,
+    "num_comini": 25
+  },
+  {
+    "codice_regione": 2,
+    "regione": "VDA",
+    "sigla_provincia": "AO",
+    "popolazione": 125666,
+    "superficie_kmq": 3260.9,
+    "densita_ab_kmq": 39,
+    "num_comini": 74
+  },
+  {
+    "codice_regione": 14,
+    "regione": "MOL",
+    "sigla_provincia": "IS",
+    "popolazione": 84379,
+    "superficie_kmq": 1535.24,
+    "densita_ab_kmq": 55,
+    "num_comini": 52
+  }
+]
