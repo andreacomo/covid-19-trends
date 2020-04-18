@@ -9,6 +9,7 @@ import { ProvinceData } from 'src/app/commons/models/province-data';
 import { LinearChartDataTypeProvider } from 'src/app/commons/services/linear-chart-data-type-provider';
 import { TimeFilter } from 'src/app/commons/models/time-filter';
 import { DataFilterProviderService } from 'src/app/commons/services/data-filter-provider.service';
+import { ProvincePercentageFilter } from 'src/app/commons/models/province-percentage-filter';
 
 @Component({
   selector: 'app-provinces-chart',
@@ -32,6 +33,8 @@ export class ProvincesChartComponent implements OnInit, OnChanges {
   private chartDataType: ChartDataType;
 
   private timeFilter: TimeFilter;
+
+  private percentageFilter: ProvincePercentageFilter;
 
   constructor(private github: GithubService,
               private chartProvider: LinearChartProvider,
@@ -67,7 +70,7 @@ export class ProvincesChartComponent implements OnInit, OnChanges {
   }
 
   private initDataSet(data: {[code: string]: ProvinceData[]}) {
-    const filters = [this.timeFilter];
+    const filters = [this.timeFilter, this.percentageFilter].filter(f => !!f);
     this.chartData = this.chartProvider.createChartData<ProvinceData>(data, this.chartDataType, {}, filters);
 
     this.labels = this.chartProvider.createLabels<ProvinceData>(data, filters);
@@ -75,6 +78,11 @@ export class ProvincesChartComponent implements OnInit, OnChanges {
 
   applyTimeFilter(filter: TimeFilter) {
     this.timeFilter = filter;
+    this.initDataSet(this.currentData);
+  }
+
+  applyPercentFilter(filter: ProvincePercentageFilter) {
+    this.percentageFilter = filter;
     this.initDataSet(this.currentData);
   }
 }

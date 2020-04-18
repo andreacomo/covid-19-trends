@@ -1,7 +1,10 @@
 <div *ngIf="chartData" fxHide.xs class="chart-container" fxLayout="column">
     <div fxLayout="row" fxLayoutAlign="space-between" fxLayout.sm="column">
         <app-line-chart-legend [chartDataTypes]="chartTypes" (toggleDataType)="toggle($event)"></app-line-chart-legend>
-        <app-time-filter (selectFilter)="applyTimeFilter($event)" fxFlexAlign.sm="end"></app-time-filter>
+        <div fxFlexAlign.sm="end">
+            <app-time-filter (selectFilter)="applyTimeFilter($event)"></app-time-filter>
+            <app-percentage-filter (selectFilter)="applyPercentFilter($event)"></app-percentage-filter>
+        </div>
     </div>
     <canvas baseChart
             [datasets]="chartData"

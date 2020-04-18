@@ -20,7 +20,11 @@ export class AppComponent implements OnInit {
               private router: Router) {
     this.matIconRegistry.addSvgIcon(
       'github',
-      this.domSanitizer.bypassSecurityTrustResourceUrl(environment.context + '/assets/github.svg')
+      this.domSanitizer.bypassSecurityTrustResourceUrl(environment.context + 'assets/github.svg')
+    );
+    this.matIconRegistry.addSvgIcon(
+      'percent',
+      this.domSanitizer.bypassSecurityTrustResourceUrl(environment.context + 'assets/percent.svg')
     );
   }
 

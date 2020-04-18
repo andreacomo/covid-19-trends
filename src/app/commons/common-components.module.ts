@@ -14,12 +14,13 @@ import { SignedPercentagePipe } from './pipes/signed-percentage.pipe';
 import { ChipComponent } from './components/chip/chip.component';
 import { TrendChipComponent } from './components/trend-chip/trend-chip.component';
 import { TimeFilterComponent } from './components/time-filter/time-filter.component';
+import { PercentageFilterComponent } from './components/percentage-filter/percentage-filter.component';
 
 
 
 @NgModule({
   declarations: [ToggleButtonsComponent, AsColorPipe, LineChartComponent, LineChartLegendComponent,
-    LineChartStrokeComponent, DateStringPipe, SignedNumberPipe, SignedPercentagePipe, ChipComponent, TrendChipComponent, TimeFilterComponent],
+    LineChartStrokeComponent, DateStringPipe, SignedNumberPipe, SignedPercentagePipe, ChipComponent, TrendChipComponent, TimeFilterComponent, PercentageFilterComponent],
   imports: [
     CommonModule,
     FormsModule,

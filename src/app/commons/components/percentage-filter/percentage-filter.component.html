@@ -1,0 +1,13 @@
+<button mat-button [matMenuTriggerFor]="beforeMenu" matTooltip="Cambia scala">
+    <mat-icon>bar_chart</mat-icon>
+</button>
+<mat-menu #beforeMenu="matMenu" xPosition="before">
+    <button mat-menu-item (click)="select('pop_percent')">
+        <mat-icon svgIcon="percent"></mat-icon>
+        <span>Rispetto a % popolazione</span>
+    </button>
+    <button mat-menu-item (click)="select('reset')">
+        <mat-icon>timeline</mat-icon>
+        <span>Valori assoluti</span>
+    </button>
+</mat-menu>
