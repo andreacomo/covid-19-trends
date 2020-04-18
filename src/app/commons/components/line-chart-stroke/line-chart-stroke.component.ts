@@ -1,5 +1,4 @@
 import { Component, OnInit, Output, EventEmitter, ViewChild, ElementRef, AfterViewInit, Input } from '@angular/core';
-import { ChartDataType } from '../line-chart/line-chart.component';
 
 @Component({
   selector: 'app-line-chart-stroke',

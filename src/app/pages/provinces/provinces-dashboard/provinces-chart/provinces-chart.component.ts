@@ -4,12 +4,12 @@ import { ChartDataSets } from 'chart.js';
 import { Label } from 'ng2-charts';
 import { LinearChartProvider } from '../../../../commons/services/linear-chart-provider';
 import { Province } from 'src/app/commons/models/province';
-import { ChartDataType } from 'src/app/commons/components/line-chart/line-chart.component';
 import { ProvinceData } from 'src/app/commons/models/province-data';
 import { LinearChartDataTypeProvider } from 'src/app/commons/services/linear-chart-data-type-provider';
 import { TimeFilter } from 'src/app/commons/models/time-filter';
 import { DataFilterProviderService } from 'src/app/commons/services/data-filter-provider.service';
-import { ProvincePercentageFilter } from 'src/app/commons/models/province-percentage-filter';
+import { ProvincePercentAdapter } from 'src/app/commons/models/province-percent-adapter';
+import { ChartDataType } from 'src/app/commons/models/chart-data-type';
 
 @Component({
   selector: 'app-provinces-chart',
@@ -30,11 +30,11 @@ export class ProvincesChartComponent implements OnInit, OnChanges {
 
   private currentData: {[code: string]: ProvinceData[]};
 
-  private chartDataType: ChartDataType[];
+  private chartDataType: ChartDataType;
 
   private timeFilter: TimeFilter;
 
-  private percentageFilter: ProvincePercentageFilter;
+  private percentageAdapter: ProvincePercentAdapter;
 
   constructor(private github: GithubService,
               private chartProvider: LinearChartProvider,
@@ -42,7 +42,7 @@ export class ProvincesChartComponent implements OnInit, OnChanges {
               private filtersProvider: DataFilterProviderService) { }
 
   ngOnInit() {
-    this.chartDataType = this.chartTypeProvider.getMany(['totale_casi', 'totale_casi_perc_pop']);
+    this.chartDataType = this.chartTypeProvider.get('totale_casi');
     this.timeFilter = this.filtersProvider.getTimeFilterByScope('all');
   }
 
@@ -70,10 +70,9 @@ export class ProvincesChartComponent implements OnInit, OnChanges {
   }
 
   private initDataSet(data: {[code: string]: ProvinceData[]}) {
-    const filters = [this.timeFilter, this.percentageFilter].filter(f => !!f);
-    this.chartData = this.chartDataType
-                      .filter(c => c.active)
-                      .flatMap(c => this.chartProvider.createChartData<ProvinceData>(data, c, {}, filters));
+    const filters = [this.timeFilter];
+    const chartDataType = this.percentageAdapter ? this.percentageAdapter.decorate(this.chartDataType) : this.chartDataType;
+    this.chartData = this.chartProvider.createChartData<ProvinceData>(data, chartDataType, {}, filters);
 
     this.labels = this.chartProvider.createLabels<ProvinceData>(data, filters);
   }
@@ -83,8 +82,8 @@ export class ProvincesChartComponent implements OnInit, OnChanges {
     this.initDataSet(this.currentData);
   }
 
-  applyPercentFilter(filter: ProvincePercentageFilter) {
-    this.percentageFilter = filter;
+  applyPercentAdapter(adapter: ProvincePercentAdapter) {
+    this.percentageAdapter = adapter;
     this.initDataSet(this.currentData);
   }
 }

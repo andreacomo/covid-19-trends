@@ -3,9 +3,9 @@ import { DistrictData } from 'src/app/commons/models/district-data';
 import { ChartDataSets, ChartOptions } from 'chart.js';
 import { Label } from 'ng2-charts';
 import { LinearChartProvider } from 'src/app/commons/services/linear-chart-provider';
-import { ChartDataType } from 'src/app/commons/components/line-chart/line-chart.component';
 import { EnrichedData } from '../../models/enriched-data';
 import { LinearChartDataTypeProvider } from 'src/app/commons/services/linear-chart-data-type-provider';
+import { ChartDataType } from 'src/app/commons/models/chart-data-type';
 
 @Component({
   selector: 'app-district-latest-trend',

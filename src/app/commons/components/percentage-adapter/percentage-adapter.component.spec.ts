@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { PercentageFilterComponent } from './percentage-filter.component';
+import { PercentageAdapterComponent } from './percentage-adapter.component';
 
 describe('PercentageFilterComponent', () => {
-  let component: PercentageFilterComponent;
-  let fixture: ComponentFixture<PercentageFilterComponent>;
+  let component: PercentageAdapterComponent;
+  let fixture: ComponentFixture<PercentageAdapterComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ PercentageFilterComponent ]
+      declarations: [ PercentageAdapterComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(PercentageFilterComponent);
+    fixture = TestBed.createComponent(PercentageAdapterComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { ChartDataType } from '../components/line-chart/line-chart.component';
+import { ChartDataType } from '../models/chart-data-type';
 
 @Injectable({
   providedIn: 'root'

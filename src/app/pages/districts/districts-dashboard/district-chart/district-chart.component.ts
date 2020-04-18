@@ -2,12 +2,12 @@ import { Component, OnInit, Input, ViewChild, OnChanges, SimpleChanges } from '@
 import { DistrictData } from 'src/app/commons/models/district-data';
 import { ChartDataSets } from 'chart.js';
 import { Label } from 'ng2-charts';
-import { ChartDataType } from 'src/app/commons/components/line-chart/line-chart.component';
 import { GithubService } from 'src/app/commons/services/github.service';
 import { LinearChartProvider } from 'src/app/commons/services/linear-chart-provider';
 import { LinearChartDataTypeProvider } from 'src/app/commons/services/linear-chart-data-type-provider';
 import { DataFilterProviderService } from 'src/app/commons/services/data-filter-provider.service';
 import { TimeFilter } from 'src/app/commons/models/time-filter';
+import { ChartDataType } from 'src/app/commons/models/chart-data-type';
 
 @Component({
   selector: 'app-district-chart',

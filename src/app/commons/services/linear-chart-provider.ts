@@ -2,12 +2,12 @@ import { ChartDataSets, ChartOptions, ChartSize, ChartTooltipItem, ChartData } f
 import { Label } from 'ng2-charts';
 import * as pluginAnnotations from 'chartjs-plugin-annotation';
 import { Milestone } from 'src/app/commons/models/milestone';
-import { ChartDataType } from '../components/line-chart/line-chart.component';
 import { HasColor } from '../models/has-color';
 import { Injectable } from '@angular/core';
 import { MediaObserver } from '@angular/flex-layout';
 import { DateStringPipe } from '../pipes/date-string.pipe';
 import { DataFilter } from '../models/data-filter';
+import { ChartDataType } from '../models/chart-data-type';
 
 @Injectable({
   providedIn: 'root'

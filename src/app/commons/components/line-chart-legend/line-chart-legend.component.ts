@@ -1,6 +1,6 @@
 import { Component, OnInit, Input, EventEmitter, Output } from '@angular/core';
-import { ChartDataType } from '../line-chart/line-chart.component';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { ChartDataType } from '../../models/chart-data-type';
 
 @Component({
   selector: 'app-line-chart-legend',
