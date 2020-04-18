@@ -2,6 +2,7 @@
                 *ngIf="district"
                 [chartData]="chartData" 
                 [labels]="labels"
+                [timeFilter]="timeFilter"
+                [percentCharts]="true"
                 (timeFilterChange)="applyTimeFilter($event)"
-                (percentAdapterChange)="applyPercentAdapter($event)"
-                [percentCharts]="true"></app-line-chart>
+                (percentAdapterChange)="applyPercentAdapter($event)"></app-line-chart>

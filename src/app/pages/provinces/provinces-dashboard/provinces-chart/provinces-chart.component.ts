@@ -28,11 +28,11 @@ export class ProvincesChartComponent implements OnInit, OnChanges {
 
   labels: Label[];
 
+  timeFilter: TimeFilter;
+
   private currentData: {[code: string]: ProvinceData[]};
 
   private chartDataType: ChartDataType;
-
-  private timeFilter: TimeFilter;
 
   private percentageAdapter: ChartDataTypeDecorator;
 

@@ -26,6 +26,9 @@ export class LineChartComponent implements OnInit, OnDestroy {
   chartTypes: ChartDataType[];
 
   @Input()
+  timeFilter: TimeFilter;
+
+  @Input()
   percentCharts: boolean;
 
   @Output()

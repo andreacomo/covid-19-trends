@@ -1,8 +1,8 @@
 <div *ngIf="chartData" fxHide.xs class="chart-container" fxLayout="column">
     <div fxLayout="row" fxLayoutAlign="space-between" fxLayout.sm="column">
         <app-line-chart-legend [chartDataTypes]="chartTypes" (toggleDataType)="toggle($event)"></app-line-chart-legend>
-        <div fxFlexAlign.sm="end">
-            <app-time-filter (selectFilter)="applyTimeFilter($event)"></app-time-filter>
+        <div fxFlexAlign.sm="end" fxLayout="column">
+            <app-time-filter [selectedFilter]="timeFilter" (selectFilter)="applyTimeFilter($event)"></app-time-filter>
             <app-percentage-adapter (selectAdapter)="applyPercentAdapter($event)" *ngIf="percentCharts"></app-percentage-adapter>
         </div>
     </div>

@@ -1,25 +1,10 @@
+<span *ngIf="selectedFilter" class="selected">{{selectedFilter.label}}</span>
 <button mat-button [matMenuTriggerFor]="beforeMenu" matTooltip="Filtra per date">
     <mat-icon>history</mat-icon>
 </button>
 <mat-menu #beforeMenu="matMenu" xPosition="before">
-    <button mat-menu-item (click)="select('3d')">
-        <mat-icon>crop_portrait</mat-icon>
-        <span>Ultimi 3 giorni</span>
-    </button>
-    <button mat-menu-item (click)="select('7d')">
-        <mat-icon>crop_square</mat-icon>
-        <span>Ultima settimana</span>
-    </button>
-    <button mat-menu-item (click)="select('14d')">
-        <mat-icon>crop_landscape</mat-icon>
-        <span>Ultime 2 settimane</span>
-    </button>
-    <button mat-menu-item (click)="select('30d')">
-        <mat-icon>crop_7_5</mat-icon>  
-        <span>Ultimo mese</span>
-    </button>
-    <button mat-menu-item (click)="select('all')">
-        <mat-icon>crop_free</mat-icon>
-        <span>Tutto</span>
+    <button mat-menu-item (click)="select(filter)" *ngFor="let filter of timeFilters">
+        <mat-icon>{{filter.icon}}</mat-icon>
+        <span>{{filter.label}}</span>
     </button>
 </mat-menu>

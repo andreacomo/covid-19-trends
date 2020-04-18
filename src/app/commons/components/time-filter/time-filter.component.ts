@@ -1,4 +1,4 @@
-import { Component, OnInit, EventEmitter, Output } from '@angular/core';
+import { Component, OnInit, EventEmitter, Output, Input } from '@angular/core';
 import { TimeFilter } from '../../models/time-filter';
 import { DataFilterProviderService } from '../../services/data-filter-provider.service';
 
@@ -12,16 +12,20 @@ export class TimeFilterComponent implements OnInit {
   @Output()
   selectFilter: EventEmitter<TimeFilter> = new EventEmitter<TimeFilter>();
 
-  private timeFilters: {[scope: string]: TimeFilter};
+  @Input()
+  selectedFilter: TimeFilter;
+
+  @Input()
+  timeFilters: TimeFilter[];
 
   constructor(private filterProvider: DataFilterProviderService) { }
 
   ngOnInit() {
-    this.timeFilters = this.filterProvider.getAllTimeFilters();
+    this.timeFilters = Object.values(this.filterProvider.getAllTimeFilters());
   }
 
-  select(filterKey: string) {
-    this.selectFilter.next(this.timeFilters[filterKey]);
+  select(filter: TimeFilter) {
+    this.selectFilter.next(filter);
   }
 
 }
