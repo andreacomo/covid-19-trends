@@ -3,7 +3,7 @@
         <app-line-chart-legend [chartDataTypes]="chartTypes" (toggleDataType)="toggle($event)"></app-line-chart-legend>
         <div fxFlexAlign.sm="end">
             <app-time-filter (selectFilter)="applyTimeFilter($event)"></app-time-filter>
-            <app-percentage-adapter (selectAdapter)="applyPercentAdapter($event)"></app-percentage-adapter>
+            <app-percentage-adapter (selectAdapter)="applyPercentAdapter($event)" *ngIf="percentCharts"></app-percentage-adapter>
         </div>
     </div>
     <canvas baseChart

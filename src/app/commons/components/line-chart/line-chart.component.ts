@@ -25,6 +25,9 @@ export class LineChartComponent implements OnInit, OnDestroy {
   @Input()
   chartTypes: ChartDataType[];
 
+  @Input()
+  percentCharts: boolean;
+
   @Output()
   toggleDataType: EventEmitter<ChartDataType> = new EventEmitter<ChartDataType>();
 
