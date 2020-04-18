@@ -6,8 +6,8 @@ import { LocalDataService } from '../../services/local-data.service';
 import { MediaObserver, MediaChange } from '@angular/flex-layout';
 import { Subscription } from 'rxjs';
 import { TimeFilter } from '../../models/time-filter';
-import { ProvincePercentAdapter } from '../../models/province-percent-adapter';
 import { ChartDataType } from '../../models/chart-data-type';
+import { ChartDataTypeDecorator } from '../../models/chart-data-type-decorator';
 
 @Component({
   selector: 'app-line-chart',
@@ -32,7 +32,7 @@ export class LineChartComponent implements OnInit, OnDestroy {
   timeFilterChange: EventEmitter<TimeFilter> = new EventEmitter<TimeFilter>();
 
   @Output()
-  percentAdapterChange: EventEmitter<ProvincePercentAdapter> = new EventEmitter<ProvincePercentAdapter>();
+  percentAdapterChange: EventEmitter<ChartDataTypeDecorator> = new EventEmitter<ChartDataTypeDecorator>();
 
   options: ChartOptions;
 
@@ -91,7 +91,7 @@ export class LineChartComponent implements OnInit, OnDestroy {
     this.timeFilterChange.next(filter);
   }
 
-  applyPercentAdapter(adapter: ProvincePercentAdapter) {
+  applyPercentAdapter(adapter: ChartDataTypeDecorator) {
     this.percentAdapterChange.next(adapter);
   }
 }

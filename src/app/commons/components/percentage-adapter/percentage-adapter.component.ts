@@ -2,6 +2,7 @@ import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { ProvincePercentAdapter } from '../../models/province-percent-adapter';
 import { LocalDataService } from '../../services/local-data.service';
 import { map } from 'rxjs/operators';
+import { ChartDataTypeDecorator } from '../../models/chart-data-type-decorator';
 
 @Component({
   selector: 'app-percentage-adapter',
@@ -11,9 +12,9 @@ import { map } from 'rxjs/operators';
 export class PercentageAdapterComponent implements OnInit {
 
   @Output()
-  selectAdapter: EventEmitter<ProvincePercentAdapter> = new EventEmitter<ProvincePercentAdapter>();
+  selectAdapter: EventEmitter<ChartDataTypeDecorator> = new EventEmitter<ChartDataTypeDecorator>();
 
-  private adapter: Promise<ProvincePercentAdapter>;
+  private adapter: Promise<ChartDataTypeDecorator>;
 
   constructor(private localData: LocalDataService) { }
 

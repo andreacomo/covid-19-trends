@@ -8,8 +8,8 @@ import { ProvinceData } from 'src/app/commons/models/province-data';
 import { LinearChartDataTypeProvider } from 'src/app/commons/services/linear-chart-data-type-provider';
 import { TimeFilter } from 'src/app/commons/models/time-filter';
 import { DataFilterProviderService } from 'src/app/commons/services/data-filter-provider.service';
-import { ProvincePercentAdapter } from 'src/app/commons/models/province-percent-adapter';
 import { ChartDataType } from 'src/app/commons/models/chart-data-type';
+import { ChartDataTypeDecorator } from 'src/app/commons/models/chart-data-type-decorator';
 
 @Component({
   selector: 'app-provinces-chart',
@@ -34,7 +34,7 @@ export class ProvincesChartComponent implements OnInit, OnChanges {
 
   private timeFilter: TimeFilter;
 
-  private percentageAdapter: ProvincePercentAdapter;
+  private percentageAdapter: ChartDataTypeDecorator;
 
   constructor(private github: GithubService,
               private chartProvider: LinearChartProvider,
@@ -82,7 +82,7 @@ export class ProvincesChartComponent implements OnInit, OnChanges {
     this.initDataSet(this.currentData);
   }
 
-  applyPercentAdapter(adapter: ProvincePercentAdapter) {
+  applyPercentAdapter(adapter: ChartDataTypeDecorator) {
     this.percentageAdapter = adapter;
     this.initDataSet(this.currentData);
   }
