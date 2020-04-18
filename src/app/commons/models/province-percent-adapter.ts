@@ -5,8 +5,8 @@ import { ChartTooltipItem, ChartData } from 'chart.js';
 
 export class ProvincePercentAdapter extends ChartDataTypeDecorator {
 
-    constructor(private provincesPop: Population[]) {
-        super();
+    constructor(label: string, icon: string, isSvg: boolean, private provincesPop: Population[]) {
+        super(label, icon, isSvg);
     }
 
     protected adapt(transformedValues: number[], originalValues: any[]): any {

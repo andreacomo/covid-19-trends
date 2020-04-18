@@ -10,6 +10,7 @@ import { TimeFilter } from 'src/app/commons/models/time-filter';
 import { DataFilterProviderService } from 'src/app/commons/services/data-filter-provider.service';
 import { ChartDataType } from 'src/app/commons/models/chart-data-type';
 import { ChartDataTypeDecorator } from 'src/app/commons/models/chart-data-type-decorator';
+import { ChartDataTypeDecoratorProvider } from 'src/app/commons/services/chart-data-type-decorator-provider';
 
 @Component({
   selector: 'app-provinces-chart',
@@ -30,20 +31,22 @@ export class ProvincesChartComponent implements OnInit, OnChanges {
 
   timeFilter: TimeFilter;
 
+  valuesDecorator: ChartDataTypeDecorator;
+
   private currentData: {[code: string]: ProvinceData[]};
 
   private chartDataType: ChartDataType;
 
-  private percentageAdapter: ChartDataTypeDecorator;
-
   constructor(private github: GithubService,
               private chartProvider: LinearChartProvider,
               private chartTypeProvider: LinearChartDataTypeProvider,
-              private filtersProvider: DataFilterProviderService) { }
+              private filtersProvider: DataFilterProviderService,
+              private decoratorsProvider: ChartDataTypeDecoratorProvider) { }
 
   ngOnInit() {
     this.chartDataType = this.chartTypeProvider.get('totale_casi');
     this.timeFilter = this.filtersProvider.getTimeFilterByScope('all');
+    this.valuesDecorator = this.decoratorsProvider.getDefaultDecorator();
   }
 
   ngOnChanges(changes: SimpleChanges): void {
@@ -71,7 +74,7 @@ export class ProvincesChartComponent implements OnInit, OnChanges {
 
   private initDataSet(data: {[code: string]: ProvinceData[]}) {
     const filters = [this.timeFilter];
-    const chartDataType = this.percentageAdapter ? this.percentageAdapter.decorate(this.chartDataType) : this.chartDataType;
+    const chartDataType = this.valuesDecorator.decorate(this.chartDataType);
     this.chartData = this.chartProvider.createChartData<ProvinceData>(data, chartDataType, {}, filters);
 
     this.labels = this.chartProvider.createLabels<ProvinceData>(data, filters);
@@ -82,8 +85,8 @@ export class ProvincesChartComponent implements OnInit, OnChanges {
     this.initDataSet(this.currentData);
   }
 
-  applyPercentAdapter(adapter: ChartDataTypeDecorator) {
-    this.percentageAdapter = adapter;
+  applyDecorator(decorator: ChartDataTypeDecorator) {
+    this.valuesDecorator = decorator;
     this.initDataSet(this.currentData);
   }
 }

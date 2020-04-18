@@ -1,0 +1,10 @@
+@import 'src/styles/palette.scss';
+
+.decorator-container {
+    .selected {
+        font-size: .9em;
+        font-style: oblique;
+        color: $text-light;
+        padding-right: .5em;
+    }
+}

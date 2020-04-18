@@ -29,6 +29,9 @@ export class LineChartComponent implements OnInit, OnDestroy {
   timeFilter: TimeFilter;
 
   @Input()
+  valuesDecorator: ChartDataTypeDecorator;
+
+  @Input()
   percentCharts: boolean;
 
   @Output()
@@ -38,7 +41,7 @@ export class LineChartComponent implements OnInit, OnDestroy {
   timeFilterChange: EventEmitter<TimeFilter> = new EventEmitter<TimeFilter>();
 
   @Output()
-  percentAdapterChange: EventEmitter<ChartDataTypeDecorator> = new EventEmitter<ChartDataTypeDecorator>();
+  valuesDecoratorChange: EventEmitter<ChartDataTypeDecorator> = new EventEmitter<ChartDataTypeDecorator>();
 
   options: ChartOptions;
 
@@ -97,8 +100,8 @@ export class LineChartComponent implements OnInit, OnDestroy {
     this.timeFilterChange.next(filter);
   }
 
-  applyPercentAdapter(adapter: ChartDataTypeDecorator) {
-    this.percentAdapterChange.next(adapter);
+  applyDecorator(decorator: ChartDataTypeDecorator) {
+    this.valuesDecoratorChange.next(decorator);
   }
 }
 

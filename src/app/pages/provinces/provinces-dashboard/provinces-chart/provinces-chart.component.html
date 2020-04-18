@@ -3,6 +3,7 @@
                 [chartData]="chartData" 
                 [labels]="labels"
                 [timeFilter]="timeFilter"
+                [valuesDecorator]="valuesDecorator"
                 [percentCharts]="true"
                 (timeFilterChange)="applyTimeFilter($event)"
-                (percentAdapterChange)="applyPercentAdapter($event)"></app-line-chart>
+                (valuesDecoratorChange)="applyDecorator($event)"></app-line-chart>

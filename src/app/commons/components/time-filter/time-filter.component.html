@@ -1,10 +1,12 @@
-<span *ngIf="selectedFilter" class="selected">{{selectedFilter.label}}</span>
-<button mat-button [matMenuTriggerFor]="beforeMenu" matTooltip="Filtra per date">
-    <mat-icon>history</mat-icon>
-</button>
-<mat-menu #beforeMenu="matMenu" xPosition="before">
-    <button mat-menu-item (click)="select(filter)" *ngFor="let filter of timeFilters">
-        <mat-icon>{{filter.icon}}</mat-icon>
-        <span>{{filter.label}}</span>
+<div fxLayout="row" fxLayoutAlign="flex-end center" class="filters-container">
+    <span *ngIf="selectedFilter" class="selected">{{selectedFilter.label}}</span>
+    <button mat-button [matMenuTriggerFor]="beforeMenu" matTooltip="Filtra per date">
+        <mat-icon>history</mat-icon>
     </button>
-</mat-menu>
+    <mat-menu #beforeMenu="matMenu" xPosition="before">
+        <button mat-menu-item (click)="select(filter)" *ngFor="let filter of timeFilters">
+            <mat-icon>{{filter.icon}}</mat-icon>
+            <span>{{filter.label}}</span>
+        </button>
+    </mat-menu>
+</div>

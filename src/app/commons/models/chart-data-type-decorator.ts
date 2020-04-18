@@ -3,7 +3,7 @@ import { ChartTooltipItem, ChartData } from 'chart.js';
 
 export abstract class ChartDataTypeDecorator {
 
-  constructor() { }
+  constructor(private label: string, private icon: string, private isSvg: boolean) { }
 
   decorate(chartDataType: ChartDataType): ChartDataType {
     return {
@@ -13,7 +13,7 @@ export abstract class ChartDataTypeDecorator {
     };
   }
 
-  protected abstract adapt(transformedValues: number[], originalValues: any[]): any;
+  protected abstract adapt(transformedValues: number[], originalValues: any[]): number[];
 
   /**
    * Keeps original tooltip. Override this method to override tooltip in data chart
