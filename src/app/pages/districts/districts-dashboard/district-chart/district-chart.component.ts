@@ -25,9 +25,9 @@ export class DistrictChartComponent implements OnInit, OnChanges {
 
   availableChartTypes: ChartDataType[];
 
-  private currentData: {[name: string]: DistrictData[]};
+  timeFilter: TimeFilter;
 
-  private timeFilter: TimeFilter;
+  private currentData: {[name: string]: DistrictData[]};
 
   constructor(private github: GithubService,
               private chartProvider: LinearChartProvider,

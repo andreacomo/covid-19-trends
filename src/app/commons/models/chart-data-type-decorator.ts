@@ -3,7 +3,7 @@ import { ChartTooltipItem, ChartData } from 'chart.js';
 
 export abstract class ChartDataTypeDecorator {
 
-  constructor(private label: string, private icon: string, private isSvg: boolean) { }
+  constructor(private pLabel: string, private pIcon: string, private pIsSvg: boolean) { }
 
   decorate(chartDataType: ChartDataType): ChartDataType {
     return {
@@ -23,5 +23,17 @@ export abstract class ChartDataTypeDecorator {
    */
   protected adaptTooltipFooter(items: ChartTooltipItem[], data: ChartData, chartDataType: ChartDataType): string {
     return chartDataType.tooltipFooter(items, data);
+  }
+
+  get label() {
+    return this.pLabel;
+  }
+
+  get icon() {
+    return this.pIcon;
+  }
+
+  get isSvg() {
+    return this.pIsSvg;
   }
 }
