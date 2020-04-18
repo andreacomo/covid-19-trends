@@ -51,15 +51,7 @@ export class LinearChartProvider {
                 },
                 footer: (items: ChartTooltipItem[], data: ChartData) => {
                   const i = items[0];
-                  const previous = data.datasets[i.datasetIndex].data[i.index - 1] as number;
-                  const current = parseInt(i.value, 10);
-                  const incrementPercent = (((current - previous) / previous) * 100);
-                  const sing = incrementPercent > 0 ? '+' : '';
-                  if (!isNaN(incrementPercent) && isFinite(incrementPercent)) {
-                    return `${sing}${incrementPercent.toFixed(2)}% rispetto al giorno precedente`;
-                  } else {
-                    return '';
-                  }
+                  return (data.datasets[i.datasetIndex] as any).tooltipFooter(items, data);
                 }
               }
             },
@@ -124,6 +116,7 @@ export class LinearChartProvider {
                 pointRadius: dotRadius,
                 pointBorderWidth: 1,
                 lineTension: 0,
+                tooltipFooter: dataType.tooltipFooter,
                 ...override
               };
             });
