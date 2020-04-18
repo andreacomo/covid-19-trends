@@ -1,6 +1,7 @@
 <app-line-chart #chart
                 *ngIf="district"
                 [chartData]="chartData" 
+                [chartTypes]="chartDataType"
                 [labels]="labels"
                 (timeFilterChange)="applyTimeFilter($event)"
                 (percentFilterChange)="applyPercentFilter($event)"></app-line-chart>

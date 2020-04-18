@@ -47,6 +47,14 @@ export class LinearChartDataTypeProvider {
       active: false,
       transformer: (values) => values.map(v => v.terapia_intensiva),
       lineDash: [4, 4, 2, 4]
+    }, {
+      label: 'Casi totali su % popolazione',
+      value: 'totale_casi_perc_pop',
+      active: false,
+      transformer: (values) => values.map(v => {
+        return v.totale_casi;
+      }),
+      lineDash: [4, 1, 1]
     }];
 
     this.typesAsMap = this.types.reduce((acc, t) => {
@@ -59,7 +67,11 @@ export class LinearChartDataTypeProvider {
     return this.types;
   }
 
-  get(type: string) {
+  getMany(types: string[]): ChartDataType[] {
+    return types.map(type => this.typesAsMap[type]);
+  }
+
+  get(type: string): ChartDataType {
     return this.typesAsMap[type];
   }
 }

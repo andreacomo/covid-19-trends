@@ -30,7 +30,7 @@ export class ProvincesChartComponent implements OnInit, OnChanges {
 
   private currentData: {[code: string]: ProvinceData[]};
 
-  private chartDataType: ChartDataType;
+  private chartDataType: ChartDataType[];
 
   private timeFilter: TimeFilter;
 
@@ -42,7 +42,7 @@ export class ProvincesChartComponent implements OnInit, OnChanges {
               private filtersProvider: DataFilterProviderService) { }
 
   ngOnInit() {
-    this.chartDataType = this.chartTypeProvider.get('totale_casi');
+    this.chartDataType = this.chartTypeProvider.getMany(['totale_casi', 'totale_casi_perc_pop']);
     this.timeFilter = this.filtersProvider.getTimeFilterByScope('all');
   }
 
@@ -71,7 +71,9 @@ export class ProvincesChartComponent implements OnInit, OnChanges {
 
   private initDataSet(data: {[code: string]: ProvinceData[]}) {
     const filters = [this.timeFilter, this.percentageFilter].filter(f => !!f);
-    this.chartData = this.chartProvider.createChartData<ProvinceData>(data, this.chartDataType, {}, filters);
+    this.chartData = this.chartDataType
+                      .filter(c => c.active)
+                      .flatMap(c => this.chartProvider.createChartData<ProvinceData>(data, c, {}, filters));
 
     this.labels = this.chartProvider.createLabels<ProvinceData>(data, filters);
   }

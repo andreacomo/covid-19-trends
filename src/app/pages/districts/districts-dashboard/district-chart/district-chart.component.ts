@@ -45,7 +45,14 @@ export class DistrictChartComponent implements OnInit, OnChanges {
 
   ngOnChanges(changes: SimpleChanges): void {
     if (changes.toggleDistricts.isFirstChange()) {
-      this.availableChartTypes = this.chartTypeProvider.getAll();
+      this.availableChartTypes = this.chartTypeProvider.getMany([
+        'totale_casi',
+        'tamponi',
+        'decessi',
+        'dimessi',
+        'ricoverati',
+        'terapia_intensiva'
+      ]);
     } else {
       this.github.getAllDistrictsData()
         .subscribe(data => {
