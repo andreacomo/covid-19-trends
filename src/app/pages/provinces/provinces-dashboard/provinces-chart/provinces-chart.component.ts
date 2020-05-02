@@ -41,12 +41,14 @@ export class ProvincesChartComponent implements OnInit, OnChanges {
               private chartProvider: LinearChartProvider,
               private chartTypeProvider: LinearChartDataTypeProvider,
               private filtersProvider: DataFilterProviderService,
-              private decoratorsProvider: ChartDataTypeDecoratorProvider) { }
+              private decoratorsProvider: ChartDataTypeDecoratorProvider) {
+
+                this.chartDataType = this.chartTypeProvider.get('totale_casi');
+                this.timeFilter = this.filtersProvider.getTimeFilterByScope('all');
+                this.valuesDecorator = this.decoratorsProvider.getDefaultDecorator();
+              }
 
   ngOnInit() {
-    this.chartDataType = this.chartTypeProvider.get('totale_casi');
-    this.timeFilter = this.filtersProvider.getTimeFilterByScope('all');
-    this.valuesDecorator = this.decoratorsProvider.getDefaultDecorator();
   }
 
   ngOnChanges(changes: SimpleChanges): void {

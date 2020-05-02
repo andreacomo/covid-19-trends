@@ -1,8 +1,6 @@
 import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
-import { GithubService } from 'src/app/commons/services/github.service';
-import { Observable } from 'rxjs';
 import { Province } from 'src/app/commons/models/province';
-import { ProvinceData } from 'src/app/commons/models/province-data';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-provinces-dashboard',
@@ -15,12 +13,13 @@ export class ProvincesDashboardComponent implements OnInit {
 
   selectedProvinces: Province[];
 
-  constructor() { }
+  constructor(private router: ActivatedRoute) { }
 
   ngOnInit() {
+    this.selectedDistrict = this.router.snapshot.queryParamMap.get('district');
   }
 
-  districtChanged(event) {
+  districtChanged(event: string) {
     this.selectedDistrict = event;
   }
 

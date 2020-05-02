@@ -8,6 +8,7 @@ import { DistrictLatestTableComponent } from './home-dashboard/district-latest-t
 import { CommonComponentsModule } from 'src/app/commons/common-components.module';
 import { NationalLatestComponent } from './home-dashboard/national-latest/national-latest.component';
 import { LatestProviderService } from './services/latest-data-provider.service';
+import { RouterModule } from '@angular/router';
 
 @NgModule({
   declarations: [HomeDashboardComponent, DistrictLatestTrendComponent,
@@ -16,7 +17,8 @@ import { LatestProviderService } from './services/latest-data-provider.service';
     CommonModule,
     MaterialModule,
     CommonComponentsModule,
-    ChartsModule
+    ChartsModule,
+    RouterModule
   ],
   providers: [
     LatestProviderService

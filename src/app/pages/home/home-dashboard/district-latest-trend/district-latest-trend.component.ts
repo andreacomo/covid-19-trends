@@ -25,6 +25,7 @@ export class DistrictLatestTrendComponent implements OnInit, OnChanges {
 
   options: ChartOptions = {
     responsive: true,
+    aspectRatio: 1.5,
     legend: {
       display: false
     },

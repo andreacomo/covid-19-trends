@@ -47,34 +47,39 @@
                        
                        <div fxLayout="row" fxFlex="100" fxLayoutAlign="space-between" *ngIf="chartData[element.district] as district">
                             <app-district-latest-trend [data]="district" fxFlex.gt-xs="40" fxFlex.xs="100"></app-district-latest-trend>
-                            <div fxFlex.gt-xs="60" fxLayout="row" fxLayoutAlign="space-around center" fxHide.xs>
-                                <div fxFlex="40">
-                                    <p>
-                                        <strong>Totale casi</strong>
-                                        <span class="district-detail-value">{{district[2].totale_casi | number : '1.0-0' : 'it'}}</span>
-                                    </p>
-                                    <p>
-                                        <strong>Tamponi</strong>
-                                        <span class="district-detail-value">{{district[2].tamponi | number : '1.0-0' : 'it'}}</span>
-                                    </p>
-                                    <p>
-                                        <strong>Ricoverati</strong>
-                                        <span class="district-detail-value">{{district[2].ricoverati_con_sintomi | number : '1.0-0' : 'it'}}</span>
-                                    </p>
+                            <div fxFlex.gt-xs="60" fxLayout="column" fxLayoutAlign="center" fxHide.xs>
+                                <div fxLayout="row" fxLayoutAlign="space-around center">
+                                    <div fxFlex="40">
+                                        <p>
+                                            <strong>Totale casi</strong>
+                                            <span class="district-detail-value">{{district[2].totale_casi | number : '1.0-0' : 'it'}}</span>
+                                        </p>
+                                        <p>
+                                            <strong>Tamponi</strong>
+                                            <span class="district-detail-value">{{district[2].tamponi | number : '1.0-0' : 'it'}}</span>
+                                        </p>
+                                        <p>
+                                            <strong>Ricoverati</strong>
+                                            <span class="district-detail-value">{{district[2].ricoverati_con_sintomi | number : '1.0-0' : 'it'}}</span>
+                                        </p>
+                                    </div>
+                                    <div fxFlex="50">
+                                        <p>
+                                            <strong>Terapia intensiva</strong>
+                                            <span class="district-detail-value">{{district[2].terapia_intensiva | number : '1.0-0' : 'it'}}</span>
+                                        </p>
+                                        <p>
+                                            <strong>Dimessi guariti</strong>
+                                            <span class="district-detail-value">{{district[2].dimessi_guariti | number : '1.0-0' : 'it'}}</span>
+                                        </p>
+                                        <p>
+                                            <strong>Deceduti</strong>
+                                            <span class="district-detail-value">{{district[2].deceduti | number : '1.0-0' : 'it'}}</span>
+                                        </p>
+                                    </div>
                                 </div>
-                                <div fxFlex="50">
-                                    <p>
-                                        <strong>Terapia intensiva</strong>
-                                        <span class="district-detail-value">{{district[2].terapia_intensiva | number : '1.0-0' : 'it'}}</span>
-                                    </p>
-                                    <p>
-                                        <strong>Dimessi guariti</strong>
-                                        <span class="district-detail-value">{{district[2].dimessi_guariti | number : '1.0-0' : 'it'}}</span>
-                                    </p>
-                                    <p>
-                                        <strong>Deceduti</strong>
-                                        <span class="district-detail-value">{{district[2].deceduti | number : '1.0-0' : 'it'}}</span>
-                                    </p>
+                                <div fxLayoutAlign="center center">
+                                    <button mat-raised-button class="go-to-provinces" [routerLink]="['/provinces']" [queryParams]="{district: element.district}">Vai alle province</button>
                                 </div>
                             </div>
                        </div>

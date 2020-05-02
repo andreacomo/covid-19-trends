@@ -1,4 +1,4 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, Input, OnChanges, SimpleChanges } from '@angular/core';
 import { Observable } from 'rxjs';
 import { GithubService } from 'src/app/commons/services/github.service';
 import { map } from 'rxjs/operators';
@@ -10,10 +10,13 @@ import { map } from 'rxjs/operators';
 })
 export class DistrictComponent implements OnInit {
 
-  districts$: Observable<string[]>;
+  @Input()
+  districtName: string;
 
   @Output()
   selected: EventEmitter<string> = new EventEmitter<string>();
+
+  districts$: Observable<string[]>;
 
   constructor(private github: GithubService) { }
 

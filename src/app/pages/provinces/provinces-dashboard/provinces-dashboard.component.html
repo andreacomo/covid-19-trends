@@ -4,7 +4,7 @@
     </mat-drawer>
     <mat-drawer-content>
         <div fxLayout="row" fxLayoutAlign="center">
-            <app-district (selected)="districtChanged($event)" class="district"></app-district>
+            <app-district (selected)="districtChanged($event)" [districtName]="selectedDistrict" class="district"></app-district>
         </div>
         <div fxLayout="row" fxLayout.lt-sm="column" fxLayout.sm="column">
             <app-provinces fxFlex="20" fxHide.lt-sm fxHide.sm fxShow.gt-sm [district]="selectedDistrict" (clickItems)="provinceClicked($event)"></app-provinces>
