@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, OnChanges, SimpleChanges, OnDestroy } from '@angular/core';
+import { Component, OnInit, Input, OnChanges, SimpleChanges, OnDestroy, ViewChild } from '@angular/core';
 import { DistrictData } from 'src/app/commons/models/district-data';
 import { DateStringPipe } from 'src/app/commons/pipes/date-string.pipe';
 import { LatestProviderService } from '../../services/latest-data-provider.service';
@@ -8,6 +8,7 @@ import { Subscription } from 'rxjs';
 import { Trend } from '../../models/trend';
 import { EnrichedDataGroup } from '../../models/enriched-district-data-group';
 import { trigger, state, style, animate, transition } from '@angular/animations';
+import { Sort } from '@angular/material/sort';
 
 @Component({
   selector: 'app-district-latest-table',
@@ -15,9 +16,10 @@ import { trigger, state, style, animate, transition } from '@angular/animations'
   styleUrls: ['./district-latest-table.component.scss'],
   animations: [
     trigger('detailExpand', [
-      state('collapsed', style({height: '0px', minHeight: '0'})),
+      state('collapsed, void', style({ height: '0px', minHeight: '0' })),
       state('expanded', style({height: '*'})),
       transition('expanded <=> collapsed', animate('225ms cubic-bezier(0.4, 0.0, 0.2, 1)')),
+      transition('expanded <=> void', animate('225ms cubic-bezier(0.4, 0.0, 0.2, 1)'))
     ]),
   ],
 })
@@ -107,6 +109,15 @@ export class DistrictLatestTableComponent implements OnInit, OnChanges, OnDestro
         return 'bad';
       default:
         return 'bad';
+    }
+  }
+
+  onSortChange(sort: Sort) {
+    if (sort.active && sort.direction) {
+      const isAsc = sort.direction === 'asc';
+      this.tableData.sort((i1, i2) => {
+        return (i1[sort.active] < i2[sort.active] ? -1 : 1) * (isAsc ? 1 : -1);
+      });
     }
   }
 }

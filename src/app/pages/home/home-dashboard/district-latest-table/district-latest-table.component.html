@@ -1,9 +1,9 @@
 <div *ngIf="tableData && displayedColumns" >
     <h2 class="mat-title">Incremento casi totali</h2>
     <div class="table-container mat-elevation-z2">
-        <table mat-table [dataSource]="tableData" multiTemplateDataRows>
+        <table #table mat-table [dataSource]="tableData" multiTemplateDataRows matSort matSortActive="district" matSortDirection="asc" (matSortChange)="onSortChange($event); table.renderRows()">
             <ng-container matColumnDef="district">
-                <th mat-header-cell *matHeaderCellDef [ngClass.xs]="'default-width'">{{tableDef.district}}</th>
+                <th mat-header-cell *matHeaderCellDef [ngClass.xs]="'default-width'" mat-sort-header>{{tableDef.district}}</th>
                 <td mat-cell *matCellDef="let element">
                     <span [ngStyle]="{backgroundColor: element.districtColor}" class="district-color" [ngClass.xs]="'default-width'">&nbsp;</span> 
                     <span>{{element.district}}</span>
@@ -11,21 +11,21 @@
             </ng-container>
     
             <ng-container matColumnDef="beforeBeforeLatest">
-                <th mat-header-cell *matHeaderCellDef>{{tableDef.beforeBeforeLatest}}</th>
+                <th mat-header-cell *matHeaderCellDef mat-sort-header>{{tableDef.beforeBeforeLatest}}</th>
                 <td mat-cell *matCellDef="let element">
                     {{element.beforeBeforeLatest | signedNumber}} ({{element.beforeBeforeLatestPercent | signedPercentage}})
                 </td>
             </ng-container>
     
             <ng-container matColumnDef="beforeLatest">
-                <th mat-header-cell *matHeaderCellDef>{{tableDef.beforeLatest}}</th>
+                <th mat-header-cell *matHeaderCellDef mat-sort-header>{{tableDef.beforeLatest}}</th>
                 <td mat-cell *matCellDef="let element">
                     {{element.beforeLatest | signedNumber}} ({{element.beforeLatestPercent | signedPercentage}})
                 </td>
             </ng-container>
     
             <ng-container matColumnDef="latest">
-                <th mat-header-cell *matHeaderCellDef [ngClass.xs]="'default-width'">{{tableDef.latest}}</th>
+                <th mat-header-cell *matHeaderCellDef [ngClass.xs]="'default-width'" mat-sort-header>{{tableDef.latest}}</th>
                 <td mat-cell *matCellDef="let element" [ngClass.xs]="'default-width'"> 
                     <app-trend-chip [trend]="getTrendOf(element.district, element.latest)">
                         {{element.latest | signedNumber}} ({{element.latestPercent | signedPercentage}})
@@ -43,7 +43,7 @@
             <ng-container matColumnDef="expandedDetail">
                 <td mat-cell *matCellDef="let element" [attr.colspan]="displayedColumns.length">
                   <div class="element-detail"
-                       [@detailExpand]="element == expandedElement ? 'expanded' : 'collapsed'">
+                       [@detailExpand]="element == expandedElement ? 'expanded' : 'collapsed'" >
                        
                        <div fxLayout="row" fxFlex="100" fxLayoutAlign="space-between" *ngIf="chartData[element.district] as district">
                             <app-district-latest-trend [data]="district" fxFlex.gt-xs="40" fxFlex.xs="100"></app-district-latest-trend>
