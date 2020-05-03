@@ -2,6 +2,9 @@
                 [chartData]="chartData" 
                 [labels]="labels"
                 [chartTypes]="availableChartTypes"
-                [timeFilter]="timeFilter"
                 (toggleDataType)="toggle($event)"
-                (timeFilterChange)="applyTimeFilter($event)"></app-line-chart>
+                [timeFilter]="timeFilter"
+                (timeFilterChange)="applyTimeFilter($event)"
+                [availableDecorators]="availableDecorators"
+                [valuesDecorator]="valuesDecorator"
+                (valuesDecoratorChange)="applyDecorator($event)"></app-line-chart>

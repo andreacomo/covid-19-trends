@@ -8,6 +8,8 @@ import { LinearChartDataTypeProvider } from 'src/app/commons/services/linear-cha
 import { DataFilterProviderService } from 'src/app/commons/services/data-filter-provider.service';
 import { TimeFilter } from 'src/app/commons/models/time-filter';
 import { ChartDataType } from 'src/app/commons/models/chart-data-type';
+import { ChartDataTypeDecoratorProvider } from 'src/app/commons/services/chart-data-type-decorator-provider';
+import { ChartDataTypeDecorator } from 'src/app/commons/models/chart-data-type-decorator';
 
 @Component({
   selector: 'app-district-chart',
@@ -27,12 +29,17 @@ export class DistrictChartComponent implements OnInit, OnChanges {
 
   timeFilter: TimeFilter;
 
+  valuesDecorator: ChartDataTypeDecorator;
+
+  availableDecorators: ChartDataTypeDecorator[];
+
   private currentData: {[name: string]: DistrictData[]};
 
   constructor(private github: GithubService,
               private chartProvider: LinearChartProvider,
               private chartTypeProvider: LinearChartDataTypeProvider,
-              private dataFilterProvider: DataFilterProviderService) { }
+              private dataFilterProvider: DataFilterProviderService,
+              private decoratorsProvider: ChartDataTypeDecoratorProvider) { }
 
   ngOnInit() {
     this.timeFilter = this.dataFilterProvider.getTimeFilterByScope('all');
@@ -41,6 +48,9 @@ export class DistrictChartComponent implements OnInit, OnChanges {
         this.currentData = data;
         this.initDataSet(data);
       });
+    this.valuesDecorator = this.decoratorsProvider.getDefaultDecorator();
+    this.decoratorsProvider.getDistrictsDecorators()
+      .subscribe(decorators => this.availableDecorators = decorators);
   }
 
   ngOnChanges(changes: SimpleChanges): void {
@@ -80,11 +90,16 @@ export class DistrictChartComponent implements OnInit, OnChanges {
     this.initDataSet(this.currentData);
   }
 
+  applyDecorator(decorator: ChartDataTypeDecorator) {
+    this.valuesDecorator = decorator;
+    this.initDataSet(this.currentData);
+  }
+
   private initDataSet(data: {[name: string]: DistrictData[]}) {
     const filters = [this.timeFilter];
     this.chartData = this.availableChartTypes
                       .filter(c => c.active)
-                      .flatMap(c => this.chartProvider.createChartData<DistrictData>(data, c, {}, filters));
+                      .flatMap(c => this.chartProvider.createChartData<DistrictData>(data, this.valuesDecorator.decorate(c), {}, filters));
 
     if (Object.keys(data).length) {
       this.labels = this.chartProvider.createLabels<DistrictData>(data, filters);
