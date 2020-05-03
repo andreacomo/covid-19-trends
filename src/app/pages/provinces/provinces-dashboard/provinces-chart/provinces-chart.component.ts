@@ -48,7 +48,7 @@ export class ProvincesChartComponent implements OnInit, OnChanges {
                 this.chartDataType = this.chartTypeProvider.get('totale_casi');
                 this.timeFilter = this.filtersProvider.getTimeFilterByScope('all');
                 this.valuesDecorator = this.decoratorsProvider.getDefaultDecorator();
-                this.decoratorsProvider.getYDecorators()
+                this.decoratorsProvider.getProvincesDecorators()
                   .subscribe(decorators => this.availableDecorators = decorators);
               }
 

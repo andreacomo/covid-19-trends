@@ -6,6 +6,7 @@ import { ProvincePercentAdapter } from '../models/province-percent-adapter';
 import { DefaultChartDataTypeValues } from '../models/default-chart-data-type-values.service';
 import { Observable } from 'rxjs';
 import { IncrementalChartDataTypeAdapter } from '../models/incremental-chart-data-type-adapter';
+import { DistrictPercentAdapter } from '../models/district-percent-adapter';
 
 @Injectable({
     providedIn: 'root'
@@ -18,9 +19,15 @@ export class ChartDataTypeDecoratorProvider {
         false
     );
 
+    private incrementalDecorator: ChartDataTypeDecorator = new IncrementalChartDataTypeAdapter(
+        'Andamento incrementale',
+        'delta',
+        true
+    );
+
     constructor(private localDataService: LocalDataService) { }
 
-    getYDecorators(): Observable<ChartDataTypeDecorator[]> {
+    getProvincesDecorators(): Observable<ChartDataTypeDecorator[]> {
         return this.localDataService.getProvincesPopulation()
             .pipe(
                 map(pop => {
@@ -30,11 +37,25 @@ export class ChartDataTypeDecoratorProvider {
                             'percent',
                             true,
                             pop),
-                        new IncrementalChartDataTypeAdapter(
-                            'Andamento incrementale',
-                            'delta',
-                            true
+                        this.incrementalDecorator,
+                        this.defaultDecorator
+                    ];
+                })
+            );
+    }
+
+    getDistrictsDecorators(): Observable<ChartDataTypeDecorator[]> {
+        return this.localDataService.getDistrictsPopulation()
+            .pipe(
+                map(pop => {
+                    return [
+                        new DistrictPercentAdapter(
+                            'Rispetto a % popolazione',
+                            'percent',
+                            true,
+                            pop
                         ),
+                        this.incrementalDecorator,
                         this.defaultDecorator
                     ];
                 })
