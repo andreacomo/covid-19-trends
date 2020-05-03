@@ -42,13 +42,13 @@ export class DistrictChartComponent implements OnInit, OnChanges {
               private decoratorsProvider: ChartDataTypeDecoratorProvider) { }
 
   ngOnInit() {
+    this.valuesDecorator = this.decoratorsProvider.getDefaultDecorator();
     this.timeFilter = this.dataFilterProvider.getTimeFilterByScope('all');
     this.github.getAllDistrictsData()
       .subscribe(data => {
         this.currentData = data;
         this.initDataSet(data);
       });
-    this.valuesDecorator = this.decoratorsProvider.getDefaultDecorator();
     this.decoratorsProvider.getDistrictsDecorators()
       .subscribe(decorators => this.availableDecorators = decorators);
   }
