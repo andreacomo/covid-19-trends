@@ -5,6 +5,7 @@ import { map } from 'rxjs/operators';
 import { ProvincePercentAdapter } from '../models/province-percent-adapter';
 import { DefaultChartDataTypeValues } from '../models/default-chart-data-type-values.service';
 import { Observable } from 'rxjs';
+import { IncrementalChartDataTypeAdapter } from '../models/incremental-chart-data-type-adapter';
 
 @Injectable({
     providedIn: 'root'
@@ -29,6 +30,11 @@ export class ChartDataTypeDecoratorProvider {
                             'percent',
                             true,
                             pop),
+                        new IncrementalChartDataTypeAdapter(
+                            'Andamento incrementale',
+                            'delta',
+                            true
+                        ),
                         this.defaultDecorator
                     ];
                 })

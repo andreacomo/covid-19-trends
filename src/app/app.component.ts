@@ -18,14 +18,26 @@ export class AppComponent implements OnInit {
   constructor(private matIconRegistry: MatIconRegistry,
               private domSanitizer: DomSanitizer,
               private router: Router) {
-    this.matIconRegistry.addSvgIcon(
-      'github',
-      this.domSanitizer.bypassSecurityTrustResourceUrl(environment.context + 'assets/github.svg')
-    );
-    this.matIconRegistry.addSvgIcon(
-      'percent',
-      this.domSanitizer.bypassSecurityTrustResourceUrl(environment.context + 'assets/percent.svg')
-    );
+    [
+      {
+        iconName: 'github',
+        path: 'assets/github.svg'
+      },
+      {
+        iconName: 'percent',
+        path: 'assets/percent.svg'
+      },
+      {
+        iconName: 'delta',
+        path: 'assets/delta.svg'
+      }
+    ]
+    .forEach(svg => {
+      this.matIconRegistry.addSvgIcon(
+        svg.iconName,
+        this.domSanitizer.bypassSecurityTrustResourceUrl(environment.context + svg.path)
+      );
+    });
   }
 
   ngOnInit(): void {
