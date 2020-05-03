@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { PercentageAdapterComponent } from './percentage-adapter.component';
+import { DataDecoratorsComponent } from './data-decorators.component';
 
 describe('PercentageFilterComponent', () => {
-  let component: PercentageAdapterComponent;
-  let fixture: ComponentFixture<PercentageAdapterComponent>;
+  let component: DataDecoratorsComponent;
+  let fixture: ComponentFixture<DataDecoratorsComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ PercentageAdapterComponent ]
+      declarations: [ DataDecoratorsComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(PercentageAdapterComponent);
+    fixture = TestBed.createComponent(DataDecoratorsComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

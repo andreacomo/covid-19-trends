@@ -1,17 +1,15 @@
 import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
 import { ProvincePercentAdapter } from '../../models/province-percent-adapter';
-import { LocalDataService } from '../../services/local-data.service';
-import { map } from 'rxjs/operators';
 import { ChartDataTypeDecorator } from '../../models/chart-data-type-decorator';
 import { ChartDataTypeDecoratorProvider } from '../../services/chart-data-type-decorator-provider';
 import { DefaultChartDataTypeValues } from '../../models/default-chart-data-type-values.service';
 
 @Component({
-  selector: 'app-percentage-adapter',
-  templateUrl: './percentage-adapter.component.html',
-  styleUrls: ['./percentage-adapter.component.scss']
+  selector: 'app-data-decorators',
+  templateUrl: './data-decorators.component.html',
+  styleUrls: ['./data-decorators.component.scss']
 })
-export class PercentageAdapterComponent implements OnInit {
+export class DataDecoratorsComponent implements OnInit {
 
   @Input()
   selectedDecorator: ChartDataTypeDecorator;
@@ -19,13 +17,12 @@ export class PercentageAdapterComponent implements OnInit {
   @Output()
   selectDecorator: EventEmitter<ChartDataTypeDecorator> = new EventEmitter<ChartDataTypeDecorator>();
 
+  @Input()
   decorators: ChartDataTypeDecorator[];
 
-  constructor(private decoratorsProvider: ChartDataTypeDecoratorProvider) { }
+  constructor() { }
 
   ngOnInit() {
-    this.decoratorsProvider.getYDecorators()
-      .subscribe(d => this.decorators = d);
   }
 
   select(decorator: ChartDataTypeDecorator) {

@@ -1,11 +1,11 @@
-import { Population } from './population';
+import { ProvincePopulation } from './province-population';
 import { ChartDataType } from './chart-data-type';
 import { ChartDataTypeDecorator } from './chart-data-type-decorator';
 import { ChartTooltipItem, ChartData } from 'chart.js';
 
 export class ProvincePercentAdapter extends ChartDataTypeDecorator {
 
-    constructor(label: string, icon: string, isSvg: boolean, private provincesPop: Population[]) {
+    constructor(label: string, icon: string, isSvg: boolean, private provincesPop: ProvincePopulation[]) {
         super(label, icon, isSvg);
     }
 

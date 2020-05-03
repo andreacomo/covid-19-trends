@@ -1,4 +1,4 @@
-export class Population {
+export class ProvincePopulation {
     'codice_regione': number;
     'regione': string;
     'sigla_provincia': string;
