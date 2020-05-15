@@ -2,9 +2,9 @@
     <h2 class="mat-title">Situazione al {{updatedAt | date : 'dd/MM/yyyy'}}</h2>
     <div fxLayout.gt-sm="column" fxLayout.sm="row wrap" fxLayoutAlign.sm="space-between">
         <mat-card *ngFor="let item of items" fxFlex.gt-sm="100" fxFlex.sm="49">
-            <mat-card-content fxLayout="row" fxLayoutAlign="space-between center">
+            <mat-card-content fxLayout="row" fxLayoutAlign="space-between space-between" fxLayout.md="column">
                 <strong>{{item.label}}</strong> 
-                <div class="numbers">
+                <div class="numbers" fxLayout="row" fxLayoutAlign="space-between center" ngClass.md="tablet-numbers">
                     <span class="absolute-number">{{item.value | number : '1.0-0' : 'it'}}</span>
                     <app-trend-chip [trend]="item.mean.trendOf(item.valueDif)" [inverseLogic]="item.inverseLogic">
                         {{item.valueDifPercent | signedPercentage}}
