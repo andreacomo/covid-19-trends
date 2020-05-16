@@ -1,3 +1,10 @@
 <div fxLayout="row" class="footer" fxLayoutAlign="space-between" fxLayoutGap="1em">
-    <div class="mat-small" fxLayout="column" fxLayoutAlign="center">Fonte dati: <a href="https://github.com/pcm-dpc/COVID-19" target="_blank">Protezione Civile</a></div>
+    <div class="mat-small" fxLayout="column" fxLayoutAlign="center start">
+        Fonte dati: 
+        <a href="https://github.com/pcm-dpc/COVID-19" target="_blank">Protezione Civile</a>
+    </div>
+    <div class="mat-small" fxLayout="column" fxLayoutAlign="center end">
+        <span>Ultimo aggiornamento: </span>
+        {{updateDate | date: 'dd-MM-yyyy HH:mm'}}
+    </div>
 </div>

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { GithubService } from 'src/app/commons/services/github.service';
 
 @Component({
   selector: 'app-footer',
@@ -7,9 +8,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class FooterComponent implements OnInit {
 
-  constructor() { }
+  updateDate: Date;
+
+  constructor(private github: GithubService) { }
 
   ngOnInit() {
+    this.github.getLatestNational()
+    .subscribe(data => {
+      this.updateDate = new Date(data.data);
+    });
   }
 
 }
