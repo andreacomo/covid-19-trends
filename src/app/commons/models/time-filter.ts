@@ -6,6 +6,6 @@ export interface TimeFilter extends DataFilter {
 
   icon: string;
 
-  scope: '3d' | '7d' | '14d' | '30d' | 'all';
+  scope: '3d' | '7d' | '14d' | '30d' | '60d' | '120d' | 'all';
 
 }

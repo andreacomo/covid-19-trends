@@ -31,6 +31,18 @@ export class DataFilterProviderService {
       icon: 'crop_7_5',
       apply: (values: any[]) => values.slice(values.length - 30)
     },
+    '60d': {
+      scope: '60d',
+      label: 'Ultimi due mesi',
+      icon: 'crop_7_5',
+      apply: (values: any[]) => values.slice(values.length - 60)
+    },
+    '120d': {
+      scope: '120d',
+      label: 'Ultimi quattro mesi',
+      icon: 'crop_7_5',
+      apply: (values: any[]) => values.slice(values.length - 120)
+    },
     all: {
       scope: 'all',
       label: 'Dall\'inizio dell\'epidemia',
