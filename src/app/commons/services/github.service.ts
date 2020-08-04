@@ -66,6 +66,7 @@ export class GithubService {
         map(data => {
           const result = data
                     .filter(d => d.denominazione_regione === district)
+                    .filter(d => d.sigla_provincia)
                     .reduce((acc, i) => this.groupByAttribute<ProvinceData>(acc, i, 'sigla_provincia'), {});
 
           this.addColorToEntries<ProvinceData>(result);

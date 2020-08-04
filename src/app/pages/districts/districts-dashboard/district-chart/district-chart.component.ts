@@ -43,7 +43,7 @@ export class DistrictChartComponent implements OnInit, OnChanges {
 
   ngOnInit() {
     this.valuesDecorator = this.decoratorsProvider.getDefaultDecorator();
-    this.timeFilter = this.dataFilterProvider.getTimeFilterByScope('all');
+    this.timeFilter = this.dataFilterProvider.getTimeFilterByScope('120d');
     this.github.getAllDistrictsData()
       .subscribe(data => {
         this.currentData = data;
