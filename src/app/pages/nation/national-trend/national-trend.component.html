@@ -9,6 +9,18 @@
         <app-national-data-chart [data]="allNationalData" [config]="allCasesConfig" fxFlex="50"></app-national-data-chart>
     </div>
     <div fxLayout="row" fxLayout.xs="column" fxLayout.sm="column" fxLayoutAlign="center" fxLayoutGap="2em">
+        <app-national-data-chart [data]="allNationalData" [config]="newHospitalizedVsNewCasesConfig" fxFlex="50"></app-national-data-chart>
+        <app-national-data-chart [data]="allNationalData" [config]="intensiveCareVsTotalHospitalizedCasesConfig" fxFlex="50"></app-national-data-chart>
+    </div>
+    <div fxLayout="row" fxLayout.xs="column" fxLayout.sm="column" fxLayoutAlign="center" fxLayoutGap="2em">
+        <app-national-data-chart [data]="allNationalData" [config]="newHospitalizedCasesConfig" fxFlex="50"></app-national-data-chart>
+        <app-national-data-chart [data]="allNationalData" [config]="hospitalizedCasesConfig" fxFlex="50"></app-national-data-chart>
+    </div>
+    <div fxLayout="row" fxLayout.xs="column" fxLayout.sm="column" fxLayoutAlign="center" fxLayoutGap="2em">
+        <app-national-data-chart [data]="allNationalData" [config]="newIntensiveCareCasesConfig" fxFlex="50"></app-national-data-chart>
+        <app-national-data-chart [data]="allNationalData" [config]="intensiveCareCasesConfig" fxFlex="50"></app-national-data-chart>
+    </div>
+    <div fxLayout="row" fxLayout.xs="column" fxLayout.sm="column" fxLayoutAlign="center" fxLayoutGap="2em">
         <app-national-data-chart [data]="allNationalData" [config]="newDeadCasesConfig" fxFlex="50"></app-national-data-chart>
         <app-national-data-chart [data]="allNationalData" [config]="deadCasesConfig" fxFlex="50"></app-national-data-chart>
     </div>
