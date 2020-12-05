@@ -1,0 +1,172 @@
+{
+    "source": "http://www.salute.gov.it/portale/nuovocoronavirus/dettaglioContenutiNuovoCoronavirus.jsp?area=nuovoCoronavirus&id=5351&lingua=italiano&menu=vuoto",
+    "lastUpdate": "2020-12-05",
+    "data": [
+        {
+            "issueDate": "2020-11-04",
+            "validFromDate": "2020-11-06",
+            "scenarios": [
+                {
+                    "color": "ORANGE",
+                    "scenario": 3,
+                    "districts": [
+                        "Puglia", "Sicilia"
+                    ]
+                },
+                {
+                    "color": "RED",
+                    "scenario": 4,
+                    "districts": [
+                        "Calabria", "Lombardia", "Piemonte", "Valle d'Aosta"
+                    ]
+                }
+            ]
+        },
+        {
+            "issueDate": "2020-11-10",
+            "validFromDate": "2020-11-11",
+            "scenarios": [
+                {
+                    "color": "ORANGE",
+                    "scenario": 3,
+                    "districts": [
+                        "Puglia", "Sicilia",
+                        "Abruzzo", "Basilicata", "Liguria", "Toscana", "Umbria"
+                    ]
+                },
+                {
+                    "color": "RED",
+                    "scenario": 4,
+                    "districts": [
+                        "Calabria", "Lombardia", "Piemonte", "Valle d'Aosta",
+                        "Provincia autonoma di Bolzano"
+                    ]
+                }
+            ]
+        },
+        {
+            "issueDate": "2020-11-13",
+            "validFromDate": "2020-11-15",
+            "scenarios": [
+                {
+                    "color": "ORANGE",
+                    "scenario": 3,
+                    "districts": [
+                        "Puglia", "Sicilia",
+                        "Abruzzo", "Basilicata", "Liguria", "Umbria",
+                        "Emilia-Romagna", "Friuli-Venezia Giulia", "Marche"
+                    ]
+                },
+                {
+                    "color": "RED",
+                    "scenario": 4,
+                    "districts": [
+                        "Calabria", "Lombardia", "Piemonte", "Valle d'Aosta",
+                        "Provincia autonoma di Bolzano",
+                        "Campania", "Toscana"
+                    ]
+                }
+            ]
+        },
+        {
+            "issueDate": "2020-11-19",
+            "validFromDate": "2020-11-19",
+            "scenarios": [
+                {
+                    "color": "ORANGE",
+                    "scenario": 3,
+                    "districts": [
+                        "Puglia", "Sicilia",
+                        "Abruzzo", "Basilicata", "Liguria", "Umbria",
+                        "Emilia-Romagna", "Friuli-Venezia Giulia", "Marche"
+                    ]
+                },
+                {
+                    "color": "RED",
+                    "scenario": 4,
+                    "districts": [
+                        "Calabria", "Lombardia", "Piemonte", "Valle d'Aosta",
+                        "Provincia autonoma di Bolzano",
+                        "Campania", "Toscana"
+                    ]
+                }
+            ]
+        },
+        {
+            "issueDate": "2020-11-20",
+            "validFromDate": "2020-11-22",
+            "scenarios": [
+                {
+                    "color": "ORANGE",
+                    "scenario": 3,
+                    "districts": [
+                        "Puglia", "Sicilia",
+                        "Basilicata", "Liguria", "Umbria",
+                        "Emilia-Romagna", "Friuli-Venezia Giulia", "Marche"
+                    ]
+                },
+                {
+                    "color": "RED",
+                    "scenario": 4,
+                    "districts": [
+                        "Calabria", "Lombardia", "Piemonte", "Valle d'Aosta",
+                        "Provincia autonoma di Bolzano",
+                        "Campania", "Toscana",
+                        "Abruzzo"
+                    ]
+                }
+            ]
+        },
+        {
+            "issueDate": "2020-11-24",
+            "validFromDate": "2020-11-24",
+            "scenarios": [
+                {
+                    "color": "ORANGE",
+                    "scenario": 3,
+                    "districts": [
+                        "Puglia", "Sicilia",
+                        "Basilicata", "Liguria", "Umbria",
+                        "Emilia-Romagna", "Friuli-Venezia Giulia", "Marche"
+                    ]
+                },
+                {
+                    "color": "RED",
+                    "scenario": 4,
+                    "districts": [
+                        "Calabria", "Lombardia", "Piemonte", "Valle d'Aosta",
+                        "Provincia autonoma di Bolzano",
+                        "Campania", "Toscana",
+                        "Abruzzo"
+                    ]
+                }
+            ]
+        },
+        {
+            "issueDate": "2020-11-27",
+            "validFromDate": "2020-11-29",
+            "scenarios": [
+                {
+                    "color": "ORANGE",
+                    "scenario": 3,
+                    "districts": [
+                        "Puglia",
+                        "Basilicata", "Umbria",
+                        "Emilia-Romagna", "Friuli-Venezia Giulia", "Marche",
+                        "Calabria", "Lombardia", "Piemonte"
+                    ]
+                },
+                {
+                    "color": "RED",
+                    "scenario": 4,
+                    "districts": [
+                        "Valle d'Aosta",
+                        "Provincia autonoma di Bolzano",
+                        "Campania", "Toscana",
+                        "Abruzzo"
+                    ]
+                }
+            ]
+        }
+    ]
+}
