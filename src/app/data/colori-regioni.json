@@ -167,6 +167,28 @@
                     ]
                 }
             ]
+        },
+        {
+            "issueDate": "2020-12-05",
+            "validFromDate": "2020-11-06",
+            "scenarios": [
+                {
+                    "color": "ORANGE",
+                    "scenario": 3,
+                    "districts": [
+                        "Basilicata",
+                        "Calabria", "Lombardia", "Piemonte",
+                        "Provincia autonoma di Bolzano", "Campania", "Toscana", "Valle d'Aosta"
+                    ]
+                },
+                {
+                    "color": "RED",
+                    "scenario": 4,
+                    "districts": [
+                        "Abruzzo"
+                    ]
+                }
+            ]
         }
     ]
 }
