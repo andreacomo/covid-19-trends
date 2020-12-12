@@ -19,6 +19,7 @@ import { MatExpansionModule } from '@angular/material';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatSortModule } from '@angular/material/sort';
+import { MatSliderModule } from '@angular/material/slider';
 import { FlexLayoutModule } from '@angular/flex-layout';
 
 
@@ -47,6 +48,7 @@ import { FlexLayoutModule } from '@angular/flex-layout';
     BrowserAnimationsModule,
     MatMenuModule,
     MatSortModule,
+    MatSliderModule,
     FlexLayoutModule
   ],
   providers: [

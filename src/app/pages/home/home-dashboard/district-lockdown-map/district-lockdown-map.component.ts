@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 import { Regulation } from 'src/app/commons/models/districts-lockdown-colors';
 import { LocalDataService } from 'src/app/commons/services/local-data.service';
 
@@ -7,7 +7,7 @@ import { LocalDataService } from 'src/app/commons/services/local-data.service';
   templateUrl: './district-lockdown-map.component.svg',
   styleUrls: ['./district-lockdown-map.component.scss']
 })
-export class DistrictLockdownMapComponent implements OnInit {
+export class DistrictLockdownMapComponent implements OnInit, OnChanges {
 
   @Input()
   regulation: Regulation;
@@ -17,7 +17,10 @@ export class DistrictLockdownMapComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
-    console.log(this.regulation);
+
+  }
+
+  ngOnChanges(changes: SimpleChanges): void {
     this.data = this.regulation.scenarios
       .map(scenario => {
         return scenario.districts.reduce((acc, district) => {

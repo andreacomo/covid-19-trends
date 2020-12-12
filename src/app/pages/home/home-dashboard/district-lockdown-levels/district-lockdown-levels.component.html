@@ -1,4 +1,4 @@
-<h2 class="mat-title" *ngIf="districtColors">Colori delle regioni (in vigore dal {{date | date : 'dd/MM/yyyy'}})</h2>
+<h2 class="mat-title" *ngIf="districtColors">Indicatori di rischio per regione</h2>
 <mat-accordion *ngIf="districtColors">
     <mat-expansion-panel>
         <mat-expansion-panel-header>
@@ -23,8 +23,16 @@
                 </div>
             </mat-panel-title>
          </mat-expansion-panel-header>
-         <div flexLayout="row" fxFlex="100" fxLayoutAlign="center">
-            <app-district-lockdown-map [regulation]="regulation"></app-district-lockdown-map>
+         <div fxLayout="column" fxLayoutGap="1em">
+            <app-regulation-date-selection [regulations]="allRegulations" (dateChange)="changeRegulation($event)"></app-regulation-date-selection>
+            <mat-divider></mat-divider>
+            <div fxLayout="column" fxLayoutAlign="center center">
+                <app-district-lockdown-map [regulation]="regulation" fxFlex="100"></app-district-lockdown-map>
+            </div>
+            <mat-divider></mat-divider>
+            <div class="mat-small">
+                I dati sono aggiornati al {{lastUpdate | date: 'dd/MM/yyyy'}} in base alle <a href="{{source}}" target="_blank">ordinanze del Ministero della Salute</a>
+            </div>
          </div>
     </mat-expansion-panel>
 </mat-accordion>
