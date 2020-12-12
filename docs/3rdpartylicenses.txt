@@ -120,6 +120,8 @@ THE SOFTWARE.
 
 @angular/material/core
 
+@angular/material/divider
+
 @angular/material/expansion
 
 @angular/material/form-field
@@ -135,6 +137,8 @@ THE SOFTWARE.
 @angular/material/select
 
 @angular/material/sidenav
+
+@angular/material/slider
 
 @angular/material/snack-bar
 
@@ -303,6 +307,8 @@ WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
 FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
 OTHER DEALINGS IN THE SOFTWARE.
 
+
+undefined
 
 ng2-charts
 ISC
@@ -585,6 +591,3 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
-
-
-undefined
