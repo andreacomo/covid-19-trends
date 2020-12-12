@@ -1,0 +1,27 @@
+<h2 class="mat-title" *ngIf="districtColors">Colori delle regioni (in vigore dal {{date | date : 'dd/MM/yyyy'}})</h2>
+<mat-accordion *ngIf="districtColors">
+    <mat-expansion-panel>
+        <mat-expansion-panel-header>
+            <mat-panel-title>
+                <div fxLayout="row" fxFlex="100" fxLayoutAlign="space-evenly" fxLayoutGap="1em">
+                    <div fxLayout="row" fxLayoutAlign="start center" fxFlex="100">
+                        <div class="dot green"></div>
+                        <div>{{districtColors['GREEN']}}</div>
+                    </div>
+                    <div fxLayout="row" fxLayoutAlign="start center" fxFlex="100">
+                        <div class="dot yellow"></div>
+                        <div>{{districtColors['YELLOW']}}</div>
+                    </div>
+                    <div fxLayout="row" fxLayoutAlign="start center" fxFlex="100">
+                        <div class="dot orange"></div>
+                        <div>{{districtColors['ORANGE']}}</div>
+                    </div>
+                    <div fxLayout="row" fxLayoutAlign="start center" fxFlex="100">
+                        <div class="dot red"></div>
+                        <div>{{districtColors['RED']}}</div>
+                    </div>
+                </div>
+            </mat-panel-title>
+         </mat-expansion-panel-header>
+    </mat-expansion-panel>
+</mat-accordion>

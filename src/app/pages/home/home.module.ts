@@ -7,12 +7,13 @@ import { MaterialModule } from 'src/app/commons/material/material.module';
 import { DistrictLatestTableComponent } from './home-dashboard/district-latest-table/district-latest-table.component';
 import { CommonComponentsModule } from 'src/app/commons/common-components.module';
 import { NationalLatestComponent } from './home-dashboard/national-latest/national-latest.component';
+import { DistrictLockdownLevelsComponent } from './home-dashboard/district-lockdown-levels/district-lockdown-levels.component'
 import { LatestProviderService } from './services/latest-data-provider.service';
 import { RouterModule } from '@angular/router';
 
 @NgModule({
   declarations: [HomeDashboardComponent, DistrictLatestTrendComponent,
-    DistrictLatestTableComponent, NationalLatestComponent],
+    DistrictLatestTableComponent, NationalLatestComponent, DistrictLockdownLevelsComponent],
   imports: [
     CommonModule,
     MaterialModule,

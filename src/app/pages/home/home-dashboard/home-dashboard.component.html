@@ -1,5 +1,8 @@
 <div fxLayout="row" fxLayout.xs="column" fxLayout.sm="column" fxLayoutAlign="center" class="home-container" fxLayoutGap="2em">
     <app-national-latest fxFlex="20" [data]="allNationalData"></app-national-latest>
-    <app-district-latest-table [data]="allDistrictsData" fxFlex="80"></app-district-latest-table>
+    <div fxLayout="column" fxFlex="80" fxLayoutGap="1em">
+        <app-district-lockdown-levels></app-district-lockdown-levels>
+        <app-district-latest-table [data]="allDistrictsData"></app-district-latest-table>
+    </div>
 </div>
 
