@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { LocalDataService } from 'src/app/commons/services/local-data.service';
+import { Regulation } from 'src/app/commons/models/districts-lockdown-colors';
 
 @Component({
   selector: 'app-district-lockdown-levels',
@@ -12,16 +13,18 @@ export class DistrictLockdownLevelsComponent implements OnInit {
 
   date: string;
 
+  regulation: Regulation;
+
   constructor(private localDataService: LocalDataService) { }
 
   ngOnInit() {
     this.localDataService.getDistrictsLockdownColors()
       .subscribe(districts => {
-        const regulation = districts.data[districts.data.length - 1];
+        this.regulation = districts.data[districts.data.length - 1];
 
-        this.date = regulation.validFromDate;
+        this.date = this.regulation.validFromDate;
 
-        this.districtColors = regulation.scenarios.reduce((acc, scenario) => {
+        this.districtColors = this.regulation.scenarios.reduce((acc, scenario) => {
           acc[scenario.color] = scenario.districts.length;
           return acc;
         }, {} as {[color: string]: number});

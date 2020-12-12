@@ -7,7 +7,7 @@ export class DistrictsLockdownColors {
     data: Regulation[];
 }
 
-class Regulation {
+export class Regulation {
 
     issueDate: string;
 
@@ -16,7 +16,7 @@ class Regulation {
     scenarios: Scenario[];
 }
 
-class Scenario {
+export class Scenario {
 
     color: 'GREEN' | 'YELLOW' | 'ORANGE' | 'RED';
 

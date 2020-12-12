@@ -10,10 +10,12 @@ import { NationalLatestComponent } from './home-dashboard/national-latest/nation
 import { DistrictLockdownLevelsComponent } from './home-dashboard/district-lockdown-levels/district-lockdown-levels.component'
 import { LatestProviderService } from './services/latest-data-provider.service';
 import { RouterModule } from '@angular/router';
+import { DistrictLockdownMapComponent } from './home-dashboard/district-lockdown-map/district-lockdown-map.component';
 
 @NgModule({
   declarations: [HomeDashboardComponent, DistrictLatestTrendComponent,
-    DistrictLatestTableComponent, NationalLatestComponent, DistrictLockdownLevelsComponent],
+    DistrictLatestTableComponent, NationalLatestComponent, DistrictLockdownLevelsComponent,
+    DistrictLockdownMapComponent],
   imports: [
     CommonModule,
     MaterialModule,

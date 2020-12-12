@@ -265,7 +265,7 @@
                     "color": "YELLOW",
                     "scenario": 2,
                     "districts": [
-                        "Emilia-Romagna", "Friuli Venezia Giulia", "Lazio", "Liguria", "Marche", "Molise", "P.A. Bolzano", "P.A. Trento", "Puglia", "Sardegna", "Sicilia", "Umbria", "Veneto"
+                        "Emilia-Romagna", "Friuli Venezia Giulia", "Lazio", "Liguria", "Marche", "Molise", "P.A. Trento", "Puglia", "Sardegna", "Sicilia", "Umbria", "Veneto"
                     ]
                 },
                 {

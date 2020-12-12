@@ -1,0 +1,18 @@
+@import 'src/styles/palette.scss';
+
+.italy {
+    width: 100%;
+
+    .green {
+        fill: $district-green;
+    }
+    .yellow {
+        fill: $district-yellow;
+    }
+    .orange {
+        fill: $district-orange;
+    }
+    .red {
+        fill: $district-red;
+    }
+}
