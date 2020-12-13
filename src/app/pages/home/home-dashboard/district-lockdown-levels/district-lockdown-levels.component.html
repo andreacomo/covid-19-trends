@@ -25,7 +25,7 @@
          </mat-expansion-panel-header>
          <div fxLayout="column" fxLayoutGap="1em">
             <app-regulation-date-selection [regulations]="allRegulations" (dateChange)="changeRegulation($event)"></app-regulation-date-selection>
-            <mat-divider></mat-divider>
+            <mat-divider ngClass.md="addMarginTop" ngClass.lt-md="addMarginTop"></mat-divider>
             <div fxLayout="column" fxLayoutAlign="center center">
                 <app-district-lockdown-map [regulation]="regulation" fxFlex="100"></app-district-lockdown-map>
             </div>
