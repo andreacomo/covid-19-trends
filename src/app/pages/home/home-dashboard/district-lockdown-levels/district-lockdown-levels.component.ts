@@ -19,15 +19,12 @@ export class DistrictLockdownLevelsComponent implements OnInit {
 
   source: string;
 
-  lastUpdate: string;
-
   constructor(private localDataService: LocalDataService) { }
 
   ngOnInit() {
     this.localDataService.getDistrictsLockdownColors()
       .subscribe(districts => {
         this.source = districts.source;
-        this.lastUpdate = districts.lastUpdate;
         this.allRegulations = districts.data;
 
         this.changeRegulation(districts.data.length - 1);

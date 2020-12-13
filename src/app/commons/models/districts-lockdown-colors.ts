@@ -2,8 +2,6 @@ export class DistrictsLockdownColors {
 
     source: string;
 
-    lastUpdate: string;
-
     data: Regulation[];
 }
 
