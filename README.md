@@ -7,6 +7,16 @@ E' disponibile online servito come "GitHub Pages" su:
 
 [https://andreacomo.github.io/covid-19-trends/](https://andreacomo.github.io/covid-19-trends/)
 
+## Prerequirements
+
+Minimun Node version is `v10.13.0`.
+
+With NVM you can:
+
+```
+nvm use v10.13.0
+```
+
 ## Build prod
 Se si hanno problemi **causati da Babel** nella build di prod:
 
