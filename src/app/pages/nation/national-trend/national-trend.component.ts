@@ -113,9 +113,9 @@ export class NationalTrendComponent implements OnInit {
       smaLabel: `Media mobile a ${this.smaWindow} giorni`,
       metric: 'nuovi_ricoverati_con_sintomi',
       dataLatestDays: this.dataLatestDays,
-      dataLabel: 'Nuovi ricovertati',
+      dataLabel: 'Nuovi ricoverati',
       dataBarColor: Colors.SUPPORTED[16],
-      title: `Nuovi ricovertati (rispetto al giorno precedente)`
+      title: `Nuovi ricoverati (rispetto al giorno precedente)`
     };
     this.hospitalizedCasesConfig = {
       smaWindow: this.smaWindow,
@@ -149,18 +149,18 @@ export class NationalTrendComponent implements OnInit {
       smaLabel: `Media mobile a ${this.smaWindow} giorni`,
       metric: 'nuovi_ricoverati_su_nuovi_positivi',
       dataLatestDays: this.dataLatestDays,
-      dataLabel: '% nuovi ricovertati / nuovi casi',
+      dataLabel: '% nuovi ricoverati / nuovi casi',
       dataBarColor: Colors.SUPPORTED[17],
-      title: `% nuovi ricovertati / nuovi casi (rispetto al giorno precedente)`
+      title: `% nuovi ricoverati / nuovi casi (rispetto al giorno precedente)`
     };
     this.intensiveCareVsTotalHospitalizedCasesConfig = {
       smaWindow: this.smaWindow,
       smaLabel: `Media mobile a ${this.smaWindow} giorni`,
       metric: 'terapia_intensiva_su_ricoverati',
       dataLatestDays: this.dataLatestDays,
-      dataLabel: '% terapia intensiva / ricovertati',
+      dataLabel: '% terapia intensiva / ricoverati',
       dataBarColor: Colors.SUPPORTED[10],
-      title: `% totale terapia intensiva / ricovertati (rispetto al giorno precedente)`
+      title: `% totale terapia intensiva / ricoverati (rispetto al giorno precedente)`
     };
   }
 
