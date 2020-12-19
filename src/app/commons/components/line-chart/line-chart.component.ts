@@ -51,7 +51,7 @@ export class LineChartComponent implements OnInit, OnDestroy {
 
   private watcher: Subscription;
 
-  @ViewChild(BaseChartDirective, { static: false })
+  @ViewChild(BaseChartDirective)
   chart: BaseChartDirective;
 
   constructor(private dataService: LocalDataService,
