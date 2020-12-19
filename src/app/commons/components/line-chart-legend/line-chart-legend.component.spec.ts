@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
 import { LineChartLegendComponent } from './line-chart-legend.component';
 
@@ -6,7 +6,7 @@ describe('LineChartLegendComponent', () => {
   let component: LineChartLegendComponent;
   let fixture: ComponentFixture<LineChartLegendComponent>;
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [ LineChartLegendComponent ]
     })
