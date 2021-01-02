@@ -13,11 +13,12 @@ import { LatestProviderService } from './services/latest-data-provider.service';
 import { RouterModule } from '@angular/router';
 import { DistrictLockdownMapComponent } from './home-dashboard/district-lockdown-map/district-lockdown-map.component';
 import { RegulationDateSelectionComponent } from './home-dashboard/regulation-date-selection/regulation-date-selection.component';
+import { VaccinationSummaryComponent } from './home-dashboard/vaccination-summary/vaccination-summary.component';
 
 @NgModule({
   declarations: [HomeDashboardComponent, DistrictLatestTrendComponent,
     DistrictLatestTableComponent, NationalLatestComponent, DistrictLockdownLevelsComponent,
-    DistrictLockdownMapComponent, RegulationDateSelectionComponent],
+    DistrictLockdownMapComponent, RegulationDateSelectionComponent, VaccinationSummaryComponent],
   imports: [
     CommonModule,
     MaterialModule,
