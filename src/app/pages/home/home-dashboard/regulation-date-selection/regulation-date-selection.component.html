@@ -1,20 +1,3 @@
-<div fxLayout="row" fxLayout.lt-md="column-reverse" fxLayout.md="column-reverse" 
-    fxLayoutAlign="space-between center" fxLayoutAlign.lt-md="space-between stretch" fxLayoutAlign.md="space-between stretch" 
-    class="regulation-date-selection">
-    <mat-slider
-            fxFlex="90"
-            fxFlex.lt-md="100"
-            fxFlex.md="100"
-            *ngIf="regulations"
-            [max]="maxValue"
-            [min]="0"
-            [step]="1"
-            [thumbLabel]="false"
-            [tickInterval]="1"
-            [(ngModel)]="value"
-            (ngModelChange)="onValueChange()">
-    </mat-slider>
-    <mat-chip-list fxFlex="10" fxFlexAlign.lt-md="center" fxFlexAlign.md="center">
-        <mat-chip>{{regulations[value].validFromDate | date: 'dd/MM/yyyy'}}</mat-chip>
-    </mat-chip-list>
-</div>
+<mat-tab-group *ngIf="regulations" (selectedTabChange)="onTabChange($event)" [animationDuration]="0">
+    <mat-tab *ngFor="let regulation of regulations.reverse()" label="{{regulation.validFromDate | date: 'dd/MM/yyyy'}}"></mat-tab>
+</mat-tab-group>

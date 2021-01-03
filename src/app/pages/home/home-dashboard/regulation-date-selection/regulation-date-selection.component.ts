@@ -1,4 +1,5 @@
 import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
+import { MatTabChangeEvent } from '@angular/material/tabs';
 import { Regulation } from 'src/app/commons/models/districts-lockdown-colors';
 
 @Component({
@@ -14,19 +15,13 @@ export class RegulationDateSelectionComponent implements OnInit {
   @Output()
   dateChange: EventEmitter<number> = new EventEmitter<number>();
 
-  value: number;
-
-  maxValue: number;
-
   constructor() { }
 
   ngOnInit() {
-    this.maxValue = this.regulations.length - 1;
-    this.value = this.maxValue;
   }
 
-  onValueChange() {
-    this.dateChange.emit(this.value);
+  onTabChange(changeEvent: MatTabChangeEvent) {
+    this.dateChange.emit(this.regulations.length - 1 - changeEvent.index);
   }
 
 }
