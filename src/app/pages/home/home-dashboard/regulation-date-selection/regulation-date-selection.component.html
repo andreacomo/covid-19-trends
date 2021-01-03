@@ -1,3 +1,3 @@
-<mat-tab-group *ngIf="regulations" (selectedTabChange)="onTabChange($event)" [animationDuration]="0">
-    <mat-tab *ngFor="let regulation of regulations.reverse()" label="{{regulation.validFromDate | date: 'dd/MM/yyyy'}}"></mat-tab>
+<mat-tab-group *ngIf="reversedRegulations" (selectedTabChange)="onTabChange($event)" [animationDuration]="0">
+    <mat-tab *ngFor="let regulation of reversedRegulations" label="{{regulation.validFromDate | date: 'dd/MM/yyyy'}}"></mat-tab>
 </mat-tab-group>

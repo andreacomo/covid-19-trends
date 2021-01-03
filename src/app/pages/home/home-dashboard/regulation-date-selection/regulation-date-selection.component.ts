@@ -12,12 +12,15 @@ export class RegulationDateSelectionComponent implements OnInit {
   @Input()
   regulations: Regulation[];
 
+  reversedRegulations: Regulation[];
+
   @Output()
   dateChange: EventEmitter<number> = new EventEmitter<number>();
 
   constructor() { }
 
   ngOnInit() {
+    this.reversedRegulations = [...this.regulations].reverse();
   }
 
   onTabChange(changeEvent: MatTabChangeEvent) {
