@@ -4,28 +4,40 @@
         <div class="item" fxLayout="row" fxLayoutAlign="center center" fxFlex="100" fxLayoutGap=".5em">
             <div fxLayout="row" fxLayoutAlign="center center" fxLayoutGap=".5em">
                 <mat-icon>history_toggle_off</mat-icon>
-                <div class="numbers">{{lastUpdate$ | async | date: 'dd/MM/yyyy HH:mm:ss'}}</div>
+                <div class="numbers" *ngIf="lastUpdate$ | async as lastUpdate; else lastUpdateLoading">{{lastUpdate | date: 'dd/MM/yyyy HH:mm:ss'}}</div>
+                <ng-template #lastUpdateLoading>
+                    <mat-spinner [diameter]="24"></mat-spinner>
+                </ng-template>
             </div>
         </div>
         <div class="item" fxLayout="row" fxLayoutAlign="space-between center" fxFlex="100" fxLayoutGap=".5em">
             <strong>Totale vaccinati</strong> 
             <div fxLayout="row" fxLayoutAlign="center center" fxLayoutGap=".5em">
                 <mat-icon>groups</mat-icon>
-                <div class="numbers">{{total$ | async}}</div>
+                <div class="numbers" *ngIf="total$ | async as total; else totalLoading">{{total}}</div>
+                <ng-template #totalLoading>
+                    <mat-spinner [diameter]="24"></mat-spinner>
+                </ng-template>
             </div>
         </div>
         <div class="item" fxLayout="row" fxLayoutAlign="space-between center" fxFlex="100" fxLayoutGap=".5em">
             <strong>Uomini</strong>
             <div fxLayout="row" fxLayoutAlign="center center" fxLayoutGap=".5em">
                 <mat-icon class="men">face</mat-icon>
-                <div class="numbers">{{totalMen$ | async}}</div>
+                <div class="numbers" *ngIf="totalMen$ | async as totalMen; else totalMenLoading">{{totalMen}}</div>
+                <ng-template #totalMenLoading>
+                    <mat-spinner [diameter]="24"></mat-spinner>
+                </ng-template>
             </div>
         </div>
         <div class="item" fxLayout="row" fxLayoutAlign="space-between center" fxFlex="100" fxLayoutGap=".5em">
             <strong>Donne</strong>
             <div fxLayout="row" fxLayoutAlign="center center" fxLayoutGap=".5em">
                 <mat-icon class="women">face</mat-icon>
-                <div class="numbers">{{totalWomen$ | async}}</div>
+                <div class="numbers" *ngIf="totalWomen$ | async as totalWomen; else totalWomenLoading">{{totalWomen}}</div>
+                <ng-template #totalWomenLoading>
+                    <mat-spinner [diameter]="24"></mat-spinner>
+                </ng-template>
             </div>
         </div>
     </mat-card-content>
