@@ -12,7 +12,7 @@ import totalWomen from './vacciantion-inputs/vaccination.service.total-women.jso
   })
 export class VaccinationService {
 
-    private url = 'https://wabi-europe-north-b-api.analysis.windows.net/public/reports/querydata?synchronous=true';
+    private url = 'https://wabi-europe-north-b-api.analysis.windows.net/public/reports/querydata';
 
     private headers = {
         headers: {
