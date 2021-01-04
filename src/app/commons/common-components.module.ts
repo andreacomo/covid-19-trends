@@ -15,13 +15,14 @@ import { ChipComponent } from './components/chip/chip.component';
 import { TrendChipComponent } from './components/trend-chip/trend-chip.component';
 import { TimeFilterComponent } from './components/time-filter/time-filter.component';
 import { DataDecoratorsComponent } from './components/data-decorators/data-decorators.component';
+import { PleaseRotateComponent } from './components/please-rotate/please-rotate.component';
 
 
 
 @NgModule({
   declarations: [ToggleButtonsComponent, AsColorPipe, LineChartComponent, LineChartLegendComponent,
     LineChartStrokeComponent, DateStringPipe, SignedNumberPipe, SignedPercentagePipe, ChipComponent,
-    TrendChipComponent, TimeFilterComponent, DataDecoratorsComponent],
+    TrendChipComponent, TimeFilterComponent, DataDecoratorsComponent, PleaseRotateComponent],
   imports: [
     CommonModule,
     FormsModule,
@@ -32,6 +33,6 @@ import { DataDecoratorsComponent } from './components/data-decorators/data-decor
     DateStringPipe
   ],
   exports: [ToggleButtonsComponent, AsColorPipe, LineChartComponent, DateStringPipe,
-    SignedNumberPipe, SignedPercentagePipe, ChipComponent, TrendChipComponent]
+    SignedNumberPipe, SignedPercentagePipe, ChipComponent, TrendChipComponent, PleaseRotateComponent]
 })
 export class CommonComponentsModule { }

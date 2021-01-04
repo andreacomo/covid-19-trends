@@ -14,11 +14,8 @@
             [plugins]="plugins"
             [chartType]="'line'"></canvas>
 </div>
-<div *ngIf="chartData" fxShow.xs fxHide.gt-xs fxLayout="column" fxLayoutAlign="center center" class="change-rotation">
-    <p>
-        <mat-icon>screen_rotation</mat-icon>  
-    </p>
-    <p>Ruota il dispositivo per vedere il grafico</p>
+<div *ngIf="chartData">
+    <app-please-rotate></app-please-rotate>
 </div>
 <div *ngIf="!chartData" fxLayout="column" fxLayoutAlign="center center" class="spinner">
     <mat-spinner [diameter]="48"></mat-spinner>

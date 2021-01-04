@@ -1,0 +1,15 @@
+@import 'src/styles/palette.scss';
+
+.change-rotation {
+    color: $text-light;
+    margin-top: 1em;
+    background-color: map-get($md-primary, 50);
+    border-top: 1px solid #ccc;
+    border-bottom: 1px solid #ccc;
+    mat-icon {
+        $size: 42px;
+        font-size: $size;
+        width: $size;
+        height: $size;
+    }
+}

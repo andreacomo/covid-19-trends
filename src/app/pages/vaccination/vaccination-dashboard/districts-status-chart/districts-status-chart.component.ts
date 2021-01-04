@@ -5,11 +5,11 @@ import { Colors } from 'src/app/commons/models/colors';
 import { VaccinationDistrictStatus } from '../../models/vaccination-district-status';
 
 @Component({
-  selector: 'app-districts-status',
-  templateUrl: './districts-status.component.html',
-  styleUrls: ['./districts-status.component.scss']
+  selector: 'app-districts-status-chart',
+  templateUrl: './districts-status-chart.component.html',
+  styleUrls: ['./districts-status-chart.component.scss']
 })
-export class DistrictsStatusComponent implements OnInit, OnChanges {
+export class DistrictsStatusChartComponent implements OnInit, OnChanges {
 
   @Input()
   data: VaccinationDistrictStatus[];
