@@ -35,7 +35,7 @@ export class DistrictsStatusChartComponent implements OnInit, OnChanges {
   private createOptions(): ChartOptions {
     return {
       responsive: true,
-      aspectRatio: 3,
+      aspectRatio: 2,
       scales: {
         xAxes: [{
           ticks: {
