@@ -1,4 +1,7 @@
 <div *ngIf="chartData">
+    <div fxLayout="row" fxLayoutAlign="end center">
+        <app-district-status-chart-sorter [sorters]="sorters" [selectedSorter]="selectedSorter" (selectSorter)="onSort($event)"></app-district-status-chart-sorter>
+    </div>
     <canvas baseChart
             [datasets]="chartData"
             [labels]="labels"

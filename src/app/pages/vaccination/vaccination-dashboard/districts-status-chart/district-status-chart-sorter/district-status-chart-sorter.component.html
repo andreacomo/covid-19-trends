@@ -1,0 +1,13 @@
+<div fxLayout="row" fxLayoutAlign="flex-end center" class="sorter-container">
+    <span *ngIf="selectedSorter" class="label">Ordinamento: {{selectedSorter.label}}</span>
+    <button mat-button [matMenuTriggerFor]="beforeMenu" matTooltip="Ordinamento">
+        <mat-icon>swap_vert</mat-icon>
+    </button>
+    <mat-menu #beforeMenu="matMenu" xPosition="before">
+        <button mat-menu-item (click)="select(sorter)" *ngFor="let sorter of sorters">
+            <mat-icon [svgIcon]="sorter.icon" *ngIf="sorter.isSvg"></mat-icon>
+            <mat-icon *ngIf="!sorter.isSvg">{{sorter.icon}}</mat-icon>
+            <span>{{sorter.label}}</span>
+        </button>
+    </mat-menu>
+</div>
