@@ -10,6 +10,7 @@ import { MaterialModule } from './commons/material/material.module';
 import { FooterComponent } from './layout/footer/footer.component';
 import { DistrictsModule } from './pages/districts/districts.module';
 import { NationModule } from './pages/nation/nation.module';
+import { VaccinationModule } from './pages/vaccination/vaccination.module';
 import { HomeModule } from './pages/home/home.module';
 import { registerLocaleData } from '@angular/common';
 import localeIt from '@angular/common/locales/it';
@@ -28,6 +29,7 @@ import localeIt from '@angular/common/locales/it';
     ProvincesModule,
     DistrictsModule,
     NationModule,
+    VaccinationModule,
     HomeModule
   ],
   providers: [],

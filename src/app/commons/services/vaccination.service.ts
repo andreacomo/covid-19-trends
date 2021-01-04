@@ -2,10 +2,12 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { map, publishReplay, refCount } from 'rxjs/operators';
+import { VaccinationDistrictStatus } from 'src/app/pages/vaccination/models/vaccination-district-status';
 import totalInput from './vacciantion-inputs/vaccination.service.total.json';
 import updateDateInput from './vacciantion-inputs/vaccination.service.update-date.json';
-import totalMen from './vacciantion-inputs/vaccination.service.total-men.json';
-import totalWomen from './vacciantion-inputs/vaccination.service.total-women.json';
+import totalMenInput from './vacciantion-inputs/vaccination.service.total-men.json';
+import totalWomenInput from './vacciantion-inputs/vaccination.service.total-women.json';
+import districtsDetailsTableInput from './vacciantion-inputs/vaccination.service.districts-details-table.json';
 
 @Injectable({
     providedIn: 'root'
@@ -26,19 +28,9 @@ export class VaccinationService {
     constructor(private http: HttpClient) { }
 
     public getLastUpdate(): Observable<Date> {
-        const cacheKey = 'lastUpdate';
-        if (this.cache[cacheKey] == null) {
-            this.cache[cacheKey] = this.http.post<any>(this.url, updateDateInput, this.headers)
-            .pipe(
-                map(data => {
-                    return data.results[0].result.data.dsr.DS[0].PH[0].DM0[0].G0;
-                }),
-                map(data => new Date(data)),
-                publishReplay(1),
-                refCount()
-            );
-        }
-        return this.cache[cacheKey];
+        return this.fetchRemoteOrCached(updateDateInput, 'lastUpdate', data => {
+            return new Date(data.results[0].result.data.dsr.DS[0].PH[0].DM0[0].G0);
+        });
     }
 
     public getTotal(): Observable<number> {
@@ -46,20 +38,37 @@ export class VaccinationService {
     }
 
     public getTotalMen(): Observable<number> {
-        return this.getTotalNumber(totalMen, 'totalMen');
+        return this.getTotalNumber(totalMenInput, 'totalMen');
     }
 
     public getTotalWomen(): Observable<number> {
-        return this.getTotalNumber(totalWomen, 'totalWomen');
+        return this.getTotalNumber(totalWomenInput, 'totalWomen');
     }
 
-    private getTotalNumber(input, cacheKey): Observable<number> {
+    public getVaccinationDistrictsStatus(): Observable<VaccinationDistrictStatus[]> {
+        return this.fetchRemoteOrCached(districtsDetailsTableInput, 'districtsStatus', data => {
+            return data.results[0].result.data.dsr.DS[0].PH[0].DM0.map(district => {
+                return {
+                    districtName: district.C[0],
+                    doneCount: district.C[1],
+                    receivedCount: district.C[3],
+                    completionPercentage: district.C[2]
+                } as VaccinationDistrictStatus;
+            });
+        });
+    }
+
+    private getTotalNumber(requestBody, cacheKey): Observable<number> {
+        return this.fetchRemoteOrCached(requestBody, cacheKey, data => {
+            return data.results[0].result.data.dsr.DS[0].PH[0].DM0[0].M0;
+        });
+    }
+
+    private fetchRemoteOrCached(requestBody, cacheKey, transformer: (data) => any): Observable<any> {
         if (this.cache[cacheKey] == null) {
-            this.cache[cacheKey] = this.http.post<any>(this.url, input, this.headers)
+            this.cache[cacheKey] = this.http.post<any>(this.url, requestBody, this.headers)
             .pipe(
-                map(data => {
-                    return data.results[0].result.data.dsr.DS[0].PH[0].DM0[0].M0;
-                }),
+                map(transformer),
                 publishReplay(1),
                 refCount()
             );

@@ -4,6 +4,7 @@ import { ProvincesDashboardComponent } from './pages/provinces/provinces-dashboa
 import { DistrictsDashboardComponent } from './pages/districts/districts-dashboard/districts-dashboard.component';
 import { HomeDashboardComponent } from './pages/home/home-dashboard/home-dashboard.component';
 import { NationalTrendComponent } from './pages/nation/national-trend/national-trend.component';
+import { VaccinationDashboardComponent } from './pages/vaccination/vaccination-dashboard/vaccination-dashboard.component';
 
 
 const routes: Routes = [
@@ -33,6 +34,13 @@ const routes: Routes = [
     component: ProvincesDashboardComponent,
     data: {
       label: 'Province'
+    }
+  },
+  {
+    path: 'vacciantion',
+    component: VaccinationDashboardComponent,
+    data: {
+      label: 'Vaccinazioni'
     }
   },
   {
