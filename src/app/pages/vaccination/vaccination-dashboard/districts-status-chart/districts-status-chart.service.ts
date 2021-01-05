@@ -27,7 +27,16 @@ export enum DistrictsStatusChartType {
 
 export abstract class DistrictsStatusChartTypeStrategy {
 
-    constructor(protected data: VaccinationDistrictStatus[]) {}
+    data: (VaccinationDistrictStatus & {color: string})[];
+
+    constructor(data: VaccinationDistrictStatus[]) {
+        this.data = data.map((v, i) => {
+            return {
+                ...v,
+                color: Colors.SUPPORTED[i]
+            };
+        });
+    }
 
     protected abstract getSorter(): (v1: VaccinationDistrictStatus, v2: VaccinationDistrictStatus) => number;
 
@@ -66,12 +75,14 @@ export class DistrictsStatusChartTypePercentageStrategy extends DistrictsStatusC
     }
 
     public createChartData(): ChartDataSets[] {
+        const sortedData = this.data.sort(this.getSorter());
+        const sortedColors = sortedData.map(d => d.color);
         return [{
-            data: this.data.sort(this.getSorter()).map(d => d.completionPercentage * 100),
-            backgroundColor: Colors.SUPPORTED.map(c => c + '99'),
-            borderColor: Colors.SUPPORTED,
-            hoverBackgroundColor: Colors.SUPPORTED.map(c => c + 'AA'),
-            hoverBorderColor: Colors.SUPPORTED
+            data: sortedData.map(d => d.completionPercentage * 100),
+            backgroundColor: sortedColors.map(c => c + '99'),
+            borderColor: sortedColors,
+            hoverBackgroundColor: sortedColors.map(c => c + 'AA'),
+            hoverBorderColor: sortedColors
         }];
     }
 
@@ -103,23 +114,24 @@ export class DistrictsStatusChartTypePercentageStrategy extends DistrictsStatusC
 export class DistrictsStatusChartTypeAbsoluteStrategy extends DistrictsStatusChartTypeStrategy {
 
     protected getSorter(): (v1: VaccinationDistrictStatus, v2: VaccinationDistrictStatus) => number {
-        return (v1: VaccinationDistrictStatus, v2: VaccinationDistrictStatus) => v2.receivedCount - v1.receivedCount;
+        return (v1: VaccinationDistrictStatus, v2: VaccinationDistrictStatus) => v2.doneCount - v1.doneCount;
     }
 
     public createChartData(): ChartDataSets[] {
         const sortedData = this.data.sort(this.getSorter());
+        const sortedColors = sortedData.map(d => d.color);
         return [{
             data: sortedData.map(d => d.doneCount),
-            backgroundColor: Colors.SUPPORTED,
-            borderColor: Colors.SUPPORTED,
-            hoverBackgroundColor: Colors.SUPPORTED,
-            hoverBorderColor: Colors.SUPPORTED
+            backgroundColor: sortedColors,
+            borderColor: sortedColors,
+            hoverBackgroundColor: sortedColors,
+            hoverBorderColor: sortedColors
         }, {
             data: sortedData.map(d => d.receivedCount),
-            backgroundColor: Colors.SUPPORTED.map(c => c + '66'),
-            borderColor: Colors.SUPPORTED,
-            hoverBackgroundColor: Colors.SUPPORTED.map(c => c + 'AA'),
-            hoverBorderColor: Colors.SUPPORTED
+            backgroundColor: sortedColors.map(c => c + '66'),
+            borderColor: sortedColors,
+            hoverBackgroundColor: sortedColors.map(c => c + 'AA'),
+            hoverBorderColor: sortedColors
         }];
     }
 
@@ -128,7 +140,7 @@ export class DistrictsStatusChartTypeAbsoluteStrategy extends DistrictsStatusCha
         options.tooltips.callbacks = {
             label: (item: ChartTooltipItem, data: ChartData) => {
                 const prefix = item.datasetIndex === 1 ? 'Dosi consegnate' : 'Somministrazioni';
-                return `${prefix}: ${item.value}`;
+                return `${prefix}: ${parseInt(item.value, 10).toLocaleString()}`;
             }
         };
 
