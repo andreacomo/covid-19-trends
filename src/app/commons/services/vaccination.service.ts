@@ -3,11 +3,11 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { map, publishReplay, refCount } from 'rxjs/operators';
 import { VaccinationDistrictStatus } from 'src/app/pages/vaccination/models/vaccination-district-status';
-import totalInput from './vacciantion-inputs/vaccination.service.total.json';
-import updateDateInput from './vacciantion-inputs/vaccination.service.update-date.json';
-import totalMenInput from './vacciantion-inputs/vaccination.service.total-men.json';
-import totalWomenInput from './vacciantion-inputs/vaccination.service.total-women.json';
-import districtsDetailsTableInput from './vacciantion-inputs/vaccination.service.districts-details-table.json';
+import totalInput from './vaccination-inputs/vaccination.service.total.json';
+import updateDateInput from './vaccination-inputs/vaccination.service.update-date.json';
+import totalMenInput from './vaccination-inputs/vaccination.service.total-men.json';
+import totalWomenInput from './vaccination-inputs/vaccination.service.total-women.json';
+import districtsDetailsTableInput from './vaccination-inputs/vaccination.service.districts-details-table.json';
 import { VaccinationDistrictOverallStatus } from 'src/app/pages/vaccination/models/vaccination-district-overall-status';
 
 @Injectable({

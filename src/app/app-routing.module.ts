@@ -37,7 +37,7 @@ const routes: Routes = [
     }
   },
   {
-    path: 'vacciantion',
+    path: 'vaccination',
     component: VaccinationDashboardComponent,
     data: {
       label: 'Vaccinazioni'
