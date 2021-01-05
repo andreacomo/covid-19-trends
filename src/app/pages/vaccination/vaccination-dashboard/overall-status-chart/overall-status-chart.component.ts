@@ -82,7 +82,7 @@ export class OverallStatusChartComponent implements OnInit, OnChanges {
     if (this.media.isActive('sm') || this.media.isActive('lt-sm')) {
       this.options = {
         ...this.options,
-        aspectRatio: 2.5
+        aspectRatio: 1.5
       };
     } else {
       this.options = {
