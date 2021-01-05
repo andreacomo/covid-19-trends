@@ -8,6 +8,7 @@ import updateDateInput from './vacciantion-inputs/vaccination.service.update-dat
 import totalMenInput from './vacciantion-inputs/vaccination.service.total-men.json';
 import totalWomenInput from './vacciantion-inputs/vaccination.service.total-women.json';
 import districtsDetailsTableInput from './vacciantion-inputs/vaccination.service.districts-details-table.json';
+import { VaccinationDistrictOverallStatus } from 'src/app/pages/vaccination/models/vaccination-district-overall-status';
 
 @Injectable({
     providedIn: 'root'
@@ -45,16 +46,22 @@ export class VaccinationService {
         return this.getTotalNumber(totalWomenInput, 'totalWomen');
     }
 
-    public getVaccinationDistrictsStatus(): Observable<VaccinationDistrictStatus[]> {
+    public getVaccinationDistrictsStatus(): Observable<VaccinationDistrictOverallStatus> {
         return this.fetchRemoteOrCached(districtsDetailsTableInput, 'districtsStatus', data => {
-            return data.results[0].result.data.dsr.DS[0].PH[0].DM0.map(district => {
-                return {
-                    districtName: district.C[0],
-                    doneCount: district.C[1],
-                    receivedCount: district.C[3],
-                    completionPercentage: district.C[2]
-                } as VaccinationDistrictStatus;
-            });
+            const overallData = data.results[0].result.data.dsr.DS[0].PH[0].DM0[0].C;
+            return {
+                doneCount: overallData[0],
+                completionPercentage: overallData[1],
+                receivedCount: overallData[2],
+                details: data.results[0].result.data.dsr.DS[0].PH[1].DM1.map(district => {
+                    return {
+                        districtName: district.C[0],
+                        doneCount: district.C[1],
+                        receivedCount: district.C[3],
+                        completionPercentage: district.C[2]
+                    } as VaccinationDistrictStatus;
+                })
+            } as VaccinationDistrictOverallStatus;
         });
     }
 

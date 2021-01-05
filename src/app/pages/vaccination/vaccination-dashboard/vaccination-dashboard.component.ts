@@ -19,7 +19,7 @@ export class VaccinationDashboardComponent implements OnInit {
   ngOnInit(): void {
     this.lastUpdate$ = this.vaccinationService.getLastUpdate();
     this.vaccinationService.getVaccinationDistrictsStatus()
-      .subscribe(data => this.districtsStatus = data);
+      .subscribe(data => this.districtsStatus = data.details);
   }
 
 }
