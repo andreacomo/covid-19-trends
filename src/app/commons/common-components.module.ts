@@ -17,7 +17,8 @@ import { TimeFilterComponent } from './components/time-filter/time-filter.compon
 import { DataDecoratorsComponent } from './components/data-decorators/data-decorators.component';
 import { PleaseRotateComponent } from './components/please-rotate/please-rotate.component';
 
-
+import ChartDataLabels from 'chartjs-plugin-datalabels';
+import Chart from 'chart.js';
 
 @NgModule({
   declarations: [ToggleButtonsComponent, AsColorPipe, LineChartComponent, LineChartLegendComponent,
@@ -35,4 +36,11 @@ import { PleaseRotateComponent } from './components/please-rotate/please-rotate.
   exports: [ToggleButtonsComponent, AsColorPipe, LineChartComponent, DateStringPipe,
     SignedNumberPipe, SignedPercentagePipe, ChipComponent, TrendChipComponent, PleaseRotateComponent]
 })
-export class CommonComponentsModule { }
+export class CommonComponentsModule {
+
+  constructor() {
+    // unregister globally
+    // https://stackoverflow.com/questions/56189171/how-to-unregister-chartjs-plugin-datalabels-globally)
+    Chart.plugins.unregister(ChartDataLabels);
+  }
+}

@@ -36,6 +36,7 @@
             "deployUrl": "/covid-19-trends/",
             "allowedCommonJsDependencies": [
               "chartjs-plugin-annotation",
+              "chartjs-plugin-datalabels",
               "chart.js"
             ]
           },

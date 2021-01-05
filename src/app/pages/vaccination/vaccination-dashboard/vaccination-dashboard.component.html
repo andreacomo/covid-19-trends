@@ -1,8 +1,9 @@
 <div class="container" fxHide.xs fxShow.gt-xs>
     <h2 class="mat-title">Stato vaccinazioni al {{lastUpdate$ | async | date: 'dd/MM/yyyy HH:mm:ss' : 'GMT'}}</h2>
     <div>
-        <div fxLayout="column" fxFlex="100">
-            <app-districts-status-chart [data]="districtsStatus"></app-districts-status-chart>
+        <div fxLayout="row" fxLayout.sm="column-reverse" *ngIf="overallStatus$ | async as overallStatus">
+            <app-districts-status-chart fxFlex="80" [data]="overallStatus.details"></app-districts-status-chart>
+            <app-overall-status-chart fxFlex="20" [data]="overallStatus"></app-overall-status-chart>
         </div>
     </div>
     <mat-divider></mat-divider>

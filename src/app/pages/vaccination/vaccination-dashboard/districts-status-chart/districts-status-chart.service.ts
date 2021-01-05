@@ -50,20 +50,20 @@ export abstract class DistrictsStatusChartTypeStrategy {
 
     public createOptions(): ChartOptions {
         return {
-          responsive: true,
-          aspectRatio: 2,
-          legend: {
-            display: true,
-            position: 'top',
-            align: 'center',
-            labels: {
-              boxWidth: 13,
-              fontFamily: 'Roboto, \'Helvetica Neue\', sans-serif'
+            responsive: true,
+            aspectRatio: 2,
+            legend: {
+                display: true,
+                position: 'top',
+                align: 'center',
+                labels: {
+                boxWidth: 13,
+                fontFamily: 'Roboto, \'Helvetica Neue\', sans-serif'
+                }
+            },
+            tooltips: {
+                enabled: true
             }
-          },
-          tooltips: {
-            enabled: true
-          }
         };
     }
 }

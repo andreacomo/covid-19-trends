@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import { VaccinationService } from 'src/app/commons/services/vaccination.service';
+import { VaccinationDistrictOverallStatus } from '../models/vaccination-district-overall-status';
 import { VaccinationDistrictStatus } from '../models/vaccination-district-status';
 
 @Component({
@@ -12,14 +13,13 @@ export class VaccinationDashboardComponent implements OnInit {
 
   lastUpdate$: Observable<Date>;
 
-  districtsStatus: VaccinationDistrictStatus[];
+  overallStatus$: Observable<VaccinationDistrictOverallStatus>;
 
   constructor(private vaccinationService: VaccinationService) { }
 
   ngOnInit(): void {
     this.lastUpdate$ = this.vaccinationService.getLastUpdate();
-    this.vaccinationService.getVaccinationDistrictsStatus()
-      .subscribe(data => this.districtsStatus = data.details);
+    this.overallStatus$ = this.vaccinationService.getVaccinationDistrictsStatus();
   }
 
 }

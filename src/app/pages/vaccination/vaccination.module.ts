@@ -6,11 +6,12 @@ import { CommonComponentsModule } from 'src/app/commons/common-components.module
 import { VaccinationDashboardComponent } from './vaccination-dashboard/vaccination-dashboard.component';
 import { DistrictsStatusChartComponent } from './vaccination-dashboard/districts-status-chart/districts-status-chart.component';
 import { DistrictStatusChartTypeSelectorComponent } from './vaccination-dashboard/districts-status-chart/district-status-chart-type-selector/district-status-chart-type-selector.component';
+import { OverallStatusChartComponent } from './vaccination-dashboard/overall-status-chart/overall-status-chart.component';
 
 
 
 @NgModule({
-  declarations: [VaccinationDashboardComponent, DistrictsStatusChartComponent, DistrictStatusChartTypeSelectorComponent],
+  declarations: [VaccinationDashboardComponent, DistrictsStatusChartComponent, DistrictStatusChartTypeSelectorComponent, OverallStatusChartComponent],
   imports: [
     CommonModule,
     MaterialModule,
