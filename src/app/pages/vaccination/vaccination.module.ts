@@ -5,12 +5,12 @@ import { ChartsModule } from 'ng2-charts';
 import { CommonComponentsModule } from 'src/app/commons/common-components.module';
 import { VaccinationDashboardComponent } from './vaccination-dashboard/vaccination-dashboard.component';
 import { DistrictsStatusChartComponent } from './vaccination-dashboard/districts-status-chart/districts-status-chart.component';
-import { DistrictStatusChartSorterComponent } from './vaccination-dashboard/districts-status-chart/district-status-chart-sorter/district-status-chart-sorter.component';
+import { DistrictStatusChartTypeSelectorComponent } from './vaccination-dashboard/districts-status-chart/district-status-chart-type-selector/district-status-chart-type-selector.component';
 
 
 
 @NgModule({
-  declarations: [VaccinationDashboardComponent, DistrictsStatusChartComponent, DistrictStatusChartSorterComponent],
+  declarations: [VaccinationDashboardComponent, DistrictsStatusChartComponent, DistrictStatusChartTypeSelectorComponent],
   imports: [
     CommonModule,
     MaterialModule,

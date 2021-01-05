@@ -1,0 +1,16 @@
+<div fxLayout="row" fxLayoutAlign="flex-end center" class="sorter-container">
+    <span *ngIf="selectedLabel" class="label">{{selectedLabel}}</span>
+    <button mat-button [matMenuTriggerFor]="beforeMenu" matTooltip="Cambia dati">
+        <mat-icon>leaderboard</mat-icon>
+    </button>
+    <mat-menu #beforeMenu="matMenu" xPosition="before">
+        <button mat-menu-item (click)="select(availableTypes.PERCENTAGE)">
+            <mat-icon [svgIcon]="'percent'"></mat-icon>
+            <span>{{chartTypeLabels.get(availableTypes.PERCENTAGE)}}</span>
+        </button>
+        <button mat-menu-item (click)="select(availableTypes.ABSOLUTE)">
+            <mat-icon>sanitizer</mat-icon>
+            <span>{{chartTypeLabels.get(availableTypes.ABSOLUTE)}}</span>
+        </button>
+    </mat-menu>
+</div>
