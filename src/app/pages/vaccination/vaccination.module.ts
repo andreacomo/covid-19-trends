@@ -9,11 +9,12 @@ import { DistrictStatusChartTypeSelectorComponent } from './vaccination-dashboar
 import { OverallStatusChartComponent } from './vaccination-dashboard/overall-status-chart/overall-status-chart.component';
 import { OverallStatusCardComponent } from './vaccination-dashboard/overall-status-card/overall-status-card.component';
 import { AgeGroupsChartComponent } from './vaccination-dashboard/age-groups-chart/age-groups-chart.component';
+import { CategoryGroupsChartComponent } from './vaccination-dashboard/category-groups-chart/category-groups-chart.component';
 
 
 
 @NgModule({
-  declarations: [VaccinationDashboardComponent, DistrictsStatusChartComponent, DistrictStatusChartTypeSelectorComponent, OverallStatusChartComponent, OverallStatusCardComponent, AgeGroupsChartComponent],
+  declarations: [VaccinationDashboardComponent, DistrictsStatusChartComponent, DistrictStatusChartTypeSelectorComponent, OverallStatusChartComponent, OverallStatusCardComponent, AgeGroupsChartComponent, CategoryGroupsChartComponent],
   imports: [
     CommonModule,
     MaterialModule,

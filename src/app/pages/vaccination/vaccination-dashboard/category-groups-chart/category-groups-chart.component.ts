@@ -1,19 +1,19 @@
 import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 import { ChartData, ChartOptions, ChartTooltipItem } from 'chart.js';
-import { VaccinationAgeGroup } from '../../models/vaccination-age-group';
-import * as pluginDataLabels from 'chartjs-plugin-datalabels';
 import { Label } from 'ng2-charts';
 import { Colors } from 'src/app/commons/models/colors';
+import { VaccinationCategoryGroup } from '../../models/vaccination-category-group';
+import * as pluginDataLabels from 'chartjs-plugin-datalabels';
 
 @Component({
-  selector: 'app-age-groups-chart',
-  templateUrl: './age-groups-chart.component.html',
-  styleUrls: ['./age-groups-chart.component.scss']
+  selector: 'app-category-groups-chart',
+  templateUrl: './category-groups-chart.component.html',
+  styleUrls: ['./category-groups-chart.component.scss']
 })
-export class AgeGroupsChartComponent implements OnInit, OnChanges {
+export class CategoryGroupsChartComponent implements OnInit, OnChanges {
 
   @Input()
-  data: VaccinationAgeGroup[];
+  data: VaccinationCategoryGroup[];
 
   options: ChartOptions;
 
@@ -27,9 +27,6 @@ export class AgeGroupsChartComponent implements OnInit, OnChanges {
 
   constructor() {
     this.plugins = [pluginDataLabels];
-    this.colors = [{
-      backgroundColor: Colors.SUPPORTED
-    }];
     this.options = {
       responsive: true,
       aspectRatio: 2,
@@ -60,12 +57,7 @@ export class AgeGroupsChartComponent implements OnInit, OnChanges {
             weight: 'bold'
           },
           formatter: (value, ctx) => {
-            const valuesAsNumber = parseInt(value, 10);
-            if (valuesAsNumber > 6000) {
-              return valuesAsNumber.toLocaleString();
-            } else {
-              return '';
-            }
+            return parseInt(value, 10).toLocaleString();
           },
         },
       }
@@ -77,7 +69,7 @@ export class AgeGroupsChartComponent implements OnInit, OnChanges {
 
   ngOnChanges(changes: SimpleChanges): void {
     if (changes.data.currentValue && !changes.data.previousValue) {
-      this.labels = this.data.map(d => d.range);
+      this.labels = this.data.map(d => d.name);
       this.chartData = this.data.map(d => d.doneCount);
     }
   }

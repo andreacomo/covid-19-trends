@@ -9,8 +9,10 @@ import totalMenInput from './vaccination-inputs/vaccination.service.total-men.js
 import totalWomenInput from './vaccination-inputs/vaccination.service.total-women.json';
 import districtsDetailsTableInput from './vaccination-inputs/vaccination.service.districts-details-table.json';
 import ageGroupsInput from './vaccination-inputs/vaccination.service.age-groups.json';
+import categoryGroupsInput from './vaccination-inputs/vaccination.service.category-groups.json';
 import { VaccinationDistrictOverallStatus } from 'src/app/pages/vaccination/models/vaccination-district-overall-status';
-import { AgeGroup } from 'src/app/pages/vaccination/models/vaccination-age-group';
+import { VaccinationAgeGroup } from 'src/app/pages/vaccination/models/vaccination-age-group';
+import { VaccinationCategoryGroup } from 'src/app/pages/vaccination/models/vaccination-category-group';
 
 @Injectable({
     providedIn: 'root'
@@ -67,13 +69,24 @@ export class VaccinationService {
         });
     }
 
-    public getAgeGroups(): Observable<AgeGroup[]> {
+    public getAgeGroups(): Observable<VaccinationAgeGroup[]> {
         return this.fetchRemoteOrCached(ageGroupsInput, 'ageGroup', data => {
             return data.results[0].result.data.dsr.DS[0].PH[0].DM0.map(ageRange => {
                 return {
                     range: ageRange.C[0],
                     doneCount: ageRange.C[1]
-                } as AgeGroup;
+                } as VaccinationAgeGroup;
+            });
+        });
+    }
+
+    public getCategoryGroups(): Observable<VaccinationCategoryGroup[]> {
+        return this.fetchRemoteOrCached(categoryGroupsInput, 'categoryGroup', data => {
+            return data.results[0].result.data.dsr.DS[0].PH[0].DM0.map(category => {
+                return {
+                    name: category.C[0],
+                    doneCount: category.C[1]
+                } as VaccinationCategoryGroup;
             });
         });
     }

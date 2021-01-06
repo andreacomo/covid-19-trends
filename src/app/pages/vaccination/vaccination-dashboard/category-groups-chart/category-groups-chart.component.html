@@ -1,0 +1,9 @@
+<div *ngIf="chartData">
+    <canvas baseChart
+            [data]="chartData"
+            [labels]="labels"
+            [options]="options"
+            [plugins]="plugins"
+            [chartType]="'doughnut'">
+    </canvas>
+</div>
