@@ -27,6 +27,9 @@ export class CategoryGroupsChartComponent implements OnInit, OnChanges {
 
   constructor() {
     this.plugins = [pluginDataLabels];
+    this.colors = [{
+      backgroundColor: [Colors.SUPPORTED[10], Colors.SUPPORTED[19], Colors.SUPPORTED[13]]
+    }];
     this.options = {
       responsive: true,
       aspectRatio: 2,
