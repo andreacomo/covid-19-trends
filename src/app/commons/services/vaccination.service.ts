@@ -8,7 +8,9 @@ import updateDateInput from './vaccination-inputs/vaccination.service.update-dat
 import totalMenInput from './vaccination-inputs/vaccination.service.total-men.json';
 import totalWomenInput from './vaccination-inputs/vaccination.service.total-women.json';
 import districtsDetailsTableInput from './vaccination-inputs/vaccination.service.districts-details-table.json';
+import ageGroupsInput from './vaccination-inputs/vaccination.service.age-groups.json';
 import { VaccinationDistrictOverallStatus } from 'src/app/pages/vaccination/models/vaccination-district-overall-status';
+import { AgeGroup } from 'src/app/pages/vaccination/models/vaccination-age-group';
 
 @Injectable({
     providedIn: 'root'
@@ -62,6 +64,17 @@ export class VaccinationService {
                     } as VaccinationDistrictStatus;
                 })
             } as VaccinationDistrictOverallStatus;
+        });
+    }
+
+    public getAgeGroups(): Observable<AgeGroup[]> {
+        return this.fetchRemoteOrCached(ageGroupsInput, 'ageGroup', data => {
+            return data.results[0].result.data.dsr.DS[0].PH[0].DM0.map(ageRange => {
+                return {
+                    range: ageRange.C[0],
+                    doneCount: ageRange.C[1]
+                } as AgeGroup;
+            });
         });
     }
 

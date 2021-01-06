@@ -8,8 +8,11 @@
                 <app-overall-status-card fxFlex.sm="50" [data]="overallStatus"></app-overall-status-card>
             </div>
         </div>
+        <div fxLayout="row" fxLayout.sm="column" fxLayoutGap="2em">
+            <app-age-groups-chart *ngIf="ageGroups$ | async as ageGroups" [data]="ageGroups" fxFlex="50" fxFlex.sm="100"></app-age-groups-chart>
+        </div>
     </div>
-    <mat-divider></mat-divider>
+    <mat-divider class="bottom-divider"></mat-divider>
     <div class="mat-small">
         Fonte dati: 
         <a href="https://app.powerbi.com/view?r=eyJrIjoiMzg4YmI5NDQtZDM5ZC00ZTIyLTgxN2MtOTBkMWM4MTUyYTg0IiwidCI6ImFmZDBhNzVjLTg2NzEtNGNjZS05MDYxLTJjYTBkOTJlNDIyZiIsImMiOjh9" target="_blank">
