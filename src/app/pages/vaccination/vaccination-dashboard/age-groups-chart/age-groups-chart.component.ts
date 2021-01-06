@@ -1,5 +1,5 @@
 import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
-import { ChartData, ChartOptions, ChartTooltipItem } from 'chart.js';
+import { ChartData, ChartDataSets, ChartOptions, ChartTooltipItem } from 'chart.js';
 import { VaccinationAgeGroup } from '../../models/vaccination-age-group';
 import * as pluginDataLabels from 'chartjs-plugin-datalabels';
 import { Label } from 'ng2-charts';
@@ -17,56 +17,46 @@ export class AgeGroupsChartComponent implements OnInit, OnChanges {
 
   options: ChartOptions;
 
-  colors: any[];
-
   plugins: any[];
 
   labels: Label[];
 
-  chartData: number[];
+  chartData: ChartDataSets[];
 
   constructor() {
     this.plugins = [pluginDataLabels];
-    this.colors = [{
-      backgroundColor: Colors.SUPPORTED
-    }];
     this.options = {
       responsive: true,
       aspectRatio: 2,
       legend: {
-          display: true,
-          position: 'top',
-          align: 'center',
-          labels: {
-            boxWidth: 20,
-            fontFamily: 'Roboto, \'Helvetica Neue\', sans-serif'
+        display: false
+      },
+      scales: {
+        xAxes: [{
+          gridLines: {
+            display: false
           }
+        }],
+        yAxes: [{
+          gridLines: {
+            display: true
+          }
+        }]
       },
       tooltips: {
-        enabled: true,
-        callbacks: {
-          title: (item: ChartTooltipItem[], data: ChartData) => {
-            return this.labels[item[0].index];
-          },
-          label: (item: ChartTooltipItem, data: ChartData) => {
-            return data.datasets[item.datasetIndex].data[item.index].toLocaleString();
-          }
-        }
+        enabled: false
       },
       plugins: {
         datalabels: {
-          color: '#FFF',
           font: {
             weight: 'bold'
           },
+          anchor: 'end',
+          align: 'end',
+          offset: -2,
           formatter: (value, ctx) => {
-            const valuesAsNumber = parseInt(value, 10);
-            if (valuesAsNumber > 6000) {
-              return valuesAsNumber.toLocaleString();
-            } else {
-              return '';
-            }
-          },
+            return parseInt(value, 10).toLocaleString();
+          }
         },
       }
     };
@@ -78,7 +68,11 @@ export class AgeGroupsChartComponent implements OnInit, OnChanges {
   ngOnChanges(changes: SimpleChanges): void {
     if (changes.data.currentValue && !changes.data.previousValue) {
       this.labels = this.data.map(d => d.range);
-      this.chartData = this.data.map(d => d.doneCount);
+      this.chartData = [{
+        data: this.data.map(d => d.doneCount),
+        backgroundColor: Colors.SUPPORTED,
+        hoverBackgroundColor: Colors.SUPPORTED
+      }];
     }
   }
 
