@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { ChartData, ChartDataSets, ChartOptions, ChartTooltipItem } from 'chart.js';
 import { Colors } from 'src/app/commons/models/colors';
 import { VaccinationDistrictStatus } from '../../models/vaccination-district-status';
+import * as pluginDataLabels from 'chartjs-plugin-datalabels';
 
 @Injectable({
     providedIn: 'root'
@@ -38,6 +39,8 @@ export abstract class DistrictsStatusChartTypeStrategy {
         });
     }
 
+    public abstract createPlugins(): any[];
+
     protected abstract getSorter(): (v1: VaccinationDistrictStatus, v2: VaccinationDistrictStatus) => number;
 
     public abstract createChartData(): ChartDataSets[];
@@ -69,6 +72,10 @@ export abstract class DistrictsStatusChartTypeStrategy {
 }
 
 export class DistrictsStatusChartTypePercentageStrategy extends DistrictsStatusChartTypeStrategy {
+
+    public createPlugins(): any[] {
+        return [pluginDataLabels];
+    }
 
     protected getSorter(): (v1: VaccinationDistrictStatus, v2: VaccinationDistrictStatus) => number {
         return (v1: VaccinationDistrictStatus, v2: VaccinationDistrictStatus) => v2.completionPercentage - v1.completionPercentage;
@@ -106,12 +113,25 @@ export class DistrictsStatusChartTypePercentageStrategy extends DistrictsStatusC
               return `Somministrazioni: ${status.doneCount.toLocaleString()}\nDosi consegnate: ${status.receivedCount.toLocaleString()}`;
             }
         };
+        options.plugins = {
+            datalabels: {
+                anchor: 'end',
+                align: 'end',
+                formatter: (value, ctx) => {
+                    return `${parseFloat(value).toFixed(2)}%`;
+                }
+            },
+          };
 
         return options;
     }
 }
 
 export class DistrictsStatusChartTypeAbsoluteStrategy extends DistrictsStatusChartTypeStrategy {
+
+    public createPlugins(): any[] {
+        return [];
+    }
 
     protected getSorter(): (v1: VaccinationDistrictStatus, v2: VaccinationDistrictStatus) => number {
         return (v1: VaccinationDistrictStatus, v2: VaccinationDistrictStatus) => v2.doneCount - v1.doneCount;

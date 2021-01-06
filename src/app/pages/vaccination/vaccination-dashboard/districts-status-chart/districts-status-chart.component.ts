@@ -18,6 +18,8 @@ export class DistrictsStatusChartComponent implements OnInit, OnChanges {
 
   selectedChartType: DistrictsStatusChartType;
 
+  plugins: any[];
+
   labels: Label[];
 
   chartData: ChartDataSets[];
@@ -45,5 +47,6 @@ export class DistrictsStatusChartComponent implements OnInit, OnChanges {
     this.options = strategy.createOptions();
     this.labels = strategy.createLabels();
     this.chartData = strategy.createChartData();
+    this.plugins = strategy.createPlugins();
   }
 }
