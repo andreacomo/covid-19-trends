@@ -14,11 +14,13 @@ import { VaccinationModule } from './pages/vaccination/vaccination.module';
 import { HomeModule } from './pages/home/home.module';
 import { registerLocaleData } from '@angular/common';
 import localeIt from '@angular/common/locales/it';
+import { NavBarComponent } from './layout/nav-bar/nav-bar.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    FooterComponent
+    FooterComponent,
+    NavBarComponent
   ],
   imports: [
     BrowserModule,

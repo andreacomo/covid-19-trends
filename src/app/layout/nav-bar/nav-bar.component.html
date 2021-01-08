@@ -1,0 +1,12 @@
+<mat-toolbar class="mat-elevation-z2">
+    <button mat-icon-button (click)="doCloseMenu()" onfocus="this.blur()">
+        <mat-icon>first_page</mat-icon>
+    </button>
+</mat-toolbar>
+<ng-container *ngFor="let m of menu">
+    <mat-nav-list>
+        <h3 *ngIf="m.groupName" matSubheader>{{m.groupName}}</h3>
+        <a mat-list-item *ngFor="let l of m.links" [routerLink]="l.path" (click)="doCloseMenu()" routerLinkActive="active">{{l.label}}</a>
+    </mat-nav-list>
+    <mat-divider></mat-divider>    
+</ng-container>

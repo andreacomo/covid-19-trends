@@ -1,22 +1,32 @@
-<div fxLayout="column" class="container">
-  <mat-toolbar color="primary" class="mat-elevation-z6">
-    <span>COVID-19 Trends</span>
-    <span fxFlex="1 1 auto"></span>
-    <a mat-button href="https://github.com/andreacomo/covid-19-trends" target="_blank" matTooltip="Fork me!" aria-label="Click me to contribute">
-      <mat-icon svgIcon="github" [ngStyle]="{'color':'white'}"></mat-icon>
-    </a>
-  </mat-toolbar>
-  <div class="content">
-    <nav mat-tab-nav-bar>
-      <a mat-tab-link
-         *ngFor="let link of navLinks"
-         [routerLink]="link.path"
-         routerLinkActive #rla="routerLinkActive"
-         [active]="rla.isActive">
-        {{link.label}}
-      </a>
-    </nav>
-    <router-outlet></router-outlet>
-  </div>
-  <app-footer></app-footer>
-</div>
+<mat-sidenav-container class="sidenav-container" [hasBackdrop]="true">
+  <mat-sidenav mode="over" #drawer>
+    <app-nav-bar (closeMenu)="drawer.toggle()"></app-nav-bar>
+  </mat-sidenav>
+  <mat-sidenav-content>
+    <div fxLayout="column" class="container">
+      <mat-toolbar color="primary" class="mat-elevation-z6">
+        <button mat-icon-button (click)="drawer.toggle()" onclick="this.blur()">
+          <mat-icon>menu</mat-icon>
+        </button>
+        <span>COVID-19 Trends</span>
+        <span fxFlex="1 1 auto"></span>
+        <a mat-button href="https://github.com/andreacomo/covid-19-trends" target="_blank" matTooltip="Fork me!" aria-label="Click me to contribute">
+          <mat-icon svgIcon="github" [ngStyle]="{'color':'white'}"></mat-icon>
+        </a>
+      </mat-toolbar>
+      <div class="content">
+        <nav mat-tab-nav-bar>
+          <a mat-tab-link
+            *ngFor="let link of navLinks"
+            [routerLink]="link.path"
+            routerLinkActive #rla="routerLinkActive"
+            [active]="rla.isActive">
+            {{link.label}}
+          </a>
+        </nav>
+        <router-outlet></router-outlet>
+      </div>
+      <app-footer></app-footer>
+    </div>
+  </mat-sidenav-content>
+</mat-sidenav-container>
