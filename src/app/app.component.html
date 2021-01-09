@@ -1,23 +1,21 @@
-<mat-sidenav-container class="sidenav-container" [hasBackdrop]="true">
-  <mat-sidenav mode="over" #drawer>
-    <app-nav-bar (closeMenu)="drawer.toggle()"></app-nav-bar>
-  </mat-sidenav>
-  <mat-sidenav-content>
-    <div fxLayout="column" class="container">
-      <mat-toolbar color="primary" class="mat-elevation-z6">
-        <button mat-icon-button (click)="drawer.toggle()" onclick="this.blur()">
-          <mat-icon>menu</mat-icon>
-        </button>
+<div fxLayout="column" class="container">
+  <mat-toolbar color="primary" class="mat-elevation-z6">
+    <mat-toolbar-row>
+      <button mat-button class="home-button" [routerLink]="['/home']">
+        <mat-icon>coronavirus</mat-icon>
         <span>COVID-19 Trends</span>
-        <span fxFlex="1 1 auto"></span>
-        <a mat-button href="https://github.com/andreacomo/covid-19-trends" target="_blank" matTooltip="Fork me!" aria-label="Click me to contribute">
-          <mat-icon svgIcon="github" [ngStyle]="{'color':'white'}"></mat-icon>
-        </a>
-      </mat-toolbar>
-      <div class="content">
-        <router-outlet></router-outlet>
-      </div>
-      <app-footer></app-footer>
-    </div>
-  </mat-sidenav-content>
-</mat-sidenav-container>
+      </button>
+      <span fxFlex="1 1 auto"></span>
+      <a mat-button href="https://github.com/andreacomo/covid-19-trends" target="_blank" matTooltip="Fork me!" aria-label="Click me to contribute">
+        <mat-icon svgIcon="github" [ngStyle]="{'color':'white'}"></mat-icon>
+      </a>
+    </mat-toolbar-row>
+    <mat-toolbar-row class="second-row">
+      <app-nav-menu></app-nav-menu>
+    </mat-toolbar-row>
+  </mat-toolbar>
+  <div class="content">
+    <router-outlet></router-outlet>
+  </div>
+  <app-footer></app-footer>
+</div>

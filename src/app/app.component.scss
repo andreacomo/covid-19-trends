@@ -1,6 +1,22 @@
 .container {
     min-height: 100vh;
 
+    .home-button {
+        
+        .mat-icon {
+            padding-right: .5em;
+        }
+
+        span {
+            font-size: 20px;
+        }
+    }
+
+    .second-row {
+        height: 32px;
+        border-top: 1px solid #FFF6;
+    }
+
     a[mat-button] {
 
         &:hover {
