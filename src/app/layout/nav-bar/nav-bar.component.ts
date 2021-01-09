@@ -22,7 +22,7 @@ export class NavBarComponent implements OnInit {
       // groupName: 'Italia',
       links: [{
         label: 'Dati COVID-19',
-        path: '/italy'
+        path: '/italy/overview'
       }, {
         label: 'Vaccinazione',
         path: '/vaccination'
