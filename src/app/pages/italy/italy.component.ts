@@ -14,8 +14,9 @@ export class ItalyComponent implements OnInit {
 
   ngOnInit(): void {
     this.navLinks = this.router.config
-      .filter(r => r.path === 'italy')
+      .filter(r => r.path === 'italy' && !!r.children)
       .flatMap(r => r.children)
+      .filter(r => r.data?.label)
       .map(r => {
         return {
           path: r.path,

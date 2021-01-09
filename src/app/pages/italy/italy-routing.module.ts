@@ -13,6 +13,11 @@ export const routes: Routes = [
     component: ItalyComponent,
     children: [
       {
+        path: '',
+        redirectTo: 'overview',
+        pathMatch: 'full'
+      },
+      {
         path: 'overview',
         component: NationalTrendComponent,
         data: {
