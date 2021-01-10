@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
-import { VaccinationService } from 'src/app/commons/services/vaccination.service';
+import { ItalianVaccinationService } from 'src/app/commons/services/italian-vaccination.service';
 import { VaccinationAgeGroup } from '../models/vaccination-age-group';
 import { VaccinationCategoryGroup } from '../models/vaccination-category-group';
 import { VaccinationDistrictOverallStatus } from '../models/vaccination-district-overall-status';
@@ -21,7 +21,7 @@ export class ItalianVaccinationDashboardComponent implements OnInit {
 
   categoryGroup$: Observable<VaccinationCategoryGroup[]>;
 
-  constructor(private vaccinationService: VaccinationService) { }
+  constructor(private vaccinationService: ItalianVaccinationService) { }
 
   ngOnInit(): void {
     this.lastUpdate$ = this.vaccinationService.getLastUpdate();

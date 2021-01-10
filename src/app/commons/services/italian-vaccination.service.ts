@@ -3,13 +3,13 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { map, publishReplay, refCount } from 'rxjs/operators';
 import { VaccinationDistrictStatus } from 'src/app/pages/vaccination/italian-vaccination/models/vaccination-district-status';
-import totalInput from './vaccination-inputs/vaccination.service.total.json';
-import updateDateInput from './vaccination-inputs/vaccination.service.update-date.json';
-import totalMenInput from './vaccination-inputs/vaccination.service.total-men.json';
-import totalWomenInput from './vaccination-inputs/vaccination.service.total-women.json';
-import districtsDetailsTableInput from './vaccination-inputs/vaccination.service.districts-details-table.json';
-import ageGroupsInput from './vaccination-inputs/vaccination.service.age-groups.json';
-import categoryGroupsInput from './vaccination-inputs/vaccination.service.category-groups.json';
+import totalInput from './italian-vaccination-inputs/vaccination.service.total.json';
+import updateDateInput from './italian-vaccination-inputs/vaccination.service.update-date.json';
+import totalMenInput from './italian-vaccination-inputs/vaccination.service.total-men.json';
+import totalWomenInput from './italian-vaccination-inputs/vaccination.service.total-women.json';
+import districtsDetailsTableInput from './italian-vaccination-inputs/vaccination.service.districts-details-table.json';
+import ageGroupsInput from './italian-vaccination-inputs/vaccination.service.age-groups.json';
+import categoryGroupsInput from './italian-vaccination-inputs/vaccination.service.category-groups.json';
 import { VaccinationDistrictOverallStatus } from 'src/app/pages/vaccination/italian-vaccination/models/vaccination-district-overall-status';
 import { VaccinationAgeGroup } from 'src/app/pages/vaccination/italian-vaccination/models/vaccination-age-group';
 import { VaccinationCategoryGroup } from 'src/app/pages/vaccination/italian-vaccination/models/vaccination-category-group';
@@ -17,7 +17,7 @@ import { VaccinationCategoryGroup } from 'src/app/pages/vaccination/italian-vacc
 @Injectable({
     providedIn: 'root'
   })
-export class VaccinationService {
+export class ItalianVaccinationService {
 
     private url = 'https://wabi-europe-north-b-api.analysis.windows.net/public/reports/querydata';
 

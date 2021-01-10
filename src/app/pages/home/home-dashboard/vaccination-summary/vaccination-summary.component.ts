@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { VaccinationService } from 'src/app/commons/services/vaccination.service';
+import { ItalianVaccinationService } from 'src/app/commons/services/italian-vaccination.service';
 
 @Component({
   selector: 'app-vaccination-summary',
@@ -18,7 +18,7 @@ export class VaccinationSummaryComponent implements OnInit {
 
   lastUpdate$: Observable<Date>;
 
-  constructor(private vaccinationService: VaccinationService) { }
+  constructor(private vaccinationService: ItalianVaccinationService) { }
 
   ngOnInit(): void {
     this.total$ = this.vaccinationService.getTotal()
