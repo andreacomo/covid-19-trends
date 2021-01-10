@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { MaterialModule } from 'src/app/commons/material/material.module';
 import { ChartsModule } from 'ng2-charts';
 import { CommonComponentsModule } from 'src/app/commons/common-components.module';
-import { VaccinationDashboardComponent } from './vaccination-dashboard/vaccination-dashboard.component';
+import { ItalianVaccinationDashboardComponent } from './vaccination-dashboard/italian-vaccination-dashboard.component';
 import { DistrictsStatusChartComponent } from './vaccination-dashboard/districts-status-chart/districts-status-chart.component';
 import { DistrictStatusChartTypeSelectorComponent } from './vaccination-dashboard/districts-status-chart/district-status-chart-type-selector/district-status-chart-type-selector.component';
 import { OverallStatusChartComponent } from './vaccination-dashboard/overall-status-chart/overall-status-chart.component';
@@ -14,7 +14,7 @@ import { CategoryGroupsChartComponent } from './vaccination-dashboard/category-g
 
 
 @NgModule({
-  declarations: [VaccinationDashboardComponent, DistrictsStatusChartComponent,
+  declarations: [ItalianVaccinationDashboardComponent, DistrictsStatusChartComponent,
     DistrictStatusChartTypeSelectorComponent, OverallStatusChartComponent,
     OverallStatusCardComponent, AgeGroupsChartComponent, CategoryGroupsChartComponent],
   imports: [
@@ -24,4 +24,4 @@ import { CategoryGroupsChartComponent } from './vaccination-dashboard/category-g
     CommonComponentsModule
   ]
 })
-export class VaccinationModule { }
+export class ItalianVaccinationModule { }

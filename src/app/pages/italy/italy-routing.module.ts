@@ -4,7 +4,7 @@ import { DistrictsDashboardComponent } from './covid-data/districts/districts-da
 import { NationalTrendComponent } from './covid-data/nation/national-trend/national-trend.component';
 import { ProvincesDashboardComponent } from './covid-data/provinces/provinces-dashboard/provinces-dashboard.component';
 import { ItalyComponent } from './italy.component';
-import { VaccinationDashboardComponent } from './vaccination/vaccination-dashboard/vaccination-dashboard.component';
+import { ItalianVaccinationDashboardComponent } from '../vaccination/italian-vaccination/vaccination-dashboard/italian-vaccination-dashboard.component';
 
 
 
@@ -22,6 +22,7 @@ export const routes: Routes = [
         path: 'overview',
         component: NationalTrendComponent,
         data: {
+          codivData: true,
           label: 'Italia'
         }
       },
@@ -29,6 +30,7 @@ export const routes: Routes = [
         path: 'districts',
         component: DistrictsDashboardComponent,
         data: {
+          codivData: true,
           label: 'Regioni'
         }
       },
@@ -36,17 +38,11 @@ export const routes: Routes = [
         path: 'provinces',
         component: ProvincesDashboardComponent,
         data: {
+          codivData: true,
           label: 'Province'
         }
       }
     ]
-  },
-  {
-    path: 'vaccination',
-    component: VaccinationDashboardComponent,
-    data: {
-      label: 'Vaccinazioni'
-    }
   }
 ];
 

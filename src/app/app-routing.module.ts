@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { HomeDashboardComponent } from './pages/home/home-dashboard/home-dashboard.component';
-import { VaccinationDashboardComponent } from './pages/italy/vaccination/vaccination-dashboard/vaccination-dashboard.component';
 
 
 const routes: Routes = [

@@ -2,11 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
 @Component({
-  selector: 'app-italy',
-  templateUrl: './italy.component.html',
-  styleUrls: ['./italy.component.scss']
+  selector: 'app-vaccination',
+  templateUrl: './vaccination.component.html',
+  styleUrls: ['./vaccination.component.scss']
 })
-export class ItalyComponent implements OnInit {
+export class VaccinationComponent implements OnInit {
 
   navLinks: any[];
 
@@ -14,9 +14,9 @@ export class ItalyComponent implements OnInit {
 
   ngOnInit(): void {
     this.navLinks = this.router.config
-      .filter(r => r.path === 'italy' && !!r.children)
+      .filter(r => r.path === 'vaccination' && !!r.children)
       .flatMap(r => r.children)
-      .filter(r => r.data?.codivData)
+      .filter(r => r.data?.label)
       .map(r => {
         return {
           path: r.path,

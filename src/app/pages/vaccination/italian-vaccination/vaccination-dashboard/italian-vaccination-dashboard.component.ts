@@ -7,11 +7,11 @@ import { VaccinationDistrictOverallStatus } from '../models/vaccination-district
 import { VaccinationDistrictStatus } from '../models/vaccination-district-status';
 
 @Component({
-  selector: 'app-vaccination-dashboard',
-  templateUrl: './vaccination-dashboard.component.html',
-  styleUrls: ['./vaccination-dashboard.component.scss']
+  selector: 'app-italian-vaccination-dashboard',
+  templateUrl: './italian-vaccination-dashboard.component.html',
+  styleUrls: ['./italian-vaccination-dashboard.component.scss']
 })
-export class VaccinationDashboardComponent implements OnInit {
+export class ItalianVaccinationDashboardComponent implements OnInit {
 
   lastUpdate$: Observable<Date>;
 

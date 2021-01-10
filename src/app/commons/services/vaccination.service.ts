@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { map, publishReplay, refCount } from 'rxjs/operators';
-import { VaccinationDistrictStatus } from 'src/app/pages/italy/vaccination/models/vaccination-district-status';
+import { VaccinationDistrictStatus } from 'src/app/pages/vaccination/italian-vaccination/models/vaccination-district-status';
 import totalInput from './vaccination-inputs/vaccination.service.total.json';
 import updateDateInput from './vaccination-inputs/vaccination.service.update-date.json';
 import totalMenInput from './vaccination-inputs/vaccination.service.total-men.json';
@@ -10,9 +10,9 @@ import totalWomenInput from './vaccination-inputs/vaccination.service.total-wome
 import districtsDetailsTableInput from './vaccination-inputs/vaccination.service.districts-details-table.json';
 import ageGroupsInput from './vaccination-inputs/vaccination.service.age-groups.json';
 import categoryGroupsInput from './vaccination-inputs/vaccination.service.category-groups.json';
-import { VaccinationDistrictOverallStatus } from 'src/app/pages/italy/vaccination/models/vaccination-district-overall-status';
-import { VaccinationAgeGroup } from 'src/app/pages/italy/vaccination/models/vaccination-age-group';
-import { VaccinationCategoryGroup } from 'src/app/pages/italy/vaccination/models/vaccination-category-group';
+import { VaccinationDistrictOverallStatus } from 'src/app/pages/vaccination/italian-vaccination/models/vaccination-district-overall-status';
+import { VaccinationAgeGroup } from 'src/app/pages/vaccination/italian-vaccination/models/vaccination-age-group';
+import { VaccinationCategoryGroup } from 'src/app/pages/vaccination/italian-vaccination/models/vaccination-category-group';
 
 @Injectable({
     providedIn: 'root'
