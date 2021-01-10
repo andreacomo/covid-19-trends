@@ -15,6 +15,7 @@ import { HomeModule } from './pages/home/home.module';
 import { registerLocaleData } from '@angular/common';
 import localeIt from '@angular/common/locales/it';
 import { NavMenuComponent } from './layout/nav-menu/nav-menu.component';
+import { ItalyModule } from './pages/italy/italy.module';
 
 @NgModule({
   declarations: [
@@ -28,11 +29,8 @@ import { NavMenuComponent } from './layout/nav-menu/nav-menu.component';
     AppRoutingModule,
     BrowserAnimationsModule,
     MaterialModule,
-    ProvincesModule,
-    DistrictsModule,
-    NationModule,
-    VaccinationModule,
-    HomeModule
+    HomeModule,
+    ItalyModule
   ],
   providers: [],
   bootstrap: [AppComponent]

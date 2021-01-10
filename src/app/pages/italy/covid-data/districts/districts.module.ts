@@ -7,7 +7,6 @@ import { DistrictsDashboardComponent } from './districts-dashboard/districts-das
 import { DistrictsComponent } from './districts-dashboard/districts/districts.component';
 import { CommonComponentsModule } from 'src/app/commons/common-components.module';
 import { DistrictChartComponent } from './districts-dashboard/district-chart/district-chart.component';
-import { ItalyModule } from '../../italy.module';
 
 
 
@@ -18,8 +17,7 @@ import { ItalyModule } from '../../italy.module';
     MaterialModule,
     ChartsModule,
     FormsModule,
-    CommonComponentsModule,
-    ItalyModule
+    CommonComponentsModule
   ]
 })
 export class DistrictsModule { }
