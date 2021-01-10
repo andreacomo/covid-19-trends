@@ -14,7 +14,9 @@ import { CategoryGroupsChartComponent } from './vaccination-dashboard/category-g
 
 
 @NgModule({
-  declarations: [VaccinationDashboardComponent, DistrictsStatusChartComponent, DistrictStatusChartTypeSelectorComponent, OverallStatusChartComponent, OverallStatusCardComponent, AgeGroupsChartComponent, CategoryGroupsChartComponent],
+  declarations: [VaccinationDashboardComponent, DistrictsStatusChartComponent,
+    DistrictStatusChartTypeSelectorComponent, OverallStatusChartComponent,
+    OverallStatusCardComponent, AgeGroupsChartComponent, CategoryGroupsChartComponent],
   imports: [
     CommonModule,
     MaterialModule,

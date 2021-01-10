@@ -1,7 +1,7 @@
 import { Component, OnInit, Input, OnChanges, SimpleChanges, Output, EventEmitter } from '@angular/core';
 import { GithubService } from 'src/app/commons/services/github.service';
 import { Observable } from 'rxjs';
-import { Province } from '../../../../commons/models/province';
+import { Province } from '../../../../../../commons/models/province';
 import { MatButtonToggleChange } from '@angular/material/button-toggle';
 import { ProvinceData } from 'src/app/commons/models/province-data';
 

@@ -1,9 +1,10 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { DistrictsDashboardComponent } from '../districts/districts-dashboard/districts-dashboard.component';
-import { NationalTrendComponent } from '../nation/national-trend/national-trend.component';
-import { ProvincesDashboardComponent } from '../provinces/provinces-dashboard/provinces-dashboard.component';
+import { DistrictsDashboardComponent } from './covid-data/districts/districts-dashboard/districts-dashboard.component';
+import { NationalTrendComponent } from './covid-data/nation/national-trend/national-trend.component';
+import { ProvincesDashboardComponent } from './covid-data/provinces/provinces-dashboard/provinces-dashboard.component';
 import { ItalyComponent } from './italy.component';
+import { VaccinationDashboardComponent } from './vaccination/vaccination-dashboard/vaccination-dashboard.component';
 
 
 
@@ -39,6 +40,13 @@ export const routes: Routes = [
         }
       }
     ]
+  },
+  {
+    path: 'vaccination',
+    component: VaccinationDashboardComponent,
+    data: {
+      label: 'Vaccinazioni'
+    }
   }
 ];
 

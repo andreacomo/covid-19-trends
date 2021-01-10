@@ -2,7 +2,7 @@ import { Component, OnInit, Input, OnChanges, SimpleChanges } from '@angular/cor
 import { GithubService } from 'src/app/commons/services/github.service';
 import { ChartDataSets } from 'chart.js';
 import { Label } from 'ng2-charts';
-import { LinearChartProvider } from '../../../../commons/services/linear-chart-provider';
+import { LinearChartProvider } from '../../../../../../commons/services/linear-chart-provider';
 import { Province } from 'src/app/commons/models/province';
 import { ProvinceData } from 'src/app/commons/models/province-data';
 import { LinearChartDataTypeProvider } from 'src/app/commons/services/linear-chart-data-type-provider';
