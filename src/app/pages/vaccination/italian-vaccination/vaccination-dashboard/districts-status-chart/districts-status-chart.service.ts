@@ -95,11 +95,13 @@ export class DistrictsStatusChartTypePercentageStrategy extends DistrictsStatusC
 
     public createOptions(): ChartOptions {
         const options = super.createOptions();
+        const maxPercentage = this.data.reduce((max, d) => max > d.completionPercentage ? max : d.completionPercentage, 0);
+        const ceiledMaxPercentage = Math.ceil(maxPercentage * 100);
         options.scales = {
             xAxes: [{
                 ticks: {
                     min: 0,
-                    max: 100
+                    max: maxPercentage < 1 ? 100 : ceiledMaxPercentage + ceiledMaxPercentage * .1
                 }
             }]
         };

@@ -1,10 +1,9 @@
-import { ChartDataSets, ChartOptions, ChartSize, ChartTooltipItem, ChartData } from 'chart.js';
+import { ChartDataSets, ChartOptions, ChartTooltipItem, ChartData } from 'chart.js';
 import { Label } from 'ng2-charts';
 import * as pluginAnnotations from 'chartjs-plugin-annotation';
 import { Milestone } from 'src/app/commons/models/milestone';
 import { HasColor } from '../models/has-color';
 import { Injectable } from '@angular/core';
-import { MediaObserver } from '@angular/flex-layout';
 import { DateStringPipe } from '../pipes/date-string.pipe';
 import { DataFilter } from '../models/data-filter';
 import { ChartDataType } from '../models/chart-data-type';
@@ -14,16 +13,11 @@ import { ChartDataType } from '../models/chart-data-type';
 })
 export class LinearChartProvider {
 
-    private static readonly DEFAULT_LINE_WIDTH: number = 3;
-
-    private static readonly DEFAULT_POINT_RADIUS: number = 5;
-
     private static readonly THIN_LINE_WIDTH: number = 2;
 
     private static readonly THIN_POINT_RADIUS: number = 3;
 
-    constructor(private mediaObserver: MediaObserver,
-                private dateString: DateStringPipe) { }
+    constructor(private dateString: DateStringPipe) { }
 
     public getOptions(milestones: Milestone[]): (ChartOptions & { annotation: any }) {
         let labelGaps = 1;
@@ -92,12 +86,8 @@ export class LinearChartProvider {
                                                override: ChartDataSets = {},
                                                filters: DataFilter[] = [{apply: values => values}]): ChartDataSets[] {
 
-        let lineWidth = LinearChartProvider.DEFAULT_LINE_WIDTH;
-        let dotRadius = LinearChartProvider.DEFAULT_POINT_RADIUS;
-        if (this.mediaObserver.isActive('sm')) {
-          lineWidth = LinearChartProvider.THIN_LINE_WIDTH;
-          dotRadius = LinearChartProvider.THIN_POINT_RADIUS;
-        }
+        const lineWidth = LinearChartProvider.THIN_LINE_WIDTH;
+        const dotRadius = LinearChartProvider.THIN_POINT_RADIUS;
 
         return Object.entries(data)
             .filter(([code]) => code)
@@ -136,20 +126,6 @@ export class LinearChartProvider {
 
     public getPlugins(): any[] {
         return [pluginAnnotations];
-    }
-
-    public switchToThinLines(dataSet: ChartDataSets[]) {
-      dataSet.forEach(d => {
-        d.borderWidth = LinearChartProvider.THIN_LINE_WIDTH;
-        d.pointRadius = LinearChartProvider.THIN_POINT_RADIUS;
-      });
-    }
-
-    public switchToDefaultLines(dataSet: ChartDataSets[]) {
-      dataSet.forEach(d => {
-        d.borderWidth = LinearChartProvider.DEFAULT_LINE_WIDTH;
-        d.pointRadius = LinearChartProvider.DEFAULT_POINT_RADIUS;
-      });
     }
 
     private dateStringAsLabel(date: string): string {
