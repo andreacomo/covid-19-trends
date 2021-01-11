@@ -1,0 +1,14 @@
+<div class="container">
+    <h2 class="mat-title">Stato vaccinazioni nel mondo</h2>
+    <div fxLayout="column" *ngIf="worldData$ | async as worldData">
+        <app-countries-status-chart [data]="worldData"></app-countries-status-chart>
+    </div>
+    <mat-divider class="bottom-divider"></mat-divider>
+    <div class="mat-small">
+        Fonte dati: 
+        <a href="https://ourworldindata.org/covid-vaccinations" target="_blank">
+            Our World in Data
+        </a>
+    </div>
+</div>
+<app-please-rotate></app-please-rotate>

@@ -5,6 +5,7 @@ import { VaccinationComponent } from './vaccination.component';
 import { RouterModule } from '@angular/router';
 import { MaterialModule } from 'src/app/commons/material/material.module';
 import { VaccinationRoutingModule } from './vaccination-routing.module';
+import { WorldVaccinationModule } from './world-vaccination/world-vaccination.module';
 
 
 
@@ -15,7 +16,8 @@ import { VaccinationRoutingModule } from './vaccination-routing.module';
     RouterModule,
     MaterialModule,
     VaccinationRoutingModule,
-    ItalianVaccinationModule
+    ItalianVaccinationModule,
+    WorldVaccinationModule
   ]
 })
 export class VaccinationModule { }
