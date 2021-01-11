@@ -14,7 +14,7 @@ import { ChartDataTypeDecorator } from '../../models/chart-data-type-decorator';
   templateUrl: './line-chart.component.html',
   styleUrls: ['./line-chart.component.scss']
 })
-export class LineChartComponent implements OnInit, OnDestroy {
+export class LineChartComponent implements OnInit {
 
   @Input()
   chartData: ChartDataSets[];
@@ -47,16 +47,11 @@ export class LineChartComponent implements OnInit, OnDestroy {
 
   plugins: any[];
 
-  private previousMediaQuery: string;
-
-  private watcher: Subscription;
-
   @ViewChild(BaseChartDirective)
   chart: BaseChartDirective;
 
   constructor(private dataService: LocalDataService,
-              private chartProvider: LinearChartProvider,
-              private mediaObserver: MediaObserver) { }
+              private chartProvider: LinearChartProvider) { }
 
   ngOnInit() {
     this.plugins = this.chartProvider.getPlugins();
@@ -65,27 +60,6 @@ export class LineChartComponent implements OnInit, OnDestroy {
       .subscribe(m => {
         this.options = this.chartProvider.getOptions(m);
       });
-
-    this.watcher = this.mediaObserver.media$.subscribe((change: MediaChange) => {
-      if (change.mqAlias === 'sm' && this.isBig(this.previousMediaQuery) && this.chartData) {
-        this.chartProvider.switchToThinLines(this.chartData);
-      } else if (this.isBig(change.mqAlias) && this.was('sm') && this.chartData) {
-        this.chartProvider.switchToDefaultLines(this.chartData);
-      }
-      this.previousMediaQuery = change.mqAlias;
-    });
-  }
-
-  private isBig(alias: string) {
-    return ['md', 'lg', 'xl'].indexOf(alias) !== -1;
-  }
-
-  private was(alias: string) {
-    return this.previousMediaQuery === alias;
-  }
-
-  ngOnDestroy() {
-    this.watcher.unsubscribe();
   }
 
   hideDataset(chartIndex: number, value: boolean) {
