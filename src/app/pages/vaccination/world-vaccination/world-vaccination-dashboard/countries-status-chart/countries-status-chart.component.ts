@@ -5,6 +5,8 @@ import { CountryVaccinationStatus } from '../../models/country-vaccination-statu
 import { WorldVaccinationStatus } from '../../models/world-vaccination-status';
 import * as pluginDataLabels from 'chartjs-plugin-datalabels';
 import { Colors } from 'src/app/commons/models/colors';
+import { Europe } from 'src/app/commons/models/eurore';
+import { EuropeanVaccinationDataFilter } from '../../services/world-vaccination-data-filter';
 
 @Component({
   selector: 'app-countries-status-chart',
@@ -28,7 +30,7 @@ export class CountriesStatusChartComponent implements OnInit, OnChanges {
     this.plugins = [pluginDataLabels];
     this.options = {
       responsive: true,
-      aspectRatio: 2,
+      aspectRatio: 1,
       legend: {
         display: true,
         position: 'top',
@@ -43,8 +45,18 @@ export class CountriesStatusChartComponent implements OnInit, OnChanges {
       },
       plugins: {
         datalabels: {
+          font: {
+            weight: 'bold'
+          },
           anchor: 'end',
-          align: 'end',
+          align: (context) => {
+            const index = context.dataIndex;
+            const value = context.dataset.data[index];
+            const maxXAsis = (context.chart as any).scales['x-axis-0'].max;
+            const gap = parseInt(maxXAsis, 10) - (value as number);
+            return gap < 100000 ? 'left' : 'right';
+          },
+          clamp: true,
           formatter: (value, ctx) => {
             return parseInt(value, 10).toLocaleString();
           }
@@ -59,18 +71,21 @@ export class CountriesStatusChartComponent implements OnInit, OnChanges {
   ngOnChanges(changes: SimpleChanges): void {
     if (changes.data.currentValue && !changes.data.previousValue) {
       const field = 'totalVaccinations';
-      const countryWithMaxFieldValue = this.data
-        .map(country => country.data.reduce((prev, curr) => this.max(field, prev, curr)))
-        .sort((c1, c2) => this.sort(field, c1, c2))
-        .slice(0, 20);
+      const countryWithMaxFieldValue = new EuropeanVaccinationDataFilter(field, 27).filter(this.data);
+
       this.labels = countryWithMaxFieldValue.map(c => c.countryName);
+      const colors = [...Colors.SUPPORTED, ...Colors.SUPPORTED];
       this.chartData = [{
         data: countryWithMaxFieldValue.map(c => this.getFieldValue(field, c)),
-        backgroundColor: Colors.SUPPORTED,
-        borderColor: Colors.SUPPORTED,
-        hoverBackgroundColor: Colors.SUPPORTED.map(c => c + 'DD')
+        backgroundColor: colors,
+        borderColor: colors,
+        hoverBackgroundColor: colors.map(c => c + 'DD')
       }];
     }
+  }
+
+  private isEuropeanCountry(country: WorldVaccinationStatus): boolean {
+    return Europe.COUNTRIES.indexOf(country.countryName) !== -1;
   }
 
   private max(fieldName: string, prev: CountryVaccinationStatus, current: CountryVaccinationStatus): CountryVaccinationStatus {

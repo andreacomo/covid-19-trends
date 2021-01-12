@@ -1,7 +1,7 @@
-<div class="container">
-    <h2 class="mat-title">Stato vaccinazioni nel mondo</h2>
-    <div fxLayout="column" *ngIf="worldData$ | async as worldData">
-        <app-countries-status-chart [data]="worldData"></app-countries-status-chart>
+<div class="container" fxHide.xs fxShow.gt-xs>
+    <h2 class="mat-title">Stato vaccinazioni in Europa e nel mondo</h2>
+    <div fxLayout="row" *ngIf="worldData$ | async as worldData">
+        <app-countries-status-chart [data]="worldData" fxFlex="100"></app-countries-status-chart>
     </div>
     <mat-divider class="bottom-divider"></mat-divider>
     <div class="mat-small">
