@@ -5,11 +5,12 @@ import { CountriesStatusChartComponent } from './world-vaccination-dashboard/cou
 import { MaterialModule } from 'src/app/commons/material/material.module';
 import { CommonComponentsModule } from 'src/app/commons/common-components.module';
 import { ChartsModule } from 'ng2-charts';
+import { CountriesTopStatusChartComponent } from './world-vaccination-dashboard/countries-top-status-chart/countries-top-status-chart.component';
 
 
 
 @NgModule({
-  declarations: [WorldVaccinationDashboardComponent, CountriesStatusChartComponent],
+  declarations: [WorldVaccinationDashboardComponent, CountriesStatusChartComponent, CountriesTopStatusChartComponent],
   imports: [
     CommonModule,
     MaterialModule,

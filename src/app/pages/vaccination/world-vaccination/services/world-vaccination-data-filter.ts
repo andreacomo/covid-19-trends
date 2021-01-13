@@ -28,7 +28,7 @@ export class FieldBasedWorldVaccinationDataFilter extends WorldVaccinationDataFi
     }
 
     protected filterData(country: WorldVaccinationStatus): boolean {
-        return true;
+        return country.countryIsoCode !== 'OWID_WRL' && !!country.countryIsoCode;
     }
 
     protected reduce(prev: CountryVaccinationStatus, current: CountryVaccinationStatus): CountryVaccinationStatus {

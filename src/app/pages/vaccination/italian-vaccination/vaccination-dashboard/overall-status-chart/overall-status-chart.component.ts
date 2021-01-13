@@ -1,4 +1,4 @@
-import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
+import { Component, Input, OnChanges, OnDestroy, OnInit, SimpleChanges } from '@angular/core';
 import { MediaChange, MediaObserver } from '@angular/flex-layout';
 import { ChartOptions } from 'chart.js';
 import { Label } from 'ng2-charts';
@@ -6,13 +6,14 @@ import { distinctUntilChanged, map } from 'rxjs/operators';
 import { Colors } from 'src/app/commons/models/colors';
 import { VaccinationDistrictOverallStatus } from '../../models/vaccination-district-overall-status';
 import * as pluginDataLabels from 'chartjs-plugin-datalabels';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-overall-status-chart',
   templateUrl: './overall-status-chart.component.html',
   styleUrls: ['./overall-status-chart.component.scss']
 })
-export class OverallStatusChartComponent implements OnInit, OnChanges {
+export class OverallStatusChartComponent implements OnInit, OnChanges, OnDestroy {
 
   @Input()
   data: VaccinationDistrictOverallStatus;
@@ -26,6 +27,8 @@ export class OverallStatusChartComponent implements OnInit, OnChanges {
   labels: Label[];
 
   chartData: number[];
+
+  watchMedia: Subscription;
 
   constructor(private media: MediaObserver) {
     this.plugins = [pluginDataLabels];
@@ -61,7 +64,7 @@ export class OverallStatusChartComponent implements OnInit, OnChanges {
       backgroundColor: [Colors.SUPPORTED[18], Colors.SUPPORTED[16]]
     }];
 
-    this.media.asObservable().pipe(
+    this.watchMedia = this.media.asObservable().pipe(
         map(changes => changes[0]),
         distinctUntilChanged((c1, c2) => c1.mqAlias === c2.mqAlias)
       )
@@ -76,6 +79,10 @@ export class OverallStatusChartComponent implements OnInit, OnChanges {
       this.labels = ['Dosi somministrate', 'Dosi mancanti'];
       this.chartData = [this.data.doneCount, this.data.receivedCount - this.data.doneCount];
     }
+  }
+
+  ngOnDestroy(): void {
+    this.watchMedia.unsubscribe();
   }
 
   private resetAspectRatio() {

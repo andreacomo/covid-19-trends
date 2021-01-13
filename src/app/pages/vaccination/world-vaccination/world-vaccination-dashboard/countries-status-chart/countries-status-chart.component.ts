@@ -5,7 +5,6 @@ import { CountryVaccinationStatus } from '../../models/country-vaccination-statu
 import { WorldVaccinationStatus } from '../../models/world-vaccination-status';
 import * as pluginDataLabels from 'chartjs-plugin-datalabels';
 import { Colors } from 'src/app/commons/models/colors';
-import { Europe } from 'src/app/commons/models/eurore';
 import { EuropeanVaccinationDataFilter } from '../../services/world-vaccination-data-filter';
 
 @Component({
@@ -82,18 +81,6 @@ export class CountriesStatusChartComponent implements OnInit, OnChanges {
         hoverBackgroundColor: colors.map(c => c + 'DD')
       }];
     }
-  }
-
-  private isEuropeanCountry(country: WorldVaccinationStatus): boolean {
-    return Europe.COUNTRIES.indexOf(country.countryName) !== -1;
-  }
-
-  private max(fieldName: string, prev: CountryVaccinationStatus, current: CountryVaccinationStatus): CountryVaccinationStatus {
-    return prev[fieldName] > current[fieldName] ? prev : current;
-  }
-
-  private sort(fieldName: string, c1: CountryVaccinationStatus, c2: CountryVaccinationStatus): number {
-    return c2[fieldName] - c1[fieldName];
   }
 
   private getFieldValue(fieldName: string, c: CountryVaccinationStatus): number {
