@@ -13,6 +13,7 @@ import categoryGroupsInput from './italian-vaccination-inputs/vaccination.servic
 import { VaccinationDistrictOverallStatus } from 'src/app/pages/vaccination/italian-vaccination/models/vaccination-district-overall-status';
 import { VaccinationAgeGroup } from 'src/app/pages/vaccination/italian-vaccination/models/vaccination-age-group';
 import { VaccinationCategoryGroup } from 'src/app/pages/vaccination/italian-vaccination/models/vaccination-category-group';
+import { Districts } from '../models/districts';
 
 @Injectable({
     providedIn: 'root'
@@ -74,7 +75,7 @@ export class ItalianVaccinationService {
                 receivedCount,
                 details: data.data.map(district => {
                     return {
-                        districtName: district.area,
+                        districtName: Districts.MAPPING[district.area],
                         doneCount: district.dosi_somministrate,
                         receivedCount: district.dosi_consegnate,
                         completionPercentage: district.percentuale_somministrazione
