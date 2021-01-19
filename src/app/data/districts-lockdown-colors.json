@@ -382,6 +382,42 @@
                     "districts": []
                 }
             ]
+        },
+        {
+            "issueDate": "2021-01-16",
+            "validFromDate": "2021-01-17",
+            "scenarios": [
+                {
+                    "color": "GREEN",
+                    "scenario": 1,
+                    "districts": []
+                },
+                {
+                    "color": "YELLOW",
+                    "scenario": 2,
+                    "districts": [
+                        "Molise", "P.A. Trento", "Sardegna",
+                        "Basilicata", 
+                        "Toscana", 
+                        "Abruzzo", "Campania"
+                    ]
+                },
+                {
+                    "color": "ORANGE",
+                    "scenario": 3,
+                    "districts": [
+                        "Calabria", "Emilia-Romagna", "Veneto",
+                        "Friuli Venezia Giulia", "Lazio", "Liguria",  "Marche", "Piemonte", "Puglia",  "Umbria", "Valle d'Aosta"
+                    ]
+                },
+                {
+                    "color": "RED",
+                    "scenario": 4,
+                    "districts": [
+                        "Lombardia", "P.A. Bolzano", "Sicilia"
+                    ]
+                }
+            ]
         }
     ]
 }
