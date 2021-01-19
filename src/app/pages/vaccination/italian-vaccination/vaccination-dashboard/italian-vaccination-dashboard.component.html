@@ -1,5 +1,5 @@
 <div class="container" fxHide.xs fxShow.gt-xs>
-    <h2 class="mat-title">Stato vaccinazioni al {{lastUpdate$ | async | date: 'dd/MM/yyyy HH:mm:ss' : 'GMT'}}</h2>
+    <h2 class="mat-title">Stato vaccinazioni al {{lastUpdate$ | async | date: 'dd/MM/yyyy HH:mm:ss'}}</h2>
     <div>
         <div fxLayout="row" fxLayout.sm="column-reverse" fxLayoutGap="2em" *ngIf="overallStatus$ | async as overallStatus">
             <app-districts-status-chart fxFlex="80" [data]="overallStatus.details"></app-districts-status-chart>
@@ -16,8 +16,8 @@
     <mat-divider class="bottom-divider"></mat-divider>
     <div class="mat-small">
         Fonte dati: 
-        <a href="https://app.powerbi.com/view?r=eyJrIjoiMzg4YmI5NDQtZDM5ZC00ZTIyLTgxN2MtOTBkMWM4MTUyYTg0IiwidCI6ImFmZDBhNzVjLTg2NzEtNGNjZS05MDYxLTJjYTBkOTJlNDIyZiIsImMiOjh9" target="_blank">
-            Report Vaccini Anti COVID-19
+        <a href="https://github.com/italia/covid19-opendata-vaccini" target="_blank">
+            COVID-19 Open Data Vaccini
         </a>
     </div>
 </div>

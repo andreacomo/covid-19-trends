@@ -19,50 +19,65 @@ import { VaccinationCategoryGroup } from 'src/app/pages/vaccination/italian-vacc
   })
 export class ItalianVaccinationService {
 
-    private url = 'https://wabi-europe-north-b-api.analysis.windows.net/public/reports/querydata';
+    private readonly url = 'https://raw.githubusercontent.com/italia/covid19-opendata-vaccini/master/dati/';
 
-    private headers = {
-        headers: {
-            'X-PowerBI-ResourceKey': '388bb944-d39d-4e22-817c-90d1c8152a84',
-            'Content-Type': 'application/json;charset=UTF-8'
-        }
-    };
+    private readonly LATEST_UPDATE = 'last-update-dataset.json';
+
+    private readonly REGISTRY_SUMMARY = 'anagrafica-vaccini-summary-latest.json';
+
+    private readonly VAX_SUMMARY = 'vaccini-summary-latest.json';
 
     private cache: Map<string, Observable<any>> = new Map<string, Observable<any>>();
 
     constructor(private http: HttpClient) { }
 
     public getLastUpdate(): Observable<Date> {
-        return this.fetchRemoteOrCached(updateDateInput, 'lastUpdate', data => {
-            return new Date(data.results[0].result.data.dsr.DS[0].PH[0].DM0[0].G0);
+        return this.getRemoteOrCached(this.LATEST_UPDATE, 'lastUpdate', data => {
+            return Date.parse(data.ultimo_aggiornamento);
         });
     }
 
     public getTotal(): Observable<number> {
-        return this.getTotalNumber(totalInput, 'total');
+        return this.getRemoteOrCached(this.REGISTRY_SUMMARY, 'registrySummary', data => {
+            return data.data;
+        })
+        .pipe(
+            map((data: RegistrySummary[]) => this.sumAttributeValue(data, 'totale'))
+        );
     }
 
     public getTotalMen(): Observable<number> {
-        return this.getTotalNumber(totalMenInput, 'totalMen');
+        return this.getRemoteOrCached(this.REGISTRY_SUMMARY, 'registrySummary', data => {
+            return data.data;
+        })
+        .pipe(
+            map((data: RegistrySummary[]) => this.sumAttributeValue(data, 'sesso_maschile'))
+        );
     }
 
     public getTotalWomen(): Observable<number> {
-        return this.getTotalNumber(totalWomenInput, 'totalWomen');
+        return this.getRemoteOrCached(this.REGISTRY_SUMMARY, 'registrySummary', data => {
+            return data.data;
+        })
+        .pipe(
+            map((data: RegistrySummary[]) => this.sumAttributeValue(data, 'sesso_femminile'))
+        );
     }
 
     public getVaccinationDistrictsStatus(): Observable<VaccinationDistrictOverallStatus> {
-        return this.fetchRemoteOrCached(districtsDetailsTableInput, 'districtsStatus', data => {
-            const overallData = data.results[0].result.data.dsr.DS[0].PH[0].DM0[0].C;
+        return this.getRemoteOrCached(this.VAX_SUMMARY, 'districtsStatus', data => {
+            const doneCount: number = this.sumAttributeValue(data.data, 'dosi_somministrate');
+            const receivedCount: number = this.sumAttributeValue(data.data, 'dosi_consegnate');
             return {
-                doneCount: overallData[0],
-                completionPercentage: overallData[1],
-                receivedCount: overallData[2],
-                details: data.results[0].result.data.dsr.DS[0].PH[1].DM1.map(district => {
+                doneCount,
+                completionPercentage: doneCount / receivedCount,
+                receivedCount,
+                details: data.data.map(district => {
                     return {
-                        districtName: district.C[0],
-                        doneCount: district.C[1],
-                        receivedCount: district.C[3],
-                        completionPercentage: district.C[2]
+                        districtName: district.area,
+                        doneCount: district.dosi_somministrate,
+                        receivedCount: district.dosi_consegnate,
+                        completionPercentage: district.percentuale_somministrazione
                     } as VaccinationDistrictStatus;
                 })
             } as VaccinationDistrictOverallStatus;
@@ -70,36 +85,40 @@ export class ItalianVaccinationService {
     }
 
     public getAgeGroups(): Observable<VaccinationAgeGroup[]> {
-        return this.fetchRemoteOrCached(ageGroupsInput, 'ageGroup', data => {
-            return data.results[0].result.data.dsr.DS[0].PH[0].DM0.map(ageRange => {
-                return {
-                    range: ageRange.C[0],
-                    doneCount: ageRange.C[1]
-                } as VaccinationAgeGroup;
-            });
-        });
+        return this.getRemoteOrCached(this.REGISTRY_SUMMARY, 'registrySummary', data => {
+            return data.data;
+        })
+        .pipe(
+            map((data: RegistrySummary[]) => data.map(summary => ({
+                    range: summary.fascia_anagrafica,
+                    doneCount: summary.totale
+                }))
+            )
+        );
     }
 
     public getCategoryGroups(): Observable<VaccinationCategoryGroup[]> {
-        return this.fetchRemoteOrCached(categoryGroupsInput, 'categoryGroup', data => {
-            return data.results[0].result.data.dsr.DS[0].PH[0].DM0.map(category => {
-                return {
-                    name: category.C[0],
-                    doneCount: category.C[1]
-                } as VaccinationCategoryGroup;
-            });
-        });
+        return this.getRemoteOrCached(this.REGISTRY_SUMMARY, 'registrySummary', data => {
+            return data.data;
+        })
+        .pipe(
+            map((data: RegistrySummary[]) => ([{
+                    name: 'Operatori Sanitari e Sociosanitari',
+                    doneCount: this.sumAttributeValue(data, 'categoria_operatori_sanitari_sociosanitari')
+                }, {
+                    name: 'Personale non sanitario',
+                    doneCount: this.sumAttributeValue(data, 'categoria_personale_non_sanitario')
+                }, {
+                    name: 'Ospiti Strutture Residenziali',
+                    doneCount: this.sumAttributeValue(data, 'categoria_ospiti_rsa')
+                }])
+            )
+        );
     }
 
-    private getTotalNumber(requestBody, cacheKey): Observable<number> {
-        return this.fetchRemoteOrCached(requestBody, cacheKey, data => {
-            return data.results[0].result.data.dsr.DS[0].PH[0].DM0[0].M0;
-        });
-    }
-
-    private fetchRemoteOrCached(requestBody, cacheKey, transformer: (data) => any): Observable<any> {
+    private getRemoteOrCached(path: string, cacheKey, transformer: (data) => any): Observable<any> {
         if (this.cache[cacheKey] == null) {
-            this.cache[cacheKey] = this.http.post<any>(this.url, requestBody, this.headers)
+            this.cache[cacheKey] = this.http.get<any>(this.url + path)
             .pipe(
                 map(transformer),
                 publishReplay(1),
@@ -108,4 +127,35 @@ export class ItalianVaccinationService {
         }
         return this.cache[cacheKey];
     }
+
+    private sumAttributeValue(data: RegistrySummary[], attribute: string) {
+        return data.reduce((acc, s) => acc + s[attribute], 0);
+    }
+}
+
+class RegistrySummary {
+
+    'categoria_operatori_sanitari_sociosanitari': number;
+
+    'categoria_ospiti_rsa': number;
+
+    'categoria_over80': number;
+
+    'categoria_personale_non_sanitario': number;
+
+    'fascia_anagrafica': string;
+
+    index: number;
+
+    'prima_dose': number;
+
+    'seconda_dose': number;
+
+    'sesso_femminile': number;
+
+    'sesso_maschile': number;
+
+    totale: number;
+
+    'ultimo_aggiornamento': string;
 }

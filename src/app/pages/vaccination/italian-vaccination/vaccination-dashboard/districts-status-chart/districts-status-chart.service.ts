@@ -85,7 +85,7 @@ export class DistrictsStatusChartTypePercentageStrategy extends DistrictsStatusC
         const sortedData = this.data.sort(this.getSorter());
         const sortedColors = sortedData.map(d => d.color);
         return [{
-            data: sortedData.map(d => d.completionPercentage * 100),
+            data: sortedData.map(d => d.completionPercentage),
             backgroundColor: sortedColors.map(c => c + '99'),
             borderColor: sortedColors,
             hoverBackgroundColor: sortedColors.map(c => c + 'AA'),
@@ -96,7 +96,7 @@ export class DistrictsStatusChartTypePercentageStrategy extends DistrictsStatusC
     public createOptions(): ChartOptions {
         const options = super.createOptions();
         const maxPercentage = this.data.reduce((max, d) => max > d.completionPercentage ? max : d.completionPercentage, 0);
-        const ceiledMaxPercentage = Math.ceil(maxPercentage * 100);
+        const ceiledMaxPercentage = Math.ceil(maxPercentage);
         options.scales = {
             xAxes: [{
                 ticks: {
