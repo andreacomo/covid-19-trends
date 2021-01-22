@@ -12,6 +12,10 @@ export class VaccinationSummaryComponent implements OnInit {
 
   total$: Observable<string>;
 
+  firstDoseTotal$: Observable<string>;
+
+  secondDoseTotal$: Observable<string>;
+
   totalMen$: Observable<string>;
 
   totalWomen$: Observable<string>;
@@ -22,6 +26,16 @@ export class VaccinationSummaryComponent implements OnInit {
 
   ngOnInit(): void {
     this.total$ = this.vaccinationService.getTotal()
+      .pipe(
+        map(data => data.toLocaleString())
+      );
+
+    this.firstDoseTotal$ = this.vaccinationService.getFirstDosesTotal()
+      .pipe(
+        map(data => data.toLocaleString())
+      );
+
+    this.secondDoseTotal$ = this.vaccinationService.getSecondDosesTotal()
       .pipe(
         map(data => data.toLocaleString())
       );

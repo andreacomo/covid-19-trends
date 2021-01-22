@@ -40,6 +40,24 @@ export class ItalianVaccinationService {
         );
     }
 
+    public getFirstDosesTotal(): Observable<number> {
+        return this.getRemoteOrCached(this.REGISTRY_SUMMARY, 'registrySummary', data => {
+            return data.data;
+        })
+        .pipe(
+            map((data: RegistrySummary[]) => this.sumAttributeValue(data, 'prima_dose'))
+        );
+    }
+
+    public getSecondDosesTotal(): Observable<number> {
+        return this.getRemoteOrCached(this.REGISTRY_SUMMARY, 'registrySummary', data => {
+            return data.data;
+        })
+        .pipe(
+            map((data: RegistrySummary[]) => this.sumAttributeValue(data, 'seconda_dose'))
+        );
+    }
+
     public getTotalMen(): Observable<number> {
         return this.getRemoteOrCached(this.REGISTRY_SUMMARY, 'registrySummary', data => {
             return data.data;

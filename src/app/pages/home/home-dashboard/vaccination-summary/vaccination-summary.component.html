@@ -11,31 +11,31 @@
             </div>
         </div>
         <div class="item" fxLayout="row" fxLayoutAlign="space-between center" fxFlex="100" fxLayoutGap=".5em">
-            <strong>Totale vaccinati</strong> 
+            <strong>Prime dosi</strong> 
             <div fxLayout="row" fxLayoutAlign="center center" fxLayoutGap=".5em">
-                <mat-icon>groups</mat-icon>
+                <mat-icon>local_pharmacy</mat-icon>
+                <div class="numbers" *ngIf="firstDoseTotal$ | async as firstDoseTotal; else firstDoseTotalLoading">{{firstDoseTotal}}</div>
+                <ng-template #firstDoseTotalLoading>
+                    <mat-spinner [diameter]="24"></mat-spinner>
+                </ng-template>
+            </div>
+        </div>
+        <div class="item" fxLayout="row" fxLayoutAlign="space-between center" fxFlex="100" fxLayoutGap=".5em">
+            <strong>Seconde dosi</strong> 
+            <div fxLayout="row" fxLayoutAlign="center center" fxLayoutGap=".5em">
+                <mat-icon>security</mat-icon>
+                <div class="numbers" *ngIf="secondDoseTotal$ | async as secondDoseTotal; else firstDoseTotalLoading">{{secondDoseTotal}}</div>
+                <ng-template #secondDoseTotalLoading>
+                    <mat-spinner [diameter]="24"></mat-spinner>
+                </ng-template>
+            </div>
+        </div>
+        <div class="item" fxLayout="row" fxLayoutAlign="space-between center" fxFlex="100" fxLayoutGap=".5em">
+            <strong>Dosi totali</strong> 
+            <div fxLayout="row" fxLayoutAlign="center center" fxLayoutGap=".5em">
+                <mat-icon>emoji_events</mat-icon>
                 <div class="numbers" *ngIf="total$ | async as total; else totalLoading">{{total}}</div>
                 <ng-template #totalLoading>
-                    <mat-spinner [diameter]="24"></mat-spinner>
-                </ng-template>
-            </div>
-        </div>
-        <div class="item" fxLayout="row" fxLayoutAlign="space-between center" fxFlex="100" fxLayoutGap=".5em">
-            <strong>Uomini</strong>
-            <div fxLayout="row" fxLayoutAlign="center center" fxLayoutGap=".5em">
-                <mat-icon class="men">face</mat-icon>
-                <div class="numbers" *ngIf="totalMen$ | async as totalMen; else totalMenLoading">{{totalMen}}</div>
-                <ng-template #totalMenLoading>
-                    <mat-spinner [diameter]="24"></mat-spinner>
-                </ng-template>
-            </div>
-        </div>
-        <div class="item" fxLayout="row" fxLayoutAlign="space-between center" fxFlex="100" fxLayoutGap=".5em">
-            <strong>Donne</strong>
-            <div fxLayout="row" fxLayoutAlign="center center" fxLayoutGap=".5em">
-                <mat-icon class="women">face</mat-icon>
-                <div class="numbers" *ngIf="totalWomen$ | async as totalWomen; else totalWomenLoading">{{totalWomen}}</div>
-                <ng-template #totalWomenLoading>
                     <mat-spinner [diameter]="24"></mat-spinner>
                 </ng-template>
             </div>
