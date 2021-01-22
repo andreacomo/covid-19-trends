@@ -6,7 +6,7 @@
             <div>{{totals.first.toLocaleString()}}</div>
         </div>
         <div class="item" fxLayout="row" fxLayoutAlign="space-between center" fxFlex="100" fxLayoutGap=".5em">
-            <strong>Seconde somministrazioni /<br> Persone vaccinate</strong> 
+            <strong>Persone vaccinate</strong> 
             <div>{{totals.second.toLocaleString()}}</div>
         </div>
         <div class="divider"></div>
@@ -26,6 +26,10 @@
         <div class="item" fxLayout="row" fxLayoutAlign="space-between center" fxFlex="100" fxLayoutGap=".5em">
             <strong>Completamento</strong> 
             <div>{{(data.completionPercentage * 100).toFixed(2)}}%</div>
+        </div>
+        <div class="item" fxLayout="row" fxLayoutAlign="space-between center" fxFlex="100" fxLayoutGap=".5em">
+            <strong>Copertura popolazione</strong> 
+            <div>{{((totals.second / totalPopulation) * 100).toFixed(2)}}%</div>
         </div>
     </mat-card-content>
 </mat-card>

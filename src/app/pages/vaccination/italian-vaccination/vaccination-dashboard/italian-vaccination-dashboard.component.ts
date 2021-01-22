@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
+import { DistrictPopulation } from 'src/app/commons/models/district-population';
 import { ItalianVaccinationService } from 'src/app/commons/services/italian-vaccination.service';
+import { LocalDataService } from 'src/app/commons/services/local-data.service';
 import { VaccinationAgeGroup } from '../models/vaccination-age-group';
 import { VaccinationCategoryGroup } from '../models/vaccination-category-group';
 import { VaccinationDistrictOverallStatus } from '../models/vaccination-district-overall-status';
@@ -23,7 +25,10 @@ export class ItalianVaccinationDashboardComponent implements OnInit {
 
   totalDoses$: Observable<VaccinationDoses>;
 
-  constructor(private vaccinationService: ItalianVaccinationService) { }
+  districtsPopulation$: Observable<DistrictPopulation[]>;
+
+  constructor(private vaccinationService: ItalianVaccinationService,
+              private localDataService: LocalDataService) { }
 
   ngOnInit(): void {
     this.lastUpdate$ = this.vaccinationService.getLastUpdate();
@@ -31,6 +36,7 @@ export class ItalianVaccinationDashboardComponent implements OnInit {
     this.ageGroups$ = this.vaccinationService.getAgeGroups();
     this.categoryGroup$ = this.vaccinationService.getCategoryGroups();
     this.totalDoses$ = this.vaccinationService.getVaccinationDoses();
+    this.districtsPopulation$ = this.localDataService.getDistrictsPopulation();
   }
 
 }

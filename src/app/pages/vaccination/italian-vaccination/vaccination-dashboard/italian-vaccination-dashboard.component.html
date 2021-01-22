@@ -5,7 +5,7 @@
             <app-districts-status-chart fxFlex="80" [data]="overallStatus.details"></app-districts-status-chart>
             <div fxFlex="20" fxLayout="column" fxLayout.sm="row" fxLayoutAlign.sm="center center" fxLayoutAlign="center stretch" fxLayoutGap="2em" *ngIf="totalDoses$ | async as totalDoses">
                 <app-overall-status-chart fxFlex.sm="50" [data]="overallStatus" [totals]="totalDoses"></app-overall-status-chart>
-                <app-overall-status-card fxFlex.sm="50" [data]="overallStatus" [totals]="totalDoses"></app-overall-status-card>
+                <app-overall-status-card *ngIf="districtsPopulation$ | async as districtsPopulation" fxFlex.sm="50" [data]="overallStatus" [totals]="totalDoses" [population]="districtsPopulation"></app-overall-status-card>
             </div>
         </div>
         <div fxLayout="row" fxLayout.sm="column" fxLayoutGap="2em" class="groups-charts">
