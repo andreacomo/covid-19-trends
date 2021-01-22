@@ -7,6 +7,8 @@ import { VaccinationDistrictOverallStatus } from 'src/app/pages/vaccination/ital
 import { VaccinationAgeGroup } from 'src/app/pages/vaccination/italian-vaccination/models/vaccination-age-group';
 import { VaccinationCategoryGroup } from 'src/app/pages/vaccination/italian-vaccination/models/vaccination-category-group';
 import { Districts } from '../models/districts';
+import { VaccinationRegistrySummary } from 'src/app/pages/vaccination/italian-vaccination/models/vaccination-registry-summary';
+import { VaccinationDoses } from 'src/app/pages/vaccination/italian-vaccination/models/vaccination-doses';
 
 @Injectable({
     providedIn: 'root'
@@ -36,7 +38,7 @@ export class ItalianVaccinationService {
             return data.data;
         })
         .pipe(
-            map((data: RegistrySummary[]) => this.sumAttributeValue(data, 'totale'))
+            map((data: VaccinationRegistrySummary[]) => this.sumAttributeValue(data, 'totale'))
         );
     }
 
@@ -45,7 +47,7 @@ export class ItalianVaccinationService {
             return data.data;
         })
         .pipe(
-            map((data: RegistrySummary[]) => this.sumAttributeValue(data, 'prima_dose'))
+            map((data: VaccinationRegistrySummary[]) => this.sumAttributeValue(data, 'prima_dose'))
         );
     }
 
@@ -54,7 +56,20 @@ export class ItalianVaccinationService {
             return data.data;
         })
         .pipe(
-            map((data: RegistrySummary[]) => this.sumAttributeValue(data, 'seconda_dose'))
+            map((data: VaccinationRegistrySummary[]) => this.sumAttributeValue(data, 'seconda_dose'))
+        );
+    }
+
+    public getVaccinationDoses(): Observable<VaccinationDoses> {
+        return this.getRemoteOrCached(this.REGISTRY_SUMMARY, 'registrySummary', data => {
+            return data.data;
+        })
+        .pipe(
+            map((data: VaccinationRegistrySummary[]) => ({
+                total: this.sumAttributeValue(data, 'total'),
+                first: this.sumAttributeValue(data, 'prima_dose'),
+                second: this.sumAttributeValue(data, 'seconda_dose')
+            }))
         );
     }
 
@@ -63,7 +78,7 @@ export class ItalianVaccinationService {
             return data.data;
         })
         .pipe(
-            map((data: RegistrySummary[]) => this.sumAttributeValue(data, 'sesso_maschile'))
+            map((data: VaccinationRegistrySummary[]) => this.sumAttributeValue(data, 'sesso_maschile'))
         );
     }
 
@@ -72,7 +87,7 @@ export class ItalianVaccinationService {
             return data.data;
         })
         .pipe(
-            map((data: RegistrySummary[]) => this.sumAttributeValue(data, 'sesso_femminile'))
+            map((data: VaccinationRegistrySummary[]) => this.sumAttributeValue(data, 'sesso_femminile'))
         );
     }
 
@@ -101,7 +116,7 @@ export class ItalianVaccinationService {
             return data.data;
         })
         .pipe(
-            map((data: RegistrySummary[]) => data.map(summary => ({
+            map((data: VaccinationRegistrySummary[]) => data.map(summary => ({
                     range: summary.fascia_anagrafica,
                     doneCount: summary.totale
                 }))
@@ -114,7 +129,7 @@ export class ItalianVaccinationService {
             return data.data;
         })
         .pipe(
-            map((data: RegistrySummary[]) => ([{
+            map((data: VaccinationRegistrySummary[]) => ([{
                     name: 'Operatori Sanitari e Sociosanitari',
                     doneCount: this.sumAttributeValue(data, 'categoria_operatori_sanitari_sociosanitari')
                 }, {
@@ -140,34 +155,7 @@ export class ItalianVaccinationService {
         return this.cache[cacheKey];
     }
 
-    private sumAttributeValue(data: RegistrySummary[], attribute: string) {
+    private sumAttributeValue(data: VaccinationRegistrySummary[], attribute: string) {
         return data.reduce((acc, s) => acc + s[attribute], 0);
     }
-}
-
-class RegistrySummary {
-
-    'categoria_operatori_sanitari_sociosanitari': number;
-
-    'categoria_ospiti_rsa': number;
-
-    'categoria_over80': number;
-
-    'categoria_personale_non_sanitario': number;
-
-    'fascia_anagrafica': string;
-
-    index: number;
-
-    'prima_dose': number;
-
-    'seconda_dose': number;
-
-    'sesso_femminile': number;
-
-    'sesso_maschile': number;
-
-    totale: number;
-
-    'ultimo_aggiornamento': string;
 }

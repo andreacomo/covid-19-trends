@@ -1,12 +1,13 @@
 import { Component, Input, OnChanges, OnDestroy, OnInit, SimpleChanges } from '@angular/core';
 import { MediaChange, MediaObserver } from '@angular/flex-layout';
-import { ChartOptions } from 'chart.js';
-import { Label } from 'ng2-charts';
+import { ChartData, ChartOptions, ChartTooltipItem } from 'chart.js';
+import { Label, MultiDataSet } from 'ng2-charts';
 import { distinctUntilChanged, map } from 'rxjs/operators';
 import { Colors } from 'src/app/commons/models/colors';
 import { VaccinationDistrictOverallStatus } from '../../models/vaccination-district-overall-status';
 import * as pluginDataLabels from 'chartjs-plugin-datalabels';
 import { Subscription } from 'rxjs';
+import { VaccinationDoses } from '../../models/vaccination-doses';
 
 @Component({
   selector: 'app-overall-status-chart',
@@ -18,6 +19,9 @@ export class OverallStatusChartComponent implements OnInit, OnChanges, OnDestroy
   @Input()
   data: VaccinationDistrictOverallStatus;
 
+  @Input()
+  totals: VaccinationDoses;
+
   options: ChartOptions;
 
   colors: any[];
@@ -26,7 +30,7 @@ export class OverallStatusChartComponent implements OnInit, OnChanges, OnDestroy
 
   labels: Label[];
 
-  chartData: number[];
+  chartData: MultiDataSet;
 
   watchMedia: Subscription;
 
@@ -35,17 +39,20 @@ export class OverallStatusChartComponent implements OnInit, OnChanges, OnDestroy
     this.options = {
       responsive: true,
       aspectRatio: 1,
+      cutoutPercentage: 30,
       legend: {
-          display: true,
-          position: 'top',
-          align: 'center',
-          labels: {
-          boxWidth: 20,
-          fontFamily: 'Roboto, \'Helvetica Neue\', sans-serif'
-        }
+        display: false
       },
       tooltips: {
-          enabled: false
+        enabled: true,
+        callbacks: {
+          title: (item: ChartTooltipItem[], data: ChartData) => {
+            return data.labels[item[0].datasetIndex][item[0].index];
+          },
+          label: (item: ChartTooltipItem, data: ChartData) => {
+            return data.datasets[item.datasetIndex].data[item.index].toLocaleString();
+          }
+        }
       },
       plugins: {
         datalabels: {
@@ -61,7 +68,14 @@ export class OverallStatusChartComponent implements OnInit, OnChanges, OnDestroy
     };
     this.colors = [{
       borderColor: [Colors.SUPPORTED[18], Colors.SUPPORTED[16]],
-      backgroundColor: [Colors.SUPPORTED[18], Colors.SUPPORTED[16]]
+      backgroundColor: [Colors.SUPPORTED[18], Colors.SUPPORTED[16]],
+      hoverBorderColor: [Colors.SUPPORTED[18], Colors.SUPPORTED[16]],
+      hoverBackgroundColor: [Colors.SUPPORTED[18], Colors.SUPPORTED[16]]
+    }, {
+      borderColor: [Colors.SUPPORTED[14], Colors.SUPPORTED[2]],
+      backgroundColor: [Colors.SUPPORTED[14], Colors.SUPPORTED[2]],
+      hoverBorderColor: [Colors.SUPPORTED[14], Colors.SUPPORTED[2]],
+      hoverBackgroundColor: [Colors.SUPPORTED[14], Colors.SUPPORTED[2]]
     }];
 
     this.watchMedia = this.media.asObservable().pipe(
@@ -76,8 +90,11 @@ export class OverallStatusChartComponent implements OnInit, OnChanges, OnDestroy
 
   ngOnChanges(changes: SimpleChanges): void {
     if (changes.data.currentValue && !changes.data.previousValue) {
-      this.labels = ['Dosi somministrate', 'Dosi mancanti'];
-      this.chartData = [this.data.doneCount, this.data.receivedCount - this.data.doneCount];
+      this.labels = [['Dosi somministrate', 'Dosi rimaste'], ['Prime somministrazioni', 'Seconde somministrazioni']];
+      this.chartData = [
+        [this.data.doneCount, this.data.receivedCount - this.data.doneCount],
+        [this.totals.first, this.totals.second]
+      ];
     }
   }
 

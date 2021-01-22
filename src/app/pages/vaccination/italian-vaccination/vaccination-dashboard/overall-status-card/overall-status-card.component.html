@@ -2,13 +2,27 @@
     <mat-card-content fxLayout="column" fxLayoutAlign="space-evenly stretch" fxLayoutGap="1em">
 
         <div class="item" fxLayout="row" fxLayoutAlign="space-between center" fxFlex="100" fxLayoutGap=".5em">
-            <strong>Dosi somministrate</strong> 
+            <strong>Prime somministrazioni</strong>
+            <div>{{totals.first.toLocaleString()}}</div>
+        </div>
+        <div class="item" fxLayout="row" fxLayoutAlign="space-between center" fxFlex="100" fxLayoutGap=".5em">
+            <strong>Seconde somministrazioni /<br> Persone vaccinate</strong> 
+            <div>{{totals.second.toLocaleString()}}</div>
+        </div>
+        <div class="divider"></div>
+        <div class="item" fxLayout="row" fxLayoutAlign="space-between center" fxFlex="100" fxLayoutGap=".5em">
+            <strong>Somministrazioni totali</strong> 
             <div>{{data.doneCount.toLocaleString()}}</div>
         </div>
         <div class="item" fxLayout="row" fxLayoutAlign="space-between center" fxFlex="100" fxLayoutGap=".5em">
             <strong>Dosi ricevute</strong> 
             <div>{{data.receivedCount.toLocaleString()}}</div>
         </div>
+        <div class="item" fxLayout="row" fxLayoutAlign="space-between center" fxFlex="100" fxLayoutGap=".5em">
+            <strong>Dosi rimaste</strong> 
+            <div>{{(data.receivedCount - data.doneCount).toLocaleString()}}</div>
+        </div>
+        <div class="divider"></div>
         <div class="item" fxLayout="row" fxLayoutAlign="space-between center" fxFlex="100" fxLayoutGap=".5em">
             <strong>Completamento</strong> 
             <div>{{(data.completionPercentage * 100).toFixed(2)}}%</div>

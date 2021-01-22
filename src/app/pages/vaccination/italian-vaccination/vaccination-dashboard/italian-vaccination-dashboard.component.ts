@@ -4,7 +4,7 @@ import { ItalianVaccinationService } from 'src/app/commons/services/italian-vacc
 import { VaccinationAgeGroup } from '../models/vaccination-age-group';
 import { VaccinationCategoryGroup } from '../models/vaccination-category-group';
 import { VaccinationDistrictOverallStatus } from '../models/vaccination-district-overall-status';
-import { VaccinationDistrictStatus } from '../models/vaccination-district-status';
+import { VaccinationDoses } from '../models/vaccination-doses';
 
 @Component({
   selector: 'app-italian-vaccination-dashboard',
@@ -21,6 +21,8 @@ export class ItalianVaccinationDashboardComponent implements OnInit {
 
   categoryGroup$: Observable<VaccinationCategoryGroup[]>;
 
+  totalDoses$: Observable<VaccinationDoses>;
+
   constructor(private vaccinationService: ItalianVaccinationService) { }
 
   ngOnInit(): void {
@@ -28,6 +30,7 @@ export class ItalianVaccinationDashboardComponent implements OnInit {
     this.overallStatus$ = this.vaccinationService.getVaccinationDistrictsStatus();
     this.ageGroups$ = this.vaccinationService.getAgeGroups();
     this.categoryGroup$ = this.vaccinationService.getCategoryGroups();
+    this.totalDoses$ = this.vaccinationService.getVaccinationDoses();
   }
 
 }

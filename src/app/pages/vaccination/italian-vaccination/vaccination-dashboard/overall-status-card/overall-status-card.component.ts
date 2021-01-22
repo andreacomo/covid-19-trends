@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { VaccinationDistrictOverallStatus } from '../../models/vaccination-district-overall-status';
+import { VaccinationDoses } from '../../models/vaccination-doses';
 
 @Component({
   selector: 'app-overall-status-card',
@@ -10,6 +11,9 @@ export class OverallStatusCardComponent implements OnInit {
 
   @Input()
   data: VaccinationDistrictOverallStatus;
+
+  @Input()
+  totals: VaccinationDoses;
 
   constructor() { }
 
