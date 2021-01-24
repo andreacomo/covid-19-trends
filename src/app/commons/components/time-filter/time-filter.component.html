@@ -1,6 +1,6 @@
 <div fxLayout="row" fxLayoutAlign="flex-end center" class="filters-container">
-    <span *ngIf="selectedFilter" class="selected">{{selectedFilter.label}}</span>
-    <button mat-button [matMenuTriggerFor]="beforeMenu" matTooltip="Filtra per date">
+    <button mat-stroked-button [matMenuTriggerFor]="beforeMenu" matTooltip="Filtra per date">
+        <span *ngIf="selectedFilter" class="selected">{{selectedFilter.label}}</span>
         <mat-icon>history</mat-icon>
     </button>
     <mat-menu #beforeMenu="matMenu" xPosition="before">

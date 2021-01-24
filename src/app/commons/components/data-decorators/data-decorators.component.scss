@@ -2,9 +2,10 @@
 
 .decorator-container {
     .selected {
-        font-size: .9em;
+        font-size: 1.1em;
         font-style: oblique;
+        font-weight: normal;
         color: $text-light;
-        padding-right: .5em;
+        padding-right: 1em;
     }
 }

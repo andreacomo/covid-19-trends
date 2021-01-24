@@ -1,6 +1,6 @@
 <div fxLayout="row" fxLayoutAlign="flex-end center" class="decorator-container" *ngIf="selectedDecorator">
-    <span class="selected">{{selectedDecorator.label}}</span>
-    <button mat-button [matMenuTriggerFor]="beforeMenu" matTooltip="Cambia scala">
+    <button mat-stroked-button [matMenuTriggerFor]="beforeMenu" matTooltip="Cambia scala">
+        <span class="selected">{{selectedDecorator.label}}</span>
         <mat-icon>bar_chart</mat-icon>
     </button>
     <mat-menu #beforeMenu="matMenu" xPosition="before">

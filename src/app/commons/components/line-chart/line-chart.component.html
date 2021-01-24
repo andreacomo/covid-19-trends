@@ -1,7 +1,7 @@
 <div *ngIf="chartData" fxHide.xs class="chart-container" fxLayout="column">
     <div fxLayout="row" fxLayoutAlign="space-between" fxLayout.sm="column">
         <app-line-chart-legend [chartDataTypes]="chartTypes" (toggleDataType)="toggle($event)"></app-line-chart-legend>
-        <div fxFlexAlign.sm="center" fxLayout.sm="row" fxLayout="column">
+        <div fxFlexAlign.sm="center" fxLayout.sm="row" fxLayout="column" fxLayoutGap=".5em">
             <app-time-filter [selectedFilter]="timeFilter" (selectFilter)="applyTimeFilter($event)"></app-time-filter>
             <app-data-decorators [selectedDecorator]="valuesDecorator" (selectDecorator)="applyDecorator($event)" [decorators]="availableDecorators"></app-data-decorators>
         </div>
