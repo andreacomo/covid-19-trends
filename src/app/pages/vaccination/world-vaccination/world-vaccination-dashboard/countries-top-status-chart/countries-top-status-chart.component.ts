@@ -111,7 +111,7 @@ export class CountriesTopStatusChartComponent implements OnInit, OnChanges, OnDe
   }
 
   private resetAspectRatio() {
-    if (this.media.isActive('sm') || this.media.isActive('lt-sm')) {
+    if (this.media.isActive('md') || this.media.isActive('lt-md')) {
       this.options = {
         ...this.options,
         aspectRatio: 2
