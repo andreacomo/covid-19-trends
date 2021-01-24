@@ -103,7 +103,7 @@ export class OverallStatusChartComponent implements OnInit, OnChanges, OnDestroy
   }
 
   private resetAspectRatio() {
-    if (this.media.isActive('sm') || this.media.isActive('lt-sm')) {
+    if (this.media.isActive('md') || this.media.isActive('lt-md')) {
       this.options = {
         ...this.options,
         aspectRatio: 1.5

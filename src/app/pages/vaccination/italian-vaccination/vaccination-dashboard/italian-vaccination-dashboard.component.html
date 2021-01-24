@@ -1,9 +1,9 @@
 <div class="container" fxHide.xs fxShow.gt-xs>
     <h2 class="mat-title">Stato vaccinazioni al {{lastUpdate$ | async | date: 'dd/MM/yyyy HH:mm:ss'}}</h2>
     <div>
-        <div fxLayout="row" fxLayout.sm="column-reverse" fxLayoutGap="0" fxLayoutGap.sm="2em" *ngIf="overallStatus$ | async as overallStatus">
+        <div fxLayout="row" fxLayout.lt-md="column-reverse" fxLayout.md="column-reverse" fxLayoutGap="0" fxLayoutGap.lt-md="2em" fxLayoutGap.md="2em" *ngIf="overallStatus$ | async as overallStatus">
             <app-districts-status-chart fxFlex="80" [data]="overallStatus.details"></app-districts-status-chart>
-            <div fxFlex="20" fxLayout="column" fxLayout.sm="row" fxLayoutAlign.sm="center center" fxLayoutAlign="center stretch" fxLayoutGap="2em" *ngIf="totalDoses$ | async as totalDoses">
+            <div fxFlex="20" fxLayout="column" fxLayout.lt-md="row" fxLayout.md="row" fxLayoutAlign="center stretch" fxLayoutGap="2em" fxLayoutAlign.lt-md="center center" fxLayoutAlign.md="center center" *ngIf="totalDoses$ | async as totalDoses">
                 <app-overall-status-chart fxFlex.sm="50" [data]="overallStatus" [totals]="totalDoses"></app-overall-status-chart>
                 <app-overall-status-card *ngIf="districtsPopulation$ | async as districtsPopulation" fxFlex.sm="50" [data]="overallStatus" [totals]="totalDoses" [population]="districtsPopulation"></app-overall-status-card>
             </div>
