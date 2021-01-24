@@ -6,6 +6,7 @@ import { WorldVaccinationStatus } from '../../models/world-vaccination-status';
 import * as pluginDataLabels from 'chartjs-plugin-datalabels';
 import { Colors } from 'src/app/commons/models/colors';
 import { EuropeanVaccinationDataFilter } from '../../services/world-vaccination-data-filter';
+import { WorldVaccinationMetric } from '../../models/world-vaccination-metric';
 
 @Component({
   selector: 'app-countries-status-chart',
@@ -16,6 +17,9 @@ export class CountriesStatusChartComponent implements OnInit, OnChanges {
 
   @Input()
   data: WorldVaccinationStatus[];
+
+  @Input()
+  selected: WorldVaccinationMetric;
 
   options: ChartOptions;
 
@@ -49,15 +53,23 @@ export class CountriesStatusChartComponent implements OnInit, OnChanges {
           },
           anchor: 'end',
           align: (context) => {
-            const index = context.dataIndex;
-            const value = context.dataset.data[index];
-            const maxXAsis = (context.chart as any).scales['x-axis-0'].max;
-            const gap = parseInt(maxXAsis, 10) - (value as number);
-            return gap < 100000 ? 'left' : 'right';
+            if (this.selected.isPercent) {
+              return 'right';
+            } else {
+              const index = context.dataIndex;
+              const value = context.dataset.data[index];
+              const maxXAsis = (context.chart as any).scales['x-axis-0'].max;
+              const gap = parseInt(maxXAsis, 10) - (value as number);
+              return gap < 100000 ? 'left' : 'right';
+            }
           },
           clamp: true,
           formatter: (value, ctx) => {
-            return parseInt(value, 10).toLocaleString();
+            if (this.selected.isPercent) {
+              return parseFloat(value).toFixed(2) + '%';
+            } else {
+              return parseInt(value, 10).toLocaleString();
+            }
           }
         }
       }
@@ -68,8 +80,8 @@ export class CountriesStatusChartComponent implements OnInit, OnChanges {
   }
 
   ngOnChanges(changes: SimpleChanges): void {
-    if (changes.data.currentValue && !changes.data.previousValue) {
-      const field = 'totalVaccinations';
+    if (changes.selected.currentValue) {
+      const field = this.selected.field;
       const countryWithMaxFieldValue = new EuropeanVaccinationDataFilter(field, 27).filter(this.data);
 
       this.labels = countryWithMaxFieldValue.map(c => c.countryName);

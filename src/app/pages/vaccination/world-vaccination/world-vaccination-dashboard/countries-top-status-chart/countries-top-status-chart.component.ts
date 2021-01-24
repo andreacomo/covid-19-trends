@@ -8,6 +8,7 @@ import { CountryVaccinationStatus } from '../../models/country-vaccination-statu
 import { MediaChange, MediaObserver } from '@angular/flex-layout';
 import { distinctUntilChanged, map } from 'rxjs/operators';
 import { Subscription } from 'rxjs';
+import { WorldVaccinationMetric } from '../../models/world-vaccination-metric';
 
 @Component({
   selector: 'app-countries-top-status-chart',
@@ -18,6 +19,9 @@ export class CountriesTopStatusChartComponent implements OnInit, OnChanges, OnDe
 
   @Input()
   data: WorldVaccinationStatus[];
+
+  @Input()
+  selected: WorldVaccinationMetric;
 
   options: ChartOptions;
 
@@ -47,7 +51,11 @@ export class CountriesTopStatusChartComponent implements OnInit, OnChanges, OnDe
           enabled: true,
           callbacks: {
             label: (item: ChartTooltipItem, data: ChartData) => {
-              return parseInt(item.value, 10).toLocaleString();
+              if (this.selected.isPercent) {
+                return parseFloat(item.value).toFixed(2) + '%';
+              } else {
+                return parseInt(item.value, 10).toLocaleString();
+              }
             }
           }
       },
@@ -55,8 +63,12 @@ export class CountriesTopStatusChartComponent implements OnInit, OnChanges, OnDe
         yAxes: [{
           ticks: {
             callback: (value, index, values) => {
-              const million = value as number / 1000000;
-              return million + ' Mln';
+              if (this.selected.isPercent) {
+                return value + '%';
+              } else {
+                const million = value as number / 1000000;
+                return million + ' Mln';
+              }
             }
           }
         }]
@@ -87,8 +99,8 @@ export class CountriesTopStatusChartComponent implements OnInit, OnChanges, OnDe
   }
 
   ngOnChanges(changes: SimpleChanges): void {
-    if (changes.data.currentValue && !changes.data.previousValue) {
-      const field = 'totalVaccinations';
+    if (changes.selected?.currentValue) {
+      const field = this.selected.field;
       const countryWithMaxFieldValue = new FieldBasedWorldVaccinationDataFilter(field, this.countriesNumber).filter(this.data);
 
       this.labels = countryWithMaxFieldValue.map(c => c.countryName);

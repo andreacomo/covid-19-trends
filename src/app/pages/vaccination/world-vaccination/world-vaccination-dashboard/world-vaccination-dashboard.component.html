@@ -1,8 +1,11 @@
 <div class="container" fxHide.xs fxShow.gt-xs>
     <h2 class="mat-title">Stato vaccinazioni in Europa e nel mondo</h2>
+    <div fxLayoutAlign="center center" class="metric-selector-container">
+        <app-vaccination-metric-selector [selected]="selectedMetric" [availableMetrics]="metrics" (selectedMetric)="onChangeMetric($event)"></app-vaccination-metric-selector>
+    </div>
     <div fxLayout="row" fxLayout.lt-md="column-reverse" fxLayout.md="column-reverse" fxLayoutGap="1em" *ngIf="worldData$ | async as worldData">
-        <app-countries-status-chart [data]="worldData" fxFlex="70"></app-countries-status-chart>
-        <app-countries-top-status-chart [data]="worldData" fxFlex="30"></app-countries-top-status-chart>
+        <app-countries-status-chart [data]="worldData" [selected]="selectedMetric" fxFlex="70"></app-countries-status-chart>
+        <app-countries-top-status-chart [data]="worldData" [selected]="selectedMetric" fxFlex="30"></app-countries-top-status-chart>
     </div>
     <mat-divider class="bottom-divider"></mat-divider>
     <div class="mat-small">

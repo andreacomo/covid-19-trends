@@ -24,9 +24,9 @@ export class WorldVaccinationService {
                                 countryIsoCode: cells[1],
                                 date: cells[2],
                                 totalVaccinations: parseInt(cells[3], 10) || null,
-                                dailyVaccinations: parseInt(cells[4], 10) || null,
-                                totalVaccinationsPerHundred: parseFloat(cells[5]) || null,
-                                totalVaccinationsPerMillion: parseFloat(cells[6]) || null
+                                dailyVaccinations: parseInt(cells[7], 10) || null,
+                                totalVaccinationsPerHundred: parseFloat(cells[8]) || null,
+                                peopleFullyVaccinatedPerHundred: parseFloat(cells[10]) || null
                         })
                     )
                 ),

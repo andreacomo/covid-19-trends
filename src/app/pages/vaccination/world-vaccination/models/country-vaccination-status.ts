@@ -12,6 +12,6 @@ export class CountryVaccinationStatus {
 
     totalVaccinationsPerHundred?: number;
 
-    totalVaccinationsPerMillion?: number;
+    peopleFullyVaccinatedPerHundred?: number;
 
 }
