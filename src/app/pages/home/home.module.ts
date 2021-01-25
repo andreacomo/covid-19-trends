@@ -14,11 +14,12 @@ import { RouterModule } from '@angular/router';
 import { DistrictLockdownMapComponent } from './home-dashboard/district-lockdown-levels/district-lockdown-map/district-lockdown-map.component';
 import { RegulationDateSelectionComponent } from './home-dashboard/regulation-date-selection/regulation-date-selection.component';
 import { VaccinationSummaryComponent } from './home-dashboard/vaccination-summary/vaccination-summary.component';
+import { DistrictLockdownChartComponent } from './home-dashboard/district-lockdown-levels/district-lockdown-chart/district-lockdown-chart.component';
 
 @NgModule({
   declarations: [HomeDashboardComponent, DistrictLatestTrendComponent,
     DistrictLatestTableComponent, NationalLatestComponent, DistrictLockdownLevelsComponent,
-    DistrictLockdownMapComponent, RegulationDateSelectionComponent, VaccinationSummaryComponent],
+    DistrictLockdownMapComponent, RegulationDateSelectionComponent, VaccinationSummaryComponent, DistrictLockdownChartComponent],
   imports: [
     CommonModule,
     MaterialModule,

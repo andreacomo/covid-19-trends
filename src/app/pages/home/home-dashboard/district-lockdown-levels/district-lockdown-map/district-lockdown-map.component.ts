@@ -1,6 +1,5 @@
 import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 import { Regulation } from 'src/app/commons/models/districts-lockdown-colors';
-import { LocalDataService } from 'src/app/commons/services/local-data.service';
 
 @Component({
   selector: 'app-district-lockdown-map',

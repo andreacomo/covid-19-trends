@@ -28,6 +28,7 @@
             <div fxLayout="column" fxLayoutAlign="center center">
                 <app-district-lockdown-map [regulation]="regulation" fxFlex="100"></app-district-lockdown-map>
             </div>
+            <app-district-lockdown-chart fxHide.xs [regulations]="allRegulations"></app-district-lockdown-chart>
             <mat-divider></mat-divider>
             <div class="mat-small">
                 Fonte dati: <a href="{{source}}" target="_blank">Ministero della Salute</a>
