@@ -1,12 +1,10 @@
 import { Injectable } from '@angular/core';
 import milestones from '../../data/milestones.json';
 import provincesPop from '../../data/province_pop_2019.json';
-import districtsLockdownColors from '../../data/districts-lockdown-colors.json';
 import { Milestone } from '../models/milestone';
 import { ProvincePopulation } from '../models/province-population';
 import { Observable, of } from 'rxjs';
 import { DistrictPopulation } from '../models/district-population';
-import { DistrictsLockdownColors } from '../models/districts-lockdown-colors';
 import { Districts } from '../models/districts';
 
 @Injectable({
@@ -59,9 +57,5 @@ export class LocalDataService {
     } else {
       return Districts.MAPPING[provincePop.regione];
     }
-  }
-
-  getDistrictsLockdownColors(): Observable<DistrictsLockdownColors> {
-    return of(districtsLockdownColors as DistrictsLockdownColors);
   }
 }

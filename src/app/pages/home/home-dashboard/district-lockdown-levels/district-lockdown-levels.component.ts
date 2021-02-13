@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { LocalDataService } from 'src/app/commons/services/local-data.service';
 import { Regulation } from 'src/app/commons/models/districts-lockdown-colors';
+import { DistrictLockdownLevelsService } from './district-lockdown-levels.service';
 
 @Component({
   selector: 'app-district-lockdown-levels',
@@ -19,10 +19,10 @@ export class DistrictLockdownLevelsComponent implements OnInit {
 
   source: string;
 
-  constructor(private localDataService: LocalDataService) { }
+  constructor(private districtLockdownService: DistrictLockdownLevelsService) { }
 
   ngOnInit() {
-    this.localDataService.getDistrictsLockdownColors()
+    this.districtLockdownService.getData()
       .subscribe(districts => {
         this.source = districts.source;
         this.allRegulations = districts.data;
