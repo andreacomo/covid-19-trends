@@ -1,5 +1,5 @@
 import { Component, OnInit, EventEmitter, Output } from '@angular/core';
-import { GithubService } from 'src/app/commons/services/github.service';
+import { DpcCovid19Service } from 'src/app/commons/services/dpc-covid19.service';
 import { DistrictData } from 'src/app/commons/models/district-data';
 import { Observable } from 'rxjs';
 import { MatButtonToggleChange } from '@angular/material/button-toggle';
@@ -19,7 +19,7 @@ export class DistrictsComponent implements OnInit {
   @Output()
   clickItems: EventEmitter<DistrictData[]> = new EventEmitter<DistrictData[]>();
 
-  constructor(private github: GithubService) { }
+  constructor(private github: DpcCovid19Service) { }
 
   ngOnInit() {
     this.checkGroup = 'all';

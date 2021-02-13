@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { NationalData } from 'src/app/commons/models/national-data';
-import { GithubService } from 'src/app/commons/services/github.service';
+import { DpcCovid19Service } from 'src/app/commons/services/dpc-covid19.service';
 import { ChartConfig } from './national-data-chart/national-data-chart.component';
 import { Colors } from 'src/app/commons/models/colors';
 import { DifferentialData } from '../models/differential-data';
@@ -42,7 +42,7 @@ export class NationalTrendComponent implements OnInit {
 
   intensiveCareVsTotalHospitalizedCasesConfig: ChartConfig;
 
-  constructor(private github: GithubService) { }
+  constructor(private github: DpcCovid19Service) { }
 
   ngOnInit() {
     this.github.getAllNationalData()

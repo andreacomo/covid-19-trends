@@ -11,7 +11,7 @@ import { NationalData } from '../models/national-data';
 @Injectable({
   providedIn: 'root'
 })
-export class GithubService {
+export class DpcCovid19Service {
 
   private readonly BASE_PATH = 'https://raw.githubusercontent.com/pcm-dpc/COVID-19/master/dati-json/';
 
@@ -43,7 +43,7 @@ export class GithubService {
                     .map(d => {
                       return {...d}; // cloning objects to avoid dirty data
                     })
-                    .map(d => GithubService.addSingleColor(d, ++index));
+                    .map(d => DpcCovid19Service.addSingleColor(d, ++index));
                 })
               );
   }
@@ -55,7 +55,7 @@ export class GithubService {
           let index = -1;
           return parsed
             .filter(p => p.denominazione_regione === district && p.sigla_provincia)
-            .map(d => GithubService.addSingleColor(d, ++index));
+            .map(d => DpcCovid19Service.addSingleColor(d, ++index));
         })
       );
   }
@@ -106,7 +106,7 @@ export class GithubService {
     Object.entries(result)
       .forEach(([code, values]) => {
         ++index;
-        (values as T[]).map(v => GithubService.addSingleColor<T>(v, index));
+        (values as T[]).map(v => DpcCovid19Service.addSingleColor<T>(v, index));
       });
   }
 

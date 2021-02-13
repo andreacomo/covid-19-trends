@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, OnChanges, SimpleChanges, Output, EventEmitter } from '@angular/core';
-import { GithubService } from 'src/app/commons/services/github.service';
+import { DpcCovid19Service } from 'src/app/commons/services/dpc-covid19.service';
 import { Observable } from 'rxjs';
 import { Province } from '../../../../../../commons/models/province';
 import { MatButtonToggleChange } from '@angular/material/button-toggle';
@@ -22,7 +22,7 @@ export class ProvincesComponent implements OnInit, OnChanges {
 
   checkGroup: 'all' | 'none';
 
-  constructor(private github: GithubService) { }
+  constructor(private github: DpcCovid19Service) { }
 
   ngOnInit() {
     this.checkGroup = 'all';

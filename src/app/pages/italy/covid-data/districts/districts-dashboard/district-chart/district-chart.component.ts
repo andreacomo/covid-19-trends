@@ -2,7 +2,7 @@ import { Component, OnInit, Input, ViewChild, OnChanges, SimpleChanges } from '@
 import { DistrictData } from 'src/app/commons/models/district-data';
 import { ChartDataSets } from 'chart.js';
 import { Label } from 'ng2-charts';
-import { GithubService } from 'src/app/commons/services/github.service';
+import { DpcCovid19Service } from 'src/app/commons/services/dpc-covid19.service';
 import { LinearChartProvider } from 'src/app/commons/services/linear-chart-provider';
 import { LinearChartDataTypeProvider } from 'src/app/commons/services/linear-chart-data-type-provider';
 import { DataFilterProviderService } from 'src/app/commons/services/data-filter-provider.service';
@@ -35,7 +35,7 @@ export class DistrictChartComponent implements OnInit, OnChanges {
 
   private currentData: {[name: string]: DistrictData[]};
 
-  constructor(private github: GithubService,
+  constructor(private github: DpcCovid19Service,
               private chartProvider: LinearChartProvider,
               private chartTypeProvider: LinearChartDataTypeProvider,
               private dataFilterProvider: DataFilterProviderService,

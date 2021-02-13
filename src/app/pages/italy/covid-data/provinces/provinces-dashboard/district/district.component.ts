@@ -1,6 +1,6 @@
 import { Component, OnInit, Output, EventEmitter, Input, OnChanges, SimpleChanges } from '@angular/core';
 import { Observable } from 'rxjs';
-import { GithubService } from 'src/app/commons/services/github.service';
+import { DpcCovid19Service } from 'src/app/commons/services/dpc-covid19.service';
 import { map, tap } from 'rxjs/operators';
 
 @Component({
@@ -18,7 +18,7 @@ export class DistrictComponent implements OnInit {
 
   districts$: Observable<string[]>;
 
-  constructor(private github: GithubService) { }
+  constructor(private github: DpcCovid19Service) { }
 
   ngOnInit() {
     this.districts$ = this.github.getDistricts()

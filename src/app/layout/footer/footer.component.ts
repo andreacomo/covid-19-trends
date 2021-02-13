@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { GithubService } from 'src/app/commons/services/github.service';
+import { DpcCovid19Service } from 'src/app/commons/services/dpc-covid19.service';
 
 @Component({
   selector: 'app-footer',
@@ -10,7 +10,7 @@ export class FooterComponent implements OnInit {
 
   updateDate: Date;
 
-  constructor(private github: GithubService) { }
+  constructor(private github: DpcCovid19Service) { }
 
   ngOnInit() {
     this.github.getLatestNational()

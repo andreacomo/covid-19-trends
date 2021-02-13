@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, OnChanges, SimpleChanges } from '@angular/core';
-import { GithubService } from 'src/app/commons/services/github.service';
+import { DpcCovid19Service } from 'src/app/commons/services/dpc-covid19.service';
 import { ChartDataSets } from 'chart.js';
 import { Label } from 'ng2-charts';
 import { LinearChartProvider } from '../../../../../../commons/services/linear-chart-provider';
@@ -39,7 +39,7 @@ export class ProvincesChartComponent implements OnInit, OnChanges {
 
   private chartDataType: ChartDataType;
 
-  constructor(private github: GithubService,
+  constructor(private github: DpcCovid19Service,
               private chartProvider: LinearChartProvider,
               private chartTypeProvider: LinearChartDataTypeProvider,
               private filtersProvider: DataFilterProviderService,

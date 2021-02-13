@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { GithubService } from 'src/app/commons/services/github.service';
+import { DpcCovid19Service } from 'src/app/commons/services/dpc-covid19.service';
 import { DistrictData } from 'src/app/commons/models/district-data';
 import { NationalData } from 'src/app/commons/models/national-data';
 
@@ -14,7 +14,7 @@ export class HomeDashboardComponent implements OnInit {
 
   allNationalData: NationalData[];
 
-  constructor(private github: GithubService) { }
+  constructor(private github: DpcCovid19Service) { }
 
   ngOnInit() {
     this.github.getAllDistrictsData()
