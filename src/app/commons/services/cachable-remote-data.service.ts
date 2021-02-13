@@ -8,7 +8,7 @@ import { publishReplay, refCount } from 'rxjs/operators';
 })
 export class CachableRemoteDataService {
 
-  private cache$: Map<string, any> = new Map<string, any>();
+  private cache$: Map<string, Observable<any>> = new Map<string, Observable<any>>();
 
   constructor(private http: HttpClient) { }
 

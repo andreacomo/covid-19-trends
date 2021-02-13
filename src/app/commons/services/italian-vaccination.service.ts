@@ -1,7 +1,7 @@
-import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { map, publishReplay, refCount } from 'rxjs/operators';
+import { CachableRemoteDataService } from './cachable-remote-data.service';
+import { map } from 'rxjs/operators';
 import { VaccinationDistrictStatus } from 'src/app/pages/vaccination/italian-vaccination/models/vaccination-district-status';
 import { VaccinationDistrictOverallStatus } from 'src/app/pages/vaccination/italian-vaccination/models/vaccination-district-overall-status';
 import { VaccinationAgeGroup } from 'src/app/pages/vaccination/italian-vaccination/models/vaccination-age-group';
@@ -23,18 +23,16 @@ export class ItalianVaccinationService {
 
     private readonly VAX_SUMMARY = 'vaccini-summary-latest.json';
 
-    private cache: Map<string, Observable<any>> = new Map<string, Observable<any>>();
-
-    constructor(private http: HttpClient) { }
+    constructor(private remoteService: CachableRemoteDataService) { }
 
     public getLastUpdate(): Observable<Date> {
-        return this.getRemoteOrCached(this.LATEST_UPDATE, 'lastUpdate', data => {
+        return this.getRemoteOrCached(this.LATEST_UPDATE, data => {
             return Date.parse(data.ultimo_aggiornamento);
         });
     }
 
     public getTotal(): Observable<number> {
-        return this.getRemoteOrCached(this.REGISTRY_SUMMARY, 'registrySummary', data => {
+        return this.getRemoteOrCached(this.REGISTRY_SUMMARY, data => {
             return data.data;
         })
         .pipe(
@@ -43,7 +41,7 @@ export class ItalianVaccinationService {
     }
 
     public getFirstDosesTotal(): Observable<number> {
-        return this.getRemoteOrCached(this.REGISTRY_SUMMARY, 'registrySummary', data => {
+        return this.getRemoteOrCached(this.REGISTRY_SUMMARY, data => {
             return data.data;
         })
         .pipe(
@@ -52,7 +50,7 @@ export class ItalianVaccinationService {
     }
 
     public getSecondDosesTotal(): Observable<number> {
-        return this.getRemoteOrCached(this.REGISTRY_SUMMARY, 'registrySummary', data => {
+        return this.getRemoteOrCached(this.REGISTRY_SUMMARY, data => {
             return data.data;
         })
         .pipe(
@@ -61,7 +59,7 @@ export class ItalianVaccinationService {
     }
 
     public getVaccinationDoses(): Observable<VaccinationDoses> {
-        return this.getRemoteOrCached(this.REGISTRY_SUMMARY, 'registrySummary', data => {
+        return this.getRemoteOrCached(this.REGISTRY_SUMMARY, data => {
             return data.data;
         })
         .pipe(
@@ -74,7 +72,7 @@ export class ItalianVaccinationService {
     }
 
     public getTotalMen(): Observable<number> {
-        return this.getRemoteOrCached(this.REGISTRY_SUMMARY, 'registrySummary', data => {
+        return this.getRemoteOrCached(this.REGISTRY_SUMMARY, data => {
             return data.data;
         })
         .pipe(
@@ -83,7 +81,7 @@ export class ItalianVaccinationService {
     }
 
     public getTotalWomen(): Observable<number> {
-        return this.getRemoteOrCached(this.REGISTRY_SUMMARY, 'registrySummary', data => {
+        return this.getRemoteOrCached(this.REGISTRY_SUMMARY, data => {
             return data.data;
         })
         .pipe(
@@ -92,7 +90,7 @@ export class ItalianVaccinationService {
     }
 
     public getVaccinationDistrictsStatus(): Observable<VaccinationDistrictOverallStatus> {
-        return this.getRemoteOrCached(this.VAX_SUMMARY, 'districtsStatus', data => {
+        return this.getRemoteOrCached(this.VAX_SUMMARY, data => {
             const doneCount: number = this.sumAttributeValue(data.data, 'dosi_somministrate');
             const receivedCount: number = this.sumAttributeValue(data.data, 'dosi_consegnate');
             return {
@@ -112,7 +110,7 @@ export class ItalianVaccinationService {
     }
 
     public getAgeGroups(): Observable<VaccinationAgeGroup[]> {
-        return this.getRemoteOrCached(this.REGISTRY_SUMMARY, 'registrySummary', data => {
+        return this.getRemoteOrCached(this.REGISTRY_SUMMARY, data => {
             return data.data;
         })
         .pipe(
@@ -125,7 +123,7 @@ export class ItalianVaccinationService {
     }
 
     public getCategoryGroups(): Observable<VaccinationCategoryGroup[]> {
-        return this.getRemoteOrCached(this.REGISTRY_SUMMARY, 'registrySummary', data => {
+        return this.getRemoteOrCached(this.REGISTRY_SUMMARY, data => {
             return data.data;
         })
         .pipe(
@@ -143,16 +141,11 @@ export class ItalianVaccinationService {
         );
     }
 
-    private getRemoteOrCached(path: string, cacheKey, transformer: (data) => any): Observable<any> {
-        if (this.cache[cacheKey] == null) {
-            this.cache[cacheKey] = this.http.get<any>(this.url + path)
+    private getRemoteOrCached(path: string, transformer: (data) => any): Observable<any> {
+        return this.remoteService.getData<any>(this.url + path)
             .pipe(
-                map(transformer),
-                publishReplay(1),
-                refCount()
+                map(transformer)
             );
-        }
-        return this.cache[cacheKey];
     }
 
     private sumAttributeValue(data: VaccinationRegistrySummary[], attribute: string) {
