@@ -12,14 +12,14 @@ export class CachableRemoteDataService {
 
   constructor(private http: HttpClient) { }
 
-  public getData<T>(url: string, cacheKey: string = url): Observable<T[]> {
-    if (this.cache$[cacheKey] == null) {
-      this.cache$[cacheKey] = this.http.get(url)
+  public getData<T>(url: string, options: object = null): Observable<T[] | any> {
+    if (this.cache$[url] == null) {
+      this.cache$[url] = (options ? this.http.get(url, options) : this.http.get(url))
           .pipe(
             publishReplay(1),
             refCount()
-          ) as Observable<T[]>;
+          );
     }
-    return this.cache$[cacheKey];
+    return this.cache$[url];
   }
 }

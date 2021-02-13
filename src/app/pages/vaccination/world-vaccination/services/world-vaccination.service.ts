@@ -1,7 +1,7 @@
-import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
+import { CachableRemoteDataService } from 'src/app/commons/services/cachable-remote-data.service';
 import { CountryVaccinationStatus } from '../models/country-vaccination-status';
 import { WorldVaccinationStatus } from '../models/world-vaccination-status';
 
@@ -12,10 +12,10 @@ export class WorldVaccinationService {
 
     private url = 'https://raw.githubusercontent.com/owid/covid-19-data/master/public/data/vaccinations/vaccinations.csv';
 
-    constructor(private http: HttpClient) { }
+    constructor(private remoteService: CachableRemoteDataService) { }
 
     public getWorldVaccination(): Observable<WorldVaccinationStatus[]> {
-        return this.http.get(this.url, {
+        return this.remoteService.getData<string>(this.url, {
                 responseType: 'text'
             })
             .pipe(
