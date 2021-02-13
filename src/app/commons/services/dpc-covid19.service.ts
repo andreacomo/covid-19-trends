@@ -3,7 +3,7 @@ import { map } from 'rxjs/operators';
 import { Observable } from 'rxjs';
 import { ProvinceData } from '../models/province-data';
 import { DistrictData } from '../models/district-data';
-import { RemoteDataService } from './remote-data.service';
+import { CachableRemoteDataService } from './cachable-remote-data.service';
 import { Colors } from '../models/colors';
 import { HasColor } from '../models/has-color';
 import { NationalData } from '../models/national-data';
@@ -27,7 +27,7 @@ export class DpcCovid19Service {
 
   private readonly LATEST_NATIONAL_DATA = 'dpc-covid19-ita-andamento-nazionale-latest.json';
 
-  constructor(private remote: RemoteDataService) { }
+  constructor(private remote: CachableRemoteDataService) { }
 
   private static addSingleColor<T extends HasColor>(data: T, colorIndex: number): T {
     data.color = Colors.SUPPORTED[colorIndex];
@@ -35,7 +35,7 @@ export class DpcCovid19Service {
   }
 
   getDistricts(): Observable<DistrictData[]> {
-    return this.remote.getLatestData<DistrictData>(this.BASE_PATH + this.LATEST_DISTRICTS_DATA)
+    return this.remote.getData<DistrictData>(this.BASE_PATH + this.LATEST_DISTRICTS_DATA)
               .pipe(
                 map(data => {
                   let index = -1;
@@ -49,7 +49,7 @@ export class DpcCovid19Service {
   }
 
   getProvincesOf(district: string): Observable<ProvinceData[]> {
-    return this.remote.getLatestData<ProvinceData>(this.BASE_PATH + this.LATEST_PROVINCES_DATA)
+    return this.remote.getData<ProvinceData>(this.BASE_PATH + this.LATEST_PROVINCES_DATA)
       .pipe(
         map(parsed => {
           let index = -1;
@@ -61,7 +61,7 @@ export class DpcCovid19Service {
   }
 
   getAllDataInDistrict(district: string): Observable<{[code: string]: ProvinceData[]}> {
-    return this.remote.getAllData<ProvinceData>(this.BASE_PATH + this.ALL_PROVINCES_DATA)
+    return this.remote.getData<ProvinceData>(this.BASE_PATH + this.ALL_PROVINCES_DATA)
       .pipe(
         map(data => {
           const result = data
@@ -77,7 +77,7 @@ export class DpcCovid19Service {
   }
 
   getAllDistrictsData(): Observable<{[name: string]: DistrictData[]}> {
-    return this.remote.getAllData<DistrictData>(this.BASE_PATH + this.ALL_DISTRICTS_DATA)
+    return this.remote.getData<DistrictData>(this.BASE_PATH + this.ALL_DISTRICTS_DATA)
       .pipe(
         map(data => {
           const result = data
@@ -91,14 +91,14 @@ export class DpcCovid19Service {
   }
 
   getLatestNational(): Observable<NationalData> {
-    return this.remote.getLatestData<NationalData>(this.BASE_PATH + this.LATEST_NATIONAL_DATA)
+    return this.remote.getData<NationalData>(this.BASE_PATH + this.LATEST_NATIONAL_DATA)
       .pipe(
         map(d => d[0])
       );
   }
 
   getAllNationalData(): Observable<NationalData[]> {
-    return this.remote.getAllData<NationalData>(this.BASE_PATH + this.ALL_NATIONAL_DATA);
+    return this.remote.getData<NationalData>(this.BASE_PATH + this.ALL_NATIONAL_DATA);
   }
 
   private addColorToEntries<T extends HasColor>(result: {[code: string]: T[]}) {
