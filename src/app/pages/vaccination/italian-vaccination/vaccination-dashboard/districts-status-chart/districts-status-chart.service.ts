@@ -60,8 +60,8 @@ export abstract class DistrictsStatusChartTypeStrategy {
                 position: 'top',
                 align: 'center',
                 labels: {
-                boxWidth: 13,
-                fontFamily: 'Roboto, \'Helvetica Neue\', sans-serif'
+                    boxWidth: 13,
+                    fontFamily: 'Roboto, \'Helvetica Neue\', sans-serif'
                 }
             },
             tooltips: {

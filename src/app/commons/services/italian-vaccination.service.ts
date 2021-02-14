@@ -9,6 +9,8 @@ import { VaccinationCategoryGroup } from 'src/app/pages/vaccination/italian-vacc
 import { Districts } from '../models/districts';
 import { VaccinationRegistrySummary } from 'src/app/pages/vaccination/italian-vaccination/models/vaccination-registry-summary';
 import { VaccinationDoses } from 'src/app/pages/vaccination/italian-vaccination/models/vaccination-doses';
+import { VaccinesDelivery } from 'src/app/pages/vaccination/italian-vaccination/models/vaccines-delivery';
+import { VaccinesDeliveryPerSupplierInDistricts, DistrictDelivery } from 'src/app/pages/vaccination/italian-vaccination/models/vaccines-delivery-per-supplier-in-districts';
 
 @Injectable({
     providedIn: 'root'
@@ -22,6 +24,8 @@ export class ItalianVaccinationService {
     private readonly REGISTRY_SUMMARY = 'anagrafica-vaccini-summary-latest.json';
 
     private readonly VAX_SUMMARY = 'vaccini-summary-latest.json';
+
+    private readonly VACCINES_DELIVERY = 'consegne-vaccini-latest.json';
 
     constructor(private remoteService: CachableRemoteDataService) { }
 
@@ -144,6 +148,39 @@ export class ItalianVaccinationService {
         );
     }
 
+    public getVaccinesDeliveriesInDistricts(): Observable<VaccinesDeliveryPerSupplierInDistricts[]> {
+        return this.getRemoteOrCached(this.VACCINES_DELIVERY, data => {
+            return data.data;
+        })
+        .pipe(
+            map((data: VaccinesDelivery[]) => {
+                const groupBySupplier = data.reduce((acc, delivery) => {
+                    acc[delivery.fornitore] = acc[delivery.fornitore] || [];
+                    acc[delivery.fornitore].push(delivery);
+                    return acc;
+                }, {} as {[supplier: string]: VaccinesDelivery[]});
+
+                return Object.values(groupBySupplier).map((deliveriesBySupplier, index) => {
+                    const groupByDistrict = deliveriesBySupplier.reduce((acc, delivery) => {
+                        const reduction = acc[delivery.area] || {
+                            districtName: Districts.MAPPING[delivery.area],
+                            doses: 0
+                        } as DistrictDelivery;
+
+                        acc[delivery.area] = reduction;
+                        reduction.doses += delivery.numero_dosi;
+                        return acc;
+                    }, {} as {[area: string]: DistrictDelivery});
+
+                    return {
+                        supplier: deliveriesBySupplier[index].fornitore,
+                        deliveries: Object.values(groupByDistrict)
+                    } as VaccinesDeliveryPerSupplierInDistricts;
+                });
+            })
+        );
+    }
+
     private getRemoteOrCached(path: string, transformer: (data) => any): Observable<any> {
         return this.remoteService.getData<any>(this.url + path)
             .pipe(
@@ -151,7 +188,7 @@ export class ItalianVaccinationService {
             );
     }
 
-    private sumAttributeValue(data: VaccinationRegistrySummary[], attribute: string) {
+    private sumAttributeValue(data: any[], attribute: string) {
         return data.reduce((acc, s) => acc + s[attribute], 0);
     }
 }
