@@ -136,6 +136,9 @@ export class ItalianVaccinationService {
                 }, {
                     name: 'Ospiti Strutture Residenziali',
                     doneCount: this.sumAttributeValue(data, 'categoria_ospiti_rsa')
+                }, {
+                    name: 'Over 80',
+                    doneCount: this.sumAttributeValue(data, 'categoria_over80')
                 }])
             )
         );
