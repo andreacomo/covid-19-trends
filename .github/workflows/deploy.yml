@@ -30,7 +30,7 @@ jobs:
     - name: Cache node_modules folder
       uses: actions/cache@v2
       with:
-        path: ~/node_modules
+        path: ./node_modules
         key: ${{ runner.os }}-build-node-modules-${{ hashFiles('**/package-lock.json') }}
 
     - name: Install dependencies
