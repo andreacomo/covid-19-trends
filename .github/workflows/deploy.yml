@@ -19,13 +19,19 @@ jobs:
       with:
         node-version: 12.16.3
 
-    - name: Cache node modules
+    - name: Cache .npm folder
       uses: actions/cache@v2
       env:
-        cache-name: cache-node-modules
+        cache-name: cache-npm-folder
       with:
         path: ~/.npm
         key: ${{ runner.os }}-build-${{ env.cache-name }}
+
+    - name: Cache node_modules folder
+      uses: actions/cache@v2
+      with:
+        path: ~/node_modules
+        key: ${{ runner.os }}-build-node-modules-${{ hashFiles('**/package-lock.json') }}
 
     - name: Install dependencies
       run: npm install
