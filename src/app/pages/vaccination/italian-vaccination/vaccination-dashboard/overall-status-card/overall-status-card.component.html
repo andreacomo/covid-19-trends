@@ -1,18 +1,15 @@
 <mat-card>
     <mat-card-content fxLayout="column" fxLayoutAlign="space-evenly stretch" fxLayoutGap="1em">
-        <div class="item" fxLayout="row" fxLayoutAlign="space-between center" fxFlex="100" fxLayoutGap=".5em">
-            <strong>Completamento dosi</strong> 
-            <div>{{(data.completionPercentage * 100).toFixed(2)}}%</div>
-        </div>
+        <h2 class="mat-h2">Completamento dosi</h2>
+        <div class="percentage" fxFlexAlign="center">{{(data.completionPercentage * 100).toFixed(2)}}%</div>
+
         <div class="divider"></div>
+        
         <div class="item" fxLayout="row" fxLayoutAlign="space-between center" fxFlex="100" fxLayoutGap=".5em">
             <strong>Ricevute</strong> 
             <div>{{data.receivedCount.toLocaleString()}}</div>
         </div>
-        <div class="item" fxLayout="row" fxLayoutAlign="space-between center" fxFlex="100" fxLayoutGap=".5em">
-            <strong>Somministrate</strong> 
-            <div>{{data.doneCount.toLocaleString()}}</div>
-        </div>
+        
         <div class="item" fxLayout="row" fxLayoutAlign="space-between center" fxFlex="100" fxLayoutGap=".5em">
             <strong>Rimaste</strong> 
             <div>{{(data.receivedCount - data.doneCount).toLocaleString()}}</div>
