@@ -1,6 +1,0 @@
-export enum Trend {
-    MARKED_IMPROVEMENT,
-    IMPROVEMENT,
-    DETERIORATION,
-    SHARP_DETERIORATION
-}
