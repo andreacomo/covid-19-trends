@@ -20,6 +20,7 @@ jobs:
         node-version: 12.16.3
 
     - name: Cache node modules
+      id: cache
       uses: actions/cache@v2
       with:
         path: |
@@ -30,6 +31,7 @@ jobs:
           ${{ runner.os }}-node-
 
     - name: Install dependencies
+      if: steps.cache.outputs.cache-hit != 'true'
       run: npm install
 
     - name: Build
