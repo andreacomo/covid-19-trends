@@ -1,5 +1,5 @@
 import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
-import { ChartData, ChartDataSets, ChartTooltipItem } from 'chart.js';
+import { ChartData, ChartDataSets, ChartOptions, ChartTooltipItem } from 'chart.js';
 import { Label } from 'ng2-charts';
 import { TimeFilter } from 'src/app/commons/models/time-filter';
 import { DataFilterProviderService } from 'src/app/commons/services/data-filter-provider.service';
@@ -16,6 +16,8 @@ export class VaccinesDeliveryDateChartComponent implements OnInit, OnChanges {
   @Input()
   data: VaccinesDeliveryDatesPerSupplier[];
 
+  options: ChartOptions;
+
   chartData: ChartDataSets[];
 
   labels: Label[];
@@ -27,6 +29,36 @@ export class VaccinesDeliveryDateChartComponent implements OnInit, OnChanges {
   constructor(private dataFilterProvider: DataFilterProviderService) {
     this.timeFilter = this.dataFilterProvider.getTimeFilterByScope('all');
     this.allDates = this.generateDateRange();
+    this.options = {
+      responsive: true,
+      aspectRatio: 2,
+      legend: {
+        display: true,
+        position: 'top',
+        align: 'center',
+        labels: {
+            fontFamily: 'Roboto, \'Helvetica Neue\', sans-serif'
+        }
+      },
+      tooltips: {
+        enabled: true,
+        callbacks: {
+          label: (item: ChartTooltipItem, data: ChartData) => {
+            return `${data.datasets[item.datasetIndex].label}: ${parseInt(item.value, 10).toLocaleString()}`;
+          },
+        }
+      },
+      scales: {
+        yAxes: [{
+          ticks: {
+            callback: (value, index, values) => {
+              const thousand = value as number / 1000;
+              return thousand + ' Mila';
+            }
+          }
+        }]
+      }
+    };
   }
 
   ngOnInit(): void { }
@@ -63,7 +95,10 @@ export class VaccinesDeliveryDateChartComponent implements OnInit, OnChanges {
         borderColor: color + 'AA',
         hoverBackgroundColor: color,
         hoverBorderColor: color, */
+        borderWidth: 2,
         lineTension: 0.1,
+        pointRadius: 4,
+        pointBorderWidth: 2,
         label: d.supplier,
         tooltipFooter: (items: ChartTooltipItem[], data: ChartData) => ''
       };

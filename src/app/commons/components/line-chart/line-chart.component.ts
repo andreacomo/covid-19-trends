@@ -35,7 +35,7 @@ export class LineChartComponent implements OnInit {
   availableDecorators: ChartDataTypeDecorator[];
 
   @Input()
-  showLegend = false;
+  options: ChartOptions;
 
   @Output()
   toggleDataType: EventEmitter<ChartDataType> = new EventEmitter<ChartDataType>();
@@ -45,8 +45,6 @@ export class LineChartComponent implements OnInit {
 
   @Output()
   valuesDecoratorChange: EventEmitter<ChartDataTypeDecorator> = new EventEmitter<ChartDataTypeDecorator>();
-
-  options: ChartOptions;
 
   plugins: any[];
 
@@ -61,7 +59,7 @@ export class LineChartComponent implements OnInit {
 
     this.dataService.getMilestones()
       .subscribe(m => {
-        this.options = this.chartProvider.getOptions(m);
+        this.options = this.options || this.chartProvider.getOptions(m);
       });
   }
 
