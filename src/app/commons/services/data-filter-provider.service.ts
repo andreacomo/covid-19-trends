@@ -45,7 +45,7 @@ export class DataFilterProviderService {
     },
     all: {
       scope: 'all',
-      label: 'Dall\'inizio dell\'epidemia',
+      label: 'Dall\'inizio',
       icon: 'crop_free',
       apply: (values: any[]) => values
     }

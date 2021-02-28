@@ -16,6 +16,9 @@
             <div fxLayout="row" class="groups-charts">
                 <app-vaccines-brand-delivery-chart *ngIf="deliveriesInDistricts$ | async as deliveriesInDistricts" [data]="deliveriesInDistricts" fxFlex="100"></app-vaccines-brand-delivery-chart>
             </div>
+            <div fxLayout="row" class="groups-charts">
+                <app-vaccines-delivery-date-chart *ngIf="deliveriesInTime$ | async as deliveriesInTime" [data]="deliveriesInTime" fxFlex="100"></app-vaccines-delivery-date-chart>
+            </div>
         </div>
         <mat-divider class="bottom-divider"></mat-divider>
         <div class="mat-small">

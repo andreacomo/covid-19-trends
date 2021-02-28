@@ -12,13 +12,15 @@ import { AgeGroupsChartComponent } from './vaccination-dashboard/age-groups-char
 import { CategoryGroupsChartComponent } from './vaccination-dashboard/category-groups-chart/category-groups-chart.component';
 import { VaccinesBrandDeliveryChartComponent } from './vaccination-dashboard/vaccines-brand-delivery-chart/vaccines-brand-delivery-chart.component';
 import { PeopleCoverageStatusCardComponent } from './vaccination-dashboard/people-coverage-status-card/people-coverage-status-card.component';
+import { VaccinesDeliveryDateChartComponent } from './vaccination-dashboard/vaccines-delivery-date-chart/vaccines-delivery-date-chart.component';
 
 
 
 @NgModule({
   declarations: [ItalianVaccinationDashboardComponent, DistrictsStatusChartComponent,
     DistrictStatusChartTypeSelectorComponent, OverallStatusChartComponent,
-    OverallStatusCardComponent, AgeGroupsChartComponent, CategoryGroupsChartComponent, VaccinesBrandDeliveryChartComponent, PeopleCoverageStatusCardComponent],
+    OverallStatusCardComponent, AgeGroupsChartComponent, CategoryGroupsChartComponent,
+    VaccinesBrandDeliveryChartComponent, PeopleCoverageStatusCardComponent, VaccinesDeliveryDateChartComponent],
   imports: [
     CommonModule,
     MaterialModule,

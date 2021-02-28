@@ -11,6 +11,7 @@ import { VaccinationRegistrySummary } from 'src/app/pages/vaccination/italian-va
 import { VaccinationDoses } from 'src/app/pages/vaccination/italian-vaccination/models/vaccination-doses';
 import { VaccinesDelivery } from 'src/app/pages/vaccination/italian-vaccination/models/vaccines-delivery';
 import { VaccinesDeliveryPerSupplierInDistricts, DistrictDelivery } from 'src/app/pages/vaccination/italian-vaccination/models/vaccines-delivery-per-supplier-in-districts';
+import { VaccinesDeliveryDatesPerSupplier, SupplierDelivery } from 'src/app/pages/vaccination/italian-vaccination/models/vaccines-delivery-dates-per-supplier';
 
 @Injectable({
     providedIn: 'root'
@@ -160,7 +161,7 @@ export class ItalianVaccinationService {
                     return acc;
                 }, {} as {[supplier: string]: VaccinesDelivery[]});
 
-                return Object.values(groupBySupplier).map((deliveriesBySupplier, index) => {
+                return Object.values(groupBySupplier).map((deliveriesBySupplier) => {
                     const groupByDistrict = deliveriesBySupplier.reduce((acc, delivery) => {
                         const reduction = acc[delivery.area] || {
                             districtName: Districts.MAPPING[delivery.area],
@@ -173,9 +174,42 @@ export class ItalianVaccinationService {
                     }, {} as {[area: string]: DistrictDelivery});
 
                     return {
-                        supplier: deliveriesBySupplier[index].fornitore,
+                        supplier: deliveriesBySupplier[0].fornitore,
                         deliveries: Object.values(groupByDistrict)
                     } as VaccinesDeliveryPerSupplierInDistricts;
+                });
+            })
+        );
+    }
+
+    public getVaccinesDeliveryInTime(): Observable<VaccinesDeliveryDatesPerSupplier[]> {
+        return this.getRemoteOrCached(this.VACCINES_DELIVERY, data => {
+            return data.data;
+        })
+        .pipe(
+            map((data: VaccinesDelivery[]) => {
+                const groupBySupplier = data.reduce((acc, delivery) => {
+                    acc[delivery.fornitore] = acc[delivery.fornitore] || [];
+                    acc[delivery.fornitore].push(delivery);
+                    return acc;
+                }, {} as {[supplier: string]: VaccinesDelivery[]});
+
+                return Object.values(groupBySupplier).map((deliveriesBySupplier) => {
+                    const groupByDate = deliveriesBySupplier.reduce((acc, delivery) => {
+                        const reduction = acc[delivery.data_consegna] || {
+                            date: delivery.data_consegna,
+                            doses: 0
+                        } as SupplierDelivery;
+
+                        acc[delivery.data_consegna] = reduction;
+                        reduction.doses += delivery.numero_dosi;
+                        return acc;
+                    }, {} as {[date: string]: SupplierDelivery});
+
+                    return {
+                        supplier: deliveriesBySupplier[0].fornitore,
+                        deliveries: Object.values(groupByDate).sort((d1, d2) => d1.date.localeCompare(d2.date))
+                    } as VaccinesDeliveryDatesPerSupplier;
                 });
             })
         );

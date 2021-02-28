@@ -34,6 +34,9 @@ export class LineChartComponent implements OnInit {
   @Input()
   availableDecorators: ChartDataTypeDecorator[];
 
+  @Input()
+  showLegend = false;
+
   @Output()
   toggleDataType: EventEmitter<ChartDataType> = new EventEmitter<ChartDataType>();
 

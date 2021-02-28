@@ -3,6 +3,7 @@ import { ChartData, ChartDataSets, ChartOptions, ChartTooltipItem } from 'chart.
 import { Label } from 'ng2-charts';
 import { VaccinesDeliveryPerSupplierInDistricts } from '../../models/vaccines-delivery-per-supplier-in-districts';
 import { Colors } from 'src/app/commons/models/colors';
+import { VaccineSupplierColors } from '../../models/vaccine-supplier-colors';
 
 @Component({
   selector: 'app-vaccines-brand-delivery-chart',
@@ -59,13 +60,13 @@ export class VaccinesBrandDeliveryChartComponent implements OnInit, OnChanges {
   ngOnChanges(changes: SimpleChanges): void {
     if (changes.data.currentValue && !changes.data.previousValue) {
       this.labels = this.data[0].deliveries.map(d => d.districtName);
-      const colors = [Colors.SUPPORTED[1], Colors.SUPPORTED[2], Colors.SUPPORTED[4]];
+      const colors = VaccineSupplierColors.SUPPORTED;
       this.chartData = this.data.map((d, i) => ({
         data: d.deliveries.map(delivery => delivery.doses),
-        backgroundColor: colors[i] + 'AA',
+        /* backgroundColor: colors[i] + 'AA',
         borderColor: colors[i] + 'AA',
         hoverBackgroundColor: colors[i],
-        hoverBorderColor: colors[i],
+        hoverBorderColor: colors[i], */
         label: d.supplier
       }));
     }
