@@ -23,8 +23,8 @@ export class DistrictLockdownChartComponent implements OnInit, OnChanges {
   chartData: ChartDataSets[];
 
   colors = {
-    GREEN: '#67c401',
-    DARK_GREEN: '#67c401',
+    WHITE: '#fff',
+    DARK_WHITE: '#efefef',
     YELLOW: '#fff704',
     DARK_YELLOW: '#ffe004',
     ORANGE: '#ffa500',
@@ -69,10 +69,10 @@ export class DistrictLockdownChartComponent implements OnInit, OnChanges {
     if (changes.regulations.isFirstChange()) {
       this.labels = this.regulations.map(r => r.validFromDate);
       this.chartData = [{
-      //  data: this.getLengthOfColor('GREEN'),
-      //  label: 'Verde',
-      //  ...this.getBarColor('GREEN')
-      // }, {
+        data: this.getLengthOfColor('WHITE'),
+        label: 'Bianco',
+        ...this.getBarColor('WHITE')
+       }, {
         data: this.getLengthOfColor('YELLOW'),
         label: 'Giallo',
         ...this.getBarColor('YELLOW')

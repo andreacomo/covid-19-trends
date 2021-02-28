@@ -6,8 +6,9 @@
     width: 24px;
     margin-right: 1em;
 
-    &.green {
-        background-color: $district-green;
+    &.white {
+        background-color: $district-white;
+        border: 1px solid #efefef;
     }
     &.yellow {
         background-color: $district-yellow;
