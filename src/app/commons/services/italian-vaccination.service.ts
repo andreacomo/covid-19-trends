@@ -144,6 +144,12 @@ export class ItalianVaccinationService {
                 }, {
                     name: 'Over 80',
                     doneCount: this.sumAttributeValue(data, 'categoria_over80')
+                }, {
+                    name: 'Forze Armate',
+                    doneCount: this.sumAttributeValue(data, 'categoria_forze_armate')
+                }, {
+                    name: 'Personale Scolastico',
+                    doneCount: this.sumAttributeValue(data, 'categoria_personale_scolastico')
                 }])
             )
         );

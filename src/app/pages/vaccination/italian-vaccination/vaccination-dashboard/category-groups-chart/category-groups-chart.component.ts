@@ -32,7 +32,9 @@ export class CategoryGroupsChartComponent implements OnInit, OnChanges {
         Colors.SUPPORTED[10],
         Colors.SUPPORTED[12],
         Colors.SUPPORTED[13],
-        Colors.SUPPORTED[14]
+        Colors.SUPPORTED[14],
+        Colors.SUPPORTED[8],
+        Colors.SUPPORTED[2]
       ]
     }];
     this.options = {
