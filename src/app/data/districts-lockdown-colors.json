@@ -638,7 +638,7 @@
                         "Umbria", 
                         "P.A. Bolzano",
                         "Abruzzo", "Toscana", "P.A. Trento",
-                        "Emilia-Romagna", "Molise",
+                        "Emilia-Romagna",
                         "Marche", "Lombardia", "Piemonte",
                         "Friuli Venezia Giulia", "Veneto"
                     ]
@@ -649,6 +649,47 @@
                     "districts": [
                         "Molise", "Basilicata",
                         "Campania"
+                    ]
+                }
+            ]
+        },
+        {
+            "issueDate": "2021-03-13",
+            "validFromDate": "2021-03-15",
+            "scenarios": [
+                {
+                    "color": "WHITE",
+                    "scenario": 1,
+                    "districts": [
+                        "Sardegna"
+                    ]
+                },
+                {
+                    "color": "YELLOW",
+                    "scenario": 2,
+                    "districts": [ 
+                        "Calabria",
+                        "Valle d'Aosta",
+                        "Sicilia",
+                        "Liguria"
+                    ]
+                },
+                {
+                    "color": "ORANGE",
+                    "scenario": 3,
+                    "districts": [
+                        "Umbria", 
+                        "P.A. Bolzano",
+                        "Abruzzo", "Toscana"
+                    ]
+                },
+                {
+                    "color": "RED",
+                    "scenario": 4,
+                    "districts": [
+                        "Molise", "Basilicata",
+                        "Campania",
+                        "Lazio", "Puglia", "Emilia-Romagna", "Friuli Venezia Giulia", "Lombardia", "Marche", "Molise", "Piemonte", "P.A. Trento", "Veneto"
                     ]
                 }
             ]
