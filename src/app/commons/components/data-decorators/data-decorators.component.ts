@@ -1,7 +1,6 @@
 import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
 import { ProvincePercentAdapter } from '../../models/province-percent-adapter';
 import { ChartDataTypeDecorator } from '../../models/chart-data-type-decorator';
-import { ChartDataTypeDecoratorProvider } from '../../services/chart-data-type-decorator-provider';
 import { DefaultChartDataTypeValues } from '../../models/default-chart-data-type-values.service';
 
 @Component({
