@@ -7,6 +7,7 @@ import { ChartDataTypeDecorator } from 'src/app/commons/models/chart-data-type-d
 import { ChartDataType } from 'src/app/commons/models/chart-data-type';
 import { DataFilterProviderService } from 'src/app/commons/services/data-filter-provider.service';
 import { VaccinationPerDay } from '../../models/vaccination-per-day';
+import { DateStringPipe } from 'src/app/commons/pipes/date-string.pipe';
 
 @Component({
   selector: 'app-administration-day-by-day-chart',
@@ -30,7 +31,8 @@ export class AdministrationDayByDayChartComponent implements OnInit, OnChanges {
 
   availableDecorators: AdaptableChartDataTypeDecorator[];
 
-  constructor(private dataFilterProvider: DataFilterProviderService) {
+  constructor(private dataFilterProvider: DataFilterProviderService,
+              private dateString: DateStringPipe) {
     this.timeFilter = this.dataFilterProvider.getTimeFilterByScope('all');
     this.availableDecorators = [
       new AsIsChartDataTypeAdapter('Somministrazioni giornaliere', 'stacked_line_chart', false),
@@ -89,7 +91,7 @@ export class AdministrationDayByDayChartComponent implements OnInit, OnChanges {
   }
 
   private initDataSet() {
-    this.labels = this.timeFilter.apply(this.data).map(d => d.day.replace('T00:00:00.000Z', ''));
+    this.labels = this.timeFilter.apply(this.data).map(d => this.dateString.transform(d.day));
 
     this.chartData = [
       this.createChartData('Seconda dose', this.data, 'second', Colors.SUPPORTED[15]),

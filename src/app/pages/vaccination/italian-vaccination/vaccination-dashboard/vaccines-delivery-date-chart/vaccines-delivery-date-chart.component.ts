@@ -2,6 +2,7 @@ import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/cor
 import { ChartData, ChartDataSets, ChartOptions, ChartTooltipItem } from 'chart.js';
 import { Label } from 'ng2-charts';
 import { TimeFilter } from 'src/app/commons/models/time-filter';
+import { DateStringPipe } from 'src/app/commons/pipes/date-string.pipe';
 import { DataFilterProviderService } from 'src/app/commons/services/data-filter-provider.service';
 import { VaccineSupplierColors } from '../../models/vaccine-supplier-colors';
 import { SupplierDelivery, VaccinesDeliveryDatesPerSupplier } from '../../models/vaccines-delivery-dates-per-supplier';
@@ -26,7 +27,8 @@ export class VaccinesDeliveryDateChartComponent implements OnInit, OnChanges {
 
   private allDates: Date[];
 
-  constructor(private dataFilterProvider: DataFilterProviderService) {
+  constructor(private dataFilterProvider: DataFilterProviderService,
+              private dateString: DateStringPipe) {
     this.timeFilter = this.dataFilterProvider.getTimeFilterByScope('all');
     this.allDates = this.generateDateRange();
     this.options = {
@@ -107,14 +109,10 @@ export class VaccinesDeliveryDateChartComponent implements OnInit, OnChanges {
 
   private createDateDosesMap(deliveries: SupplierDelivery[]) {
     return deliveries.reduce((acc, item) => {
-      const timeStamp = this.stripTime(item.date);
+      const timeStamp = this.dateString.transform(item.date);
       acc[timeStamp] = acc[timeStamp] || item.doses;
       return acc;
     }, {});
-  }
-
-  private stripTime(timeStamp: string): string {
-    return timeStamp.replace(/T00:00:00.000Z/, '');
   }
 
   private generateDateRange(): Date[] {
