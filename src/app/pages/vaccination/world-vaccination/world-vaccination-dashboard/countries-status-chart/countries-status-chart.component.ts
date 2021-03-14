@@ -47,6 +47,19 @@ export class CountriesStatusChartComponent implements OnInit, OnChanges {
       tooltips: {
           enabled: false
       },
+      scales: {
+        xAxes: [{
+          ticks: {
+            callback: (value, index, values) => {
+              if (value > 1000) {
+                return Numbers.beautifyZeroesAsText(value as number);
+              } else {
+                return value;
+              }
+            }
+          }
+        }]
+      },
       plugins: {
         datalabels: {
           font: {
@@ -61,7 +74,7 @@ export class CountriesStatusChartComponent implements OnInit, OnChanges {
               const value = context.dataset.data[index];
               const maxXAsis = (context.chart as any).scales['x-axis-0'].max;
               const gap = parseInt(maxXAsis, 10) - (value as number);
-              return gap < 100000 ? 'left' : 'right';
+              return gap < 1000000 ? 'left' : 'right';
             }
           },
           clamp: true,
