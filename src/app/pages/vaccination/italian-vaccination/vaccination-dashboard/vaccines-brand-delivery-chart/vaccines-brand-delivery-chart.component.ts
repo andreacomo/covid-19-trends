@@ -4,6 +4,7 @@ import { Label } from 'ng2-charts';
 import { VaccinesDeliveryPerSupplierInDistricts } from '../../models/vaccines-delivery-per-supplier-in-districts';
 import { Colors } from 'src/app/commons/models/colors';
 import { VaccineSupplierColors } from '../../models/vaccine-supplier-colors';
+import { Numbers } from 'src/app/commons/models/numbers';
 
 @Component({
   selector: 'app-vaccines-brand-delivery-chart',
@@ -47,7 +48,7 @@ export class VaccinesBrandDeliveryChartComponent implements OnInit, OnChanges {
         enabled: true,
         callbacks: {
           label: (item: ChartTooltipItem, data: ChartData) => {
-            return `${data.datasets[item.datasetIndex].label}: ${parseInt(item.value, 10).toLocaleString()}`;
+            return `${data.datasets[item.datasetIndex].label}: ${Numbers.beautifyWithSeparators(item.value)}`;
           },
         }
       }

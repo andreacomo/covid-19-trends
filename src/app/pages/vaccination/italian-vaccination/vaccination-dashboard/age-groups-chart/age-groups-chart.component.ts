@@ -4,6 +4,7 @@ import { VaccinationAgeGroup } from '../../models/vaccination-age-group';
 import * as pluginDataLabels from 'chartjs-plugin-datalabels';
 import { Label } from 'ng2-charts';
 import { Colors } from 'src/app/commons/models/colors';
+import { Numbers } from 'src/app/commons/models/numbers';
 
 @Component({
   selector: 'app-age-groups-chart',
@@ -40,6 +41,11 @@ export class AgeGroupsChartComponent implements OnInit, OnChanges {
         yAxes: [{
           gridLines: {
             display: true
+          },
+          ticks: {
+            callback: (value, index, values) => {
+              return Numbers.beautifyZeroesAsText(value as number);
+            }
           }
         }]
       },
@@ -55,7 +61,7 @@ export class AgeGroupsChartComponent implements OnInit, OnChanges {
           align: 'end',
           offset: -2,
           formatter: (value, ctx) => {
-            return parseInt(value, 10).toLocaleString();
+            return Numbers.beautifyWithSeparators(value);
           }
         },
       }

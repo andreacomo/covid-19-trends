@@ -1,6 +1,7 @@
 import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 import { ChartData, ChartDataSets, ChartOptions, ChartTooltipItem } from 'chart.js';
 import { Label } from 'ng2-charts';
+import { Numbers } from 'src/app/commons/models/numbers';
 import { TimeFilter } from 'src/app/commons/models/time-filter';
 import { DateStringPipe } from 'src/app/commons/pipes/date-string.pipe';
 import { DataFilterProviderService } from 'src/app/commons/services/data-filter-provider.service';
@@ -46,7 +47,7 @@ export class VaccinesDeliveryDateChartComponent implements OnInit, OnChanges {
         enabled: true,
         callbacks: {
           label: (item: ChartTooltipItem, data: ChartData) => {
-            return `${data.datasets[item.datasetIndex].label}: ${parseInt(item.value, 10).toLocaleString()}`;
+            return `${data.datasets[item.datasetIndex].label}: ${Numbers.beautifyWithSeparators(item.value)}`;
           },
         }
       },
@@ -54,8 +55,7 @@ export class VaccinesDeliveryDateChartComponent implements OnInit, OnChanges {
         yAxes: [{
           ticks: {
             callback: (value, index, values) => {
-              const thousand = value as number / 1000;
-              return thousand + ' Mila';
+              return Numbers.beautifyZeroesAsText(value as number);
             }
           }
         }]

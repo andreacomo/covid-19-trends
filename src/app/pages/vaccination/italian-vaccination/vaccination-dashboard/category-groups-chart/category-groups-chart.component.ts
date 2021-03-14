@@ -4,6 +4,7 @@ import { Label } from 'ng2-charts';
 import { Colors } from 'src/app/commons/models/colors';
 import { VaccinationCategoryGroup } from '../../models/vaccination-category-group';
 import * as pluginDataLabels from 'chartjs-plugin-datalabels';
+import { Numbers } from 'src/app/commons/models/numbers';
 
 @Component({
   selector: 'app-category-groups-chart',
@@ -67,7 +68,7 @@ export class CategoryGroupsChartComponent implements OnInit, OnChanges {
             weight: 'bold'
           },
           formatter: (value, ctx) => {
-            return parseInt(value, 10).toLocaleString();
+            return Numbers.beautifyWithSeparators(value);
           },
         },
       }

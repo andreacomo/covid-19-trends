@@ -8,6 +8,7 @@ import { ChartDataType } from 'src/app/commons/models/chart-data-type';
 import { DataFilterProviderService } from 'src/app/commons/services/data-filter-provider.service';
 import { VaccinationPerDay } from '../../models/vaccination-per-day';
 import { DateStringPipe } from 'src/app/commons/pipes/date-string.pipe';
+import { Numbers } from 'src/app/commons/models/numbers';
 
 @Component({
   selector: 'app-administration-day-by-day-chart',
@@ -55,7 +56,7 @@ export class AdministrationDayByDayChartComponent implements OnInit, OnChanges {
         enabled: true,
         callbacks: {
           label: (item: ChartTooltipItem, data: ChartData) => {
-            return `${data.datasets[item.datasetIndex].label}: ${parseInt(item.value, 10).toLocaleString()}`;
+            return `${data.datasets[item.datasetIndex].label}: ${Numbers.beautifyWithSeparators(item.value)}`;
           },
         }
       },
@@ -63,8 +64,7 @@ export class AdministrationDayByDayChartComponent implements OnInit, OnChanges {
         yAxes: [{
           ticks: {
             callback: (value, index, values) => {
-              const thousand = value as number / 1000;
-              return thousand + ' Mila';
+              return Numbers.beautifyZeroesAsText(value as number);
             }
           }
         }]

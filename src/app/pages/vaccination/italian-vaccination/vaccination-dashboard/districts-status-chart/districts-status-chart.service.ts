@@ -3,6 +3,7 @@ import { ChartData, ChartDataSets, ChartOptions, ChartTooltipItem } from 'chart.
 import { Colors } from 'src/app/commons/models/colors';
 import { VaccinationDistrictStatus } from '../../models/vaccination-district-status';
 import * as pluginDataLabels from 'chartjs-plugin-datalabels';
+import { Numbers } from 'src/app/commons/models/numbers';
 
 @Injectable({
     providedIn: 'root'
@@ -107,12 +108,12 @@ export class DistrictsStatusChartTypePercentageStrategy extends DistrictsStatusC
         };
         options.tooltips.callbacks = {
             label: (item: ChartTooltipItem, data: ChartData) => {
-              return parseFloat(item.value).toFixed(2) + '%';
+                return Numbers.appendPercentWithPrecisionFromString(item.value);
             },
             footer: (items: ChartTooltipItem[], data: ChartData) => {
-              const item = items[0];
-              const status = this.data[item.index];
-              return `Somministrazioni: ${status.doneCount.toLocaleString()}\nDosi consegnate: ${status.receivedCount.toLocaleString()}`;
+                const item = items[0];
+                const status = this.data[item.index];
+                return `Somministrazioni: ${status.doneCount.toLocaleString()}\nDosi consegnate: ${status.receivedCount.toLocaleString()}`;
             }
         };
         options.plugins = {
@@ -162,7 +163,7 @@ export class DistrictsStatusChartTypeAbsoluteStrategy extends DistrictsStatusCha
         options.tooltips.callbacks = {
             label: (item: ChartTooltipItem, data: ChartData) => {
                 const prefix = item.datasetIndex === 1 ? 'Dosi consegnate' : 'Somministrazioni';
-                return `${prefix}: ${parseInt(item.value, 10).toLocaleString()}`;
+                return `${prefix}: ${Numbers.beautifyWithSeparators(item.value)}`;
             }
         };
 

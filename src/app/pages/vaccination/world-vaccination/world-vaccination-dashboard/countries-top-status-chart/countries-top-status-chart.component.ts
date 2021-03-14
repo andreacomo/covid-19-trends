@@ -9,6 +9,7 @@ import { MediaChange, MediaObserver } from '@angular/flex-layout';
 import { distinctUntilChanged, map } from 'rxjs/operators';
 import { Subscription } from 'rxjs';
 import { WorldVaccinationMetric } from '../../models/world-vaccination-metric';
+import { Numbers } from 'src/app/commons/models/numbers';
 
 @Component({
   selector: 'app-countries-top-status-chart',
@@ -52,9 +53,9 @@ export class CountriesTopStatusChartComponent implements OnInit, OnChanges, OnDe
           callbacks: {
             label: (item: ChartTooltipItem, data: ChartData) => {
               if (this.selected.isPercent) {
-                return parseFloat(item.value).toFixed(2) + '%';
+                return Numbers.appendPercentWithPrecisionFromString(item.value);
               } else {
-                return parseInt(item.value, 10).toLocaleString();
+                return Numbers.beautifyWithSeparators(item.value);
               }
             }
           }
@@ -64,10 +65,9 @@ export class CountriesTopStatusChartComponent implements OnInit, OnChanges, OnDe
           ticks: {
             callback: (value, index, values) => {
               if (this.selected.isPercent) {
-                return value + '%';
+                return Numbers.appendPercent(value);
               } else {
-                const million = value as number / 1000000;
-                return million + ' Mln';
+                return Numbers.beautifyZeroesAsText(value as number);
               }
             }
           }
@@ -82,7 +82,7 @@ export class CountriesTopStatusChartComponent implements OnInit, OnChanges, OnDe
           align: 'end',
           clamp: true,
           formatter: (value, ctx) => {
-            return parseInt(value, 10).toLocaleString();
+            return Numbers.beautifyWithSeparators(value);
           }
         }
       }

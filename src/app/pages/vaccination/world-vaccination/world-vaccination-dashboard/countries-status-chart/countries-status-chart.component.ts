@@ -7,6 +7,7 @@ import * as pluginDataLabels from 'chartjs-plugin-datalabels';
 import { Colors } from 'src/app/commons/models/colors';
 import { EuropeanVaccinationDataFilter } from '../../services/world-vaccination-data-filter';
 import { WorldVaccinationMetric } from '../../models/world-vaccination-metric';
+import { Numbers } from 'src/app/commons/models/numbers';
 
 @Component({
   selector: 'app-countries-status-chart',
@@ -66,9 +67,9 @@ export class CountriesStatusChartComponent implements OnInit, OnChanges {
           clamp: true,
           formatter: (value, ctx) => {
             if (this.selected.isPercent) {
-              return parseFloat(value).toFixed(2) + '%';
+              return Numbers.appendPercentWithPrecisionFromString(value);
             } else {
-              return parseInt(value, 10).toLocaleString();
+              return Numbers.beautifyWithSeparators(value);
             }
           }
         }

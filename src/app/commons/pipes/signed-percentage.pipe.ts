@@ -1,4 +1,5 @@
 import { Pipe, PipeTransform } from '@angular/core';
+import { Numbers } from '../models/numbers';
 
 @Pipe({
   name: 'signedPercentage'
@@ -6,7 +7,7 @@ import { Pipe, PipeTransform } from '@angular/core';
 export class SignedPercentagePipe implements PipeTransform {
 
   transform(value: number, ...args: number[]): string {
-    return (value > 0 ? `+${this.toFixed(value, args[0])}` : this.toFixed(value, args[0])) + '%';
+    return Numbers.appendPercentWithSignAndPrecision(value, args[0]);
   }
 
   private toFixed(value: number, precision: number): string {

@@ -8,6 +8,7 @@ import { VaccinationDistrictOverallStatus } from '../../models/vaccination-distr
 import * as pluginDataLabels from 'chartjs-plugin-datalabels';
 import { Subscription } from 'rxjs';
 import { VaccinationDoses } from '../../models/vaccination-doses';
+import { Numbers } from 'src/app/commons/models/numbers';
 
 @Component({
   selector: 'app-overall-status-chart',
@@ -61,7 +62,7 @@ export class OverallStatusChartComponent implements OnInit, OnChanges, OnDestroy
             weight: 'bold'
           },
           formatter: (value, ctx) => {
-            return parseInt(value, 10).toLocaleString();
+            return Numbers.beautifyWithSeparators(value);
           },
         },
       }
