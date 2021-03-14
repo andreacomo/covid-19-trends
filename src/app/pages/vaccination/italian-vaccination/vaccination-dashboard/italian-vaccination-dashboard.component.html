@@ -9,6 +9,9 @@
                     <app-overall-status-card fxFlex.sm="50" [data]="overallStatus" [totals]="totalDoses" [population]="districtsPopulation"></app-overall-status-card>
                 </div>
             </div>
+            <div fxLayout="row" class="groups-charts">
+                <app-administration-day-by-day-chart *ngIf="vaccinationsPerDay$ | async as vaccinationsPerDay" [data]="vaccinationsPerDay" fxFlex="100"></app-administration-day-by-day-chart>
+            </div>
             <div fxLayout="row" fxLayout.sm="column" fxLayoutGap="2em" class="groups-charts">
                 <app-age-groups-chart *ngIf="ageGroups$ | async as ageGroups" [data]="ageGroups" fxFlex="50" fxFlex.sm="100"></app-age-groups-chart>
                 <app-category-groups-chart *ngIf="categoryGroup$ | async as categoryGroup" [data]="categoryGroup" fxFlex="50" fxFlex.sm="100"></app-category-groups-chart>

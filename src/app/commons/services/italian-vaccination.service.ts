@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { ObjectUnsubscribedError, Observable } from 'rxjs';
 import { CachableRemoteDataService } from './cachable-remote-data.service';
 import { map } from 'rxjs/operators';
 import { VaccinationDistrictStatus } from 'src/app/pages/vaccination/italian-vaccination/models/vaccination-district-status';
@@ -12,6 +12,8 @@ import { VaccinationDoses } from 'src/app/pages/vaccination/italian-vaccination/
 import { VaccinesDelivery } from 'src/app/pages/vaccination/italian-vaccination/models/vaccines-delivery';
 import { VaccinesDeliveryPerSupplierInDistricts, DistrictDelivery } from 'src/app/pages/vaccination/italian-vaccination/models/vaccines-delivery-per-supplier-in-districts';
 import { VaccinesDeliveryDatesPerSupplier, SupplierDelivery } from 'src/app/pages/vaccination/italian-vaccination/models/vaccines-delivery-dates-per-supplier';
+import { VaccinationPerDay } from 'src/app/pages/vaccination/italian-vaccination/models/vaccination-per-day';
+import { VaccinationAdministrationSummary } from 'src/app/pages/vaccination/italian-vaccination/models/vaccination-registry-summary copy';
 
 @Injectable({
     providedIn: 'root'
@@ -27,6 +29,8 @@ export class ItalianVaccinationService {
     private readonly VAX_SUMMARY = 'vaccini-summary-latest.json';
 
     private readonly VACCINES_DELIVERY = 'consegne-vaccini-latest.json';
+
+    private readonly VACCINES_DONE_SUMMARY = 'somministrazioni-vaccini-summary-latest.json';
 
     constructor(private remoteService: CachableRemoteDataService) { }
 
@@ -217,6 +221,34 @@ export class ItalianVaccinationService {
                         deliveries: Object.values(groupByDate).sort((d1, d2) => d1.date.localeCompare(d2.date))
                     } as VaccinesDeliveryDatesPerSupplier;
                 });
+            })
+        );
+    }
+
+    public getVaccinationsPerDay(): Observable<VaccinationPerDay[]> {
+        return this.getRemoteOrCached(this.VACCINES_DONE_SUMMARY, data => {
+            return data.data;
+        })
+        .pipe(
+            map((data: VaccinationAdministrationSummary[]) => {
+                const vaccinationsGroupedByDay: {[day: string]: VaccinationPerDay} = data.reduce((acc, v) => {
+                    acc[v.data_somministrazione] = acc[v.data_somministrazione] || {
+                        day: v.data_somministrazione,
+                        doses: {
+                            total: 0,
+                            first: 0,
+                            second: 0
+                        }
+                    };
+                    acc[v.data_somministrazione].doses.total += v.totale;
+                    acc[v.data_somministrazione].doses.first += v.prima_dose;
+                    acc[v.data_somministrazione].doses.second += v.seconda_dose;
+
+                    return acc;
+                }, {});
+
+                return Object.values(vaccinationsGroupedByDay)
+                    .sort((v1, v2) => v1.day.localeCompare(v2.day));
             })
         );
     }

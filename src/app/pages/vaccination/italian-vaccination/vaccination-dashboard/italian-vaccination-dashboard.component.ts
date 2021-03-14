@@ -7,6 +7,7 @@ import { VaccinationAgeGroup } from '../models/vaccination-age-group';
 import { VaccinationCategoryGroup } from '../models/vaccination-category-group';
 import { VaccinationDistrictOverallStatus } from '../models/vaccination-district-overall-status';
 import { VaccinationDoses } from '../models/vaccination-doses';
+import { VaccinationPerDay } from '../models/vaccination-per-day';
 import { VaccinesDeliveryDatesPerSupplier } from '../models/vaccines-delivery-dates-per-supplier';
 import { VaccinesDeliveryPerSupplierInDistricts } from '../models/vaccines-delivery-per-supplier-in-districts';
 
@@ -33,6 +34,8 @@ export class ItalianVaccinationDashboardComponent implements OnInit {
 
   deliveriesInTime$: Observable<VaccinesDeliveryDatesPerSupplier[]>;
 
+  vaccinationsPerDay$: Observable<VaccinationPerDay[]>;
+
   constructor(private vaccinationService: ItalianVaccinationService,
               private localDataService: LocalDataService) { }
 
@@ -45,6 +48,7 @@ export class ItalianVaccinationDashboardComponent implements OnInit {
     this.districtsPopulation$ = this.localDataService.getDistrictsPopulation();
     this.deliveriesInDistricts$ = this.vaccinationService.getVaccinesDeliveriesInDistricts();
     this.deliveriesInTime$ = this.vaccinationService.getVaccinesDeliveryInTime();
+    this.vaccinationsPerDay$ = this.vaccinationService.getVaccinationsPerDay();
   }
 
 }

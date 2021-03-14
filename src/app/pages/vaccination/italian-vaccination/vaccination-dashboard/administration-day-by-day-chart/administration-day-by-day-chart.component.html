@@ -1,0 +1,7 @@
+<h3 class="mat-h3">Somministrazioni giornaliere</h3>
+<app-line-chart #chart
+                [options]="options"
+                [chartData]="chartData" 
+                [labels]="labels"
+                [timeFilter]="timeFilter"
+                (timeFilterChange)="applyTimeFilter($event)"></app-line-chart>

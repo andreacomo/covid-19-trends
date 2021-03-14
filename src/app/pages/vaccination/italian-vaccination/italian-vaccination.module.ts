@@ -13,6 +13,7 @@ import { CategoryGroupsChartComponent } from './vaccination-dashboard/category-g
 import { VaccinesBrandDeliveryChartComponent } from './vaccination-dashboard/vaccines-brand-delivery-chart/vaccines-brand-delivery-chart.component';
 import { PeopleCoverageStatusCardComponent } from './vaccination-dashboard/people-coverage-status-card/people-coverage-status-card.component';
 import { VaccinesDeliveryDateChartComponent } from './vaccination-dashboard/vaccines-delivery-date-chart/vaccines-delivery-date-chart.component';
+import { AdministrationDayByDayChartComponent } from './vaccination-dashboard/administration-day-by-day-chart/administration-day-by-day-chart.component';
 
 
 
@@ -20,7 +21,8 @@ import { VaccinesDeliveryDateChartComponent } from './vaccination-dashboard/vacc
   declarations: [ItalianVaccinationDashboardComponent, DistrictsStatusChartComponent,
     DistrictStatusChartTypeSelectorComponent, OverallStatusChartComponent,
     OverallStatusCardComponent, AgeGroupsChartComponent, CategoryGroupsChartComponent,
-    VaccinesBrandDeliveryChartComponent, PeopleCoverageStatusCardComponent, VaccinesDeliveryDateChartComponent],
+    VaccinesBrandDeliveryChartComponent, PeopleCoverageStatusCardComponent, VaccinesDeliveryDateChartComponent,
+    AdministrationDayByDayChartComponent],
   imports: [
     CommonModule,
     MaterialModule,
