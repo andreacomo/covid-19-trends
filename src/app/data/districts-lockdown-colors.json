@@ -693,6 +693,42 @@
                     ]
                 }
             ]
+        }, {
+            "issueDate": "2021-03-19",
+            "validFromDate": "2021-03-22",
+            "scenarios": [
+                {
+                    "color": "WHITE",
+                    "scenario": 1,
+                    "districts": [
+                    ]
+                },
+                {
+                    "color": "YELLOW",
+                    "scenario": 2,
+                    "districts": [ 
+                    ]
+                },
+                {
+                    "color": "ORANGE",
+                    "scenario": 3,
+                    "districts": [
+                        "Umbria", 
+                        "P.A. Bolzano",
+                        "Abruzzo", "Toscana",
+                        "Calabria", "Valle d'Aosta", "Sicilia", "Liguria", "Sardegna", "Basilicata"
+                    ]
+                },
+                {
+                    "color": "RED",
+                    "scenario": 4,
+                    "districts": [
+                        "Molise",
+                        "Campania",
+                        "Lazio", "Puglia", "Emilia-Romagna", "Friuli Venezia Giulia", "Lombardia", "Marche", "Molise", "Piemonte", "P.A. Trento", "Veneto"
+                    ]
+                }
+            ]
         }
     ]
 }
