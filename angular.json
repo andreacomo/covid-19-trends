@@ -32,8 +32,6 @@
               "src/styles.scss"
             ],
             "scripts": [],
-            "baseHref": "/covid-19-trends/",
-            "deployUrl": "/covid-19-trends/",
             "allowedCommonJsDependencies": [
               "chartjs-plugin-annotation",
               "chartjs-plugin-datalabels",
