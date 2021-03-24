@@ -5,7 +5,7 @@ Una applicazione per monitorare l'andamento dei contagi nella propria provincia 
 ## Online
 E' disponibile online servito come "GitHub Pages" su:
 
-[https://andreacomo.github.io/covid-19-trends/](https://andreacomo.github.io/covid-19-trends/)
+[https://www.covid-trend.com](https://www.covid-trend.com)
 
 ## Prerequirements
 
