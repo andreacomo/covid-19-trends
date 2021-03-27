@@ -11,53 +11,23 @@ import { VaccinationPerDay } from 'src/app/pages/vaccination/italian-vaccination
 })
 export class VaccinationSummaryComponent implements OnInit {
 
-  total$: Observable<string>;
+  total: number;
 
-  firstDoseTotal$: Observable<string>;
+  firstDoseTotal: number;
 
-  secondDoseTotal$: Observable<string>;
-
-  totalMen$: Observable<string>;
-
-  totalWomen$: Observable<string>;
-
-  lastUpdate$: Observable<Date>;
+  secondDoseTotal: number;
 
   todayVaccination: VaccinationPerDay;
 
   constructor(private vaccinationService: ItalianVaccinationService) { }
 
   ngOnInit(): void {
-    this.total$ = this.vaccinationService.getTotal()
-      .pipe(
-        map(data => data.toLocaleString())
-      );
-
-    this.firstDoseTotal$ = this.vaccinationService.getFirstDosesTotal()
-      .pipe(
-        map(data => data.toLocaleString())
-      );
-
-    this.secondDoseTotal$ = this.vaccinationService.getSecondDosesTotal()
-      .pipe(
-        map(data => data.toLocaleString())
-      );
-
-    this.totalMen$ = this.vaccinationService.getTotalMen()
-      .pipe(
-        map(data => data.toLocaleString())
-      );
-
-    this.totalWomen$ = this.vaccinationService.getTotalWomen()
-      .pipe(
-        map(data => data.toLocaleString())
-      );
-
-    this.lastUpdate$ = this.vaccinationService.getLastUpdate();
-
     this.vaccinationService.getVaccinationsPerDay()
-        .subscribe(v => {
-          this.todayVaccination = v[v.length - 1];
+        .subscribe(vaccinations => {
+          this.todayVaccination = vaccinations[vaccinations.length - 1];
+          this.total = vaccinations.reduce((acc, v) => acc + v.doses.total, 0);
+          this.firstDoseTotal = vaccinations.reduce((acc, v) => acc + v.doses.first, 0);
+          this.secondDoseTotal = vaccinations.reduce((acc, v) => acc + v.doses.second, 0);
         });
   }
 

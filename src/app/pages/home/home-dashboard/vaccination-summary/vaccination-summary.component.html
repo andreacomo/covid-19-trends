@@ -2,10 +2,9 @@
 <mat-card>
     <mat-card-content fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="1em">
         <div class="item" fxLayout="row" fxLayoutAlign="center center" fxFlex="100" fxLayoutGap=".5em">
-            <div fxLayout="row" fxLayoutAlign="center center" fxLayoutGap=".5em">
-                <mat-icon>history_toggle_off</mat-icon>
-                <div class="numbers" *ngIf="lastUpdate$ | async as lastUpdate; else lastUpdateLoading">{{lastUpdate | date: 'dd/MM/yyyy HH:mm:ss'}}</div>
-                <ng-template #lastUpdateLoading>
+            <div fxLayout="row" fxLayoutAlign="center center" fxLayoutGap=".5em" class="numbers">
+                <span *ngIf="todayVaccination; else loading">Somministrate il {{todayVaccination.day | date: 'dd/MM/yyyy'}}</span>
+                <ng-template #loading>
                     <mat-spinner [diameter]="24"></mat-spinner>
                 </ng-template>
             </div>
@@ -13,7 +12,7 @@
         
         <div fxFlex="100" fxLayout="column" fxLayout.sm="row" fxLayout.md="row" fxLayoutAlign="center space-around" fxLayoutGap="1em" fxLayoutGap.sm="4em" fxLayoutGap.md="4em" class="box-container">
             <div fxFlex="100" fxLayout="column" class="box-container">
-                <h2 class="mat-h2 box-title">Oggi</h2>
+                
                 <div class="item" fxLayout="row" fxLayoutAlign="space-between center" fxFlex="100" fxLayoutGap=".5em">
                     <strong>Prime dosi</strong> 
                     <div fxLayout="row" fxLayoutAlign="center center" fxLayoutGap=".5em">
@@ -47,13 +46,13 @@
             </div>
 
             <div fxFlex="100" fxLayout="column" class="box-container">
-                <h2 class="mat-h2 box-title">Fino ad oggi</h2>
+                <h2 class="mat-h2 box-title">Totali</h2>
                 <div class="item" fxLayout="row" fxLayoutAlign="space-between center" fxFlex="100" fxLayoutGap=".5em">
                     <strong>Prime dosi</strong> 
                     <div fxLayout="row" fxLayoutAlign="center center" fxLayoutGap=".5em">
                         <mat-icon>local_pharmacy</mat-icon>
-                        <div class="numbers" *ngIf="firstDoseTotal$ | async as firstDoseTotal; else firstDoseTotalLoading">{{firstDoseTotal}}</div>
-                        <ng-template #firstDoseTotalLoading>
+                        <div class="numbers" *ngIf="firstDoseTotal; else loading">{{firstDoseTotal.toLocaleString()}}</div>
+                        <ng-template #loading>
                             <mat-spinner [diameter]="24"></mat-spinner>
                         </ng-template>
                     </div>
@@ -62,8 +61,8 @@
                     <strong>Seconde dosi</strong> 
                     <div fxLayout="row" fxLayoutAlign="center center" fxLayoutGap=".5em">
                         <mat-icon>security</mat-icon>
-                        <div class="numbers" *ngIf="secondDoseTotal$ | async as secondDoseTotal; else firstDoseTotalLoading">{{secondDoseTotal}}</div>
-                        <ng-template #secondDoseTotalLoading>
+                        <div class="numbers" *ngIf="secondDoseTotal; else loading">{{secondDoseTotal.toLocaleString()}}</div>
+                        <ng-template #loading>
                             <mat-spinner [diameter]="24"></mat-spinner>
                         </ng-template>
                     </div>
@@ -72,8 +71,8 @@
                     <strong>Dosi totali</strong> 
                     <div fxLayout="row" fxLayoutAlign="center center" fxLayoutGap=".5em">
                         <mat-icon>emoji_events</mat-icon>
-                        <div class="numbers" *ngIf="total$ | async as total; else totalLoading">{{total}}</div>
-                        <ng-template #totalLoading>
+                        <div class="numbers" *ngIf="total; else loading">{{total.toLocaleString()}}</div>
+                        <ng-template #loading>
                             <mat-spinner [diameter]="24"></mat-spinner>
                         </ng-template>
                     </div>
