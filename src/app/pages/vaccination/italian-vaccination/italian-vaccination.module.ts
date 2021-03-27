@@ -16,6 +16,7 @@ import { VaccinesDeliveryDateChartComponent } from './vaccination-dashboard/over
 import { AdministrationDayByDayChartComponent } from './vaccination-dashboard/overview-panel/administration-day-by-day-chart/administration-day-by-day-chart.component';
 import { OverviewPanelComponent } from './vaccination-dashboard/overview-panel/overview-panel.component';
 import { RouterModule } from '@angular/router';
+import { DistrictsPanelComponent } from './vaccination-dashboard/districts-panel/districts-panel.component';
 
 
 
@@ -25,7 +26,8 @@ import { RouterModule } from '@angular/router';
     OverallStatusCardComponent, AgeGroupsChartComponent, CategoryGroupsChartComponent,
     VaccinesBrandDeliveryChartComponent, PeopleCoverageStatusCardComponent, VaccinesDeliveryDateChartComponent,
     AdministrationDayByDayChartComponent,
-    OverviewPanelComponent],
+    OverviewPanelComponent,
+    DistrictsPanelComponent],
   imports: [
     CommonModule,
     MaterialModule,
