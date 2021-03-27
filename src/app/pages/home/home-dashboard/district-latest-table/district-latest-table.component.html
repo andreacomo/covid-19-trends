@@ -1,4 +1,4 @@
-<div *ngIf="tableData && displayedColumns" >
+<div *ngIf="tableData && displayedColumns; else loading" >
     <h2 class="mat-title">Incremento casi totali</h2>
     <div class="table-container mat-elevation-z2">
         <table #table mat-table [dataSource]="tableData" multiTemplateDataRows matSort matSortActive="district" matSortDirection="asc" (matSortChange)="onSortChange($event); table.renderRows()">
@@ -97,3 +97,6 @@
         </table>
     </div>
 </div>
+<ng-template #loading>
+    <mat-spinner [diameter]="36"></mat-spinner>
+</ng-template>

@@ -1,5 +1,9 @@
 @import 'src/styles/palette.scss';
 
+mat-spinner {
+    margin: 10em auto;
+}
+
 .table-container {
     height: 80vh;
     overflow: auto;
