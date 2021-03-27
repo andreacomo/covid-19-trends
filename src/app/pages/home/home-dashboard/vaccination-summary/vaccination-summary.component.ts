@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { ItalianVaccinationService } from 'src/app/commons/services/italian-vaccination.service';
+import { VaccinationPerDay } from 'src/app/pages/vaccination/italian-vaccination/models/vaccination-per-day';
 
 @Component({
   selector: 'app-vaccination-summary',
@@ -21,6 +22,8 @@ export class VaccinationSummaryComponent implements OnInit {
   totalWomen$: Observable<string>;
 
   lastUpdate$: Observable<Date>;
+
+  todayVaccination: VaccinationPerDay;
 
   constructor(private vaccinationService: ItalianVaccinationService) { }
 
@@ -51,6 +54,11 @@ export class VaccinationSummaryComponent implements OnInit {
       );
 
     this.lastUpdate$ = this.vaccinationService.getLastUpdate();
+
+    this.vaccinationService.getVaccinationsPerDay()
+        .subscribe(v => {
+          this.todayVaccination = v[v.length - 1];
+        });
   }
 
 }
