@@ -32,23 +32,38 @@
       gtag('config', 'G-6B8BQTPGYT');
     }
   </script>
+  <!-- ------Single Page Apps GitHub Pages Workaround------ -->
+  <script type="text/javascript">
+    // Single Page Apps for GitHub Pages
+    // https://github.com/rafrex/spa-github-pages
+    // Copyright (c) 2016 Rafael Pedicini, licensed under the MIT License
+    // ----------------------------------------------------------------------
+    // This script checks to see if a redirect is present in the query string
+    // and converts it back into the correct url and adds it to the
+    // browser's history using window.history.replaceState(...),
+    // which won't cause the browser to attempt to load the new url.
+    // When the single page app is loaded further down in this file,
+    // the correct url will be waiting in the browser's history for
+    // the single page app to route accordingly.
+    (function(l) {
+      if (l.search) {
+        var q = {};
+        l.search.slice(1).split('&').forEach(function(v) {
+          var a = v.split('=');
+          q[a[0]] = a.slice(1).join('=').replace(/~and~/g, '&');
+        });
+        if (q.p !== undefined) {
+          window.history.replaceState(null, null,
+            l.pathname.slice(0, -1) + (q.p || '') +
+            (q.q ? ('?' + q.q) : '') +
+            l.hash
+          );
+        }
+      }
+    }(window.location))
+   </script>
 <link rel="stylesheet" href="styles.8d7df5e468230f83b6ab.css"></head>
 <body>
   <app-root></app-root>
-  <!-- Github Pages hack to allow SPA refresh without receiving 404. -->
-  <script>
-    (function () {
-      // Retrieve the URL the user was trying to access when receiving the 404.
-      var redirect = sessionStorage.redirect;
-      // Remove the URL from sessionStorage.
-      delete sessionStorage.redirect;
-      // Check if we actually need to redirect.
-      if (redirect && redirect != location.href) {
-        // We need to redirect to the URL the user was trying to access.
-        history.replaceState(null, null, redirect);
-      }
-    })();
-  </script>
-<!-- /Github Pages hack. -->
 <script src="runtime-es2015.a1ac991fc00ebf39524f.js" type="module"></script><script src="runtime-es5.a1ac991fc00ebf39524f.js" nomodule="" defer=""></script><script src="polyfills-es5.f78a388c7e0e9167ed89.js" nomodule="" defer=""></script><script src="polyfills-es2015.a93358e1cf8813cb4159.js" type="module"></script><script src="main-es2015.aef354dc7b46412e56db.js" type="module"></script><script src="main-es5.aef354dc7b46412e56db.js" nomodule="" defer=""></script></body>
 </html>
