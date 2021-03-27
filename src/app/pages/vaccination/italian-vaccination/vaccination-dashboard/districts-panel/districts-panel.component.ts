@@ -1,4 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { Observable } from 'rxjs';
+import { ItalianVaccinationService } from 'src/app/commons/services/italian-vaccination.service';
+import { VaccinationDistrictOverallStatus } from '../../models/vaccination-district-overall-status';
+import { VaccinesDeliveryPerSupplierInDistricts } from '../../models/vaccines-delivery-per-supplier-in-districts';
 
 @Component({
   selector: 'app-districts-panel',
@@ -7,9 +11,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class DistrictsPanelComponent implements OnInit {
 
-  constructor() { }
+  overallStatus$: Observable<VaccinationDistrictOverallStatus>;
+
+  deliveriesInDistricts$: Observable<VaccinesDeliveryPerSupplierInDistricts[]>;
+
+  constructor(private vaccinationService: ItalianVaccinationService) { }
 
   ngOnInit(): void {
+    this.overallStatus$ = this.vaccinationService.getVaccinationDistrictsStatus();
+    this.deliveriesInDistricts$ = this.vaccinationService.getVaccinesDeliveriesInDistricts();
   }
 
 }

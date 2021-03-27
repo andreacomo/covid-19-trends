@@ -30,8 +30,6 @@ export class OverviewPanelComponent implements OnInit {
 
   districtsPopulation$: Observable<DistrictPopulation[]>;
 
-  deliveriesInDistricts$: Observable<VaccinesDeliveryPerSupplierInDistricts[]>;
-
   deliveriesInTime$: Observable<VaccinesDeliveryDatesPerSupplier[]>;
 
   vaccinationsPerDay$: Observable<VaccinationPerDay[]>;
@@ -46,7 +44,6 @@ export class OverviewPanelComponent implements OnInit {
     this.categoryGroup$ = this.vaccinationService.getCategoryGroups();
     this.totalDoses$ = this.vaccinationService.getVaccinationDoses();
     this.districtsPopulation$ = this.localDataService.getDistrictsPopulation();
-    this.deliveriesInDistricts$ = this.vaccinationService.getVaccinesDeliveriesInDistricts();
     this.deliveriesInTime$ = this.vaccinationService.getVaccinesDeliveryInTime();
     this.vaccinationsPerDay$ = this.vaccinationService.getVaccinationsPerDay();
   }

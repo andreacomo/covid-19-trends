@@ -1,1 +1,11 @@
-<p>districts-panel works!</p>
+<ng-container>
+    <div class="container">
+        <app-vaccination-last-update></app-vaccination-last-update>
+        <div fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="1em" *ngIf="overallStatus$ | async as overallStatus" class="groups-charts">
+            <app-districts-status-chart fxFlex="90" fxFlex.lt-md="100" fxFlex.md="100" [data]="overallStatus.details"></app-districts-status-chart>
+        </div>
+        <div fxLayout="row" class="groups-charts" fxLayoutAlign="center center" fxLayoutGap="1em"  *ngIf="deliveriesInDistricts$ | async as deliveriesInDistricts" >
+            <app-vaccines-brand-delivery-chart fxFlex="90" fxFlex.lt-md="100" fxFlex.md="100" [data]="deliveriesInDistricts"></app-vaccines-brand-delivery-chart>
+        </div>
+    </div>
+</ng-container>

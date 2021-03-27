@@ -1,11 +1,14 @@
-<nav mat-tab-nav-bar mat-align-tabs="center" class="navbar">
-    <a mat-tab-link
-        class="tab-label"
-        *ngFor="let link of navLinks"
-        [routerLink]="link.path"
-        routerLinkActive #rla="routerLinkActive"
-        [active]="rla.isActive">
-        {{link.label}}
-    </a>
-</nav>
-<router-outlet></router-outlet>
+<div fxHide.xs fxShow.gt-xs>
+    <nav mat-tab-nav-bar mat-align-tabs="center" class="navbar" >
+        <a mat-tab-link
+            class="tab-label"
+            *ngFor="let link of navLinks"
+            [routerLink]="link.path"
+            routerLinkActive #rla="routerLinkActive"
+            [active]="rla.isActive">
+            {{link.label}}
+        </a>
+    </nav>
+    <router-outlet></router-outlet>
+</div>
+<app-please-rotate></app-please-rotate>

@@ -1,0 +1,7 @@
+<div fxLayout="row" fxLayoutAlign="end center" fxLayoutGap=".5em" class="last-update">
+    <mat-icon>history_toggle_off</mat-icon>
+    <div class="numbers" *ngIf="lastUpdate$ | async as lastUpdate; else lastUpdateLoading">{{lastUpdate | date: 'dd/MM/yyyy HH:mm:ss'}}</div>
+    <ng-template #lastUpdateLoading>
+        <mat-spinner [diameter]="24"></mat-spinner>
+    </ng-template>
+</div>
