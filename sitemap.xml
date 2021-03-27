@@ -13,7 +13,10 @@
         <loc>https://www.covid-trend.com/italy/provinces</loc>
     </url>
     <url>
-        <loc>https://www.covid-trend.com/vaccination/italy</loc>
+        <loc>https://www.covid-trend.com/vaccination/italy/overview</loc>
+    </url>
+    <url>
+        <loc>https://www.covid-trend.com/vaccination/italy/districts</loc>
     </url>
     <url>
         <loc>https://www.covid-trend.com/vaccination/world</loc>
