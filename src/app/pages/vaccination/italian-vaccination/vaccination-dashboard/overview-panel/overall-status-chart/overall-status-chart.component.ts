@@ -4,10 +4,10 @@ import { ChartData, ChartOptions, ChartTooltipItem } from 'chart.js';
 import { Label, MultiDataSet } from 'ng2-charts';
 import { distinctUntilChanged, map } from 'rxjs/operators';
 import { Colors } from 'src/app/commons/models/colors';
-import { VaccinationDistrictOverallStatus } from '../../models/vaccination-district-overall-status';
+import { VaccinationDistrictOverallStatus } from '../../../models/vaccination-district-overall-status';
 import * as pluginDataLabels from 'chartjs-plugin-datalabels';
 import { Subscription } from 'rxjs';
-import { VaccinationDoses } from '../../models/vaccination-doses';
+import { VaccinationDoses } from '../../../models/vaccination-doses';
 import { Numbers } from 'src/app/commons/models/numbers';
 
 @Component({

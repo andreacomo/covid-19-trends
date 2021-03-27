@@ -5,8 +5,8 @@ import { Numbers } from 'src/app/commons/models/numbers';
 import { TimeFilter } from 'src/app/commons/models/time-filter';
 import { DateStringPipe } from 'src/app/commons/pipes/date-string.pipe';
 import { DataFilterProviderService } from 'src/app/commons/services/data-filter-provider.service';
-import { VaccineSupplierColors } from '../../models/vaccine-supplier-colors';
-import { SupplierDelivery, VaccinesDeliveryDatesPerSupplier } from '../../models/vaccines-delivery-dates-per-supplier';
+import { VaccineSupplierColors } from '../../../models/vaccine-supplier-colors';
+import { SupplierDelivery, VaccinesDeliveryDatesPerSupplier } from '../../../models/vaccines-delivery-dates-per-supplier';
 
 @Component({
   selector: 'app-vaccines-delivery-date-chart',

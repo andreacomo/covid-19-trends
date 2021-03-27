@@ -1,9 +1,8 @@
 import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 import { ChartData, ChartDataSets, ChartOptions, ChartTooltipItem } from 'chart.js';
 import { Label } from 'ng2-charts';
-import { VaccinesDeliveryPerSupplierInDistricts } from '../../models/vaccines-delivery-per-supplier-in-districts';
-import { Colors } from 'src/app/commons/models/colors';
-import { VaccineSupplierColors } from '../../models/vaccine-supplier-colors';
+import { VaccinesDeliveryPerSupplierInDistricts } from '../../../models/vaccines-delivery-per-supplier-in-districts';
+import { VaccineSupplierColors } from '../../../models/vaccine-supplier-colors';
 import { Numbers } from 'src/app/commons/models/numbers';
 
 @Component({

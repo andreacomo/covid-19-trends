@@ -6,7 +6,7 @@ import { TimeFilter } from 'src/app/commons/models/time-filter';
 import { ChartDataTypeDecorator } from 'src/app/commons/models/chart-data-type-decorator';
 import { ChartDataType } from 'src/app/commons/models/chart-data-type';
 import { DataFilterProviderService } from 'src/app/commons/services/data-filter-provider.service';
-import { VaccinationPerDay } from '../../models/vaccination-per-day';
+import { VaccinationPerDay } from '../../../models/vaccination-per-day';
 import { DateStringPipe } from 'src/app/commons/pipes/date-string.pipe';
 import { Numbers } from 'src/app/commons/models/numbers';
 

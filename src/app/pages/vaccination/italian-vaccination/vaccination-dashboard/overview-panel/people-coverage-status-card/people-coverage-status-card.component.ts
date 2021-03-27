@@ -1,14 +1,14 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { DistrictPopulation } from 'src/app/commons/models/district-population';
-import { VaccinationDistrictOverallStatus } from '../../models/vaccination-district-overall-status';
-import { VaccinationDoses } from '../../models/vaccination-doses';
+import { VaccinationDistrictOverallStatus } from '../../../models/vaccination-district-overall-status';
+import { VaccinationDoses } from '../../../models/vaccination-doses';
 
 @Component({
-  selector: 'app-overall-status-card',
-  templateUrl: './overall-status-card.component.html',
-  styleUrls: ['./overall-status-card.component.scss']
+  selector: 'app-people-coverage-status-card',
+  templateUrl: './people-coverage-status-card.component.html',
+  styleUrls: ['./people-coverage-status-card.component.scss']
 })
-export class OverallStatusCardComponent implements OnInit {
+export class PeopleCoverageStatusCardComponent implements OnInit {
 
   @Input()
   data: VaccinationDistrictOverallStatus;

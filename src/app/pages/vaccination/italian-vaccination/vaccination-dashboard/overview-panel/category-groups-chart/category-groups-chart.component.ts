@@ -2,7 +2,7 @@ import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/cor
 import { ChartData, ChartOptions, ChartTooltipItem } from 'chart.js';
 import { Label } from 'ng2-charts';
 import { Colors } from 'src/app/commons/models/colors';
-import { VaccinationCategoryGroup } from '../../models/vaccination-category-group';
+import { VaccinationCategoryGroup } from '../../../models/vaccination-category-group';
 import * as pluginDataLabels from 'chartjs-plugin-datalabels';
 import { Numbers } from 'src/app/commons/models/numbers';
 

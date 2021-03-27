@@ -1,6 +1,6 @@
 import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 import { ChartDataSets, ChartOptions } from 'chart.js';
-import { VaccinationAgeGroup } from '../../models/vaccination-age-group';
+import { VaccinationAgeGroup } from '../../../models/vaccination-age-group';
 import * as pluginDataLabels from 'chartjs-plugin-datalabels';
 import { Label } from 'ng2-charts';
 import { Colors } from 'src/app/commons/models/colors';

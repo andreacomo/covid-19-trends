@@ -1,0 +1,35 @@
+<ng-container *ngIf="totalDoses$ | async as totalDoses">
+    <div class="container" fxHide.xs fxShow.gt-xs *ngIf="overallStatus$ | async as overallStatus">
+        <h2 class="mat-title">Stato vaccinazioni al {{lastUpdate$ | async | date: 'dd/MM/yyyy HH:mm:ss'}}</h2>
+        <div *ngIf="districtsPopulation$ | async as districtsPopulation">
+            <div fxLayout="row" fxLayout.lt-md="column-reverse" fxLayout.md="column-reverse" fxLayoutGap="0" fxLayoutGap.lt-md="2em" fxLayoutGap.md="2em">
+                <app-districts-status-chart fxFlex="80" [data]="overallStatus.details"></app-districts-status-chart>
+                <div fxFlex="20" fxLayout="column" fxLayout.lt-md="row" fxLayout.md="row" fxLayoutAlign="start stretch" fxLayoutGap="2em" fxLayoutAlign.lt-md="center center" fxLayoutAlign.md="center center">
+                    <app-people-coverage-status-card fxFlex.sm="50" [data]="overallStatus" [totals]="totalDoses" [population]="districtsPopulation"></app-people-coverage-status-card>
+                    <app-overall-status-card fxFlex.sm="50" [data]="overallStatus" [totals]="totalDoses" [population]="districtsPopulation"></app-overall-status-card>
+                </div>
+            </div>
+            <div fxLayout="row" class="groups-charts">
+                <app-administration-day-by-day-chart *ngIf="vaccinationsPerDay$ | async as vaccinationsPerDay" [data]="vaccinationsPerDay" fxFlex="100"></app-administration-day-by-day-chart>
+            </div>
+            <div fxLayout="row" fxLayout.sm="column" fxLayoutGap="2em" class="groups-charts">
+                <app-age-groups-chart *ngIf="ageGroups$ | async as ageGroups" [data]="ageGroups" fxFlex="50" fxFlex.sm="100"></app-age-groups-chart>
+                <app-category-groups-chart *ngIf="categoryGroup$ | async as categoryGroup" [data]="categoryGroup" fxFlex="50" fxFlex.sm="100"></app-category-groups-chart>
+            </div>
+            <div fxLayout="row" class="groups-charts">
+                <app-vaccines-brand-delivery-chart *ngIf="deliveriesInDistricts$ | async as deliveriesInDistricts" [data]="deliveriesInDistricts" fxFlex="100"></app-vaccines-brand-delivery-chart>
+            </div>
+            <div fxLayout="row" class="groups-charts">
+                <app-vaccines-delivery-date-chart *ngIf="deliveriesInTime$ | async as deliveriesInTime" [data]="deliveriesInTime" fxFlex="100"></app-vaccines-delivery-date-chart>
+            </div>
+        </div>
+        <mat-divider class="bottom-divider"></mat-divider>
+        <div class="mat-small">
+            Fonte dati: 
+            <a href="https://github.com/italia/covid19-opendata-vaccini" target="_blank">
+                COVID-19 Open Data Vaccini
+            </a>
+        </div>
+    </div>
+</ng-container>
+<app-please-rotate></app-please-rotate>

@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
 import { ChartData, ChartDataSets, ChartOptions, ChartTooltipItem } from 'chart.js';
 import { Colors } from 'src/app/commons/models/colors';
-import { VaccinationDistrictStatus } from '../../models/vaccination-district-status';
 import * as pluginDataLabels from 'chartjs-plugin-datalabels';
 import { Numbers } from 'src/app/commons/models/numbers';
+import { VaccinationDistrictStatus } from '../../../models/vaccination-district-status';
 
 @Injectable({
     providedIn: 'root'

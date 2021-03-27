@@ -1,7 +1,7 @@
 import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 import { ChartDataSets, ChartOptions } from 'chart.js';
 import { Label } from 'ng2-charts';
-import { VaccinationDistrictStatus } from '../../models/vaccination-district-status';
+import { VaccinationDistrictStatus } from '../../../models/vaccination-district-status';
 import { DistrictsStatusChartService, DistrictsStatusChartType } from './districts-status-chart.service';
 
 @Component({
