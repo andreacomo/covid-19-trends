@@ -16,31 +16,31 @@
                 <div class="item" fxLayout="row" fxLayoutAlign="space-between center" fxFlex="100" fxLayoutGap=".5em">
                     <strong>Prime dosi</strong> 
                     <div fxLayout="row" fxLayoutAlign="center center" fxLayoutGap=".5em">
-                        <mat-icon>local_pharmacy</mat-icon>
                         <div class="numbers" *ngIf="todayVaccination; else loading">{{todayVaccination.doses.first.toLocaleString()}}</div>
                         <ng-template #loading>
                             <mat-spinner [diameter]="24"></mat-spinner>
                         </ng-template>
+                        <mat-icon>local_pharmacy</mat-icon>
                     </div>
                 </div>
                 <div class="item" fxLayout="row" fxLayoutAlign="space-between center" fxFlex="100" fxLayoutGap=".5em">
                     <strong>Seconde dosi</strong> 
                     <div fxLayout="row" fxLayoutAlign="center center" fxLayoutGap=".5em">
-                        <mat-icon>security</mat-icon>
                         <div class="numbers" *ngIf="todayVaccination; else loading">{{todayVaccination.doses.second.toLocaleString()}}</div>
                         <ng-template #loading>
                             <mat-spinner [diameter]="24"></mat-spinner>
                         </ng-template>
+                        <mat-icon>security</mat-icon>
                     </div>
                 </div>
                 <div class="item" fxLayout="row" fxLayoutAlign="space-between center" fxFlex="100" fxLayoutGap=".5em">
                     <strong>Dosi totali</strong> 
                     <div fxLayout="row" fxLayoutAlign="center center" fxLayoutGap=".5em">
-                        <mat-icon>emoji_events</mat-icon>
                         <div class="numbers total" *ngIf="todayVaccination; else loading">{{todayVaccination.doses.total.toLocaleString()}}</div>
                         <ng-template #loading>
                             <mat-spinner [diameter]="24"></mat-spinner>
                         </ng-template>
+                        <mat-icon>emoji_events</mat-icon>
                     </div>
                 </div>
             </div>
@@ -50,31 +50,31 @@
                 <div class="item" fxLayout="row" fxLayoutAlign="space-between center" fxFlex="100" fxLayoutGap=".5em">
                     <strong>Prime dosi</strong> 
                     <div fxLayout="row" fxLayoutAlign="center center" fxLayoutGap=".5em">
-                        <mat-icon>local_pharmacy</mat-icon>
                         <div class="numbers" *ngIf="firstDoseTotal; else loading">{{firstDoseTotal.toLocaleString()}}</div>
                         <ng-template #loading>
                             <mat-spinner [diameter]="24"></mat-spinner>
                         </ng-template>
+                        <mat-icon>local_pharmacy</mat-icon>
                     </div>
                 </div>
                 <div class="item" fxLayout="row" fxLayoutAlign="space-between center" fxFlex="100" fxLayoutGap=".5em">
                     <strong>Seconde dosi</strong> 
                     <div fxLayout="row" fxLayoutAlign="center center" fxLayoutGap=".5em">
-                        <mat-icon>security</mat-icon>
                         <div class="numbers" *ngIf="secondDoseTotal; else loading">{{secondDoseTotal.toLocaleString()}}</div>
                         <ng-template #loading>
                             <mat-spinner [diameter]="24"></mat-spinner>
                         </ng-template>
+                        <mat-icon>security</mat-icon>
                     </div>
                 </div>
                 <div class="item" fxLayout="row" fxLayoutAlign="space-between center" fxFlex="100" fxLayoutGap=".5em">
                     <strong>Dosi totali</strong> 
                     <div fxLayout="row" fxLayoutAlign="center center" fxLayoutGap=".5em">
-                        <mat-icon>emoji_events</mat-icon>
                         <div class="numbers total" *ngIf="total; else loading">{{total.toLocaleString()}}</div>
                         <ng-template #loading>
                             <mat-spinner [diameter]="24"></mat-spinner>
                         </ng-template>
+                        <mat-icon>emoji_events</mat-icon>
                     </div>
                 </div>
             </div>
