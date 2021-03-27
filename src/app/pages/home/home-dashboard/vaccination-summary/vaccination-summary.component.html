@@ -3,7 +3,7 @@
     <mat-card-content fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="1em">
         <div class="item" fxLayout="row" fxLayoutAlign="center center" fxFlex="100" fxLayoutGap=".5em">
             <div fxLayout="row" fxLayoutAlign="center center" fxLayoutGap=".5em" class="numbers">
-                <span *ngIf="todayVaccination; else loading">Somministrate il {{todayVaccination.day | date: 'dd/MM/yyyy'}}</span>
+                <span *ngIf="todayVaccination; else loading">Vaccinazioni al {{todayVaccination.day | date: 'dd/MM/yyyy'}}</span>
                 <ng-template #loading>
                     <mat-spinner [diameter]="24"></mat-spinner>
                 </ng-template>
@@ -12,7 +12,7 @@
         
         <div fxFlex="100" fxLayout="column" fxLayout.sm="row" fxLayout.md="row" fxLayoutAlign="center space-around" fxLayoutGap="1em" fxLayoutGap.sm="4em" fxLayoutGap.md="4em" class="box-container">
             <div fxFlex="100" fxLayout="column" class="box-container">
-                
+                <h2 class="mat-h2 box-title">In un giorno</h2>
                 <div class="item" fxLayout="row" fxLayoutAlign="space-between center" fxFlex="100" fxLayoutGap=".5em">
                     <strong>Prime dosi</strong> 
                     <div fxLayout="row" fxLayoutAlign="center center" fxLayoutGap=".5em">
@@ -37,7 +37,7 @@
                     <strong>Dosi totali</strong> 
                     <div fxLayout="row" fxLayoutAlign="center center" fxLayoutGap=".5em">
                         <mat-icon>emoji_events</mat-icon>
-                        <div class="numbers" *ngIf="todayVaccination; else loading">{{todayVaccination.doses.total.toLocaleString()}}</div>
+                        <div class="numbers total" *ngIf="todayVaccination; else loading">{{todayVaccination.doses.total.toLocaleString()}}</div>
                         <ng-template #loading>
                             <mat-spinner [diameter]="24"></mat-spinner>
                         </ng-template>
@@ -71,7 +71,7 @@
                     <strong>Dosi totali</strong> 
                     <div fxLayout="row" fxLayoutAlign="center center" fxLayoutGap=".5em">
                         <mat-icon>emoji_events</mat-icon>
-                        <div class="numbers" *ngIf="total; else loading">{{total.toLocaleString()}}</div>
+                        <div class="numbers total" *ngIf="total; else loading">{{total.toLocaleString()}}</div>
                         <ng-template #loading>
                             <mat-spinner [diameter]="24"></mat-spinner>
                         </ng-template>

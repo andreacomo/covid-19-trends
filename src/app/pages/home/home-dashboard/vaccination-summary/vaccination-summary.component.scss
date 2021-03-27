@@ -10,6 +10,9 @@
 }
 .numbers {
     font-size: 1.2em;
+    &.total {
+        font-weight: bold;
+    }
 }
 .details {
     margin-top: 1em;
