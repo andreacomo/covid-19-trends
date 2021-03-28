@@ -1,24 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
     <url>
-        <loc>https://www.covid-trend.com/home</loc>
+        <loc>https://www.covid-trend.com/?p=/home</loc>
     </url>
     <url>
-        <loc>https://www.covid-trend.com/italy/overview</loc>
+        <loc>https://www.covid-trend.com/?p=/italy/overview</loc>
     </url>
     <url>
-        <loc>https://www.covid-trend.com/italy/districts</loc>
+        <loc>https://www.covid-trend.com/?p=/italy/districts</loc>
     </url>
     <url>
-        <loc>https://www.covid-trend.com/italy/provinces</loc>
+        <loc>https://www.covid-trend.com/?p=/italy/provinces</loc>
     </url>
     <url>
-        <loc>https://www.covid-trend.com/vaccination/italy/overview</loc>
+        <loc>https://www.covid-trend.com/?p=/vaccination/italy/overview</loc>
     </url>
     <url>
-        <loc>https://www.covid-trend.com/vaccination/italy/districts</loc>
+        <loc>https://www.covid-trend.com/?p=/vaccination/italy/districts</loc>
     </url>
     <url>
-        <loc>https://www.covid-trend.com/vaccination/world</loc>
+        <loc>https://www.covid-trend.com/?p=/vaccination/world</loc>
     </url>
 </urlset>
