@@ -21,7 +21,8 @@ export class DistrictStatusChartTypeSelectorComponent implements OnInit, OnChang
   selectedLabel: string;
 
   constructor() {
-    this.chartTypeLabels.set(DistrictsStatusChartType.PERCENTAGE, '% dosi somministrate su consegnate');
+    this.chartTypeLabels.set(DistrictsStatusChartType.PERCENTAGE_ON_DELIVERED, '% dosi somministrate su consegnate');
+    this.chartTypeLabels.set(DistrictsStatusChartType.PERCENTAGE_ON_POPULATION, '% somministrazioni su popolazione');
     this.chartTypeLabels.set(DistrictsStatusChartType.ABSOLUTE, 'Dosi somministrate e consegnate');
   }
 

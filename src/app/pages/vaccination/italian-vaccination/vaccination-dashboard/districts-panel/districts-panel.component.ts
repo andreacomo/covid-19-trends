@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
+import { DistrictPopulation } from 'src/app/commons/models/district-population';
 import { ItalianVaccinationService } from 'src/app/commons/services/italian-vaccination.service';
+import { LocalDataService } from 'src/app/commons/services/local-data.service';
 import { VaccinationDistrictOverallStatus } from '../../models/vaccination-district-overall-status';
 import { VaccinesDeliveryPerSupplierInDistricts } from '../../models/vaccines-delivery-per-supplier-in-districts';
 
@@ -15,11 +17,15 @@ export class DistrictsPanelComponent implements OnInit {
 
   deliveriesInDistricts$: Observable<VaccinesDeliveryPerSupplierInDistricts[]>;
 
-  constructor(private vaccinationService: ItalianVaccinationService) { }
+  districtsPopulation$: Observable<DistrictPopulation[]>;
+
+  constructor(private vaccinationService: ItalianVaccinationService,
+              private localDataService: LocalDataService) { }
 
   ngOnInit(): void {
     this.overallStatus$ = this.vaccinationService.getVaccinationDistrictsStatus();
     this.deliveriesInDistricts$ = this.vaccinationService.getVaccinesDeliveriesInDistricts();
+    this.districtsPopulation$ = this.localDataService.getDistrictsPopulation();
   }
 
 }

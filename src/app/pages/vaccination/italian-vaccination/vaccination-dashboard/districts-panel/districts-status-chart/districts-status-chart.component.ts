@@ -1,6 +1,7 @@
 import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 import { ChartDataSets, ChartOptions } from 'chart.js';
 import { Label } from 'ng2-charts';
+import { DistrictPopulation } from 'src/app/commons/models/district-population';
 import { VaccinationDistrictStatus } from '../../../models/vaccination-district-status';
 import { DistrictsStatusChartService, DistrictsStatusChartType } from './districts-status-chart.service';
 
@@ -12,7 +13,10 @@ import { DistrictsStatusChartService, DistrictsStatusChartType } from './distric
 export class DistrictsStatusChartComponent implements OnInit, OnChanges {
 
   @Input()
-  data: VaccinationDistrictStatus[];
+  vaccination: VaccinationDistrictStatus[];
+
+  @Input()
+  population: DistrictPopulation[];
 
   options: ChartOptions;
 
@@ -25,25 +29,26 @@ export class DistrictsStatusChartComponent implements OnInit, OnChanges {
   chartData: ChartDataSets[];
 
   constructor(private statusChartService: DistrictsStatusChartService) {
-    this.selectedChartType = DistrictsStatusChartType.PERCENTAGE;
+    this.selectedChartType = DistrictsStatusChartType.PERCENTAGE_ON_DELIVERED;
   }
 
   ngOnInit(): void {
   }
 
   ngOnChanges(changes: SimpleChanges): void {
-    if (changes.data.currentValue && !changes.data.previousValue) {
-      this.init(this.selectedChartType, changes.data.currentValue);
+    if (changes.vaccination.currentValue && !changes.vaccination.previousValue &&
+        changes.population.currentValue && !changes.population.previousValue) {
+      this.init(this.selectedChartType, changes.vaccination.currentValue, changes.population.currentValue);
     }
   }
 
   onChangeType(chartType: DistrictsStatusChartType): void {
-    this.init(chartType, this.data);
+    this.init(chartType, this.vaccination, this.population);
     this.selectedChartType = chartType;
   }
 
-  private init(chartType: DistrictsStatusChartType, data: VaccinationDistrictStatus[]) {
-    const strategy = this.statusChartService.getStrategy(chartType, data);
+  private init(chartType: DistrictsStatusChartType, vaccination: VaccinationDistrictStatus[], population: DistrictPopulation[]) {
+    const strategy = this.statusChartService.getStrategy(chartType, vaccination, population);
     this.options = strategy.createOptions();
     this.labels = strategy.createLabels();
     this.chartData = strategy.createChartData();

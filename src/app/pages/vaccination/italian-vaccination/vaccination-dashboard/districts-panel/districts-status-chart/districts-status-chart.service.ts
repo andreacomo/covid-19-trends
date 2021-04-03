@@ -4,18 +4,25 @@ import { Colors } from 'src/app/commons/models/colors';
 import * as pluginDataLabels from 'chartjs-plugin-datalabels';
 import { Numbers } from 'src/app/commons/models/numbers';
 import { VaccinationDistrictStatus } from '../../../models/vaccination-district-status';
+import { LocalDataService } from 'src/app/commons/services/local-data.service';
+import { DistrictPopulation } from 'src/app/commons/models/district-population';
 
 @Injectable({
     providedIn: 'root'
 })
 export class DistrictsStatusChartService {
 
-    getStrategy(type: DistrictsStatusChartType, data: VaccinationDistrictStatus[]): DistrictsStatusChartTypeStrategy {
+    getStrategy(type: DistrictsStatusChartType,
+                vaccination: VaccinationDistrictStatus[],
+                population: DistrictPopulation[]): DistrictsStatusChartTypeStrategy {
+
         switch (type) {
-            case DistrictsStatusChartType.PERCENTAGE:
-                return new DistrictsStatusChartTypePercentageStrategy(data);
+            case DistrictsStatusChartType.PERCENTAGE_ON_DELIVERED:
+                return new DistrictsStatusChartTypeDeliveryPercentageStrategy(vaccination);
+            case DistrictsStatusChartType.PERCENTAGE_ON_POPULATION:
+                return new DistrictsStatusChartTypePopulationDeliveryPercentageStrategy(vaccination, population);
             case DistrictsStatusChartType.ABSOLUTE:
-                return new DistrictsStatusChartTypeAbsoluteStrategy(data);
+                return new DistrictsStatusChartTypeAbsoluteStrategy(vaccination);
             default:
                 throw new Error('This should not happen');
         }
@@ -24,7 +31,7 @@ export class DistrictsStatusChartService {
 
 export enum DistrictsStatusChartType {
 
-    PERCENTAGE, ABSOLUTE
+    PERCENTAGE_ON_DELIVERED, PERCENTAGE_ON_POPULATION, ABSOLUTE
 }
 
 export abstract class DistrictsStatusChartTypeStrategy {
@@ -42,14 +49,14 @@ export abstract class DistrictsStatusChartTypeStrategy {
 
     public abstract createPlugins(): any[];
 
-    protected abstract getSorter(): (v1: VaccinationDistrictStatus, v2: VaccinationDistrictStatus) => number;
+    protected abstract getSorter(): (v1: any, v2: any) => number;
 
     public abstract createChartData(): ChartDataSets[];
 
     public createLabels(): string[] {
         return this.data
                     .sort(this.getSorter())
-                    .map(d => d.districtName);
+                    .map((d, index) => `${index + 1} - ${d.districtName}`);
     }
 
     public createOptions(): ChartOptions {
@@ -72,7 +79,7 @@ export abstract class DistrictsStatusChartTypeStrategy {
     }
 }
 
-export class DistrictsStatusChartTypePercentageStrategy extends DistrictsStatusChartTypeStrategy {
+export class DistrictsStatusChartTypeDeliveryPercentageStrategy extends DistrictsStatusChartTypeStrategy {
 
     public createPlugins(): any[] {
         return [pluginDataLabels];
@@ -128,6 +135,76 @@ export class DistrictsStatusChartTypePercentageStrategy extends DistrictsStatusC
 
         return options;
     }
+}
+
+export class DistrictsStatusChartTypePopulationDeliveryPercentageStrategy extends DistrictsStatusChartTypeStrategy {
+
+    private mergedData: {districtName: string, doneCount: number, population: number, completionPercentage: number, color: string}[];
+
+    constructor(data: VaccinationDistrictStatus[], population: DistrictPopulation[]) {
+        super(data);
+        const populationPerDistrict: {[district: string]: DistrictPopulation} = population.reduce((acc, p) => {
+            acc[p.regione] = p;
+            return acc;
+        }, {});
+
+        this.mergedData = this.data.map(d => {
+            return {
+                districtName: d.districtName,
+                doneCount: d.doneCount,
+                population: populationPerDistrict[d.districtName].popolazione,
+                completionPercentage: d.doneCount / populationPerDistrict[d.districtName].popolazione,
+                color: d.color
+            };
+        })
+        .sort(this.getSorter());
+    }
+
+    public createPlugins(): any[] {
+        return [pluginDataLabels];
+    }
+
+    protected getSorter(): (v1: {completionPercentage: number}, v2: {completionPercentage: number}) => number {
+        // tslint:disable-next-line:max-line-length
+        return (v1: {completionPercentage: number}, v2: {completionPercentage: number}) => v2.completionPercentage - v1.completionPercentage;
+    }
+
+    public createChartData(): ChartDataSets[] {
+        const sortedColors = this.mergedData.map(d => d.color);
+        return [{
+            data: this.mergedData.map(d => d.completionPercentage),
+            backgroundColor: sortedColors.map(c => c + '99'),
+            borderColor: sortedColors,
+            hoverBackgroundColor: sortedColors.map(c => c + 'AA'),
+            hoverBorderColor: sortedColors
+        }];
+    }
+
+    public createOptions(): ChartOptions {
+        const options = super.createOptions();
+        options.tooltips.callbacks = {
+            label: (item: ChartTooltipItem, data: ChartData) => {
+                return Numbers.appendPercentWithPrecisionFromString(item.value, 3);
+            },
+            footer: (items: ChartTooltipItem[], data: ChartData) => {
+                const item = items[0];
+                const status = this.mergedData[item.index];
+                return `Somministrazioni: ${status.doneCount.toLocaleString()}\nPopolazione: ${status.population.toLocaleString()}`;
+            }
+        };
+        options.plugins = {
+            datalabels: {
+                anchor: 'end',
+                align: 'end',
+                formatter: (value, ctx) => {
+                    return `${parseFloat(value).toFixed(3)}%`;
+                }
+            },
+          };
+
+        return options;
+    }
+
 }
 
 export class DistrictsStatusChartTypeAbsoluteStrategy extends DistrictsStatusChartTypeStrategy {

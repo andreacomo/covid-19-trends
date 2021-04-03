@@ -4,9 +4,13 @@
         <mat-icon>leaderboard</mat-icon>
     </button>
     <mat-menu #beforeMenu="matMenu" xPosition="before">
-        <button mat-menu-item (click)="select(availableTypes.PERCENTAGE)">
+        <button mat-menu-item (click)="select(availableTypes.PERCENTAGE_ON_DELIVERED)">
             <mat-icon [svgIcon]="'percent'"></mat-icon>
-            <span>{{chartTypeLabels.get(availableTypes.PERCENTAGE)}}</span>
+            <span>{{chartTypeLabels.get(availableTypes.PERCENTAGE_ON_DELIVERED)}}</span>
+        </button>
+        <button mat-menu-item (click)="select(availableTypes.PERCENTAGE_ON_POPULATION)">
+            <mat-icon>people_outline</mat-icon>
+            <span>{{chartTypeLabels.get(availableTypes.PERCENTAGE_ON_POPULATION)}}</span>
         </button>
         <button mat-menu-item (click)="select(availableTypes.ABSOLUTE)">
             <mat-icon>sanitizer</mat-icon>
