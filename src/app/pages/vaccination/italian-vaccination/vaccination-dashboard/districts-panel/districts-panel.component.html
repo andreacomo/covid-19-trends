@@ -4,6 +4,9 @@
         <div fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="1em" *ngIf="overallStatus$ | async as overallStatus" class="groups-charts">
             <app-districts-status-chart fxFlex="90" fxFlex.lt-md="100" fxFlex.md="100" [vaccination]="overallStatus.details" [population]="districtsPopulation"></app-districts-status-chart>
         </div>
+        <div fxLayout="row" class="groups-charts" fxLayoutAlign="center center" fxLayoutGap="1em"  *ngIf="groupsPerDistricts$ | async as groupsPerDistricts" >
+            <app-districts-category-groups-chart fxFlex="90" fxFlex.lt-md="100" fxFlex.md="100" [data]="groupsPerDistricts"></app-districts-category-groups-chart>
+        </div>
         <div fxLayout="row" class="groups-charts" fxLayoutAlign="center center" fxLayoutGap="1em"  *ngIf="deliveriesInDistricts$ | async as deliveriesInDistricts" >
             <app-vaccines-brand-delivery-chart fxFlex="90" fxFlex.lt-md="100" fxFlex.md="100" [data]="deliveriesInDistricts"></app-vaccines-brand-delivery-chart>
         </div>

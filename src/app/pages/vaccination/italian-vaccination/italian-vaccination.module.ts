@@ -18,6 +18,7 @@ import { OverviewPanelComponent } from './vaccination-dashboard/overview-panel/o
 import { RouterModule } from '@angular/router';
 import { DistrictsPanelComponent } from './vaccination-dashboard/districts-panel/districts-panel.component';
 import { VaccinationLastUpdateComponent } from './vaccination-dashboard/vaccination-last-update/vaccination-last-update.component';
+import { DistrictsCategoryGroupsChartComponent } from './vaccination-dashboard/districts-panel/districts-category-groups-chart/districts-category-groups-chart.component';
 
 
 
@@ -29,7 +30,8 @@ import { VaccinationLastUpdateComponent } from './vaccination-dashboard/vaccinat
     AdministrationDayByDayChartComponent,
     OverviewPanelComponent,
     DistrictsPanelComponent,
-    VaccinationLastUpdateComponent],
+    VaccinationLastUpdateComponent,
+    DistrictsCategoryGroupsChartComponent],
   imports: [
     CommonModule,
     MaterialModule,

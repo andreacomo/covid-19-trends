@@ -19,6 +19,8 @@ export class DistrictsPanelComponent implements OnInit {
 
   districtsPopulation$: Observable<DistrictPopulation[]>;
 
+  groupsPerDistricts$: Observable<any[]>;
+
   constructor(private vaccinationService: ItalianVaccinationService,
               private localDataService: LocalDataService) { }
 
@@ -26,6 +28,7 @@ export class DistrictsPanelComponent implements OnInit {
     this.overallStatus$ = this.vaccinationService.getVaccinationDistrictsStatus();
     this.deliveriesInDistricts$ = this.vaccinationService.getVaccinesDeliveriesInDistricts();
     this.districtsPopulation$ = this.localDataService.getDistrictsPopulation();
+    this.groupsPerDistricts$ = this.vaccinationService.getCategoryGroupsPerDistricts();
   }
 
 }

@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { ObjectUnsubscribedError, Observable } from 'rxjs';
+import { Observable } from 'rxjs';
 import { CachableRemoteDataService } from './cachable-remote-data.service';
 import { map } from 'rxjs/operators';
 import { VaccinationDistrictStatus } from 'src/app/pages/vaccination/italian-vaccination/models/vaccination-district-status';
@@ -156,6 +156,104 @@ export class ItalianVaccinationService {
                     doneCount: this.sumAttributeValue(data, 'categoria_personale_scolastico')
                 }])
             )
+        );
+    }
+
+    public getCategoryGroupsPerDistricts(): Observable<any[]> {
+        return this.getRemoteOrCached(this.VACCINES_DONE_SUMMARY, data => {
+            return data.data;
+        })
+        .pipe(
+            map((data: VaccinationAdministrationSummary[]) => {
+                const sumByDistricts = data.reduce((acc, vax) => {
+                    acc[vax.area] = acc[vax.area] || {
+                        districtName: Districts.MAPPING[vax.area],
+                        area: vax.area,
+                        categories: {
+                            categoria_operatori_sanitari_sociosanitari: {
+                                name: 'Operatori Sanitari e Sociosanitari',
+                                type: 'status',
+                                doneCount: 0,
+                            },
+                            categoria_personale_non_sanitario: {
+                                name: 'Personale non sanitario',
+                                type: 'status',
+                                doneCount: 0,
+                            },
+                            categoria_ospiti_rsa: {
+                                name: 'Ospiti Strutture Residenziali',
+                                type: 'status',
+                                doneCount: 0
+                            },
+                            categoria_over80: {
+                                name: 'Over 80',
+                                type: 'status',
+                                doneCount: 0
+                            },
+                            categoria_forze_armate: {
+                                name: 'Forze Armate',
+                                type: 'status',
+                                doneCount: 0
+                            },
+                            categoria_personale_scolastico: {
+                                name: 'Personale Scolastico',
+                                type: 'status',
+                                doneCount: 0
+                            },
+                            sesso_maschile: {
+                                name: 'Sesso  Maschile',
+                                type: 'gender',
+                                doneCount: 0
+                            },
+                            sesso_femminile: {
+                                name: 'Sesso  Femminile',
+                                type: 'gender',
+                                doneCount: 0
+                            },
+                            prima_dose: {
+                                name: 'Prima dose',
+                                type: 'administration',
+                                doneCount: 0
+                            },
+                            seconda_dose: {
+                                name: 'Seconda dose',
+                                type: 'administration',
+                                doneCount: 0
+                            }
+                        }
+                    };
+                    acc[vax.area].categories
+                        .categoria_operatori_sanitari_sociosanitari.doneCount += vax.categoria_operatori_sanitari_sociosanitari;
+                    acc[vax.area].categories
+                        .categoria_personale_non_sanitario.doneCount += vax.categoria_personale_non_sanitario;
+                    acc[vax.area].categories
+                        .categoria_ospiti_rsa.doneCount += vax.categoria_ospiti_rsa;
+                    acc[vax.area].categories
+                        .categoria_over80.doneCount += vax.categoria_over80;
+                    acc[vax.area].categories
+                        .categoria_forze_armate.doneCount += vax.categoria_forze_armate;
+                    acc[vax.area].categories
+                        .categoria_personale_scolastico.doneCount += vax.categoria_personale_scolastico;
+                    acc[vax.area].categories
+                        .sesso_maschile.doneCount += vax.sesso_maschile;
+                    acc[vax.area].categories
+                        .sesso_femminile.doneCount += vax.sesso_femminile;
+                    acc[vax.area].categories
+                        .prima_dose.doneCount += vax.prima_dose;
+                    acc[vax.area].categories
+                        .seconda_dose.doneCount += vax.seconda_dose;
+                    return acc;
+                }, {});
+
+
+                return Object.values(sumByDistricts)
+                    .map((d: any) => {
+                        return {
+                            ...d,
+                            categories: Object.values(d.categories)
+                        };
+                    });
+            })
         );
     }
 
