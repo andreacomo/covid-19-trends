@@ -79,11 +79,43 @@ export abstract class DistrictsStatusChartTypeStrategy {
     }
 }
 
-export class DistrictsStatusChartTypeDeliveryPercentageStrategy extends DistrictsStatusChartTypeStrategy {
+abstract class DistrictsStatusChartTypePercentageStrategy extends DistrictsStatusChartTypeStrategy {
 
     public createPlugins(): any[] {
         return [pluginDataLabels];
     }
+
+    protected configureOptions(mainData: any[], options: ChartOptions): ChartOptions {
+        const maxPercentage = mainData.reduce((max, d) => max > d.completionPercentage ? max : d.completionPercentage, 0);
+        const ceiledMaxPercentage = Math.ceil(maxPercentage);
+        options.scales = {
+            xAxes: [{
+                ticks: {
+                    min: 0,
+                    max: maxPercentage < 1 ? 100 : ceiledMaxPercentage + ceiledMaxPercentage * .1
+                }
+            }]
+        };
+        options.tooltips.callbacks = {
+            label: (item: ChartTooltipItem, data: ChartData) => {
+                return Numbers.appendPercentWithPrecisionFromString(item.value, 2);
+            }
+        };
+        options.plugins = {
+            datalabels: {
+                anchor: 'end',
+                align: 'end',
+                formatter: (value, ctx) => {
+                    return `${parseFloat(value).toFixed(2)}%`;
+                }
+            },
+          };
+
+        return options;
+    }
+}
+
+export class DistrictsStatusChartTypeDeliveryPercentageStrategy extends DistrictsStatusChartTypePercentageStrategy {
 
     protected getSorter(): (v1: VaccinationDistrictStatus, v2: VaccinationDistrictStatus) => number {
         return (v1: VaccinationDistrictStatus, v2: VaccinationDistrictStatus) => v2.completionPercentage - v1.completionPercentage;
@@ -103,41 +135,19 @@ export class DistrictsStatusChartTypeDeliveryPercentageStrategy extends District
 
     public createOptions(): ChartOptions {
         const options = super.createOptions();
-        const maxPercentage = this.data.reduce((max, d) => max > d.completionPercentage ? max : d.completionPercentage, 0);
-        const ceiledMaxPercentage = Math.ceil(maxPercentage);
-        options.scales = {
-            xAxes: [{
-                ticks: {
-                    min: 0,
-                    max: maxPercentage < 1 ? 100 : ceiledMaxPercentage + ceiledMaxPercentage * .1
-                }
-            }]
+        super.configureOptions(this.data, options);
+
+        options.tooltips.callbacks.footer = (items: ChartTooltipItem[], data: ChartData) => {
+            const item = items[0];
+            const status = this.data[item.index];
+            return `Somministrazioni: ${status.doneCount.toLocaleString()}\nDosi consegnate: ${status.receivedCount.toLocaleString()}`;
         };
-        options.tooltips.callbacks = {
-            label: (item: ChartTooltipItem, data: ChartData) => {
-                return Numbers.appendPercentWithPrecisionFromString(item.value);
-            },
-            footer: (items: ChartTooltipItem[], data: ChartData) => {
-                const item = items[0];
-                const status = this.data[item.index];
-                return `Somministrazioni: ${status.doneCount.toLocaleString()}\nDosi consegnate: ${status.receivedCount.toLocaleString()}`;
-            }
-        };
-        options.plugins = {
-            datalabels: {
-                anchor: 'end',
-                align: 'end',
-                formatter: (value, ctx) => {
-                    return `${parseFloat(value).toFixed(2)}%`;
-                }
-            },
-          };
 
         return options;
     }
 }
 
-export class DistrictsStatusChartTypePopulationDeliveryPercentageStrategy extends DistrictsStatusChartTypeStrategy {
+export class DistrictsStatusChartTypePopulationDeliveryPercentageStrategy extends DistrictsStatusChartTypePercentageStrategy {
 
     private mergedData: {districtName: string, doneCount: number, population: number, completionPercentage: number, color: string}[];
 
@@ -166,10 +176,6 @@ export class DistrictsStatusChartTypePopulationDeliveryPercentageStrategy extend
                     .map((d, index) => `${index + 1} - ${d.districtName}`);
     }
 
-    public createPlugins(): any[] {
-        return [pluginDataLabels];
-    }
-
     protected getSorter(): (v1: {completionPercentage: number}, v2: {completionPercentage: number}) => number {
         // tslint:disable-next-line:max-line-length
         return (v1: {completionPercentage: number}, v2: {completionPercentage: number}) => v2.completionPercentage - v1.completionPercentage;
@@ -188,35 +194,13 @@ export class DistrictsStatusChartTypePopulationDeliveryPercentageStrategy extend
 
     public createOptions(): ChartOptions {
         const options = super.createOptions();
-        const maxPercentage = this.mergedData.reduce((max, d) => max > d.completionPercentage ? max : d.completionPercentage, 0);
-        const ceiledMaxPercentage = Math.ceil(maxPercentage);
-        options.scales = {
-            xAxes: [{
-                ticks: {
-                    min: 0,
-                    max: maxPercentage < 1 ? 100 : ceiledMaxPercentage + ceiledMaxPercentage * .1
-                }
-            }]
+        super.configureOptions(this.mergedData, options);
+
+        options.tooltips.callbacks.footer = (items: ChartTooltipItem[], data: ChartData) => {
+            const item = items[0];
+            const status = this.mergedData[item.index];
+            return `Somministrazioni: ${status.doneCount.toLocaleString()}\nPopolazione: ${status.population.toLocaleString()}`;
         };
-        options.tooltips.callbacks = {
-            label: (item: ChartTooltipItem, data: ChartData) => {
-                return Numbers.appendPercentWithPrecisionFromString(item.value, 2);
-            },
-            footer: (items: ChartTooltipItem[], data: ChartData) => {
-                const item = items[0];
-                const status = this.mergedData[item.index];
-                return `Somministrazioni: ${status.doneCount.toLocaleString()}\nPopolazione: ${status.population.toLocaleString()}`;
-            }
-        };
-        options.plugins = {
-            datalabels: {
-                anchor: 'end',
-                align: 'end',
-                formatter: (value, ctx) => {
-                    return `${parseFloat(value).toFixed(2)}%`;
-                }
-            },
-          };
 
         return options;
     }
