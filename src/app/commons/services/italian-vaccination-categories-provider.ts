@@ -64,11 +64,11 @@ export class ItalianVaccinationCategoriesProvider {
     }
 
     getCategories(): ItalianVaccinationCategory[] {
-        return this.categories;
+        return this.categories.map(c => ({...c}));
     }
 
     getCategoriesGroupedByField(): {[field: string]: ItalianVaccinationCategory} {
-        return this.categories.reduce((acc, c) => {
+        return this.getCategories().reduce((acc, c) => {
             acc[c.field] = c;
             return acc;
         }, {});

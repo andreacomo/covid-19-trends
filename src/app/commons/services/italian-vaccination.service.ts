@@ -177,7 +177,7 @@ export class ItalianVaccinationService {
                     Object.keys(acc[vax.area].categories).forEach(categoryField => {
                         acc[vax.area].categories[categoryField].doneCount =
                             (acc[vax.area].categories[categoryField].doneCount || 0) + vax[categoryField];
-                     });
+                    });
 
                     return acc;
                 }, {});
