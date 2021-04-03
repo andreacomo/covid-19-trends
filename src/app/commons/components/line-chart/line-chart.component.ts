@@ -8,6 +8,7 @@ import { Subscription } from 'rxjs';
 import { TimeFilter } from '../../models/time-filter';
 import { ChartDataType } from '../../models/chart-data-type';
 import { ChartDataTypeDecorator } from '../../models/chart-data-type-decorator';
+import { Category, GoogeAnalyticsService } from '../../services/googe-analytics.service';
 
 @Component({
   selector: 'app-line-chart',
@@ -37,6 +38,9 @@ export class LineChartComponent implements OnInit {
   @Input()
   options: ChartOptions;
 
+  @Input()
+  trackingEventPrefix: string;
+
   @Output()
   toggleDataType: EventEmitter<ChartDataType> = new EventEmitter<ChartDataType>();
 
@@ -52,7 +56,8 @@ export class LineChartComponent implements OnInit {
   chart: BaseChartDirective;
 
   constructor(private dataService: LocalDataService,
-              private chartProvider: LinearChartProvider) { }
+              private chartProvider: LinearChartProvider,
+              private googleAnalytics: GoogeAnalyticsService) { }
 
   ngOnInit() {
     this.plugins = this.chartProvider.getPlugins();
@@ -69,10 +74,26 @@ export class LineChartComponent implements OnInit {
 
   toggle(dataType: ChartDataType) {
     this.toggleDataType.next(dataType);
+
+    if (this.trackingEventPrefix) {
+      this.googleAnalytics.emitEvent(
+        `${this.trackingEventPrefix}_switch_chart_type_${dataType.value}`,
+        dataType.label,
+        Category.CHART_TYPE_SWITCH
+      );
+    }
   }
 
   applyTimeFilter(filter: TimeFilter) {
     this.timeFilterChange.next(filter);
+
+    if (this.trackingEventPrefix) {
+      this.googleAnalytics.emitEvent(
+        `${this.trackingEventPrefix}_switch_filter_${filter.scope}`,
+        filter.label,
+        Category.CHART_TYPE_SWITCH
+      );
+    }
   }
 
   applyDecorator(decorator: ChartDataTypeDecorator) {

@@ -1,4 +1,5 @@
 import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
+import { Category, GoogeAnalyticsService } from 'src/app/commons/services/googe-analytics.service';
 import { DistrictsStatusChartType } from '../districts-status-chart.service';
 
 @Component({
@@ -20,7 +21,7 @@ export class DistrictStatusChartTypeSelectorComponent implements OnInit, OnChang
 
   selectedLabel: string;
 
-  constructor() {
+  constructor(private googleAnalyticsService: GoogeAnalyticsService) {
     this.chartTypeLabels.set(DistrictsStatusChartType.PERCENTAGE_ON_DELIVERED, '% dosi somministrate su consegnate');
     this.chartTypeLabels.set(DistrictsStatusChartType.PERCENTAGE_ON_POPULATION, '% somministrazioni su popolazione');
     this.chartTypeLabels.set(DistrictsStatusChartType.ABSOLUTE, 'Dosi somministrate e consegnate');
@@ -37,5 +38,11 @@ export class DistrictStatusChartTypeSelectorComponent implements OnInit, OnChang
 
   select(chartType: DistrictsStatusChartType): void {
     this.selectChartType.next(chartType);
+
+    this.googleAnalyticsService.emitEvent(
+      'district_status_switch_chart_type_' + chartType.toString(),
+      this.chartTypeLabels.get(chartType),
+      Category.CHART_TYPE_SWITCH
+    );
   }
 }

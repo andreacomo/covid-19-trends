@@ -32,6 +32,7 @@ export class GoogeAnalyticsService {
 }
 
 export enum Category {
-  INTERACTION = 'interaction'
+  INTERACTION = 'interaction',
+  CHART_TYPE_SWITCH = 'chart_type_switch'
 }
 
