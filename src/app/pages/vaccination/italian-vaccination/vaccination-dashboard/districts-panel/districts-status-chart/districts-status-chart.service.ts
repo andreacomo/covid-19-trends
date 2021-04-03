@@ -153,7 +153,7 @@ export class DistrictsStatusChartTypePopulationDeliveryPercentageStrategy extend
                 districtName: d.districtName,
                 doneCount: d.doneCount,
                 population: populationPerDistrict[d.districtName].popolazione,
-                completionPercentage: d.doneCount / populationPerDistrict[d.districtName].popolazione,
+                completionPercentage: (d.doneCount / populationPerDistrict[d.districtName].popolazione) * 100,
                 color: d.color
             };
         })
@@ -188,9 +188,19 @@ export class DistrictsStatusChartTypePopulationDeliveryPercentageStrategy extend
 
     public createOptions(): ChartOptions {
         const options = super.createOptions();
+        const maxPercentage = this.mergedData.reduce((max, d) => max > d.completionPercentage ? max : d.completionPercentage, 0);
+        const ceiledMaxPercentage = Math.ceil(maxPercentage);
+        options.scales = {
+            xAxes: [{
+                ticks: {
+                    min: 0,
+                    max: maxPercentage < 1 ? 100 : ceiledMaxPercentage + ceiledMaxPercentage * .1
+                }
+            }]
+        };
         options.tooltips.callbacks = {
             label: (item: ChartTooltipItem, data: ChartData) => {
-                return Numbers.appendPercentWithPrecisionFromString(item.value, 3);
+                return Numbers.appendPercentWithPrecisionFromString(item.value, 2);
             },
             footer: (items: ChartTooltipItem[], data: ChartData) => {
                 const item = items[0];
@@ -203,7 +213,7 @@ export class DistrictsStatusChartTypePopulationDeliveryPercentageStrategy extend
                 anchor: 'end',
                 align: 'end',
                 formatter: (value, ctx) => {
-                    return `${parseFloat(value).toFixed(3)}%`;
+                    return `${parseFloat(value).toFixed(2)}%`;
                 }
             },
           };
