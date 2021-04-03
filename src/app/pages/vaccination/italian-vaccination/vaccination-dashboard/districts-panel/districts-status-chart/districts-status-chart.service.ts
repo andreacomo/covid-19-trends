@@ -160,6 +160,12 @@ export class DistrictsStatusChartTypePopulationDeliveryPercentageStrategy extend
         .sort(this.getSorter());
     }
 
+    public createLabels(): string[] {
+        return this.mergedData
+                    .sort(this.getSorter())
+                    .map((d, index) => `${index + 1} - ${d.districtName}`);
+    }
+
     public createPlugins(): any[] {
         return [pluginDataLabels];
     }
