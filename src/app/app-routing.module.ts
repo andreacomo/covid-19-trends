@@ -8,7 +8,8 @@ const routes: Routes = [
     path: 'home',
     component: HomeDashboardComponent,
     data: {
-      label: 'Home'
+      label: 'Home',
+      title: 'Covid 19 Trends - Panoramica Generale Italiana'
     }
   },
   {

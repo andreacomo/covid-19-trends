@@ -23,7 +23,8 @@ export const routes: Routes = [
         component: NationalTrendComponent,
         data: {
           codivData: true,
-          label: 'Italia'
+          label: 'Italia',
+          title: 'Covid 19 Trends - Contagi: Panoramica Italia'
         }
       },
       {
@@ -31,7 +32,8 @@ export const routes: Routes = [
         component: DistrictsDashboardComponent,
         data: {
           codivData: true,
-          label: 'Regioni'
+          label: 'Regioni',
+          title: 'Covid 19 Trends - Contagi nelle Regioni Italiane'
         }
       },
       {
@@ -39,7 +41,8 @@ export const routes: Routes = [
         component: ProvincesDashboardComponent,
         data: {
           codivData: true,
-          label: 'Province'
+          label: 'Province',
+          title: 'Covid 19 Trends - Contagi nelle Province Italiane'
         }
       }
     ]

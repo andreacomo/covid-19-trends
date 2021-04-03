@@ -22,7 +22,8 @@ export const routes: Routes = [
         path: 'italy',
         component: ItalianVaccinationDashboardComponent,
         data: {
-          label: 'Italia'
+          label: 'Italia',
+          title: 'Covid 19 Trends - Vaccinazione Italiana'
         },
         children: [
           {
@@ -34,14 +35,16 @@ export const routes: Routes = [
             path: 'overview',
             component: OverviewPanelComponent,
             data: {
-              label: 'Panoramica'
+              label: 'Panoramica',
+              title: 'Covid 19 Trends - Panoramica Vaccinazione Italiana'
             }
           },
           {
             path: 'districts',
             component: DistrictsPanelComponent,
             data: {
-              label: 'Confronta le Regioni'
+              label: 'Confronta le Regioni',
+              title: 'Covid 19 Trends - Vaccinazione Italiana: Confronta le regioni'
             }
           }
         ]
@@ -50,7 +53,8 @@ export const routes: Routes = [
         path: 'world',
         component: WorldVaccinationDashboardComponent,
         data: {
-          label: 'Resto del mondo'
+          label: 'Resto del mondo',
+          title: 'Covid 19 Trends - Vaccinazione nel resto del mondo'
         }
       }
     ]

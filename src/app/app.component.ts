@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { MatIconRegistry } from '@angular/material/icon';
-import { DomSanitizer } from '@angular/platform-browser';
+import { DomSanitizer, Title } from '@angular/platform-browser';
 import { environment } from '../environments/environment';
-import { Router } from '@angular/router';
+import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
+import { filter, map } from 'rxjs/operators';
 
 @Component({
   selector: 'app-root',
@@ -17,7 +18,9 @@ export class AppComponent implements OnInit {
 
   constructor(private matIconRegistry: MatIconRegistry,
               private domSanitizer: DomSanitizer,
-              private router: Router) {
+              private router: Router,
+              private activatedRoute: ActivatedRoute,
+              private titleService: Title) {
     [
       {
         iconName: 'github',
@@ -49,6 +52,25 @@ export class AppComponent implements OnInit {
           label: r.data.label
         };
       });
-  }
+
+    // https://blog.bitsrc.io/dynamic-page-titles-in-angular-98ce20b5c334
+    const appTitle = this.titleService.getTitle();
+    this.router
+      .events.pipe(
+        filter(event => event instanceof NavigationEnd),
+        map(() => {
+          let child = this.activatedRoute.firstChild;
+          while (child.firstChild) {
+            child = child.firstChild;
+          }
+          if (child.snapshot.data.title) {
+            return child.snapshot.data.title;
+          }
+          return appTitle;
+        })
+      ).subscribe((ttl: string) => {
+        this.titleService.setTitle(ttl);
+    });
+}
 
 }
