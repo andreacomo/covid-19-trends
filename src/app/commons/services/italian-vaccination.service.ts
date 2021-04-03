@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { CachableRemoteDataService } from './cachable-remote-data.service';
+import { ItalianVaccinationCategoriesProvider } from './italian-vaccination-categories-provider';
 import { map } from 'rxjs/operators';
 import { VaccinationDistrictStatus } from 'src/app/pages/vaccination/italian-vaccination/models/vaccination-district-status';
 import { VaccinationDistrictOverallStatus } from 'src/app/pages/vaccination/italian-vaccination/models/vaccination-district-overall-status';
@@ -13,7 +14,7 @@ import { VaccinesDelivery } from 'src/app/pages/vaccination/italian-vaccination/
 import { VaccinesDeliveryPerSupplierInDistricts, DistrictDelivery } from 'src/app/pages/vaccination/italian-vaccination/models/vaccines-delivery-per-supplier-in-districts';
 import { VaccinesDeliveryDatesPerSupplier, SupplierDelivery } from 'src/app/pages/vaccination/italian-vaccination/models/vaccines-delivery-dates-per-supplier';
 import { VaccinationPerDay } from 'src/app/pages/vaccination/italian-vaccination/models/vaccination-per-day';
-import { VaccinationAdministrationSummary } from 'src/app/pages/vaccination/italian-vaccination/models/vaccination-registry-summary copy';
+import { VaccinationAdministrationSummary } from 'src/app/pages/vaccination/italian-vaccination/models/vaccination-administration-summary';
 
 @Injectable({
     providedIn: 'root'
@@ -32,7 +33,8 @@ export class ItalianVaccinationService {
 
     private readonly VACCINES_DONE_SUMMARY = 'somministrazioni-vaccini-summary-latest.json';
 
-    constructor(private remoteService: CachableRemoteDataService) { }
+    constructor(private remoteService: CachableRemoteDataService,
+                private categoriesProvider: ItalianVaccinationCategoriesProvider) { }
 
     public getLastUpdate(): Observable<Date> {
         return this.getRemoteOrCached(this.LATEST_UPDATE, data => {
@@ -169,79 +171,14 @@ export class ItalianVaccinationService {
                     acc[vax.area] = acc[vax.area] || {
                         districtName: Districts.MAPPING[vax.area],
                         area: vax.area,
-                        categories: {
-                            categoria_operatori_sanitari_sociosanitari: {
-                                name: 'Operatori Sanitari e Sociosanitari',
-                                type: 'status',
-                                doneCount: 0,
-                            },
-                            categoria_personale_non_sanitario: {
-                                name: 'Personale non sanitario',
-                                type: 'status',
-                                doneCount: 0,
-                            },
-                            categoria_ospiti_rsa: {
-                                name: 'Ospiti Strutture Residenziali',
-                                type: 'status',
-                                doneCount: 0
-                            },
-                            categoria_over80: {
-                                name: 'Over 80',
-                                type: 'status',
-                                doneCount: 0
-                            },
-                            categoria_forze_armate: {
-                                name: 'Forze Armate',
-                                type: 'status',
-                                doneCount: 0
-                            },
-                            categoria_personale_scolastico: {
-                                name: 'Personale Scolastico',
-                                type: 'status',
-                                doneCount: 0
-                            },
-                            sesso_maschile: {
-                                name: 'Sesso  Maschile',
-                                type: 'gender',
-                                doneCount: 0
-                            },
-                            sesso_femminile: {
-                                name: 'Sesso  Femminile',
-                                type: 'gender',
-                                doneCount: 0
-                            },
-                            prima_dose: {
-                                name: 'Prima dose',
-                                type: 'administration',
-                                doneCount: 0
-                            },
-                            seconda_dose: {
-                                name: 'Seconda dose',
-                                type: 'administration',
-                                doneCount: 0
-                            }
-                        }
+                        categories: this.categoriesProvider.getCategoriesGroupedByField()
                     };
-                    acc[vax.area].categories
-                        .categoria_operatori_sanitari_sociosanitari.doneCount += vax.categoria_operatori_sanitari_sociosanitari;
-                    acc[vax.area].categories
-                        .categoria_personale_non_sanitario.doneCount += vax.categoria_personale_non_sanitario;
-                    acc[vax.area].categories
-                        .categoria_ospiti_rsa.doneCount += vax.categoria_ospiti_rsa;
-                    acc[vax.area].categories
-                        .categoria_over80.doneCount += vax.categoria_over80;
-                    acc[vax.area].categories
-                        .categoria_forze_armate.doneCount += vax.categoria_forze_armate;
-                    acc[vax.area].categories
-                        .categoria_personale_scolastico.doneCount += vax.categoria_personale_scolastico;
-                    acc[vax.area].categories
-                        .sesso_maschile.doneCount += vax.sesso_maschile;
-                    acc[vax.area].categories
-                        .sesso_femminile.doneCount += vax.sesso_femminile;
-                    acc[vax.area].categories
-                        .prima_dose.doneCount += vax.prima_dose;
-                    acc[vax.area].categories
-                        .seconda_dose.doneCount += vax.seconda_dose;
+
+                    Object.keys(acc[vax.area].categories).forEach(categoryField => {
+                        acc[vax.area].categories[categoryField].doneCount =
+                            (acc[vax.area].categories[categoryField].doneCount || 0) + vax[categoryField];
+                     });
+
                     return acc;
                 }, {});
 
