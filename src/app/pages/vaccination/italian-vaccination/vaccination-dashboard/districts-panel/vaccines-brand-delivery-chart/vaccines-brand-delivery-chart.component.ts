@@ -37,7 +37,12 @@ export class VaccinesBrandDeliveryChartComponent implements OnInit, OnChanges {
       },
       scales: {
         xAxes: [{
-          stacked: true
+          stacked: true,
+          ticks: {
+            callback: (value, index, values) => {
+              return Numbers.beautifyZeroesAsText(value as number);
+            }
+          }
         }],
         yAxes: [{
           stacked: true

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import { DistrictPopulation } from 'src/app/commons/models/district-population';
+import { ItalianVaccinationCategories } from 'src/app/commons/models/italian-vaccination-category';
 import { ItalianVaccinationService } from 'src/app/commons/services/italian-vaccination.service';
 import { LocalDataService } from 'src/app/commons/services/local-data.service';
 import { VaccinationDistrictOverallStatus } from '../../models/vaccination-district-overall-status';
@@ -19,7 +20,7 @@ export class DistrictsPanelComponent implements OnInit {
 
   districtsPopulation$: Observable<DistrictPopulation[]>;
 
-  groupsPerDistricts$: Observable<any[]>;
+  groupsPerDistricts$: Observable<ItalianVaccinationCategories>;
 
   constructor(private vaccinationService: ItalianVaccinationService,
               private localDataService: LocalDataService) { }

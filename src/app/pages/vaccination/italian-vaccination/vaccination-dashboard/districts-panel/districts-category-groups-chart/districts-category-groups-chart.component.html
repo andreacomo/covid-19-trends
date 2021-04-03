@@ -1,1 +1,9 @@
-<p>districts-category-groups-chart works!</p>
+<h3 class="mat-h3">Somministrazione dosi per categoria</h3>
+<div *ngIf="chartData">
+    <canvas baseChart
+            [datasets]="chartData"
+            [labels]="labels"
+            [options]="options"
+            [chartType]="'horizontalBar'">
+    </canvas>
+</div>

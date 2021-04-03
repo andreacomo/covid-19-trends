@@ -15,6 +15,7 @@ import { VaccinesDeliveryPerSupplierInDistricts, DistrictDelivery } from 'src/ap
 import { VaccinesDeliveryDatesPerSupplier, SupplierDelivery } from 'src/app/pages/vaccination/italian-vaccination/models/vaccines-delivery-dates-per-supplier';
 import { VaccinationPerDay } from 'src/app/pages/vaccination/italian-vaccination/models/vaccination-per-day';
 import { VaccinationAdministrationSummary } from 'src/app/pages/vaccination/italian-vaccination/models/vaccination-administration-summary';
+import { ItalianVaccinationCategories, ItalianVaccinationCategory } from '../models/italian-vaccination-category';
 
 @Injectable({
     providedIn: 'root'
@@ -161,13 +162,20 @@ export class ItalianVaccinationService {
         );
     }
 
-    public getCategoryGroupsPerDistricts(): Observable<any[]> {
+    public getCategoryGroupsPerDistricts(): Observable<ItalianVaccinationCategories> {
         return this.getRemoteOrCached(this.VACCINES_DONE_SUMMARY, data => {
             return data.data;
         })
         .pipe(
             map((data: VaccinationAdministrationSummary[]) => {
-                const sumByDistricts = data.reduce((acc, vax) => {
+                type CategoriesInDistrict = {
+                    [districtArea: string]: {
+                        districtName: string,
+                        area: string,
+                        categories: {[categoryField: string]: ItalianVaccinationCategory}
+                    }
+                };
+                const sumCategoriesInDistricts = data.reduce((acc, vax) => {
                     acc[vax.area] = acc[vax.area] || {
                         districtName: Districts.MAPPING[vax.area],
                         area: vax.area,
@@ -177,19 +185,21 @@ export class ItalianVaccinationService {
                     Object.keys(acc[vax.area].categories).forEach(categoryField => {
                         acc[vax.area].categories[categoryField].doneCount =
                             (acc[vax.area].categories[categoryField].doneCount || 0) + vax[categoryField];
+                        acc[vax.area].categories[categoryField].districtName = Districts.MAPPING[vax.area];
                     });
 
                     return acc;
-                }, {});
+                }, {} as CategoriesInDistrict);
 
+                const groupByCategory = Object.values(sumCategoriesInDistricts)
+                    .flatMap(district => Object.values(district.categories))
+                    .reduce((acc, category) => {
+                        acc[category.name] = acc[category.name] || [];
+                        acc[category.name].push(category);
+                        return acc;
+                    }, {});
 
-                return Object.values(sumByDistricts)
-                    .map((d: any) => {
-                        return {
-                            ...d,
-                            categories: Object.values(d.categories)
-                        };
-                    });
+                return groupByCategory;
             })
         );
     }

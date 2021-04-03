@@ -5,4 +5,10 @@ export class ItalianVaccinationCategory {
     field: string;
 
     type: 'status' | 'gender' | 'administration';
+
+    doneCount?: number;
+
+    districtName?: string;
 }
+
+export type ItalianVaccinationCategories = {[districtName: string]: ItalianVaccinationCategory[]};
