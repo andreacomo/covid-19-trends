@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Regulation } from 'src/app/commons/models/districts-lockdown-colors';
+import { Category, GoogeAnalyticsService } from 'src/app/commons/services/googe-analytics.service';
 import { DistrictLockdownLevelsService } from './district-lockdown-levels.service';
 
 @Component({
@@ -19,7 +20,8 @@ export class DistrictLockdownLevelsComponent implements OnInit {
 
   source: string;
 
-  constructor(private districtLockdownService: DistrictLockdownLevelsService) { }
+  constructor(private districtLockdownService: DistrictLockdownLevelsService,
+              private googleAnalyticsService: GoogeAnalyticsService) { }
 
   ngOnInit() {
     this.districtLockdownService.getData()
@@ -40,6 +42,14 @@ export class DistrictLockdownLevelsComponent implements OnInit {
       acc[scenario.color] = scenario.districts.length;
       return acc;
     }, {} as {[color: string]: number});
+  }
+
+  afterExpand() {
+    this.googleAnalyticsService.emitEvent(
+      'district_lockdown_levels_opened',
+      'Mappa dei colori dell\'Italia aperta',
+      Category.INTERACTION
+    );
   }
 
 }

@@ -1,6 +1,6 @@
 <h2 class="mat-title" *ngIf="districtColors">Indicatori di rischio per regione</h2>
 <mat-accordion *ngIf="districtColors">
-    <mat-expansion-panel>
+    <mat-expansion-panel (afterExpand)="afterExpand()">
         <mat-expansion-panel-header>
             <mat-panel-title>
                 <div fxLayout="row" fxFlex="100" fxLayoutAlign="space-evenly" fxLayoutGap="1em">

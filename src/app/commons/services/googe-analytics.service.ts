@@ -20,4 +20,18 @@ export class GoogeAnalyticsService {
       });
     }
   }
+
+  public emitEvent(action: string, label: string, category: Category) {
+    if (gtag) {
+      gtag('event', action, {
+        event_category: category,
+        event_label: label,
+      });
+    }
+  }
 }
+
+export enum Category {
+  INTERACTION = 'interaction'
+}
+
