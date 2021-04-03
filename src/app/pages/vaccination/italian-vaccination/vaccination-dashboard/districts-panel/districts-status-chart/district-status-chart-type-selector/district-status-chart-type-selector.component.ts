@@ -23,7 +23,7 @@ export class DistrictStatusChartTypeSelectorComponent implements OnInit, OnChang
 
   constructor(private googleAnalyticsService: GoogeAnalyticsService) {
     this.chartTypeLabels.set(DistrictsStatusChartType.PERCENTAGE_ON_DELIVERED, '% dosi somministrate su consegnate');
-    this.chartTypeLabels.set(DistrictsStatusChartType.PERCENTAGE_ON_POPULATION, '% somministrazioni su popolazione');
+    this.chartTypeLabels.set(DistrictsStatusChartType.PERCENTAGE_ON_POPULATION, '% totale dosi su popolazione');
     this.chartTypeLabels.set(DistrictsStatusChartType.ABSOLUTE, 'Dosi somministrate e consegnate');
   }
 
