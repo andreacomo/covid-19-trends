@@ -1,9 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, SimpleChanges } from '@angular/core';
 import { MatIconRegistry } from '@angular/material/icon';
 import { DomSanitizer, Title } from '@angular/platform-browser';
 import { environment } from '../environments/environment';
 import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 import { filter, map } from 'rxjs/operators';
+import { GoogeAnalyticsService } from './commons/services/googe-analytics.service';
+import { SimpleRouteInfo as SimpleRouteChanges } from './commons/models/simple-route-changes';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-root',
@@ -20,7 +23,8 @@ export class AppComponent implements OnInit {
               private domSanitizer: DomSanitizer,
               private router: Router,
               private activatedRoute: ActivatedRoute,
-              private titleService: Title) {
+              private titleService: Title,
+              private googleAnalyticsService: GoogeAnalyticsService) {
     [
       {
         iconName: 'github',
@@ -53,24 +57,38 @@ export class AppComponent implements OnInit {
         };
       });
 
-    // https://blog.bitsrc.io/dynamic-page-titles-in-angular-98ce20b5c334
+    this.emitSimpleRouteChanges()
+      .subscribe((routeInfo: SimpleRouteChanges) => {
+        this.titleService.setTitle(routeInfo.title);
+
+        this.googleAnalyticsService.emitPageChange(routeInfo);
+      });
+  }
+
+  // https://blog.bitsrc.io/dynamic-page-titles-in-angular-98ce20b5c334
+  // https://medium.com/madhash/how-to-properly-add-google-analytics-tracking-to-your-angular-web-app-bc7750713c9e
+  private emitSimpleRouteChanges(): Observable<SimpleRouteChanges> {
     const appTitle = this.titleService.getTitle();
-    this.router
+    return this.router
       .events.pipe(
         filter(event => event instanceof NavigationEnd),
-        map(() => {
+        map((event: NavigationEnd) => {
           let child = this.activatedRoute.firstChild;
           while (child.firstChild) {
             child = child.firstChild;
           }
-          if (child.snapshot.data.title) {
-            return child.snapshot.data.title;
-          }
-          return appTitle;
-        })
-      ).subscribe((ttl: string) => {
-        this.titleService.setTitle(ttl);
-    });
-}
 
+          if (child.snapshot.data.title) {
+            return {
+              title: child.snapshot.data.title,
+              path: event.urlAfterRedirects
+            } as SimpleRouteChanges;
+          }
+          return {
+            title: appTitle,
+            path: event.urlAfterRedirects
+          } as SimpleRouteChanges;
+        })
+      );
+  }
 }

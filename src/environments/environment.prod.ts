@@ -1,4 +1,5 @@
 export const environment = {
   production: true,
-  context: ''
+  context: '',
+  gtag: 'G-6B8BQTPGYT'
 };
