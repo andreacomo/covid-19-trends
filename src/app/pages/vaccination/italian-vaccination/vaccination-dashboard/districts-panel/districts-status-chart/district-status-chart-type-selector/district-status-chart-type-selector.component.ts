@@ -40,7 +40,7 @@ export class DistrictStatusChartTypeSelectorComponent implements OnInit, OnChang
     this.selectChartType.next(chartType);
 
     this.googleAnalyticsService.emitEvent(
-      'district_status_switch_chart_type_' + chartType.toString(),
+      'ita_vaccination_district_status_switch_chart_type_' + chartType.toString(),
       this.chartTypeLabels.get(chartType),
       Category.CHART_TYPE_SWITCH
     );

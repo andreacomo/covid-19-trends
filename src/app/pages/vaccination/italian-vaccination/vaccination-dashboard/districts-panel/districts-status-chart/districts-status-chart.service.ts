@@ -31,7 +31,9 @@ export class DistrictsStatusChartService {
 
 export enum DistrictsStatusChartType {
 
-    PERCENTAGE_ON_DELIVERED, PERCENTAGE_ON_POPULATION, ABSOLUTE
+    PERCENTAGE_ON_DELIVERED = 'perc_on_delivered',
+    PERCENTAGE_ON_POPULATION = 'perc_on_population',
+    ABSOLUTE = 'absolute'
 }
 
 export abstract class DistrictsStatusChartTypeStrategy {
