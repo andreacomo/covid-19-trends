@@ -46,7 +46,7 @@ export class DistrictLockdownLevelsComponent implements OnInit {
 
   afterExpand() {
     this.googleAnalyticsService.emitEvent(
-      'district_lockdown_levels_opened',
+      'ita_covid_home_district_lockdown_levels_opened',
       'Mappa dei colori dell\'Italia aperta',
       Category.INTERACTION
     );
