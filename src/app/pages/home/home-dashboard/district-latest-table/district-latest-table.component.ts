@@ -9,6 +9,7 @@ import { Trend } from '../../models/trend';
 import { EnrichedDataGroup } from '../../models/enriched-district-data-group';
 import { trigger, state, style, animate, transition } from '@angular/animations';
 import { Sort } from '@angular/material/sort';
+import { Category, GoogeAnalyticsService } from 'src/app/commons/services/googe-analytics.service';
 
 @Component({
   selector: 'app-district-latest-table',
@@ -44,7 +45,8 @@ export class DistrictLatestTableComponent implements OnInit, OnChanges, OnDestro
 
   constructor(private dataProvider: LatestProviderService,
               private dateString: DateStringPipe,
-              private mediaObserver: MediaObserver) { }
+              private mediaObserver: MediaObserver,
+              private googleAnalyticsService: GoogeAnalyticsService) { }
 
   ngOnInit() {
   }
@@ -118,6 +120,21 @@ export class DistrictLatestTableComponent implements OnInit, OnChanges, OnDestro
       this.tableData.sort((i1, i2) => {
         return (i1[sort.active] < i2[sort.active] ? -1 : 1) * (isAsc ? 1 : -1);
       });
+    }
+  }
+
+  onExpand(event) {
+    if (event?.district) {
+      const normalizedDistrict = event.district.toLowerCase()
+        .replace(/\s+/g, '_')
+        .replace('-', '_')
+        .replace(/\./g, '')
+        .replace(/[']/g, '_');
+      this.googleAnalyticsService.emitEvent(
+        `ita_covid_home_district_latest_table_open_row_${normalizedDistrict}`,
+        'Tabella in homepage: apertura riga',
+        Category.INTERACTION
+      );
     }
   }
 }
