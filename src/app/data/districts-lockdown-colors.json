@@ -700,14 +700,12 @@
                 {
                     "color": "WHITE",
                     "scenario": 1,
-                    "districts": [
-                    ]
+                    "districts": []
                 },
                 {
                     "color": "YELLOW",
                     "scenario": 2,
-                    "districts": [ 
-                    ]
+                    "districts": []
                 },
                 {
                     "color": "ORANGE",
@@ -736,14 +734,12 @@
                 {
                     "color": "WHITE",
                     "scenario": 1,
-                    "districts": [
-                    ]
+                    "districts": []
                 },
                 {
                     "color": "YELLOW",
                     "scenario": 2,
-                    "districts": [ 
-                    ]
+                    "districts": []
                 },
                 {
                     "color": "ORANGE",
@@ -774,14 +770,12 @@
                 {
                     "color": "WHITE",
                     "scenario": 1,
-                    "districts": [
-                    ]
+                    "districts": []
                 },
                 {
                     "color": "YELLOW",
                     "scenario": 2,
-                    "districts": [ 
-                    ]
+                    "districts": []
                 },
                 {
                     "color": "ORANGE",
