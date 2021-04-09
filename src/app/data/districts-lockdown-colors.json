@@ -799,7 +799,6 @@
                     "color": "RED",
                     "scenario": 4,
                     "districts": [
-                        "Molise",
                         "Campania",
                         "Puglia", "Emilia-Romagna", "Friuli Venezia Giulia", "Lombardia", "Piemonte", 
                         "Valle d'Aosta", "Toscana", "Calabria"
