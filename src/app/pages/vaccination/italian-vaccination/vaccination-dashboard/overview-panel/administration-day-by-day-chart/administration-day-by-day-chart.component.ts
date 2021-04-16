@@ -95,8 +95,19 @@ export class AdministrationDayByDayChartComponent implements OnInit, OnChanges {
 
     this.chartData = [
       this.createChartData('Seconda dose', this.data, 'second', Colors.SUPPORTED[15]),
-      this.createChartData('Prima dose', this.data, 'first', Colors.SUPPORTED[2])
+      this.createChartData('Prima dose', this.data, 'first', Colors.SUPPORTED[2]),
+      this.restyleLine(this.createChartData('Dosi totali', this.data, 'total', Colors.SUPPORTED[19]))
     ];
+  }
+
+  private restyleLine(chartData: ChartDataSets): ChartDataSets {
+    return {
+      ...chartData,
+      fill: false,
+      pointBorderWidth: 1.5,
+      pointRadius: 2.5,
+      borderWidth: 1.5,
+    };
   }
 
   private createChartData(label: string, data: VaccinationPerDay[], attribute: string, colour: string): ChartDataSets {
