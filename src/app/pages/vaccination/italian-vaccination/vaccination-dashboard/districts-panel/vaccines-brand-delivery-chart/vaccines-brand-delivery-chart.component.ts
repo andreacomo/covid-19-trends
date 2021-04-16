@@ -2,7 +2,6 @@ import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/cor
 import { ChartData, ChartDataSets, ChartOptions, ChartTooltipItem } from 'chart.js';
 import { Label } from 'ng2-charts';
 import { VaccinesDeliveryPerSupplierInDistricts } from '../../../models/vaccines-delivery-per-supplier-in-districts';
-import { VaccineSupplierColors } from '../../../models/vaccine-supplier-colors';
 import { Numbers } from 'src/app/commons/models/numbers';
 
 @Component({
@@ -65,7 +64,6 @@ export class VaccinesBrandDeliveryChartComponent implements OnInit, OnChanges {
   ngOnChanges(changes: SimpleChanges): void {
     if (changes.data.currentValue && !changes.data.previousValue) {
       this.labels = this.data[0].deliveries.map(d => d.districtName);
-      const colors = VaccineSupplierColors.SUPPORTED;
       this.chartData = this.data.map((d, i) => ({
         data: d.deliveries.map(delivery => delivery.doses),
         /* backgroundColor: colors[i] + 'AA',

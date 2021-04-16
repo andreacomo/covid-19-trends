@@ -5,7 +5,6 @@ import { Numbers } from 'src/app/commons/models/numbers';
 import { TimeFilter } from 'src/app/commons/models/time-filter';
 import { DateStringPipe } from 'src/app/commons/pipes/date-string.pipe';
 import { DataFilterProviderService } from 'src/app/commons/services/data-filter-provider.service';
-import { VaccineSupplierColors } from '../../../models/vaccine-supplier-colors';
 import { SupplierDelivery, VaccinesDeliveryDatesPerSupplier } from '../../../models/vaccines-delivery-dates-per-supplier';
 
 @Component({
@@ -89,14 +88,17 @@ export class VaccinesDeliveryDateChartComponent implements OnInit, OnChanges {
 
     this.chartData = this.data.map((d, i) => {
       const dateDosesMap = this.createDateDosesMap(d.deliveries);
-      const color = VaccineSupplierColors.SUPPORTED[i];
+      const color = [
+        '#FF6384',
+        '#36A2EC',
+        '#FFCE57',
+        '#24e2b6'
+      ];
       return {
         data: dates.map(date => dateDosesMap[date] || 0),
-        /* fill: false,
-        backgroundColor: color + 'AA',
-        borderColor: color + 'AA',
-        hoverBackgroundColor: color,
-        hoverBorderColor: color, */
+        backgroundColor: color[i] + '66',
+        borderColor: color[i] + 'AA',
+        hoverBackgroundColor: color[i],
         borderWidth: 2,
         lineTension: 0.1,
         pointRadius: 4,
