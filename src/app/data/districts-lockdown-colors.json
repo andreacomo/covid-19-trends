@@ -1040,6 +1040,89 @@
                     "districts": []
                 }
             ]
+        }, {
+            "issueDate": "2021-05-21",
+            "validFromDate": "2021-05-24",
+            "scenarios": [
+                {
+                    "color": "WHITE",
+                    "scenario": 1,
+                    "districts": []
+                },
+                {
+                    "color": "YELLOW",
+                    "scenario": 2,
+                    "districts": [
+                        "Umbria", 
+                        "P.A. Bolzano",
+                        "Abruzzo", 
+                        "Liguria", 
+                        "Lazio",
+                        "Marche", "Molise", "P.A. Trento", "Veneto",
+                        "Toscana", "Emilia-Romagna", "Friuli Venezia Giulia", "Lombardia", "Piemonte",
+                        "Campania",
+                        "Puglia",
+                        "Calabria",     
+                        "Basilicata",
+                        "Sicilia",
+                        "Sardegna",
+                        "Valle d'Aosta"
+                     ]
+                },
+                {
+                    "color": "ORANGE",
+                    "scenario": 3,
+                    "districts": []
+                },
+                {
+                    "color": "RED",
+                    "scenario": 4,
+                    "districts": []
+                }
+            ]
+        }, {
+            "issueDate": "2021-05-28",
+            "validFromDate": "2021-05-31",
+            "scenarios": [
+                {
+                    "color": "WHITE",
+                    "scenario": 1,
+                    "districts": [
+                        "Friuli Venezia Giulia",
+                        "Sardegna",
+                        "Molise"
+                    ]
+                },
+                {
+                    "color": "YELLOW",
+                    "scenario": 2,
+                    "districts": [
+                        "Umbria", 
+                        "P.A. Bolzano",
+                        "Abruzzo", 
+                        "Liguria", 
+                        "Lazio",
+                        "Marche", "P.A. Trento", "Veneto",
+                        "Toscana", "Emilia-Romagna", "Lombardia", "Piemonte",
+                        "Campania",
+                        "Puglia",
+                        "Calabria",     
+                        "Basilicata",
+                        "Sicilia",
+                        "Valle d'Aosta"
+                     ]
+                },
+                {
+                    "color": "ORANGE",
+                    "scenario": 3,
+                    "districts": []
+                },
+                {
+                    "color": "RED",
+                    "scenario": 4,
+                    "districts": []
+                }
+            ]
         }
     ]
 }
