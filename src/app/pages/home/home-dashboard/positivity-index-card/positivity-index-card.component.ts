@@ -1,5 +1,4 @@
 import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
-import { ConsoleReporter } from 'jasmine';
 import { NationalData } from 'src/app/commons/models/national-data';
 import { MeanData } from '../../models/mean-data';
 import { Trend } from '../../models/trend';
