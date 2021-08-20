@@ -4,6 +4,7 @@ import { ChartOptions, ChartDataSets, ChartTooltipItem, ChartData } from 'chart.
 import { Label } from 'ng2-charts';
 import { DateStringPipe } from 'src/app/commons/pipes/date-string.pipe';
 import { Colors } from 'src/app/commons/models/colors';
+import { Numbers } from 'src/app/commons/models/numbers';
 
 @Component({
   selector: 'app-national-data-chart',
@@ -39,6 +40,15 @@ export class NationalDataChartComponent implements OnInit, OnChanges {
           return `${data.datasets[item.datasetIndex].label}: ${value}${this.config.isPercentage ? '%' : ''}`;
         }
       }
+    },
+    scales: {
+      yAxes: [{
+        ticks: {
+          callback: (value, index, values) => {
+            return Numbers.beautifyZeroesAsText(value as number);
+          }
+        }
+      }]
     }
   };
 
