@@ -15,11 +15,12 @@ import { DistrictLockdownMapComponent } from './home-dashboard/district-lockdown
 import { RegulationDateSelectionComponent } from './home-dashboard/regulation-date-selection/regulation-date-selection.component';
 import { VaccinationSummaryComponent } from './home-dashboard/vaccination-summary/vaccination-summary.component';
 import { DistrictLockdownChartComponent } from './home-dashboard/district-lockdown-levels/district-lockdown-chart/district-lockdown-chart.component';
+import { PositivityIndexCardComponent } from './home-dashboard/positivity-index-card/positivity-index-card.component';
 
 @NgModule({
   declarations: [HomeDashboardComponent, DistrictLatestTrendComponent,
     DistrictLatestTableComponent, NationalLatestComponent, DistrictLockdownLevelsComponent,
-    DistrictLockdownMapComponent, RegulationDateSelectionComponent, VaccinationSummaryComponent, DistrictLockdownChartComponent],
+    DistrictLockdownMapComponent, RegulationDateSelectionComponent, VaccinationSummaryComponent, DistrictLockdownChartComponent, PositivityIndexCardComponent],
   imports: [
     CommonModule,
     MaterialModule,

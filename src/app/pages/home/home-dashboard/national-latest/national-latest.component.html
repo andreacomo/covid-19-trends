@@ -1,6 +1,8 @@
 <div *ngIf="items" fxLayout="column">
     <h2 class="mat-title">Situazione al {{updatedAt | date : 'dd/MM/yyyy'}}</h2>
     <div fxLayout.gt-sm="column" fxLayout.sm="row wrap" fxLayoutAlign.sm="space-between">
+        <app-positivity-index-card [data]="data" fxFlex.gt-sm="100" fxFlex.sm="49"></app-positivity-index-card>
+
         <mat-card *ngFor="let item of items" fxFlex.gt-sm="100" fxFlex.sm="49">
             <mat-card-content fxLayout="row" fxLayoutAlign="space-between space-between" fxLayout.md="column">
                 <strong>{{item.label}}</strong> 

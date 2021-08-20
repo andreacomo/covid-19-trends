@@ -1,0 +1,15 @@
+<mat-card>
+    <mat-card-content fxLayout="column" fxLayoutAlign="space-between space-between" fxLayoutGap="1em">
+        <div class="item" fxLayout="row" fxLayoutAlign="space-between space-between" fxFlex="100" fxLayoutGap=".5em">
+            <span>Indice di positività</span>
+            <div class="number">
+                <app-trend-chip *ngIf="index; else loading" [trend]="trend" [inverseLogic]="true">
+                    {{index.toFixed(2)}}%
+                </app-trend-chip>
+                <ng-template #loading>
+                    <mat-spinner [diameter]="24"></mat-spinner>
+                </ng-template>
+            </div>
+        </div>
+    </mat-card-content>
+</mat-card>
