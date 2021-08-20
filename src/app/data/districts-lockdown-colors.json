@@ -1223,7 +1223,7 @@
                         "Campania",
                         "Calabria",     
                         "Basilicata",
-                        "Sicilia",
+                        "Sicilia"
                     ]
                 },
                 {
@@ -1231,7 +1231,7 @@
                     "scenario": 2,
                     "districts": [ 
                         "Valle d'Aosta"
-                     ]
+                    ]
                 },
                 {
                     "color": "ORANGE",
@@ -1244,8 +1244,7 @@
                     "districts": []
                 }
             ]
-        }
-    ], {
+        }, {
             "issueDate": "2021-06-25",
             "validFromDate": "2021-06-28",
             "scenarios": [
