@@ -1,0 +1,11 @@
+<div fxLayout="row" fxLayoutAlign="flex-end center" class="sorter-container">
+    <button mat-stroked-button [matMenuTriggerFor]="beforeMenu" matTooltip="Cambia intervallo temporale">
+        <span *ngIf="selectedLabel" class="label">Ultimi {{selectedLabel}}</span>
+        <mat-icon>leaderboard</mat-icon>
+    </button>
+    <mat-menu #beforeMenu="matMenu" xPosition="before">
+        <button mat-menu-item *ngFor="let timeFrame of availableTimeFrames" (click)="select(timeFrame)">
+            <span>{{timeFrame.label}}</span>
+        </button>
+    </mat-menu>
+</div>

@@ -12,7 +12,7 @@ import { DifferentialData } from '../models/differential-data';
 })
 export class NationalTrendComponent implements OnInit {
 
-  dataLatestDays: number;
+  selectedMonths: number;
 
   smaWindow: number;
 
@@ -48,16 +48,23 @@ export class NationalTrendComponent implements OnInit {
     this.github.getAllNationalData()
       .subscribe(data => {
         this.allNationalData = this.addDifferentialData(data);
+        this.selectedMonths = 2;
+        this.smaWindow = 7;
+        this.createConfigs(this.selectedMonths * 30);
       });
+  }
 
-    this.dataLatestDays = 40;
-    this.smaWindow = 7;
+  onTimeFrameChange(months: number) {
+    this.selectedMonths = months;
+    this.createConfigs(this.selectedMonths * 30);
+  }
 
+  private createConfigs(dataLatestDays: number) {
     this.newCasesConfig = {
       smaWindow: this.smaWindow,
       smaLabel: `Media mobile a ${this.smaWindow} giorni`,
       metric: 'nuovi_positivi',
-      dataLatestDays: this.dataLatestDays,
+      dataLatestDays,
       dataLabel: 'Nuovi casi',
       dataBarColor: Colors.SUPPORTED[0],
       title: `Nuovi casi totali (rispetto al giorno precedente)`
@@ -66,7 +73,7 @@ export class NationalTrendComponent implements OnInit {
       smaWindow: this.smaWindow,
       smaLabel: `Media mobile a ${this.smaWindow} giorni`,
       metric: 'totale_casi',
-      dataLatestDays: this.dataLatestDays,
+      dataLatestDays,
       dataLabel: 'Totale casi',
       dataBarColor: Colors.SUPPORTED[3],
       title: `Totale casi`
@@ -75,7 +82,7 @@ export class NationalTrendComponent implements OnInit {
       smaWindow: this.smaWindow,
       smaLabel: `Media mobile a ${this.smaWindow} giorni`,
       metric: 'deceduti',
-      dataLatestDays: this.dataLatestDays,
+      dataLatestDays,
       dataLabel: 'Totale deceduti',
       dataBarColor: Colors.SUPPORTED[7],
       title: `Totale deceduti`
@@ -84,7 +91,7 @@ export class NationalTrendComponent implements OnInit {
       smaWindow: this.smaWindow,
       smaLabel: `Media mobile a ${this.smaWindow} giorni`,
       metric: 'nuovi_deceduti',
-      dataLatestDays: this.dataLatestDays,
+      dataLatestDays,
       dataLabel: 'Nuovi deceduti',
       dataBarColor: Colors.SUPPORTED[8],
       title: `Nuovi deceduti (rispetto al giorno precedente)`
@@ -93,7 +100,7 @@ export class NationalTrendComponent implements OnInit {
       smaWindow: this.smaWindow,
       smaLabel: `Media mobile a ${this.smaWindow} giorni`,
       metric: 'nuovi_positivi_su_nuovi_tamponi',
-      dataLatestDays: this.dataLatestDays,
+      dataLatestDays,
       dataLabel: '% nuovi casi/nuovi tamponi',
       dataBarColor: Colors.SUPPORTED[13],
       title: `Percentuale nuovi casi rispetto ai nuovi tamponi`,
@@ -103,7 +110,7 @@ export class NationalTrendComponent implements OnInit {
       smaWindow: this.smaWindow,
       smaLabel: `Media mobile a ${this.smaWindow} giorni`,
       metric: 'nuovi_tamponi',
-      dataLatestDays: this.dataLatestDays,
+      dataLatestDays,
       dataLabel: 'Nuovi tamponi',
       dataBarColor: Colors.SUPPORTED[15],
       title: `Nuovi tamponi (rispetto al giorno precedente)`
@@ -112,7 +119,7 @@ export class NationalTrendComponent implements OnInit {
       smaWindow: this.smaWindow,
       smaLabel: `Media mobile a ${this.smaWindow} giorni`,
       metric: 'nuovi_ricoverati_con_sintomi',
-      dataLatestDays: this.dataLatestDays,
+      dataLatestDays,
       dataLabel: 'Nuovi ricoverati',
       dataBarColor: Colors.SUPPORTED[16],
       title: `Nuovi ricoverati (rispetto al giorno precedente)`
@@ -121,7 +128,7 @@ export class NationalTrendComponent implements OnInit {
       smaWindow: this.smaWindow,
       smaLabel: `Media mobile a ${this.smaWindow} giorni`,
       metric: 'ricoverati_con_sintomi',
-      dataLatestDays: this.dataLatestDays,
+      dataLatestDays,
       dataLabel: 'Totale ricoverati con sintomi',
       dataBarColor: Colors.SUPPORTED[8],
       title: `Totale ricoverati con sintomi`
@@ -130,7 +137,7 @@ export class NationalTrendComponent implements OnInit {
       smaWindow: this.smaWindow,
       smaLabel: `Media mobile a ${this.smaWindow} giorni`,
       metric: 'nuovi_terapia_intensiva',
-      dataLatestDays: this.dataLatestDays,
+      dataLatestDays,
       dataLabel: 'Nuovi casi terapia intensiva',
       dataBarColor: Colors.SUPPORTED[14],
       title: `Nuovi casi terapia intensiva (rispetto al giorno precedente)`
@@ -139,7 +146,7 @@ export class NationalTrendComponent implements OnInit {
       smaWindow: this.smaWindow,
       smaLabel: `Media mobile a ${this.smaWindow} giorni`,
       metric: 'terapia_intensiva',
-      dataLatestDays: this.dataLatestDays,
+      dataLatestDays,
       dataLabel: 'Totale terapia intensiva',
       dataBarColor: Colors.SUPPORTED[6],
       title: `Totale terapia intensiva`
@@ -148,7 +155,7 @@ export class NationalTrendComponent implements OnInit {
       smaWindow: this.smaWindow,
       smaLabel: `Media mobile a ${this.smaWindow} giorni`,
       metric: 'nuovi_ricoverati_su_nuovi_positivi',
-      dataLatestDays: this.dataLatestDays,
+      dataLatestDays,
       dataLabel: '% nuovi ricoverati / nuovi casi',
       dataBarColor: Colors.SUPPORTED[17],
       title: `% nuovi ricoverati / nuovi casi (rispetto al giorno precedente)`
@@ -157,7 +164,7 @@ export class NationalTrendComponent implements OnInit {
       smaWindow: this.smaWindow,
       smaLabel: `Media mobile a ${this.smaWindow} giorni`,
       metric: 'terapia_intensiva_su_ricoverati',
-      dataLatestDays: this.dataLatestDays,
+      dataLatestDays,
       dataLabel: '% terapia intensiva / ricoverati',
       dataBarColor: Colors.SUPPORTED[10],
       title: `% totale terapia intensiva / ricoverati (rispetto al giorno precedente)`

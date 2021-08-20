@@ -5,10 +5,11 @@ import { CommonComponentsModule } from 'src/app/commons/common-components.module
 import { ChartsModule } from 'ng2-charts';
 import { NationalTrendComponent } from './national-trend/national-trend.component';
 import { NationalDataChartComponent } from './national-trend/national-data-chart/national-data-chart.component';
+import { NationalDataTimeSelectorComponent } from './national-trend/national-data-time-selector/national-data-time-selector.component';
 
 
 @NgModule({
-  declarations: [NationalTrendComponent, NationalDataChartComponent],
+  declarations: [NationalTrendComponent, NationalDataChartComponent, NationalDataTimeSelectorComponent],
   imports: [
     MaterialModule,
     CommonComponentsModule,

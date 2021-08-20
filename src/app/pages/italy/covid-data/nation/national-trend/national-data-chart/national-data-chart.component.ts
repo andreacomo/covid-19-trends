@@ -52,7 +52,9 @@ export class NationalDataChartComponent implements OnInit, OnChanges {
   }
 
   ngOnChanges(changes: SimpleChanges): void {
-    if (changes.data.currentValue && !changes.data.previousValue) {
+    if ((changes.data && changes.data.currentValue && !changes.data.previousValue) ||
+        changes.config.currentValue !== changes.config.previousValue) {
+
       const latestData = this.data.slice(this.data.length - this.config.dataLatestDays);
       this.chartData = [{
           label: this.config.dataLabel,
