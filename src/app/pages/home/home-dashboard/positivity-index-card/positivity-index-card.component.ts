@@ -2,7 +2,6 @@ import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/cor
 import { NationalData } from 'src/app/commons/models/national-data';
 import { MeanData } from '../../models/mean-data';
 import { Trend } from '../../models/trend';
-import { LatestProviderService } from '../../services/latest-data-provider.service';
 
 @Component({
   selector: 'app-positivity-index-card',
@@ -18,7 +17,7 @@ export class PositivityIndexCardComponent implements OnInit, OnChanges {
 
   trend: Trend;
 
-  constructor(private dataProvider: LatestProviderService) { }
+  constructor() { }
 
   ngOnInit(): void {
   }
