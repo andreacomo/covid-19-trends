@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { DistrictPopulation } from 'src/app/commons/models/district-population';
+import { VaccinableDistrictAudience } from 'src/app/commons/models/vaccinable-district-audience';
 import { VaccinationDistrictOverallStatus } from '../../../models/vaccination-district-overall-status';
 import { VaccinationDoses } from '../../../models/vaccination-doses';
 
@@ -17,14 +17,14 @@ export class PeopleCoverageStatusCardComponent implements OnInit {
   totals: VaccinationDoses;
 
   @Input()
-  population: DistrictPopulation[];
+  population: VaccinableDistrictAudience[];
 
   totalPopulation: number;
 
   constructor() { }
 
   ngOnInit(): void {
-    this.totalPopulation = this.population.reduce((sum, p) => sum + p.popolazione, 0);
+    this.totalPopulation = this.population.reduce((sum, p) => sum + p.population, 0);
   }
 
 }

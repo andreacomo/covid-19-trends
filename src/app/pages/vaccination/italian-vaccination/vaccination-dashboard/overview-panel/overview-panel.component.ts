@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import { DistrictPopulation } from 'src/app/commons/models/district-population';
+import { VaccinableDistrictAudience } from 'src/app/commons/models/vaccinable-district-audience';
 import { ItalianVaccinationService } from 'src/app/commons/services/italian-vaccination.service';
 import { LocalDataService } from 'src/app/commons/services/local-data.service';
 import { VaccinationAgeGroup } from '../../models/vaccination-age-group';
@@ -28,7 +29,7 @@ export class OverviewPanelComponent implements OnInit {
 
   totalDoses$: Observable<VaccinationDoses>;
 
-  districtsPopulation$: Observable<DistrictPopulation[]>;
+  districtsPopulation$: Observable<VaccinableDistrictAudience[]>;
 
   deliveriesInTime$: Observable<VaccinesDeliveryDatesPerSupplier[]>;
 
@@ -43,7 +44,7 @@ export class OverviewPanelComponent implements OnInit {
     this.ageGroups$ = this.vaccinationService.getAgeGroups();
     this.categoryGroup$ = this.vaccinationService.getCategoryGroups();
     this.totalDoses$ = this.vaccinationService.getVaccinationDoses();
-    this.districtsPopulation$ = this.localDataService.getDistrictsPopulation();
+    this.districtsPopulation$ = this.vaccinationService.getVaccinableAudience();
     this.deliveriesInTime$ = this.vaccinationService.getVaccinesDeliveryInTime();
     this.vaccinationsPerDay$ = this.vaccinationService.getVaccinationsPerDay();
   }

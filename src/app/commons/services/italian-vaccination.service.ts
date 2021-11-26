@@ -16,6 +16,8 @@ import { VaccinesDeliveryDatesPerSupplier, SupplierDelivery } from 'src/app/page
 import { VaccinationPerDay } from 'src/app/pages/vaccination/italian-vaccination/models/vaccination-per-day';
 import { VaccinationAdministrationSummary } from 'src/app/pages/vaccination/italian-vaccination/models/vaccination-administration-summary';
 import { ItalianVaccinationCategories, ItalianVaccinationCategory } from '../models/italian-vaccination-category';
+import { VaccinableAudience } from '../models/vaccinable-audience';
+import { VaccinableDistrictAudience } from '../models/vaccinable-district-audience';
 
 @Injectable({
     providedIn: 'root'
@@ -33,6 +35,8 @@ export class ItalianVaccinationService {
     private readonly VACCINES_DELIVERY = 'consegne-vaccini-latest.json';
 
     private readonly VACCINES_DONE_SUMMARY = 'somministrazioni-vaccini-summary-latest.json';
+
+    private readonly AUDIENCE = 'platea.json';
 
     constructor(private remoteService: CachableRemoteDataService,
                 private categoriesProvider: ItalianVaccinationCategoriesProvider) { }
@@ -282,6 +286,31 @@ export class ItalianVaccinationService {
 
                 return Object.values(vaccinationsGroupedByDay)
                     .sort((v1, v2) => v1.day.localeCompare(v2.day));
+            })
+        );
+    }
+
+    public getVaccinableAudience(): Observable<VaccinableDistrictAudience[]> {
+        return this.getRemoteOrCached(this.AUDIENCE, data => {
+            return data.data;
+        })
+        .pipe(
+            map((audiences: VaccinableAudience[]) => {
+                return audiences.reduce((acc, aud) => {
+                    acc[aud.area] = acc[aud.area] || [];
+                    acc[aud.area].push(aud);
+                    return acc;
+                }, {});
+            }),
+            map((group: {[district: string]: VaccinableAudience[]}) => {
+                return Object.values(group)
+                    .map(audsInDistrict => {
+                        const totalPop = audsInDistrict.reduce((acc, aud) => acc += aud.totale_popolazione, 0);
+                        return {
+                            district: audsInDistrict[0].area,
+                            population: totalPop
+                        } as VaccinableDistrictAudience;
+                    });
             })
         );
     }
