@@ -34,6 +34,26 @@
                     </div>
                 </div>
                 <div class="item" fxLayout="row" fxLayoutAlign="space-between center" fxFlex="100" fxLayoutGap=".5em">
+                    <strong>Terze dosi</strong> 
+                    <div fxLayout="row" fxLayoutAlign="center center" fxLayoutGap=".5em">
+                        <div class="numbers" *ngIf="todayVaccination; else loading">{{todayVaccination.doses.third.toLocaleString()}}</div>
+                        <ng-template #loading>
+                            <mat-spinner [diameter]="24"></mat-spinner>
+                        </ng-template>
+                        <mat-icon>stars</mat-icon>
+                    </div>
+                </div>
+                <div class="item" fxLayout="row" fxLayoutAlign="space-between center" fxFlex="100" fxLayoutGap=".5em">
+                    <strong>Dosi a guariti</strong> 
+                    <div fxLayout="row" fxLayoutAlign="center center" fxLayoutGap=".5em">
+                        <div class="numbers" *ngIf="todayVaccination; else loading">{{todayVaccination.doses.afterHealing.toLocaleString()}}</div>
+                        <ng-template #loading>
+                            <mat-spinner [diameter]="24"></mat-spinner>
+                        </ng-template>
+                        <mat-icon>healing</mat-icon>
+                    </div>
+                </div>
+                <div class="item" fxLayout="row" fxLayoutAlign="space-between center" fxFlex="100" fxLayoutGap=".5em">
                     <strong>Dosi totali</strong> 
                     <div fxLayout="row" fxLayoutAlign="center center" fxLayoutGap=".5em">
                         <div class="numbers total" *ngIf="todayVaccination; else loading">{{todayVaccination.doses.total.toLocaleString()}}</div>
@@ -65,6 +85,26 @@
                             <mat-spinner [diameter]="24"></mat-spinner>
                         </ng-template>
                         <mat-icon>security</mat-icon>
+                    </div>
+                </div>
+                <div class="item" fxLayout="row" fxLayoutAlign="space-between center" fxFlex="100" fxLayoutGap=".5em">
+                    <strong>Terze dosi</strong> 
+                    <div fxLayout="row" fxLayoutAlign="center center" fxLayoutGap=".5em">
+                        <div class="numbers" *ngIf="thirdDoseTotal; else loading">{{thirdDoseTotal.toLocaleString()}}</div>
+                        <ng-template #loading>
+                            <mat-spinner [diameter]="24"></mat-spinner>
+                        </ng-template>
+                        <mat-icon>stars</mat-icon>
+                    </div>
+                </div>
+                <div class="item" fxLayout="row" fxLayoutAlign="space-between center" fxFlex="100" fxLayoutGap=".5em">
+                    <strong>Dosi a guariti</strong> 
+                    <div fxLayout="row" fxLayoutAlign="center center" fxLayoutGap=".5em">
+                        <div class="numbers" *ngIf="afterHealingDosesTotal; else loading">{{afterHealingDosesTotal.toLocaleString()}}</div>
+                        <ng-template #loading>
+                            <mat-spinner [diameter]="24"></mat-spinner>
+                        </ng-template>
+                        <mat-icon>healing</mat-icon>
                     </div>
                 </div>
                 <div class="item" fxLayout="row" fxLayoutAlign="space-between center" fxFlex="100" fxLayoutGap=".5em">

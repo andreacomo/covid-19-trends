@@ -26,5 +26,9 @@ export class VaccinationAdministrationSummary {
 
     'seconda_dose': number;
 
+    'dose_addizionale_booster': number;
+
+    'pregressa_infezione': number;
+
     'nome_area': string;
 }

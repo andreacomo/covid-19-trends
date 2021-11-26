@@ -17,6 +17,10 @@ export class VaccinationSummaryComponent implements OnInit {
 
   secondDoseTotal: number;
 
+  thirdDoseTotal: number;
+
+  afterHealingDosesTotal: number;
+
   todayVaccination: VaccinationPerDay;
 
   constructor(private vaccinationService: ItalianVaccinationService) { }
@@ -28,6 +32,8 @@ export class VaccinationSummaryComponent implements OnInit {
           this.total = vaccinations.reduce((acc, v) => acc + v.doses.total, 0);
           this.firstDoseTotal = vaccinations.reduce((acc, v) => acc + v.doses.first, 0);
           this.secondDoseTotal = vaccinations.reduce((acc, v) => acc + v.doses.second, 0);
+          this.thirdDoseTotal = vaccinations.reduce((acc, v) => acc + v.doses.third, 0);
+          this.afterHealingDosesTotal = vaccinations.reduce((acc, v) => acc + v.doses.afterHealing, 0);
         });
   }
 

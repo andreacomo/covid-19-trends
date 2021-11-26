@@ -52,24 +52,6 @@ export class ItalianVaccinationService {
         );
     }
 
-    public getFirstDosesTotal(): Observable<number> {
-        return this.getRemoteOrCached(this.REGISTRY_SUMMARY, data => {
-            return data.data;
-        })
-        .pipe(
-            map((data: VaccinationRegistrySummary[]) => this.sumAttributeValue(data, 'prima_dose'))
-        );
-    }
-
-    public getSecondDosesTotal(): Observable<number> {
-        return this.getRemoteOrCached(this.REGISTRY_SUMMARY, data => {
-            return data.data;
-        })
-        .pipe(
-            map((data: VaccinationRegistrySummary[]) => this.sumAttributeValue(data, 'seconda_dose'))
-        );
-    }
-
     public getVaccinationDoses(): Observable<VaccinationDoses> {
         return this.getRemoteOrCached(this.REGISTRY_SUMMARY, data => {
             return data.data;
@@ -78,7 +60,9 @@ export class ItalianVaccinationService {
             map((data: VaccinationRegistrySummary[]) => ({
                 total: this.sumAttributeValue(data, 'total'),
                 first: this.sumAttributeValue(data, 'prima_dose'),
-                second: this.sumAttributeValue(data, 'seconda_dose')
+                second: this.sumAttributeValue(data, 'seconda_dose'),
+                third: this.sumAttributeValue(data, 'dose_addizionale_booster'),
+                afterHealing: this.sumAttributeValue(data, 'pregressa_infezione')
             }))
         );
     }
@@ -282,12 +266,16 @@ export class ItalianVaccinationService {
                         doses: {
                             total: 0,
                             first: 0,
-                            second: 0
+                            second: 0,
+                            third: 0,
+                            afterHealing: 0
                         }
                     };
                     acc[v.data_somministrazione].doses.total += v.totale;
                     acc[v.data_somministrazione].doses.first += v.prima_dose;
                     acc[v.data_somministrazione].doses.second += v.seconda_dose;
+                    acc[v.data_somministrazione].doses.third += v.dose_addizionale_booster;
+                    acc[v.data_somministrazione].doses.afterHealing += v.pregressa_infezione;
 
                     return acc;
                 }, {});
