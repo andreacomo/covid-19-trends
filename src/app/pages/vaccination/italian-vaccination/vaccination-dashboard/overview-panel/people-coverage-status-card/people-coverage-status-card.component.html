@@ -13,6 +13,18 @@
                 <div>{{totals.second.toLocaleString()}}</div>
             </div>
         </div>
+        <div fxLayout="row" fxFlex="100" fxLayoutAlign="space-between center" fxLayoutGap=".5em">
+            <div fxLayout="column" fxFlex="50" fxLayoutGap=".5em">
+                <strong class="inner-title">Tre Dosi</strong> 
+                <div class="percentage">{{((totals.third / totalPopulation) * 100).toFixed(2)}}%</div>
+                <div>{{totals.third.toLocaleString()}}</div>
+            </div>
+            <div fxLayout="column" fxFlex="50" fxLayoutGap=".5em">
+                <strong class="inner-title">Dosi a guariti</strong> 
+                <div class="percentage">{{((totals.afterHealing / totalPopulation) * 100).toFixed(2)}}%</div>
+                <div>{{totals.afterHealing.toLocaleString()}}</div>
+            </div>
+        </div>
         <div class="divider"></div>
         <div class="item" fxLayout="row" fxLayoutAlign="space-evenly center" fxFlex="100" fxLayoutGap=".5em">
             <strong>Totali</strong> 
