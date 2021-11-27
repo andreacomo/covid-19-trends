@@ -11,34 +11,24 @@ export class ItalianVaccinationCategoriesProvider {
     constructor() {
         this.categories = [
             {
-                name: 'Operatori Sanitari e Sociosanitari',
-                field: 'categoria_operatori_sanitari_sociosanitari',
-                type: 'status'
+                name: 'Prima dose',
+                field: 'prima_dose',
+                type: 'administration'
             },
             {
-                name: 'Personale non sanitario',
-                field: 'categoria_personale_non_sanitario',
-                type: 'status'
+                name: 'Seconda dose',
+                field: 'seconda_dose',
+                type: 'administration'
             },
             {
-                name: 'Ospiti Strutture Residenziali',
-                field: 'categoria_ospiti_rsa',
-                type: 'status'
+                name: 'Terza dose',
+                field: 'dose_addizionale_booster',
+                type: 'administration'
             },
             {
-                name: 'Over 80',
-                field: 'categoria_over80',
-                type: 'status'
-            },
-            {
-                name: 'Forze Armate',
-                field: 'categoria_forze_armate',
-                type: 'status'
-            },
-            {
-                name: 'Personale Scolastico',
-                field: 'categoria_personale_scolastico',
-                type: 'status'
+                name: 'Dose a guariti',
+                field: 'pregressa_infezione',
+                type: 'administration'
             },
             {
                 name: 'Sesso Maschile',
@@ -49,16 +39,6 @@ export class ItalianVaccinationCategoriesProvider {
                 name: 'Sesso Femminile',
                 field: 'sesso_femminile',
                 type: 'gender'
-            },
-            {
-                name: 'Prima dose',
-                field: 'prima_dose',
-                type: 'administration'
-            },
-            {
-                name: 'Seconda dose',
-                field: 'seconda_dose',
-                type: 'administration'
             }
         ];
     }

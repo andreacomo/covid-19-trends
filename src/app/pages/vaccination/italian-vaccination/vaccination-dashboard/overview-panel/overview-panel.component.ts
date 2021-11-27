@@ -1,16 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
-import { DistrictPopulation } from 'src/app/commons/models/district-population';
 import { VaccinableDistrictAudience } from 'src/app/commons/models/vaccinable-district-audience';
 import { ItalianVaccinationService } from 'src/app/commons/services/italian-vaccination.service';
-import { LocalDataService } from 'src/app/commons/services/local-data.service';
 import { VaccinationAgeGroup } from '../../models/vaccination-age-group';
 import { VaccinationCategoryGroup } from '../../models/vaccination-category-group';
 import { VaccinationDistrictOverallStatus } from '../../models/vaccination-district-overall-status';
 import { VaccinationDoses } from '../../models/vaccination-doses';
 import { VaccinationPerDay } from '../../models/vaccination-per-day';
 import { VaccinesDeliveryDatesPerSupplier } from '../../models/vaccines-delivery-dates-per-supplier';
-import { VaccinesDeliveryPerSupplierInDistricts } from '../../models/vaccines-delivery-per-supplier-in-districts';
 
 @Component({
   selector: 'app-overview-panel',
@@ -35,8 +32,7 @@ export class OverviewPanelComponent implements OnInit {
 
   vaccinationsPerDay$: Observable<VaccinationPerDay[]>;
 
-  constructor(private vaccinationService: ItalianVaccinationService,
-              private localDataService: LocalDataService) { }
+  constructor(private vaccinationService: ItalianVaccinationService) { }
 
   ngOnInit(): void {
     this.lastUpdate$ = this.vaccinationService.getLastUpdate();

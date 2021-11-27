@@ -68,7 +68,7 @@ export class DistrictsCategoryGroupsChartComponent implements OnInit, OnChanges 
       this.labels = Object.values(this.data)[0].map(category => category.districtName).sort();
 
       this.chartData = Object.values(this.data)
-        .filter(categories => categories[0].type === 'status')
+        .filter(categories => categories[0].type === 'administration')
         .map((categories, i) => {
           const sorted = categories.sort((c1, c2) => c1.districtName.localeCompare(c2.districtName));
           return {
@@ -77,7 +77,7 @@ export class DistrictsCategoryGroupsChartComponent implements OnInit, OnChanges 
             backgroundColor: colors[i] + 'AA',
             borderColor: colors[i] + 'AA',
             hoverBackgroundColor: colors[i],
-            hoverBorderColor: colors[i],
+            hoverBorderColor: colors[i]
           };
         });
     }
