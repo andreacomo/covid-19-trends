@@ -1323,7 +1323,7 @@
                     "districts": []
                 }
             ]
-        } , {
+        }, {
             "issueDate": "2021-12-10",
             "validFromDate": "2021-12-13",
             "scenarios": [
@@ -1348,7 +1348,7 @@
                     "color": "YELLOW",
                     "scenario": 2,
                     "districts": [ 
-                         "P.A. Trento", "Friuli Venezia Giulia" 
+                         "P.A. Trento", "Friuli Venezia Giulia",
                          "Calabria"
                     ]
                 },
