@@ -1373,7 +1373,7 @@
                     "districts": [
                         "Sardegna",
                         "Molise",
-                        "Abruzzo", "Umbria", "Liguria",
+                        "Abruzzo", "Umbria",
                         "Lazio", "Emilia-Romagna", "Lombardia", "Piemonte", "Puglia", 
                         "Toscana", 
                         "Campania",
@@ -1388,7 +1388,7 @@
                     "districts": [ 
                          "P.A. Trento", "Friuli Venezia Giulia",
                          "Calabria",
-                         "Marche", "P.A. Bolzano", "Veneto"
+                         "Marche", "P.A. Bolzano", "Veneto", "Liguria"
                     ]
                 },
                 {
