@@ -15,7 +15,7 @@ jobs:
     - name: Setup Node.js
       uses: actions/setup-node@v2
       with:
-        node-version: 12.16.3
+        node-version: 16.13.1
 
     - name: Cache node modules
       id: cache
@@ -30,7 +30,7 @@ jobs:
 
     - name: Install dependencies
       if: steps.cache.outputs.cache-hit != 'true'
-      run: npm install
+      run: npm ci
 
     - name: Build
       run: npm run build:prod
