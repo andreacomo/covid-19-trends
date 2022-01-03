@@ -1,26 +1,22 @@
 export class VaccinationRegistrySummary {
 
-    'categoria_operatori_sanitari_sociosanitari': number;
-
-    'categoria_ospiti_rsa': number;
-
-    'categoria_over80': number;
-
-    'categoria_personale_non_sanitario': number;
+    index: number;
 
     'fascia_anagrafica': string;
 
-    index: number;
+    totale: number;
+
+    'sesso_maschile': number;
+
+    'sesso_femminile': number;
 
     'prima_dose': number;
 
     'seconda_dose': number;
 
-    'sesso_femminile': number;
+    'pregressa_infezione': number;
 
-    'sesso_maschile': number;
-
-    totale: number;
+    'dose_addizionale_booster': number;
 
     'ultimo_aggiornamento': string;
 }

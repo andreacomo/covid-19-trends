@@ -22,8 +22,6 @@ export class OverviewPanelComponent implements OnInit {
 
   ageGroups$: Observable<VaccinationAgeGroup[]>;
 
-  categoryGroup$: Observable<VaccinationCategoryGroup[]>;
-
   totalDoses$: Observable<VaccinationDoses>;
 
   districtsPopulation$: Observable<VaccinableDistrictAudience[]>;
@@ -38,7 +36,6 @@ export class OverviewPanelComponent implements OnInit {
     this.lastUpdate$ = this.vaccinationService.getLastUpdate();
     this.overallStatus$ = this.vaccinationService.getVaccinationDistrictsStatus();
     this.ageGroups$ = this.vaccinationService.getAgeGroups();
-    this.categoryGroup$ = this.vaccinationService.getCategoryGroups();
     this.totalDoses$ = this.vaccinationService.getVaccinationDoses();
     this.districtsPopulation$ = this.vaccinationService.getVaccinableAudience();
     this.deliveriesInTime$ = this.vaccinationService.getVaccinesDeliveryInTime();

@@ -122,34 +122,6 @@ export class ItalianVaccinationService {
         );
     }
 
-    public getCategoryGroups(): Observable<VaccinationCategoryGroup[]> {
-        return this.getRemoteOrCached(this.REGISTRY_SUMMARY, data => {
-            return data.data;
-        })
-        .pipe(
-            map((data: VaccinationRegistrySummary[]) => ([{
-                    name: 'Operatori Sanitari e Sociosanitari',
-                    doneCount: this.sumAttributeValue(data, 'categoria_operatori_sanitari_sociosanitari')
-                }, {
-                    name: 'Personale non sanitario',
-                    doneCount: this.sumAttributeValue(data, 'categoria_personale_non_sanitario')
-                }, {
-                    name: 'Ospiti Strutture Residenziali',
-                    doneCount: this.sumAttributeValue(data, 'categoria_ospiti_rsa')
-                }, {
-                    name: 'Over 80',
-                    doneCount: this.sumAttributeValue(data, 'categoria_over80')
-                }, {
-                    name: 'Forze Armate',
-                    doneCount: this.sumAttributeValue(data, 'categoria_forze_armate')
-                }, {
-                    name: 'Personale Scolastico',
-                    doneCount: this.sumAttributeValue(data, 'categoria_personale_scolastico')
-                }])
-            )
-        );
-    }
-
     public getCategoryGroupsPerDistricts(): Observable<ItalianVaccinationCategories> {
         return this.getRemoteOrCached(this.VACCINES_DONE_SUMMARY, data => {
             return data.data;
