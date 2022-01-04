@@ -23,11 +23,11 @@ export class Colors {
                             '#0C47A1',
                             '#FDEA3B'];
 
-    public static DOSE_1 = Colors.SUPPORTED[2];
+    public static DOSE_1 = '#2a9d8f';
 
-    public static DOSE_2 = Colors.SUPPORTED[15];
+    public static DOSE_2 = '#e9c46a';
 
-    public static DOSE_3 = Colors.SUPPORTED[1];
+    public static DOSE_3 = '#f4a261';
 
-    public static DOSE_AH = Colors.SUPPORTED[3];
+    public static DOSE_AH = '#e76f51';
 }
