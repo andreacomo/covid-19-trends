@@ -1,7 +1,7 @@
 <ng-container *ngIf="totalDoses$ | async as totalDoses">
     <div class="container" *ngIf="overallStatus$ | async as overallStatus">
         <app-vaccination-last-update></app-vaccination-last-update>
-        <div *ngIf="districtsPopulation$ | async as districtsPopulation">
+        <div *ngIf="audiencePerDistrict$ | async as audiencePerDistrict">
             <div fxLayout="row" fxLayout.lt-md="column-reverse" fxLayout.md="column-reverse" fxLayoutGap="0" fxLayoutGap.lt-md="2em" fxLayoutGap.md="2em" class="groups-charts">
                 <div fxFlex="80">
                     <app-administration-day-by-day-chart *ngIf="vaccinationsPerDay$ | async as vaccinationsPerDay; else vaccinationsPerDayLoading" [data]="vaccinationsPerDay"></app-administration-day-by-day-chart>
@@ -10,12 +10,13 @@
                     </ng-template>
                 </div>
                 <div fxFlex="20" fxLayout="column" fxLayout.lt-md="row" fxLayout.md="row" fxLayoutAlign="center stretch" fxLayoutGap="2em" fxLayoutAlign.lt-md="center center" fxLayoutAlign.md="center center">
-                    <app-people-coverage-status-card fxFlex.sm="50" [data]="overallStatus" [totals]="totalDoses" [population]="districtsPopulation"></app-people-coverage-status-card>
-                    <app-overall-status-card fxFlex.sm="50" [data]="overallStatus" [totals]="totalDoses" [population]="districtsPopulation"></app-overall-status-card>
+                    <app-people-coverage-status-card fxFlex.sm="50" [data]="overallStatus" [totals]="totalDoses" [population]="audiencePerDistrict"></app-people-coverage-status-card>
+                    <app-overall-status-card fxFlex.sm="50" [data]="overallStatus" [totals]="totalDoses" [population]="audiencePerDistrict"></app-overall-status-card>
                 </div>
             </div>
-            <div fxLayout="row" fxLayout.sm="column" fxLayoutGap="2em" class="groups-charts" fxLayoutAlign="center stretch">
-                <app-age-groups-chart *ngIf="ageGroups$ | async as ageGroups" [data]="ageGroups" fxFlex="50" fxFlex.sm="100"></app-age-groups-chart>
+            <div fxLayout="row" fxLayout.sm="column" fxLayoutGap="2em" class="groups-charts" fxLayoutAlign="center stretch" *ngIf="ageGroups$ | async as ageGroups" >
+                <app-age-groups-chart [data]="ageGroups" fxFlex="50" fxFlex.sm="100"></app-age-groups-chart>
+                <app-age-groups-vaccinable-chart *ngIf="audiencePerAge$ | async as audiencePerAge" [data]="ageGroups" [population]="audiencePerAge" fxFlex="50" fxFlex.sm="100"></app-age-groups-vaccinable-chart>
             </div>
             <div fxLayout="row" class="groups-charts">
                 <app-vaccines-delivery-date-chart *ngIf="deliveriesInTime$ | async as deliveriesInTime" [data]="deliveriesInTime" fxFlex="100"></app-vaccines-delivery-date-chart>

@@ -19,14 +19,11 @@ export class AgeGroupsChartComponent implements OnInit, OnChanges {
 
   options: ChartOptions;
 
-  plugins: any[];
-
   labels: Label[];
 
   chartData: ChartDataSets[];
 
   constructor() {
-    // this.plugins = [pluginDataLabels];
     this.options = {
       ...ChartOptionsFactory.createDefault(),
       scales: {
@@ -60,19 +57,6 @@ export class AgeGroupsChartComponent implements OnInit, OnChanges {
             return `Total: ${Numbers.beautifyWithSeparators(total.toString())}`;
           }
         }
-      },
-      plugins: {
-        datalabels: {
-          font: {
-            weight: 'bold'
-          },
-          anchor: 'end',
-          align: 'end',
-          offset: -2,
-          formatter: (value, ctx) => {
-            return Numbers.beautifyWithSeparators(value);
-          }
-        },
       }
     };
   }

@@ -19,6 +19,7 @@ import { RouterModule } from '@angular/router';
 import { DistrictsPanelComponent } from './vaccination-dashboard/districts-panel/districts-panel.component';
 import { VaccinationLastUpdateComponent } from './vaccination-dashboard/vaccination-last-update/vaccination-last-update.component';
 import { DistrictsCategoryGroupsChartComponent } from './vaccination-dashboard/districts-panel/districts-category-groups-chart/districts-category-groups-chart.component';
+import { AgeGroupsVaccinableChartComponent } from './vaccination-dashboard/overview-panel/age-groups-vaccinable-chart/age-groups-vaccinable-chart.component';
 
 
 
@@ -31,7 +32,8 @@ import { DistrictsCategoryGroupsChartComponent } from './vaccination-dashboard/d
     OverviewPanelComponent,
     DistrictsPanelComponent,
     VaccinationLastUpdateComponent,
-    DistrictsCategoryGroupsChartComponent],
+    DistrictsCategoryGroupsChartComponent,
+    AgeGroupsVaccinableChartComponent],
   imports: [
     CommonModule,
     MaterialModule,

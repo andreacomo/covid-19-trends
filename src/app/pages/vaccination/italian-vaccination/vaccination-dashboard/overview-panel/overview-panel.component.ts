@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
+import { VaccinableAgeGroupAudience } from 'src/app/commons/models/vaccinable-age-group-audience';
 import { VaccinableDistrictAudience } from 'src/app/commons/models/vaccinable-district-audience';
 import { ItalianVaccinationService } from 'src/app/commons/services/italian-vaccination.service';
 import { VaccinationAgeGroup } from '../../models/vaccination-age-group';
-import { VaccinationCategoryGroup } from '../../models/vaccination-category-group';
 import { VaccinationDistrictOverallStatus } from '../../models/vaccination-district-overall-status';
 import { VaccinationDoses } from '../../models/vaccination-doses';
 import { VaccinationPerDay } from '../../models/vaccination-per-day';
@@ -24,7 +24,9 @@ export class OverviewPanelComponent implements OnInit {
 
   totalDoses$: Observable<VaccinationDoses>;
 
-  districtsPopulation$: Observable<VaccinableDistrictAudience[]>;
+  audiencePerDistrict$: Observable<VaccinableDistrictAudience[]>;
+
+  audiencePerAge$: Observable<VaccinableAgeGroupAudience[]>;
 
   deliveriesInTime$: Observable<VaccinesDeliveryDatesPerSupplier[]>;
 
@@ -37,7 +39,8 @@ export class OverviewPanelComponent implements OnInit {
     this.overallStatus$ = this.vaccinationService.getVaccinationDistrictsStatus();
     this.ageGroups$ = this.vaccinationService.getAgeGroups();
     this.totalDoses$ = this.vaccinationService.getVaccinationDoses();
-    this.districtsPopulation$ = this.vaccinationService.getVaccinableAudience();
+    this.audiencePerDistrict$ = this.vaccinationService.getVaccinableDistrictAudience();
+    this.audiencePerAge$ = this.vaccinationService.getVaccinableAgeGroupAudience();
     this.deliveriesInTime$ = this.vaccinationService.getVaccinesDeliveryInTime();
     this.vaccinationsPerDay$ = this.vaccinationService.getVaccinationsPerDay();
   }

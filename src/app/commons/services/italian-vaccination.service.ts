@@ -18,6 +18,7 @@ import { VaccinationAdministrationSummary } from 'src/app/pages/vaccination/ital
 import { ItalianVaccinationCategories, ItalianVaccinationCategory } from '../models/italian-vaccination-category';
 import { VaccinableAudience } from '../models/vaccinable-audience';
 import { VaccinableDistrictAudience } from '../models/vaccinable-district-audience';
+import { VaccinableAgeGroupAudience } from '../models/vaccinable-age-group-audience';
 
 @Injectable({
     providedIn: 'root'
@@ -268,7 +269,7 @@ export class ItalianVaccinationService {
         );
     }
 
-    public getVaccinableAudience(): Observable<VaccinableDistrictAudience[]> {
+    public getVaccinableDistrictAudience(): Observable<VaccinableDistrictAudience[]> {
         return this.getRemoteOrCached(this.AUDIENCE, data => {
             return data.data;
         })
@@ -288,6 +289,31 @@ export class ItalianVaccinationService {
                             district: audsInDistrict[0].area,
                             population: totalPop
                         } as VaccinableDistrictAudience;
+                    });
+            })
+        );
+    }
+
+    public getVaccinableAgeGroupAudience(): Observable<VaccinableAgeGroupAudience[]> {
+        return this.getRemoteOrCached(this.AUDIENCE, data => {
+            return data.data;
+        })
+        .pipe(
+            map((audiences: VaccinableAudience[]) => {
+                return audiences.reduce((acc, aud) => {
+                    acc[aud.fascia_anagrafica] = acc[aud.fascia_anagrafica] || [];
+                    acc[aud.fascia_anagrafica].push(aud);
+                    return acc;
+                }, {});
+            }),
+            map((group: {[age: string]: VaccinableAudience[]}) => {
+                return Object.values(group)
+                    .map(audiencePerAge => {
+                        const totalPop = audiencePerAge.reduce((acc, aud) => acc += aud.totale_popolazione, 0);
+                        return {
+                            range: audiencePerAge[0].fascia_anagrafica,
+                            population: totalPop
+                        } as VaccinableAgeGroupAudience;
                     });
             })
         );
