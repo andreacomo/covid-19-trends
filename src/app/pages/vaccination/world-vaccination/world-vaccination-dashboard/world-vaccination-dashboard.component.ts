@@ -27,6 +27,13 @@ export class WorldVaccinationDashboardComponent implements OnInit {
     field: 'totalVaccinationsPerHundred',
     metric: 'total_vaccinations_per_hundred',
     label: 'Somministrazioni ogni 100 persone',
+    icon: 'money-100',
+    isSvg: false,
+    isPercent: false
+  }, {
+    field: 'peopleFullyVaccinatedPerHundred',
+    metric: 'people_fully_vaccinated_per_hundred',
+    label: 'Percentuale popolazione vaccinata',
     icon: 'percent',
     isSvg: true,
     isPercent: true
