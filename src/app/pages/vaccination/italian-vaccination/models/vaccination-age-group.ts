@@ -1,6 +1,8 @@
+import { VaccinationDoses } from './vaccination-doses';
+
 export class VaccinationAgeGroup {
 
     range: string;
 
-    doneCount: number;
+    doses: VaccinationDoses;
 }

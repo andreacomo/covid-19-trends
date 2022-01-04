@@ -1,5 +1,5 @@
 import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
-import { ChartDataSets, ChartOptions } from 'chart.js';
+import { ChartData, ChartDataSets, ChartOptions, ChartTooltipItem } from 'chart.js';
 import { VaccinationAgeGroup } from '../../../models/vaccination-age-group';
 import * as pluginDataLabels from 'chartjs-plugin-datalabels';
 import { Label } from 'ng2-charts';
@@ -25,20 +25,27 @@ export class AgeGroupsChartComponent implements OnInit, OnChanges {
   chartData: ChartDataSets[];
 
   constructor() {
-    this.plugins = [pluginDataLabels];
+    // this.plugins = [pluginDataLabels];
     this.options = {
       responsive: true,
       aspectRatio: 2,
       legend: {
-        display: false
+        display: true,
+        position: 'top',
+        align: 'center',
+        labels: {
+            fontFamily: 'Roboto, \'Helvetica Neue\', sans-serif'
+        }
       },
       scales: {
         xAxes: [{
+          stacked: true,
           gridLines: {
             display: false
           }
         }],
         yAxes: [{
+          stacked: true,
           gridLines: {
             display: true
           },
@@ -50,7 +57,17 @@ export class AgeGroupsChartComponent implements OnInit, OnChanges {
         }]
       },
       tooltips: {
-        enabled: false
+        enabled: true,
+        mode: 'label',
+        callbacks: {
+          label: (item: ChartTooltipItem, data: ChartData) => {
+            return `${data.datasets[item.datasetIndex].label}: ${Numbers.beautifyWithSeparators(item.value)}`;
+          },
+          footer: (item: ChartTooltipItem[], data: ChartData) => {
+            const total = item.reduce((a, e) => a + (e.yLabel as number), 0);
+            return `Total: ${Numbers.beautifyWithSeparators(total.toString())}`;
+          }
+        }
       },
       plugins: {
         datalabels: {
@@ -75,9 +92,33 @@ export class AgeGroupsChartComponent implements OnInit, OnChanges {
     if (changes.data.currentValue && !changes.data.previousValue) {
       this.labels = this.data.map(d => d.range);
       this.chartData = [{
-        data: this.data.map(d => d.doneCount),
-        backgroundColor: Colors.SUPPORTED,
-        hoverBackgroundColor: Colors.SUPPORTED
+        data: this.data.map(d => d.doses.first),
+        label: 'Prima dose',
+        backgroundColor: Colors.DOSE_1 + 'BB',
+        borderColor: Colors.DOSE_1 + 'BB',
+        hoverBackgroundColor: Colors.DOSE_1,
+        hoverBorderColor: Colors.DOSE_1,
+      }, {
+        data: this.data.map(d => d.doses.second),
+        label: 'Seconda dose',
+        backgroundColor: Colors.DOSE_2 + 'BB',
+        borderColor: Colors.DOSE_2 + 'BB',
+        hoverBackgroundColor: Colors.DOSE_2,
+        hoverBorderColor: Colors.DOSE_2,
+      }, {
+        data: this.data.map(d => d.doses.third),
+        label: 'Terza dose',
+        backgroundColor: Colors.DOSE_3 + 'BB',
+        borderColor: Colors.DOSE_3 + 'BB',
+        hoverBackgroundColor: Colors.DOSE_3,
+        hoverBorderColor: Colors.DOSE_3,
+      }, {
+        data: this.data.map(d => d.doses.afterHealing),
+        label: 'Dose a guariti',
+        backgroundColor: Colors.DOSE_AH + 'BB',
+        borderColor: Colors.DOSE_AH + 'BB',
+        hoverBackgroundColor: Colors.DOSE_AH,
+        hoverBorderColor: Colors.DOSE_AH,
       }];
     }
   }

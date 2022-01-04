@@ -116,7 +116,13 @@ export class ItalianVaccinationService {
         .pipe(
             map((data: VaccinationRegistrySummary[]) => data.map(summary => ({
                     range: summary.fascia_anagrafica,
-                    doneCount: summary.totale
+                    doses: {
+                        total: summary.totale,
+                        first: summary.prima_dose,
+                        second: summary.seconda_dose,
+                        third: summary.dose_addizionale_booster,
+                        afterHealing: summary.pregressa_infezione
+                    }
                 }))
             )
         );
