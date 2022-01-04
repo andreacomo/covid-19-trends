@@ -9,6 +9,7 @@ import { DataFilterProviderService } from 'src/app/commons/services/data-filter-
 import { VaccinationPerDay } from '../../../models/vaccination-per-day';
 import { DateStringPipe } from 'src/app/commons/pipes/date-string.pipe';
 import { Numbers } from 'src/app/commons/models/numbers';
+import ChartOptionsFactory from 'src/app/commons/services/chart-options.factory';
 
 @Component({
   selector: 'app-administration-day-by-day-chart',
@@ -42,18 +43,10 @@ export class AdministrationDayByDayChartComponent implements OnInit, OnChanges {
     this.chartTypeDecorator = this.availableDecorators[0];
 
     this.options = {
-      responsive: true,
-      aspectRatio: 2,
-      legend: {
-        display: true,
-        position: 'top',
-        align: 'center',
-        labels: {
-            fontFamily: 'Roboto, \'Helvetica Neue\', sans-serif'
-        }
-      },
+      ...ChartOptionsFactory.createDefault(),
       tooltips: {
         enabled: true,
+        mode: 'label',
         callbacks: {
           label: (item: ChartTooltipItem, data: ChartData) => {
             return `${data.datasets[item.datasetIndex].label}: ${Numbers.beautifyWithSeparators(item.value)}`;

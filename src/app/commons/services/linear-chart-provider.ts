@@ -7,6 +7,7 @@ import { Injectable } from '@angular/core';
 import { DateStringPipe } from '../pipes/date-string.pipe';
 import { DataFilter } from '../models/data-filter';
 import { ChartDataType } from '../models/chart-data-type';
+import ChartOptionsFactory from './chart-options.factory';
 
 @Injectable({
   providedIn: 'root'
@@ -22,16 +23,9 @@ export class LinearChartProvider {
     public getOptions(milestones: Milestone[]): (ChartOptions & { annotation: any }) {
         let labelGaps = 1;
         return {
-            responsive: true,
-            aspectRatio: 2,
+            ...ChartOptionsFactory.createDefault(),
             legend: {
-              display: false,
-              position: 'top',
-              align: 'center',
-              labels: {
-                boxWidth: 13,
-                fontFamily: 'Roboto, \'Helvetica Neue\', sans-serif'
-              }
+              display: false
             },
             tooltips: {
               enabled: true,

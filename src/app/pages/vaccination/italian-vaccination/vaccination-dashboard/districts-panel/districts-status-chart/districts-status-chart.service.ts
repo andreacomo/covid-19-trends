@@ -6,6 +6,7 @@ import { Numbers } from 'src/app/commons/models/numbers';
 import { VaccinationDistrictStatus } from '../../../models/vaccination-district-status';
 import { LocalDataService } from 'src/app/commons/services/local-data.service';
 import { DistrictPopulation } from 'src/app/commons/models/district-population';
+import ChartOptionsFactory from 'src/app/commons/services/chart-options.factory';
 
 @Injectable({
     providedIn: 'root'
@@ -62,22 +63,7 @@ export abstract class DistrictsStatusChartTypeStrategy {
     }
 
     public createOptions(): ChartOptions {
-        return {
-            responsive: true,
-            aspectRatio: 2,
-            legend: {
-                display: true,
-                position: 'top',
-                align: 'center',
-                labels: {
-                    boxWidth: 13,
-                    fontFamily: 'Roboto, \'Helvetica Neue\', sans-serif'
-                }
-            },
-            tooltips: {
-                enabled: true
-            }
-        };
+        return ChartOptionsFactory.createDefault();
     }
 }
 

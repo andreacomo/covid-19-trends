@@ -5,6 +5,7 @@ import * as pluginDataLabels from 'chartjs-plugin-datalabels';
 import { Label } from 'ng2-charts';
 import { Colors } from 'src/app/commons/models/colors';
 import { Numbers } from 'src/app/commons/models/numbers';
+import ChartOptionsFactory from 'src/app/commons/services/chart-options.factory';
 
 @Component({
   selector: 'app-age-groups-chart',
@@ -27,16 +28,7 @@ export class AgeGroupsChartComponent implements OnInit, OnChanges {
   constructor() {
     // this.plugins = [pluginDataLabels];
     this.options = {
-      responsive: true,
-      aspectRatio: 2,
-      legend: {
-        display: true,
-        position: 'top',
-        align: 'center',
-        labels: {
-            fontFamily: 'Roboto, \'Helvetica Neue\', sans-serif'
-        }
-      },
+      ...ChartOptionsFactory.createDefault(),
       scales: {
         xAxes: [{
           stacked: true,

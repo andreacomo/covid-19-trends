@@ -4,6 +4,7 @@ import { Label } from 'ng2-charts';
 import { Numbers } from 'src/app/commons/models/numbers';
 import { TimeFilter } from 'src/app/commons/models/time-filter';
 import { DateStringPipe } from 'src/app/commons/pipes/date-string.pipe';
+import ChartOptionsFactory from 'src/app/commons/services/chart-options.factory';
 import { DataFilterProviderService } from 'src/app/commons/services/data-filter-provider.service';
 import { SupplierDelivery, VaccinesDeliveryDatesPerSupplier } from '../../../models/vaccines-delivery-dates-per-supplier';
 
@@ -32,18 +33,10 @@ export class VaccinesDeliveryDateChartComponent implements OnInit, OnChanges {
     this.timeFilter = this.dataFilterProvider.getTimeFilterByScope('all');
     this.allDates = this.generateDateRange();
     this.options = {
-      responsive: true,
-      aspectRatio: 2,
-      legend: {
-        display: true,
-        position: 'top',
-        align: 'center',
-        labels: {
-            fontFamily: 'Roboto, \'Helvetica Neue\', sans-serif'
-        }
-      },
+      ...ChartOptionsFactory.createDefault(),
       tooltips: {
         enabled: true,
+        mode: 'label',
         callbacks: {
           label: (item: ChartTooltipItem, data: ChartData) => {
             return `${data.datasets[item.datasetIndex].label}: ${Numbers.beautifyWithSeparators(item.value)}`;
@@ -92,17 +85,21 @@ export class VaccinesDeliveryDateChartComponent implements OnInit, OnChanges {
         '#FF6384',
         '#36A2EC',
         '#FFCE57',
-        '#24e2b6'
+        '#24e2b6',
+        '#5358ed'
       ];
       return {
         data: dates.map(date => dateDosesMap[date] || 0),
         backgroundColor: color[i] + '66',
         borderColor: color[i] + 'AA',
         hoverBackgroundColor: color[i],
+        hoverBorderColor: color[i],
+        pointBackgroundColor: color[i],
+        pointBorderColor: color[i],
         borderWidth: 2,
         lineTension: 0.1,
-        pointRadius: 4,
-        pointBorderWidth: 2,
+        pointRadius: 2,
+        pointBorderWidth: 1,
         label: d.supplier,
         tooltipFooter: (items: ChartTooltipItem[], data: ChartData) => ''
       };

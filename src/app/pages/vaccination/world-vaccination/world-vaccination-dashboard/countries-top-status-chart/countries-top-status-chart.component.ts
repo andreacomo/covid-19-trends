@@ -10,6 +10,7 @@ import { distinctUntilChanged, map } from 'rxjs/operators';
 import { Subscription } from 'rxjs';
 import { WorldVaccinationMetric } from '../../models/world-vaccination-metric';
 import { Numbers } from 'src/app/commons/models/numbers';
+import ChartOptionsFactory from 'src/app/commons/services/chart-options.factory';
 
 @Component({
   selector: 'app-countries-top-status-chart',
@@ -37,17 +38,8 @@ export class CountriesTopStatusChartComponent implements OnInit, OnChanges, OnDe
   constructor(private media: MediaObserver) {
     this.countriesNumber = 10;
     this.options = {
-      responsive: true,
+      ...ChartOptionsFactory.createDefault(),
       aspectRatio: 1,
-      legend: {
-        display: true,
-        position: 'top',
-        align: 'center',
-        labels: {
-        boxWidth: 13,
-        fontFamily: 'Roboto, \'Helvetica Neue\', sans-serif'
-        }
-      },
       tooltips: {
           enabled: true,
           callbacks: {

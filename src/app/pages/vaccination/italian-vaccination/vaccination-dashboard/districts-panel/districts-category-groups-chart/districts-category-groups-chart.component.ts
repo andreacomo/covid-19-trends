@@ -4,6 +4,7 @@ import { Label } from 'ng2-charts';
 import { Colors } from 'src/app/commons/models/colors';
 import { ItalianVaccinationCategories } from 'src/app/commons/models/italian-vaccination-category';
 import { Numbers } from 'src/app/commons/models/numbers';
+import ChartOptionsFactory from 'src/app/commons/services/chart-options.factory';
 
 @Component({
   selector: 'app-districts-category-groups-chart',
@@ -25,16 +26,7 @@ export class DistrictsCategoryGroupsChartComponent implements OnInit, OnChanges 
 
   constructor() {
     this.options = {
-      responsive: true,
-      aspectRatio: 2,
-      legend: {
-        display: true,
-        position: 'top',
-        align: 'center',
-        labels: {
-            fontFamily: 'Roboto, \'Helvetica Neue\', sans-serif'
-        }
-      },
+      ...ChartOptionsFactory.createDefault(),
       scales: {
         xAxes: [{
           stacked: true,

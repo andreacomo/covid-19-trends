@@ -5,6 +5,7 @@ import { Colors } from 'src/app/commons/models/colors';
 import { VaccinationCategoryGroup } from '../../../models/vaccination-category-group';
 import * as pluginDataLabels from 'chartjs-plugin-datalabels';
 import { Numbers } from 'src/app/commons/models/numbers';
+import ChartOptionsFactory from 'src/app/commons/services/chart-options.factory';
 
 @Component({
   selector: 'app-category-groups-chart',
@@ -39,17 +40,7 @@ export class CategoryGroupsChartComponent implements OnInit, OnChanges {
       ]
     }];
     this.options = {
-      responsive: true,
-      aspectRatio: 2,
-      legend: {
-          display: true,
-          position: 'top',
-          align: 'center',
-          labels: {
-            boxWidth: 20,
-            fontFamily: 'Roboto, \'Helvetica Neue\', sans-serif'
-          }
-      },
+      ...ChartOptionsFactory.createDefault(),
       tooltips: {
         enabled: true,
         callbacks: {

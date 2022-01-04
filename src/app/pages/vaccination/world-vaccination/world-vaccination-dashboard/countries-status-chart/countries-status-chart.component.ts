@@ -8,6 +8,7 @@ import { Colors } from 'src/app/commons/models/colors';
 import { EuropeanVaccinationDataFilter } from '../../services/world-vaccination-data-filter';
 import { WorldVaccinationMetric } from '../../models/world-vaccination-metric';
 import { Numbers } from 'src/app/commons/models/numbers';
+import ChartOptionsFactory from 'src/app/commons/services/chart-options.factory';
 
 @Component({
   selector: 'app-countries-status-chart',
@@ -33,17 +34,8 @@ export class CountriesStatusChartComponent implements OnInit, OnChanges {
   constructor() {
     this.plugins = [pluginDataLabels];
     this.options = {
-      responsive: true,
+      ...ChartOptionsFactory.createDefault(),
       aspectRatio: 1,
-      legend: {
-        display: true,
-        position: 'top',
-        align: 'center',
-        labels: {
-        boxWidth: 13,
-        fontFamily: 'Roboto, \'Helvetica Neue\', sans-serif'
-        }
-      },
       tooltips: {
           enabled: false
       },

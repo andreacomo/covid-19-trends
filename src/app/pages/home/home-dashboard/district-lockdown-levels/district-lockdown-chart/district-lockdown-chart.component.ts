@@ -3,6 +3,7 @@ import { ChartDataSets, ChartOptions } from 'chart.js';
 import { Label } from 'ng2-charts';
 import { Regulation } from 'src/app/commons/models/districts-lockdown-colors';
 import * as pluginDataLabels from 'chartjs-plugin-datalabels';
+import ChartOptionsFactory from 'src/app/commons/services/chart-options.factory';
 
 @Component({
   selector: 'app-district-lockdown-chart',
@@ -36,17 +37,7 @@ export class DistrictLockdownChartComponent implements OnInit, OnChanges {
   constructor() {
     this.plugins = [pluginDataLabels];
     this.options = {
-      responsive: true,
-      aspectRatio: 2,
-      legend: {
-        display: true,
-        position: 'top',
-        align: 'center',
-        labels: {
-          boxWidth: 13,
-          fontFamily: 'Roboto, \'Helvetica Neue\', sans-serif'
-        }
-      },
+      ...ChartOptionsFactory.createDefault(),
       tooltips: {
         enabled: false
       },
