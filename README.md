@@ -34,6 +34,6 @@ ng build --prod
 
 ## Special thanks
 
-![JetBrains Logo (Main) logo](https://resources.jetbrains.com/storage/products/company/brand/logos/jb_beam.png)
+![JetBrains Logo (Main) logo](https://resources.jetbrains.com/storage/products/company/brand/logos/jb_beam.png | width=100)
 
 Special thanks to JetBrains for the [Open Source Development - Community licence](https://www.jetbrains.com/community/opensource/#support)
