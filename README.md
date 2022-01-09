@@ -31,3 +31,9 @@ npx npm-force-resolutions
 npm install
 ng build --prod
 ```
+
+## Special thanks
+
+![JetBrains Logo (Main) logo](https://resources.jetbrains.com/storage/products/company/brand/logos/jb_beam.png)
+
+Special thanks to JetBrains for the [Open Source Development - Community licence](https://www.jetbrains.com/community/opensource/#support)
