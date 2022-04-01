@@ -1714,6 +1714,71 @@
                     "districts": []
                 }
             ]
+        }, {
+            "issueDate": "2022-03-18",
+            "validFromDate": "2022-03-21",
+            "scenarios": [
+                {
+                    "color": "WHITE",
+                    "scenario": 1,
+                    "districts": [
+                        "Umbria", 
+                        "Basilicata",
+                        "P.A. Bolzano", "Veneto", "Lombardia", "Campania",
+                        "P.A. Trento", "Liguria", "Toscana", "Emilia-Romagna", "Puglia", "Molise", "Valle d'Aosta", "Abruzzo", "Piemonte", "Sicilia", "Friuli Venezia Giulia",
+                        "Calabria", "Lazio", "Marche"
+                    ]
+                },
+                {
+                    "color": "YELLOW",
+                    "scenario": 2,
+                    "districts": [ 
+                         "Sardegna"
+                    ]
+                },
+                {
+                    "color": "ORANGE",
+                    "scenario": 3,
+                    "districts": []
+                },
+                {
+                    "color": "RED",
+                    "scenario": 4,
+                    "districts": []
+                }
+            ]
+        }, {
+            "issueDate": "2022-03-25",
+            "validFromDate": "2022-03-28",
+            "scenarios": [
+                {
+                    "color": "WHITE",
+                    "scenario": 1,
+                    "districts": [
+                        "Umbria", 
+                        "Basilicata",
+                        "P.A. Bolzano", "Veneto", "Lombardia", "Campania",
+                        "P.A. Trento", "Liguria", "Toscana", "Emilia-Romagna", "Puglia", "Molise", "Valle d'Aosta", "Abruzzo", "Piemonte", "Sicilia", "Friuli Venezia Giulia",
+                        "Calabria", "Lazio", "Marche",
+                        "Sardegna"
+                    ]
+                },
+                {
+                    "color": "YELLOW",
+                    "scenario": 2,
+                    "districts": []
+                },
+                {
+                    "color": "ORANGE",
+                    "scenario": 3,
+                    "districts": []
+                },
+                {
+                    "color": "RED",
+                    "scenario": 4,
+                    "districts": []
+                }
+            ]
         }
     ]
 }
