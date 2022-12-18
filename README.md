@@ -9,13 +9,21 @@ E' disponibile online servito come "GitHub Pages" su:
 
 ## Prerequirements
 
-Minimun Node version is `v10.13.0`.
+* Node Version Manager (Versione node v18.10)
+* Angular CLI
 
-With NVM you can:
-
-```
-nvm use v10.13.0
-```
+* Installa Node.js:
+    ```
+    nvm install v18.10
+    ```
+* Abilita la versione installata:
+    ```
+    nvm use v18.10
+    ```
+* Installa Angular CLI:
+    ```
+    npm install -g @angular/cli
+    ```
 
 ## Build prod
 Se si hanno problemi **causati da Babel** nella build di prod:
