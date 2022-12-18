@@ -82,7 +82,7 @@ export class AgeGroupsChartComponent implements OnInit, OnChanges {
         hoverBackgroundColor: Colors.DOSE_2,
         hoverBorderColor: Colors.DOSE_2,
       }, {
-        data: this.data.map(d => d.doses.third),
+        data: this.data.map(d => d.doses.booster1),
         label: 'Terza dose',
         backgroundColor: Colors.DOSE_3 + 'BB',
         borderColor: Colors.DOSE_3 + 'BB',

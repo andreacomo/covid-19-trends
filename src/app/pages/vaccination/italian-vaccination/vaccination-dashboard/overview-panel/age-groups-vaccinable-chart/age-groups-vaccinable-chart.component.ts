@@ -99,7 +99,7 @@ export class AgeGroupsVaccinableChartComponent implements OnInit, OnChanges {
         hoverBackgroundColor: Colors.DOSE_2,
         hoverBorderColor: Colors.DOSE_2,
       }, {
-        data: this.createDataToPlot(d => d.doses.third),
+        data: this.createDataToPlot(d => d.doses.booster1),
         label: 'Con Tre dosi',
         backgroundColor: Colors.DOSE_3 + 'BB',
         borderColor: Colors.DOSE_3 + 'BB',

@@ -1,14 +1,17 @@
+/**
+ * somministrazioni-vaccini-summary-latest.json
+ */
 export class VaccinationAdministrationSummary {
 
-    'data_somministrazione': string;
+    data: string; // Giorno in cui è avvenuta la somministrazione.
 
-    'area': string;
+    area: string; // Sigla della regione in cui è avvenuta la somministrazione.
 
-    totale: number;
+    totale: number; // Numero totale di dosi di vaccino somministrate per giorno e regione.
 
-    'sesso_maschile': number;
+    m: number; // Totale dei soggetti di sesso maschile a cui è stato somministrato il vaccino per giorno e regione.
 
-    'sesso_femminile': number;
+    f: number; // Totale dei soggetti di sesso femminile a cui è stato somministrato il vaccino per giorno e regione.
 
     'categoria_operatori_sanitari_sociosanitari': number;
 
@@ -22,13 +25,15 @@ export class VaccinationAdministrationSummary {
 
     'categoria_personale_scolastico': string;
 
-    'prima_dose': number;
+    d1: number; // Numero prime somministrazioni.
 
-    'seconda_dose': number;
+    d2: number; // Numero seconde somministrazioni.
 
-    'dose_addizionale_booster': number;
+    db1: number; // Numero somministrazioni dose addizionale/richiamo (booster).
 
-    'pregressa_infezione': number;
+    db2: number; // Numero somministrazioni dose booster immuno/second booster.
 
-    'nome_area': string;
+    dpi: number; // Numero di somministrazioni effettuate a soggetti con pregressa infezione da covid-19 nel periodo 3-6 mesi e che, pertanto, concludono il ciclo vaccinale con un'unica dose
+
+    reg: string; // Denominazione standard dell'area (dove necessario denominazione bilingue).
 }

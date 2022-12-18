@@ -36,7 +36,7 @@
                 <div class="item" fxLayout="row" fxLayoutAlign="space-between center" fxFlex="100" fxLayoutGap=".5em">
                     <strong>Terze dosi</strong> 
                     <div fxLayout="row" fxLayoutAlign="center center" fxLayoutGap=".5em">
-                        <div class="numbers" *ngIf="todayVaccination; else loading">{{todayVaccination.doses.third.toLocaleString()}}</div>
+                        <div class="numbers" *ngIf="todayVaccination; else loading">{{todayVaccination.doses.booster1.toLocaleString()}}</div>
                         <ng-template #loading>
                             <mat-spinner [diameter]="24"></mat-spinner>
                         </ng-template>

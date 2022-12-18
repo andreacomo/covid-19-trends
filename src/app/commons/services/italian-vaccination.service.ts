@@ -66,7 +66,7 @@ export class ItalianVaccinationService {
                 total: this.sumAttributeValue(data, 'total'),
                 first: this.sumAttributeValue(data, 'prima_dose'),
                 second: this.sumAttributeValue(data, 'seconda_dose'),
-                third: this.sumAttributeValue(data, 'dose_addizionale_booster'),
+                booster1: this.sumAttributeValue(data, 'dose_addizionale_booster'),
                 afterHealing: this.sumAttributeValue(data, 'pregressa_infezione')
             }))
         );
@@ -121,7 +121,7 @@ export class ItalianVaccinationService {
                         total: summary.totale,
                         first: summary.prima_dose,
                         second: summary.seconda_dose,
-                        third: summary.dose_addizionale_booster,
+                        booster1: summary.dose_addizionale_booster,
                         afterHealing: summary.pregressa_infezione
                     }
                 }))
@@ -244,21 +244,21 @@ export class ItalianVaccinationService {
         .pipe(
             map((data: VaccinationAdministrationSummary[]) => {
                 const vaccinationsGroupedByDay: {[day: string]: VaccinationPerDay} = data.reduce((acc, v) => {
-                    acc[v.data_somministrazione] = acc[v.data_somministrazione] || {
-                        day: v.data_somministrazione,
+                    acc[v.data] = acc[v.data] || {
+                        day: v.data,
                         doses: {
                             total: 0,
                             first: 0,
                             second: 0,
-                            third: 0,
+                            booster1: 0,
                             afterHealing: 0
                         }
                     };
-                    acc[v.data_somministrazione].doses.total += v.totale;
-                    acc[v.data_somministrazione].doses.first += v.prima_dose;
-                    acc[v.data_somministrazione].doses.second += v.seconda_dose;
-                    acc[v.data_somministrazione].doses.third += v.dose_addizionale_booster;
-                    acc[v.data_somministrazione].doses.afterHealing += v.pregressa_infezione;
+                    acc[v.data].doses.total += v.totale;
+                    acc[v.data].doses.first += v.d1;
+                    acc[v.data].doses.second += v.d2;
+                    acc[v.data].doses.booster1 += v.db1;
+                    acc[v.data].doses.afterHealing += v.dpi;
 
                     return acc;
                 }, {});
