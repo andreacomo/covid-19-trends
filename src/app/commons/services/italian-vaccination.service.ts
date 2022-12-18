@@ -64,10 +64,10 @@ export class ItalianVaccinationService {
         .pipe(
             map((data: VaccinationRegistrySummary[]) => ({
                 total: this.sumAttributeValue(data, 'total'),
-                first: this.sumAttributeValue(data, 'prima_dose'),
-                second: this.sumAttributeValue(data, 'seconda_dose'),
-                booster1: this.sumAttributeValue(data, 'dose_addizionale_booster'),
-                afterHealing: this.sumAttributeValue(data, 'pregressa_infezione')
+                first: this.sumAttributeValue(data, 'd1'),
+                second: this.sumAttributeValue(data, 'd2'),
+                booster1: this.sumAttributeValue(data, 'db1'),
+                afterHealing: this.sumAttributeValue(data, 'dpi')
             }))
         );
     }
@@ -77,7 +77,7 @@ export class ItalianVaccinationService {
             return data.data;
         })
         .pipe(
-            map((data: VaccinationRegistrySummary[]) => this.sumAttributeValue(data, 'sesso_maschile'))
+            map((data: VaccinationRegistrySummary[]) => this.sumAttributeValue(data, 'm'))
         );
     }
 
@@ -86,7 +86,7 @@ export class ItalianVaccinationService {
             return data.data;
         })
         .pipe(
-            map((data: VaccinationRegistrySummary[]) => this.sumAttributeValue(data, 'sesso_femminile'))
+            map((data: VaccinationRegistrySummary[]) => this.sumAttributeValue(data, 'f'))
         );
     }
 
@@ -116,13 +116,13 @@ export class ItalianVaccinationService {
         })
         .pipe(
             map((data: VaccinationRegistrySummary[]) => data.map(summary => ({
-                    range: summary.fascia_anagrafica,
+                    range: summary.eta,
                     doses: {
                         total: summary.totale,
-                        first: summary.prima_dose,
-                        second: summary.seconda_dose,
-                        booster1: summary.dose_addizionale_booster,
-                        afterHealing: summary.pregressa_infezione
+                        first: summary.d1,
+                        second: summary.d2,
+                        booster1: summary.db1,
+                        afterHealing: summary.dpi
                     }
                 }))
             )

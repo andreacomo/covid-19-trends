@@ -1,5 +1,7 @@
 /**
  * somministrazioni-vaccini-summary-latest.json
+ *
+ * https://github.com/italia/covid19-opendata-vaccini
  */
 export class VaccinationAdministrationSummary {
 
