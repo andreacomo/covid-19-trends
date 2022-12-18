@@ -300,8 +300,8 @@ export class ItalianVaccinationService {
         .pipe(
             map((audiences: VaccinableAudience[]) => {
                 return audiences.reduce((acc, aud) => {
-                    acc[aud.fascia_anagrafica] = acc[aud.fascia_anagrafica] || [];
-                    acc[aud.fascia_anagrafica].push(aud);
+                    acc[aud.eta] = acc[aud.eta] || [];
+                    acc[aud.eta].push(aud);
                     return acc;
                 }, {});
             }),
@@ -310,7 +310,7 @@ export class ItalianVaccinationService {
                     .map(audiencePerAge => {
                         const totalPop = audiencePerAge.reduce((acc, aud) => acc += aud.totale_popolazione, 0);
                         return {
-                            range: audiencePerAge[0].fascia_anagrafica,
+                            range: audiencePerAge[0].eta,
                             population: totalPop
                         } as VaccinableAgeGroupAudience;
                     });
