@@ -1,12 +1,17 @@
+/**
+ * consegne-vaccini-latest.json
+ * 
+ * https://github.com/italia/covid19-opendata-vaccini
+ */
 export class VaccinesDelivery {
 
-    area: string;
+    area: string; // Sigla della regione di consegna.
 
-    'nome_area': string;
+    reg: string; // Denominazione standard dell'area (dove necessario denominazione bilingue).
 
-    fornitore: string;
+    forn: string; // Nome completo del fornitore del vaccino.
 
-    'numero_dosi': number;
+    numero_dosi: number; // Il numero di dosi del vaccino consegnate in quel giorno per regione.
 
-    'data_consegna': string;
+    data_consegna: string; // Il giorno in cui è avvenuta la consegna.
 }

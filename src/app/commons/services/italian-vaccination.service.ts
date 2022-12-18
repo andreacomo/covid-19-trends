@@ -6,7 +6,6 @@ import { map } from 'rxjs/operators';
 import { VaccinationDistrictStatus } from 'src/app/pages/vaccination/italian-vaccination/models/vaccination-district-status';
 import { VaccinationDistrictOverallStatus } from 'src/app/pages/vaccination/italian-vaccination/models/vaccination-district-overall-status';
 import { VaccinationAgeGroup } from 'src/app/pages/vaccination/italian-vaccination/models/vaccination-age-group';
-import { VaccinationCategoryGroup } from 'src/app/pages/vaccination/italian-vaccination/models/vaccination-category-group';
 import { Districts } from '../models/districts';
 import { VaccinationRegistrySummary } from 'src/app/pages/vaccination/italian-vaccination/models/vaccination-registry-summary';
 import { VaccinationDoses } from 'src/app/pages/vaccination/italian-vaccination/models/vaccination-doses';
@@ -178,8 +177,8 @@ export class ItalianVaccinationService {
         .pipe(
             map((data: VaccinesDelivery[]) => {
                 const groupBySupplier = data.reduce((acc, delivery) => {
-                    acc[delivery.fornitore] = acc[delivery.fornitore] || [];
-                    acc[delivery.fornitore].push(delivery);
+                    acc[delivery.forn] = acc[delivery.forn] || [];
+                    acc[delivery.forn].push(delivery);
                     return acc;
                 }, {} as {[supplier: string]: VaccinesDelivery[]});
 
@@ -196,7 +195,7 @@ export class ItalianVaccinationService {
                     }, {} as {[area: string]: DistrictDelivery});
 
                     return {
-                        supplier: deliveriesBySupplier[0].fornitore,
+                        supplier: deliveriesBySupplier[0].forn,
                         deliveries: Object.values(groupByDistrict)
                     } as VaccinesDeliveryPerSupplierInDistricts;
                 });
@@ -211,8 +210,8 @@ export class ItalianVaccinationService {
         .pipe(
             map((data: VaccinesDelivery[]) => {
                 const groupBySupplier = data.reduce((acc, delivery) => {
-                    acc[delivery.fornitore] = acc[delivery.fornitore] || [];
-                    acc[delivery.fornitore].push(delivery);
+                    acc[delivery.forn] = acc[delivery.forn] || [];
+                    acc[delivery.forn].push(delivery);
                     return acc;
                 }, {} as {[supplier: string]: VaccinesDelivery[]});
 
@@ -229,7 +228,7 @@ export class ItalianVaccinationService {
                     }, {} as {[date: string]: SupplierDelivery});
 
                     return {
-                        supplier: deliveriesBySupplier[0].fornitore,
+                        supplier: deliveriesBySupplier[0].forn,
                         deliveries: Object.values(groupByDate).sort((d1, d2) => d1.date.localeCompare(d2.date))
                     } as VaccinesDeliveryDatesPerSupplier;
                 });
