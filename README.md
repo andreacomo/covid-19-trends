@@ -25,6 +25,15 @@ E' disponibile online servito come "GitHub Pages" su:
     npm install -g @angular/cli
     ```
 
+## Build
+
+* Install dependecies:
+    ```shell
+    npm install --force
+    ```
+
+> why `--force`? Because [`flex-box`](https://github.com/angular/flex-layout) has been deprecated from Angular > v14 and it's still compatible to Angular v15
+
 ## Build prod
 Se si hanno problemi **causati da Babel** nella build di prod:
 
