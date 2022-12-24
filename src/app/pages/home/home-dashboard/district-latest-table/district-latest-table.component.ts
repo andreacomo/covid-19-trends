@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, OnChanges, SimpleChanges, OnDestroy, ViewChild } from '@angular/core';
+import { Component, OnInit, Input, OnChanges, SimpleChanges, OnDestroy } from '@angular/core';
 import { DistrictData } from 'src/app/commons/models/district-data';
 import { DateStringPipe } from 'src/app/commons/pipes/date-string.pipe';
 import { LatestProviderService } from '../../services/latest-data-provider.service';
@@ -10,6 +10,7 @@ import { EnrichedDataGroup } from '../../models/enriched-district-data-group';
 import { trigger, state, style, animate, transition } from '@angular/animations';
 import { Sort } from '@angular/material/sort';
 import { Category, GoogeAnalyticsService } from 'src/app/commons/services/googe-analytics.service';
+import { filter, map } from 'rxjs/operators';
 
 @Component({
   selector: 'app-district-latest-table',
@@ -79,15 +80,20 @@ export class DistrictLatestTableComponent implements OnInit, OnChanges, OnDestro
         latest: this.dateString.transform(firstValues[2].data)
       };
 
-      this.watcher = this.mediaObserver.media$.subscribe((change: MediaChange) => {
-        if (['lg', 'xl', 'md'].indexOf(change.mqAlias) !== -1) {
-          this.displayedColumns = ['district', 'beforeBeforeLatest', 'beforeLatest', 'latest', 'icon'];
-        } else if (change.mqAlias === 'xs') {
-          this.displayedColumns = ['district', 'latest'];
-        } else if (change.mqAlias === 'sm') {
-          this.displayedColumns = ['district', 'beforeLatest', 'latest', 'icon'];
-        }
-      });
+      this.watcher = this.mediaObserver.asObservable()
+        .pipe(
+          filter((changes: MediaChange[]) => changes.length > 0),
+          map((changes: MediaChange[]) => changes[0])
+        )
+        .subscribe((change: MediaChange) => {
+          if (['lg', 'xl', 'md'].indexOf(change.mqAlias) !== -1) {
+            this.displayedColumns = ['district', 'beforeBeforeLatest', 'beforeLatest', 'latest', 'icon'];
+          } else if (change.mqAlias === 'xs') {
+            this.displayedColumns = ['district', 'latest'];
+          } else if (change.mqAlias === 'sm') {
+            this.displayedColumns = ['district', 'beforeLatest', 'latest', 'icon'];
+          }
+        });
     }
   }
 
