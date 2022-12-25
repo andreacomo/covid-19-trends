@@ -87,7 +87,8 @@ export class AdministrationDayByDayChartComponent implements OnInit, OnChanges {
     this.labels = this.timeFilter.apply(this.data).map(d => this.dateString.transform(d.day));
 
     this.chartData = [
-      this.createChartData('Terza dose', this.data, 'booster1', Colors.DOSE_3),
+      this.createChartData('Secondo booster', this.data, 'booster2', Colors.DOSE_4),
+      this.createChartData('Primo booster', this.data, 'booster1', Colors.DOSE_3),
       this.createChartData('Dosi a guariti', this.data, 'afterHealing', Colors.DOSE_AH),
       this.createChartData('Seconda dose', this.data, 'second', Colors.DOSE_2),
       this.createChartData('Prima dose', this.data, 'first', Colors.DOSE_1),

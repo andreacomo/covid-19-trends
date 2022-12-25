@@ -8,5 +8,7 @@ export class VaccinationDoses {
 
     booster1: number;
 
+    booster2: number;
+
     afterHealing: number;
 }

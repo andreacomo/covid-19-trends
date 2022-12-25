@@ -29,5 +29,7 @@ export class Colors {
 
     public static DOSE_3 = '#f4a261';
 
+    public static DOSE_4 = '#219EBC';
+
     public static DOSE_AH = '#e76f51';
 }

@@ -66,6 +66,7 @@ export class ItalianVaccinationService {
                 first: this.sumAttributeValue(data, 'd1'),
                 second: this.sumAttributeValue(data, 'd2'),
                 booster1: this.sumAttributeValue(data, 'db1'),
+                booster2: this.sumAttributeValue(data, 'db2'),
                 afterHealing: this.sumAttributeValue(data, 'dpi')
             }))
         );
@@ -121,6 +122,7 @@ export class ItalianVaccinationService {
                         first: summary.d1,
                         second: summary.d2,
                         booster1: summary.db1,
+                        booster2: summary.db2,
                         afterHealing: summary.dpi
                     }
                 }))
@@ -250,6 +252,7 @@ export class ItalianVaccinationService {
                             first: 0,
                             second: 0,
                             booster1: 0,
+                            booster2: 0,
                             afterHealing: 0
                         }
                     };
@@ -257,6 +260,7 @@ export class ItalianVaccinationService {
                     acc[v.data].doses.first += v.d1;
                     acc[v.data].doses.second += v.d2;
                     acc[v.data].doses.booster1 += v.db1;
+                    acc[v.data].doses.booster2 += v.db2;
                     acc[v.data].doses.afterHealing += v.dpi;
 
                     return acc;
