@@ -43,6 +43,24 @@ export class DataFilterProviderService {
       icon: 'crop_7_5',
       apply: (values: any[]) => values.slice(values.length - 120)
     },
+    '180d': {
+      scope: '120d',
+      label: 'Ultimi sei mesi',
+      icon: 'crop_7_5',
+      apply: (values: any[]) => values.slice(values.length - 180)
+    },
+    '365d': {
+      scope: '120d',
+      label: 'Ultimo anno',
+      icon: 'crop_7_5',
+      apply: (values: any[]) => values.slice(values.length - 365)
+    },
+    '545d': {
+      scope: '120d',
+      label: 'Ultimo anno e mezzo',
+      icon: 'crop_7_5',
+      apply: (values: any[]) => values.slice(values.length - 545)
+    },
     all: {
       scope: 'all',
       label: 'Dall\'inizio',
