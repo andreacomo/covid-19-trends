@@ -3,22 +3,29 @@
         <h2 class="mat-h2">Copertura popolazione vaccinabile</h2>
         <div fxLayout="row" fxFlex="100" fxLayoutAlign="space-between center" fxLayoutGap=".5em">
             <div fxLayout="column" fxFlex="50" fxLayoutGap=".5em">
-                <strong class="inner-title">Una Dose</strong> 
+                <strong class="inner-title">1° Dose</strong> 
                 <div class="percentage">{{((totals.first / totalPopulation) * 100).toFixed(2)}}%</div>
                 <div>{{totals.first.toLocaleString()}}</div>
             </div>
             <div fxLayout="column" fxFlex="50" fxLayoutGap=".5em">
-                <strong class="inner-title">Due Dosi</strong> 
+                <strong class="inner-title">2° Dose</strong> 
                 <div class="percentage">{{((totals.second / totalPopulation) * 100).toFixed(2)}}%</div>
                 <div>{{totals.second.toLocaleString()}}</div>
             </div>
         </div>
         <div fxLayout="row" fxFlex="100" fxLayoutAlign="space-between center" fxLayoutGap=".5em">
             <div fxLayout="column" fxFlex="50" fxLayoutGap=".5em">
-                <strong class="inner-title">Tre Dosi</strong> 
+                <strong class="inner-title">1° booster</strong> 
                 <div class="percentage">{{((totals.booster1 / totalPopulation) * 100).toFixed(2)}}%</div>
                 <div>{{totals.booster1.toLocaleString()}}</div>
             </div>
+            <div fxLayout="column" fxFlex="50" fxLayoutGap=".5em">
+                <strong class="inner-title">2° booster</strong> 
+                <div class="percentage">{{((totals.booster2 / totalPopulation) * 100).toFixed(2)}}%</div>
+                <div>{{totals.booster2.toLocaleString()}}</div>
+            </div>
+        </div>
+        <div fxLayout="row" fxFlex="100" fxLayoutAlign="center center" fxLayoutGap=".5em">
             <div fxLayout="column" fxFlex="50" fxLayoutGap=".5em">
                 <strong class="inner-title">Dosi a guariti</strong> 
                 <div class="percentage">{{((totals.afterHealing / totalPopulation) * 100).toFixed(2)}}%</div>
