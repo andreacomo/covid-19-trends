@@ -17,7 +17,9 @@ export class VaccinationSummaryComponent implements OnInit {
 
   secondDoseTotal: number;
 
-  thirdDoseTotal: number;
+  firstBoosterTotal: number;
+
+  secondBoosterTotal: number;
 
   afterHealingDosesTotal: number;
 
@@ -32,7 +34,8 @@ export class VaccinationSummaryComponent implements OnInit {
           this.total = vaccinations.reduce((acc, v) => acc + v.doses.total, 0);
           this.firstDoseTotal = vaccinations.reduce((acc, v) => acc + v.doses.first, 0);
           this.secondDoseTotal = vaccinations.reduce((acc, v) => acc + v.doses.second, 0);
-          this.thirdDoseTotal = vaccinations.reduce((acc, v) => acc + v.doses.booster1, 0);
+          this.firstBoosterTotal = vaccinations.reduce((acc, v) => acc + v.doses.booster1, 0);
+          this.secondBoosterTotal = vaccinations.reduce((acc, v) => acc + v.doses.booster2, 0);
           this.afterHealingDosesTotal = vaccinations.reduce((acc, v) => acc + v.doses.afterHealing, 0);
         });
   }
