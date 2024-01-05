@@ -2,7 +2,7 @@ repo_name: andreacomo/covid-19-trends
 report_id: db4c2d507b5de8c5e954c0f056d3294e
 version: 0.1
 repo_type: Public
-timestamp: '2023-12-25T20:40:38+00:00'
+timestamp: '2024-01-05T08:15:38+00:00'
 requested_by: andreacomo
 provider: github
 branch: master
@@ -17,6 +17,7 @@ tools:
   category: Languages & Frameworks
   sub_category: Languages
   image_url: https://img.stackshare.io/service/1209/javascript.jpeg
+  detection_source_url: https://github.com/andreacomo/covid-19-trends
   detection_source: Repo Metadata
 - name: TypeScript
   description: A superset of JavaScript that compiles to clean JavaScript output
@@ -27,6 +28,7 @@ tools:
   category: Languages & Frameworks
   sub_category: Languages
   image_url: https://img.stackshare.io/service/1612/bynNY5dJ.jpg
+  detection_source_url: https://github.com/andreacomo/covid-19-trends
   detection_source: Repo Metadata
 - name: Angular
   description: A platform for building mobile and desktop web applications
@@ -64,6 +66,7 @@ tools:
   category: Languages & Frameworks
   sub_category: Frameworks (Full Stack)
   image_url: https://img.stackshare.io/service/1011/n1JRsFeB_400x400.png
+  detection_source_url: https://github.com/andreacomo/covid-19-trends/blob/master/package.json
   detection_source: package.json
   last_updated_by: andrea.como
   last_updated_on: 2022-01-03 15:41:37.000000000 Z
@@ -88,6 +91,7 @@ tools:
   category: Build, Test, Deploy
   sub_category: Version Control System
   image_url: https://img.stackshare.io/service/1046/git.png
+  detection_source_url: https://github.com/andreacomo/covid-19-trends
   detection_source: Repo Metadata
 - name: GitHub Actions
   description: Automate your workflow from idea to production
@@ -97,6 +101,7 @@ tools:
   category: Build, Test, Deploy
   sub_category: Continuous Integration
   image_url: https://img.stackshare.io/service/11563/actions.png
+  detection_source_url: https://github.com/andreacomo/covid-19-trends/blob/master/.github/workflows/deploy.yml
   detection_source: ".github/workflows/deploy.yml"
   last_updated_by: Andrea Como
   last_updated_on: 2022-12-24 14:58:34.000000000 Z
@@ -149,6 +154,7 @@ tools:
   category: Build, Test, Deploy
   sub_category: Code Review
   image_url: https://img.stackshare.io/service/5561/303157.png
+  detection_source_url: https://github.com/andreacomo/covid-19-trends/blob/master/package.json
   detection_source: package.json
   last_updated_by: andrea.como
   last_updated_on: 2020-03-22 01:01:07.000000000 Z
@@ -160,6 +166,7 @@ tools:
   category: Build, Test, Deploy
   sub_category: Front End Package Manager
   image_url: https://img.stackshare.io/service/1120/lejvzrnlpb308aftn31u.png
+  detection_source_url: https://github.com/andreacomo/covid-19-trends/blob/master/package.json
   detection_source: package.json
   last_updated_by: andrea.como
   last_updated_on: 2020-03-22 01:01:07.000000000 Z
