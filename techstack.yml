@@ -2,7 +2,7 @@ repo_name: andreacomo/covid-19-trends
 report_id: db4c2d507b5de8c5e954c0f056d3294e
 version: 0.1
 repo_type: Public
-timestamp: '2024-01-05T08:15:38+00:00'
+timestamp: '2024-02-29T19:11:43+00:00'
 requested_by: andreacomo
 provider: github
 branch: master
